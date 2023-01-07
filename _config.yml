@@ -15,12 +15,12 @@
 minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "default", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "en-US"
+locale                   : "ko-KR"
 title                    : "SIGIRACE"
-title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
+title_separator          : "|"
+subtitle                 : "Divide and Conquer"
 name                     : "sigi"
-description              : "An amazing website."
+description              : "kang`s blog"
 url                      : "https://sigirace.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
