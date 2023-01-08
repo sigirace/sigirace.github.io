@@ -108,7 +108,7 @@ author:
   avatar           : # "/assets/images/us2_t.png"
   bio              : "Data Scientist"
   location         : "Seoul"
-  email            : "chickang9@gmail.com"
+  # email            : "chickang9@gmail.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
