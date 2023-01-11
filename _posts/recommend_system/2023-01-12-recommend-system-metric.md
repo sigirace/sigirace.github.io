@@ -2,7 +2,7 @@
 layout: single
 title:  '추천시스템 Metric'
 toc: true
-categories: recommender_system
+categories: Recommender System
 tags: [metric, MAP, MRR, NDCG]
 ---
 
