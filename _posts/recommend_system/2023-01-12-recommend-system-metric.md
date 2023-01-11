@@ -10,7 +10,7 @@ tags: [metric, MAP, MRR, NDCG]
 
 ## 1. Introduction ##
 
-AI/ML에 관한 project시 목표를 수행하는 모델을 설계 및 학습한 뒤 metric를 통해 모델의 성능을 평가(evaluation)해야 한다. 일반적으로 평가를 위한 metric은 모델의 목(regression, classification)에 따라 나뉘어지게 된다. 하지만 추천 시스템의 경우 아래 두가지 task를 수행해야 하기에 일반적인 평가 metric을 바로 적용하기 어렵다. 
+AI/ML에 관한 project시 목표를 수행하는 모델을 설계 및 학습한 뒤 metric를 통해 모델의 성능을 평가(evaluation)해야 한다. 일반적으로 평가를 위한 metric은 모델의 목적(regression, classification)에 따라 나뉘어지게 된다. 하지만 추천 시스템의 경우 아래 두가지 task를 수행해야 하기에 일반적인 평가 metric을 바로 적용하기 어렵다. 
 
 1. 아이템의 등급 예측
 2. 아이템 순위가 반영된 추천 목록 생성
