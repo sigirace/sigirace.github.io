@@ -9,6 +9,8 @@ tags: [metric, MAP, MRR, NDCG]
 
 ![Image Alt 텍스트](https://github.com/sigirace/sigirace.github.io/tree/master/assets/images/dogfoot_sky.png)
 
+<p align="center"><img src="../../asset/images/dogfoot_sky.png" width="500"></p>
+
 
 본 게시물은 추천시스템에 대한 평가 지표에 대해 [해당 포스트](https://medium.com/swlh/rank-aware-recsys-evaluation-metrics-5191bba16832)를 읽고 정리하는 글이다.
 {: .notice}
