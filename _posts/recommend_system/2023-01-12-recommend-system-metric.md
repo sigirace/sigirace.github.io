@@ -23,7 +23,7 @@ AI/ML에 관한 project시 목표를 수행하는 모델을 설계 및 학습한
 
 ## 2. Confusion Matrix in Recommender System
 
-<img src="https://glassboxmedicine.files.wordpress.com/2019/02/confusion-matrix.png" width="450">
+<center><img src="https://glassboxmedicine.files.wordpress.com/2019/02/confusion-matrix.png" width="450"></center>
 
 ### 2.1 Accuracy
 
