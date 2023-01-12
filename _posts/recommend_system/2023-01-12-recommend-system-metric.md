@@ -6,9 +6,6 @@ categories: Recommender System
 tags: [metric, MAP, MRR, NDCG]
 ---
 
-![image](https://user-images.githubusercontent.com/45550607/102208312-9b284180-3f12-11eb-8467-7b5ea1779ac7.png)
-{: .align-center}
-
 본 게시물은 추천시스템에 대한 평가 지표에 대해 [해당 포스트](https://medium.com/swlh/rank-aware-recsys-evaluation-metrics-5191bba16832)를 읽고 정리하는 글이다.
 
 ## 1. Introduction ##
@@ -26,7 +23,7 @@ AI/ML에 관한 project시 목표를 수행하는 모델을 설계 및 학습한
 
 ## 2. Confusion Matrix in Recommender System
 
-<img src="https://glassboxmedicine.files.wordpress.com/2019/02/confusion-matrix.png" width="450">{: .align-center}
+<p align="center"><img src="https://glassboxmedicine.files.wordpress.com/2019/02/confusion-matrix.png" width="450"></p>
 
 ### 2.1 Accuracy
 
