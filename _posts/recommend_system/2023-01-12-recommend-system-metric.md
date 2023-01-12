@@ -69,9 +69,8 @@ rank-aware metric의 가장 단순한 방식으로 "relevant한 항목이 첫번
 
 - 추천 리스트를 생성함
 - 리스트에서 첫번째로 관련(relevant)있는 아이템의 위치 $k_u$를 구함
-- $\frac{1}{k_u}$ 을 계산
-- 모든 사용자에 대한 $k_u$ 역수의 평균<br><br>
-  $MRR(O, U) = \frac{1}{\vert{U}\vert}\sum\frac{1}{{k_u}}$
+- 아이템 위치에 대한 역수 $\frac{1}{k_u}$ 계산
+- 모든 사용자에 대한 $k_u$ 역수의 평균(MRR)을 계산<br><br>
 
 #### 4.1.2 Example
 
@@ -99,8 +98,8 @@ STEP1. relevant한 item이 추천 리스트 중 3번째에 처음 있었기 때�
 #### 4.2.1 Algorithm
 
 - 각 사용자에 대해 반복
-- 추천 항목의 첫번째 부터 끝까지 반복<br>-> relevant한 아이템이 등장하면 해당 아이템 까지를 sub-list로 취급하여 precision 계산
-- precision들의 평균 계산
+- 추천 항목의 첫번째 부터 끝까지 반복<br> ☞ relevant한 아이템이 등장하면 해당 아이템 까지를 sub-list로 취급하여 precision 계산
+- precision들의 평균(MAP) 계산
 
 #### 4.2.2 Example
 
