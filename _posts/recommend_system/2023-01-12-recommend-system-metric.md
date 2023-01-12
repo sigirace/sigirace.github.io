@@ -4,21 +4,7 @@ title:  '추천시스템 Metric'
 toc: true
 categories: Recommender System
 tags: [metric, MAP, MRR, NDCG]
-
 ---
-
-![Image Alt 텍스트1](https://github.com/sigirace/sigirace.github.io/tree/master/assets/images/dogfoot_sky.png)
-![Image Alt 텍스트2](https://github.com/sigirace/sigirace.github.io/tree/master/assets/images/dogfoot_sky.png?raw=true)
-
-![Image Alt 텍스트3](https://github.com/sigirace.github.io/assets/images/dogfoot_sky.png)
-![Image Alt 텍스트4](https://github.com/sigirace.github.io/assets/images/dogfoot_sky.png?raw=true)
-
-<img src="https://raw.githubusercontent.com/sigirace/sigirace.github.io/master/assets/images/test.png">
-
-<p align="center"><img src="../../asset/images/dogfoot_sky.png" width="500"></p>
-<p align="center"><img src="https://github.com/sigirace/sigirace.github.io/tree/master/assets/images/dogfoot_sky.png" width="500"></p>
-<p align="center"><img src="https://sigirace.github.com/sigirace.github.io/assets/images/dogfoot_sky.png" width="500"></p>
-
 
 본 게시물은 추천시스템에 대한 평가 지표에 대해 [해당 포스트](https://medium.com/swlh/rank-aware-recsys-evaluation-metrics-5191bba16832)를 읽고 정리하는 글이다.
 {: .notice}
