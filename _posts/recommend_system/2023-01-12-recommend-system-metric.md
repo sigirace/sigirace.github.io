@@ -9,6 +9,8 @@ tags: [metric, MAP, MRR, NDCG]
 
 ![Image Alt 텍스트](https://github.com/sigirace/sigirace.github.io/tree/master/assets/images/dogfoot_sky.png)
 
+![Image Alt 텍스트](https://github.com/sigirace/sigirace.github.io/tree/master/assets/images/dogfoot_sky.png?raw=true)
+
 <p align="center"><img src="../../asset/images/dogfoot_sky.png" width="500"></p>
 <p align="center"><img src="https://github.com/sigirace/sigirace.github.io/tree/master/assets/images/dogfoot_sky.png" width="500"></p>
 
