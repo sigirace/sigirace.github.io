@@ -132,7 +132,7 @@ NDCG metric은 MAP와 같이 관련성이 높은 아이템을 추천 리스트 �
 
 #### 4.3.1 Algorithm
 
-  <p align="center"><img src="https://miro.medium.com/max/700/1*_a_YsiSw6K1whOzTYYq_Ag.png" width="500"></\p>
+  <p align="center"><img src="https://miro.medium.com/max/700/1*_a_YsiSw6K1whOzTYYq_Ag.png" width="500"></p>
 
 - CG는 추천 리스트 중 relevant한 아이템들의 사용자 등급 합이다. 이는 단순 합이므로 위에서 살펴본 rank-less metric과 동일하다. <br>ex) 추천 리스트 A, B, C에 대해 사용자 선호도가 A-0점, B-3점, C-5점 이라면 CG는 8이 된다.
 - DCG-standard는 항목 위치와 비례하여 감소하는 factor를 적용 함으로 앞쪽의 아이템에 가중치를 더해주게 된다. 이로인해 추천 리스트의 등급과 위치를 모두 반영할 수 있게 된다.<br>ex) 위의 예시의 경우 $DCG_score = 0 + 3/log(2+1) + 5/log(3+1)$
