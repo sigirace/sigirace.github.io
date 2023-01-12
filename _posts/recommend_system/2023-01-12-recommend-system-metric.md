@@ -140,10 +140,9 @@ NDCG metric은 MAP와 같이 관련성이 높은 아이템을 추천 리스트 �
 - IDCG는 DCG를 정규화 하기 위한 것으로 가장 이상적인 DCG score를 계산한 값이다.<br>ex)$IDCG_score =  5/log(1+1) + 3/log(2+1) + 0$
 - nDCG는 DCG를 IDCG로 나누어 정규화 한 값으로 0~1까지의 값을 가진다. 
 
-
 #### 4.3.2 Example
 
-  <p align="center"><img src="https://miro.medium.com/max/1400/1*W6cQB2kozFxedqVu9lpSVw.webp" width="500"></\p>
+  <p align="center"><img src="https://miro.medium.com/max/1400/1*W6cQB2kozFxedqVu9lpSVw.webp" width="500"></p>
 
 #### 4.3.3 Advantage
 
