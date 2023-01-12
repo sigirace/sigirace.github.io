@@ -44,7 +44,7 @@ Decision support metric은 아래 세가지가 있으며 이는 추천인이 사
 
 위 metric들은 사용자가 좋은 아이템을 선택하고 나쁜 아이템을 피하는데 도움을 줄 수 있다. 하지만 이들은 모든 데이터 셋을 대상으로 평가한 것들이기 때문에 ranking task에서는 활용하기 어렵다. 추천 시스템은 단순 아이템을 맞추는 것 보다 상위에 있는 아이템을 맞추도록 하는 것, 즉 'Top-N'을 타겟으로 삼아야 하기 때문이다. 예를들어 유튜브에서 수 많은 영상들을 추천 받았지만 내가 보고싶은 컨텐츠가 스크롤을 한참 내려서 봐야 한다면 추천의 성능이 좋다고 할 수 없다.
 
-때문에 위 metric을 확장하여 Precision과 Recall에 대해 추천하는 아이템을 상위 N개로 제한하는 방법이 제안되었으며, 이를 Precision@N, Recall@N, F1@N으로 나타낸다. 하지만 이 또한 기존의 metric과 유사하며 여전히 아이템을 맞추는 것에만 집중한다는 단점이 있다.
+​	때문에 위 metric을 확장하여 Precision과 Recall에 대해 추천하는 아이템을 상위 N개로 제한하는 방법이 제안되었으며, 이를 Precision@N, Recall@N, F1@N으로 나타낸다. 하지만 이 또한 기존의 metric과 유사하며 여전히 아이템을 맞추는 것에만 집중한다는 단점이 있다.
 
 ## 4. Rank-Aware Evaluation Metrics
 
@@ -66,27 +66,23 @@ rank-aware metric의 가장 단순한 방식으로 "relevant한 항목이 첫번
 #### 4.1.1 Algorithm
 
 - 추천 리스트를 생성함
-
 - 리스트에서 첫번째로 관련(relevant)있는 아이템의 위치 $k_u$를 구함
-
 - $\frac{1}{k_u}$ 을 계산
-
 - 모든 사용자에 대한 $k_u$ 역수의 평균
-
   $MRR(O, U) = \frac{1}{\vert{U}\vert}\sum\frac{1}{{k_u}}$
 
 #### 4.1.2 Example
 
-아래 예시의 사용자 1의 경우 relevant한 item이 추천 리스트 중 3번째에 처음 있었기 때문에 1/3, 사용자 2의 경우 추천 리스트 중 2번째에 처음 있었기에 1/2, 사용자 3의 경우 추천 리스트 중 1번째에 있었기에 1로 계산할 수 있다. 이에대한 평균을 구하면 metric 결과는 0.61이 된다.
+아래 예시의 사용자 1의 경우
+
+STEP1. relevant한 item이 추천 리스트 중 3번째에 처음 있었기 때문에 1/3<br>STEP2. 사용자 2의 경우 추천 리스트 중 2번째에 처음 있었기에 1/2<br>STEP3. 사용자 3의 경우 추천 리스트 중 1번째에 있었기에 1로 계산할 수 있다. <br>STEP4. 이에대한 평균을 구하면 metric 결과는 0.61이 된다.
 
 <img src="https://miro.medium.com/max/643/1*dR24Drmb9J5BLZp8ffjOGA.png" width="500">
 
 #### 4.1.3 Advantages
 
 - 계산하기 쉽고 해석하기 쉽다.
-
 - 첫 번째 관련 요소에 높은 초점을 맞추고 있기에 "나에게 가장 적합한 항목" 인 추천 task 적합하다.
-
 - 탐색 쿼리 또는 팩트 검색과 같은 알려진 항목 검색에 적합하다.
 
 #### 4.1.4 Disadvantages
@@ -106,7 +102,11 @@ rank-aware metric의 가장 단순한 방식으로 "relevant한 항목이 첫번
 
 #### 4.2.2 Example
 
-아래 예시의 사용자 1의 경우 <br>STEP1. 첫번째 아이템이 relevant하기에 1개의 sub-list에 대해 precision을 구함(1/1)<br>STEP2. 두번째 아이템은 non-relevant하기에  skip<br>STEP3. 세번째 아이템은 relevant하기에 3개의 sub-list에 대해 precision을 구함(2/3)<br>STEP4. 네번째 아이템은 relevant하기에 4개의 sub-list에 대해 precision을 구함(3/4)<br>STEP5. 마지막 아이템은 non-relevant하기에 skip한다.<br>STEP6. 위에서 구한 precision의 평균을 구한다(0.8)<br>이러한 과정을 각 사용자마다 반복하고, 평균 precision(AP)에 대한 평균(MAP)을 구한다. 해당 과정에서 각 sub-list마다 precision을 계산하는 것은 추천 목록을 세분화 하여 평가하는 것을 의미한다. 
+아래 예시의 사용자 1의 경우 <br>
+
+STEP1. 첫번째 아이템이 relevant하기에 1개의 sub-list에 대해 precision을 구함(1/1)<br>STEP2. 두번째 아이템은 non-relevant하기에  skip<br>STEP3. 세번째 아이템은 relevant하기에 3개의 sub-list에 대해 precision을 구함(2/3)<br>STEP4. 네번째 아이템은 relevant하기에 4개의 sub-list에 대해 precision을 구함(3/4)<br>STEP5. 마지막 아이템은 non-relevant하기에 skip한다.<br>STEP6. 위에서 구한 precision의 평균을 구한다(0.8)<br>STEP7. 이러한 과정을 각 사용자마다 반복하고, 평균 precision(AP)에 대한 평균(MAP)을 구한다. 
+
+해당 과정에서 각 sub-list마다 precision을 계산하는 것은 추천 목록을 세분화 하여 평가하는 것을 의미한다. 
 
 <img src="https://miro.medium.com/max/700/1*0xdZ-NWJLlf3m4oyjh0K5g.png" width="500">
 
