@@ -77,7 +77,7 @@ rank-aware metric의 가장 단순한 방식으로 "relevant한 항목이 첫번
 
 STEP1. relevant한 item이 추천 리스트 중 3번째에 처음 있었기 때문에 1/3<br>STEP2. 사용자 2의 경우 추천 리스트 중 2번째에 처음 있었기에 1/2<br>STEP3. 사용자 3의 경우 추천 리스트 중 1번째에 있었기에 1로 계산할 수 있다. <br>STEP4. 이에대한 평균을 구하면 metric 결과는 0.61이 된다.
 
-<img src="https://miro.medium.com/max/643/1*dR24Drmb9J5BLZp8ffjOGA.png" width="500">
+<p align="center"><img src="https://miro.medium.com/max/643/1*dR24Drmb9J5BLZp8ffjOGA.png" width="500"></p>
 
 #### 4.1.3 Advantages
 
@@ -108,7 +108,7 @@ STEP1. 첫번째 아이템이 relevant하기에 1개의 sub-list에 대해 preci
 
 해당 과정에서 각 sub-list마다 precision을 계산하는 것은 추천 목록을 세분화 하여 평가하는 것을 의미한다. 
 
-<img src="https://miro.medium.com/max/700/1*0xdZ-NWJLlf3m4oyjh0K5g.png" width="500">
+<p align="center"><img src="https://miro.medium.com/max/700/1*0xdZ-NWJLlf3m4oyjh0K5g.png" width="500"></p>
 
 #### 4.2.3 Advantage
 
