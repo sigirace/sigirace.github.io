@@ -4,6 +4,7 @@ title:  '추천시스템 Metric'
 toc: true
 categories: Recommender System
 tags: [metric, MAP, MRR, NDCG]
+
 ---
 
 본 게시물은 추천시스템에 대한 평가 지표에 대해 [해당 포스트](https://medium.com/swlh/rank-aware-recsys-evaluation-metrics-5191bba16832)를 읽고 정리하는 글이다.
@@ -68,8 +69,9 @@ rank-aware metric의 가장 단순한 방식으로 "relevant한 항목이 첫번
 
 - 추천 리스트를 생성함
 - 리스트에서 첫번째로 관련(relevant)있는 아이템의 위치 $k_u$를 구함
-- 아이템 위치에 대한 역수 $\frac{1}{k_u}$ 계산
-- 모든 사용자에 대한 $k_u$ 역수의 평균(MRR)을 계산<br><br>
+- $\frac{1}{k_u}$ 을 계산
+- 모든 사용자에 대한 $k_u$ 역수의 평균<br><br>
+  $MRR(O, U) = \frac{1}{\vert{U}\vert}\sum\frac{1}{{k_u}}$
 
 #### 4.1.2 Example
 
@@ -97,8 +99,8 @@ STEP1. relevant한 item이 추천 리스트 중 3번째에 처음 있었기 때�
 #### 4.2.1 Algorithm
 
 - 각 사용자에 대해 반복
-- 추천 항목의 첫번째 부터 끝까지 반복<br> ☞ relevant한 아이템이 등장하면 해당 아이템 까지를 sub-list로 취급하여 precision 계산
-- precision들의 평균(MAP) 계산
+- 추천 항목의 첫번째 부터 끝까지 반복<br>-> relevant한 아이템이 등장하면 해당 아이템 까지를 sub-list로 취급하여 precision 계산
+- precision들의 평균 계산
 
 #### 4.2.2 Example
 
@@ -133,10 +135,10 @@ NDCG metric은 MAP와 같이 관련성이 높은 아이템을 추천 리스트 �
   <p align="center"><img src="https://miro.medium.com/max/700/1*_a_YsiSw6K1whOzTYYq_Ag.png" width="500"></p>
 
 - CG는 추천 리스트 중 relevant한 아이템들의 사용자 등급 합이다. 이는 단순 합이므로 위에서 살펴본 rank-less metric과 동일하다. <br>ex) 추천 리스트 A, B, C에 대해 사용자 선호도가 A-0점, B-3점, C-5점 이라면 CG는 8이 된다.
-- DCG-standard는 항목 위치와 비례하여 감소하는 factor를 적용 함으로 앞쪽의 아이템에 가중치를 더해주게 된다. 이로인해 추천 리스트의 등급과 위치를 모두 반영할 수 있게 된다.<br>ex) 위의 예시의 경우 $DCG_score = 0 + 3/log(2+1) + 5/log(3+1)$
+- DCG-standard는 항목 위치와 비례하여 감소하는 factor를 적용 함으로 앞쪽의 아이템에 가중치를 더해주게 된다. 이로인해 추천 리스트의 등급과 위치를 모두 반영할 수 있게 된다.<br>ex) 위의 예시의 경우 $DCG_{score} = 0 + 3/log(2+1) + 5/log(3+1)$
 - DCG-industry는 산업에서 적용하는 방법으로 컨셉은 standard와 동일하나 relevant한 아이템의 등급에 가중치를 크게 반영한다.
 - 각 유저는 다양한 추천 수를 받게된다. 이때 DCG score는 기본적으로 누적 합 컨셉을 갖고 있기 때문에 많은 추천 리스트를 받는 유저가 더 큰 값을 가지게 된다. 따라서 유저간 추천 성능을 비교하기 위해 정규화가 필요하다.
-- IDCG는 DCG를 정규화 하기 위한 것으로 가장 이상적인 DCG score를 계산한 값이다.<br>ex)$IDCG_score =  5/log(1+1) + 3/log(2+1) + 0$
+- IDCG는 DCG를 정규화 하기 위한 것으로 가장 이상적인 DCG score를 계산한 값이다.<br>ex)$IDCG_{score} =  5/log(1+1) + 3/log(2+1) + 0$
 - nDCG는 DCG를 IDCG로 나누어 정규화 한 값으로 0~1까지의 값을 가진다. 
 
 #### 4.3.2 Example
