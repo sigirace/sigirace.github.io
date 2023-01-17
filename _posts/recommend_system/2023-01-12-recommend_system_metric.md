@@ -71,7 +71,6 @@ rank-aware metric의 가장 단순한 방식으로 "relevant한 항목이 첫번
 - 리스트에서 첫번째로 관련(relevant)있는 아이템의 위치 $k_u$를 구함
 - $\frac{1}{k_u}$ 을 계산
 - 모든 사용자에 대한 $k_u$ 역수의 평균<br><br>
-  $MRR(O, U) = \frac{1}{\vert{U}\vert}\sum\frac{1}{{k_u}}$
 
 #### 4.1.2 Example
 
