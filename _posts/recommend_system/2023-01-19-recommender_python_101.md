@@ -1,9 +1,9 @@
 ---
 layout: single
-title:  'Recommender System in Python 101'
+title:  '추천시스템 튜토리얼'
 toc: true
 categories: Recommender System
-tags: [metric, MAP, MRR, NDCG]
+tags: [python, recommender system]
 ---
 
 본 게시물은 추천시스템에 대한 구현으로 [해당 포스트](https://www.kaggle.com/code/gspmoreira/recommender-systems-in-python-101/notebook)를 읽고 정리하는 글이다.
