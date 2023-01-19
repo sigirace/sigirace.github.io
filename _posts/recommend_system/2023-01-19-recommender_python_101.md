@@ -2549,9 +2549,7 @@ for p in ax.patches:
 ```
 
 
-​    
-![png](2023-01-19-recommender_python_101_files/2023-01-19-recommender_python_101_58_0.png)
-​    
+<p align="center"><img src="https://raw.githubusercontent.com/sigirace/sigirace.github.io/master/assets/images/recommender_system/output.png" width="950"></p>
 
 
 ## 7. Test
