@@ -135,7 +135,15 @@ training data 전체의 loss를 최소화 시키는 파라미터를 찾는 학�
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_7_1.png?raw=true" width="400" height="150"></p>
 
-테일러 급수 또는 테일러 전개는 어떤 미지의 함수 f(x)를 근사 다항 함수로 표현하는 것이다. 이를 gradient descent에 적용하면 x를 $\theta$
+테일러 급수 또는 테일러 전개는 어떤 미지의 함수 f(x)를 근사 다항 함수로 표현하는 것이다. 해당 수식의 x를 $\theta + \delta \theta$로 $a$를 $\theta$로 치환하면 위의 gradient descent과 동일하게 된다. 
+
+#### Approximation
+
+이는 Taylor Expansion에서 1차 미분만 사용하여 $L(\theta + \delta \theta)$를 근사한 것이다. 이때 더 많은 차수를 사용한다면 approximation error가 작아지게 된다. 하지만 계산이 복잡하고 시간이 오래 걸리기 때문에 딥러닝에서는 1차 미분항까지만 사용한다.
+
+#### Learning rate
+
+20:27
 
 
 
