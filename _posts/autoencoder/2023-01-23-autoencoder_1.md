@@ -30,7 +30,6 @@ autoencoder는 레이블이 없는 데이터의 효율적인 코딩을 학습(=u
 1. Unsupervised learning
 
 2. Representation learning 
-
    = Efficient coding learning
 
 3. **Dimensionality reduction**
@@ -54,13 +53,9 @@ Manifold learning으로 알려진 비선형 차원 축소는 고차원의 데이
 1. Unsupervised learning
 
 2. Nonlinear Dimensionality reduction
-
    = Representation learning
-
    = Efficient coding learning
-
    = **Feature extraction**
-
    = **Manifold learning**
 
 3. Generative model learning
