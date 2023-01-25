@@ -27,8 +27,10 @@ KoNLPy(코엔엘파이)는 한국어 정보처리를 위한 파이썬 패키지�
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/mecab_install/mecab1_2.png?raw=true" width="550" height="100"></p>
 
-- cd /Library/Java/JavaVirtualMachines
-- ls
+```
+>> cd /Library/Java/JavaVirtualMachines
+>> ls
+```
 
 **Step3. zshrc에 JAVA PATH를 등록한다.**
 
