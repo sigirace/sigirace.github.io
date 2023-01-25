@@ -8,7 +8,7 @@ tags: [github.io, markdown]
 
 ## 1. Github Page
 
-1. 블로그<br> 
+1. 블로그<br>
 
    강의: https://www.youtube.com/watch?v=--MMmHbSH9k&list=PLIMb_GuNnFwfQBZQwD-vCZENL5YLDZekr&index=1
 
@@ -17,8 +17,6 @@ tags: [github.io, markdown]
 2. 수식 오류 해결<br>
 
    https://an-seunghwan.github.io/github.io/mathjax-error/
-
-3. 
 
 ## 2. MarkDown
 
