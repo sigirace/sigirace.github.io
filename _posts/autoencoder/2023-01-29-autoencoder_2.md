@@ -17,13 +17,13 @@ tags: [Autoencoder, Deep Learning, MLE, MSE, CE]
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_4.png?raw=true" width="650" height="400"></p>
 
-전통적인 머신러닝의 접근방식은 데이터에서 추상화된 정보를 뽑는 것이다. 이를 위해 먼저 데이터를 모은다. 다음으로 문제를 해결할 모델을 정의하고, 모델의 파라미터를 설정한다. 이후 모델에서 나온 정보와 실제 정보의 다른 정도를 계산(measure)하는 loss function을 정의한다. 학습단계에서는 모델을 규정짓는 파라미터를 바꿔가며 앞서 수집한 training data들에 대해 로스가 최소가 되는 파라미터를 찾는다. 마지막으로 test data에 대해 정보 값을 추정한다. 이 과정에서 주요하게 볼 부분은 입력이 고정되면 출력 또한 고정된다는 것이다.
+고전적인 머신러닝의 접근방식은 데이터에서 추상화된 정보를 뽑는 것이다. 이를 위해 먼저 데이터를 모은다. 다음으로 문제를 해결할 모델을 정의하고, 모델의 파라미터를 설정한다. 이후 모델에서 나온 정보와 실제 정보의 다른 정도를 계산(measure)하는 loss function을 정의한다. 학습단계에서는 모델을 규정짓는 파라미터를 바꿔가며 앞서 수집한 training data들에 대해 로스가 최소가 되는 파라미터를 찾는다. 마지막으로 test data에 대해 정보 값을 추정한다. 이 과정에서 주요하게 볼 부분은 입력이 고정되면 출력 또한 고정된다는 것이다.
 
 ### 2.2 Deep Neural Networks
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_5.png?raw=true" width="650" height="400"></p>
 
-데이터를 모으는 부분은 고전적 머신러닝과 동일하다. 모델을 정의하는 부분은 역시나 문제에 맞는 딥러닝 모델들을 사용한다. 이때 학습해야 할 파라미터는 주로 네트워크를 구성하는 weight와 bias이다. 이후 loss function을 정의하는 부분에서 딥러닝은 backpropagation으로 인한 제약조건이 생긴다. 이는 backpropagation에 대한 아래 두 가지의 가정 때문이다.
+딥러닝에서 데이터를 모으는 부분은 고전적 머신러닝과 동일하다. 모델을 정의하는 부분은 역시나 문제에 맞는 딥러닝 모델들을 사용한다. 이때 학습해야 할 파라미터는 주로 네트워크를 구성하는 weight와 bias이다. 이후 loss function을 정의하는 부분에서 딥러닝은 backpropagation으로 인한 제약조건이 생긴다. 이는 backpropagation에 대한 아래 두 가지의 가정 때문이다.
 
 ```
 1. 전체 training data의 loss는 sample data로 부터 나온 loss의 합과 같다.
@@ -53,7 +53,7 @@ training data 전체의 loss를 최소화 시키는 파라미터를 찾는 학�
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_7_1.png?raw=true" width="400" height="150"></p>
 
-테일러 급수 또는 테일러 전개는 어떤 미지의 함수 f(x)를 근사 다항 함수로 표현하는 것이다. 해당 수식의 x를 $\theta + \Delta \theta$로 $a$를 $\theta$로 치환하면 위의 gradient descent과 동일하게 된다. ($\bigtriangledown L 은 미분의 의미)
+테일러 급수 또는 테일러 전개는 어떤 미지의 함수 f(x)를 근사 다항 함수로 표현하는 것이다. 해당 수식의 x를 $\theta + \Delta \theta$로 $a$를 $\theta$로 치환하면 위의 gradient descent과 동일하게 된다. ($\bigtriangledown L$ 은 미분의 의미)
 
 #### Approximation
 
@@ -107,15 +107,15 @@ Cross Entropy에서는 MSE와 다르게 수식상 activation function의 미분�
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_14.png?raw=true" width="650" height="400"></p>
 
-Loss function에 대한 두번째 관점은 Maximum Likelihood이며 이는 네트워크 출력값에 대한 해석이 중요하다. 결국 네트워크의 출력값 $f_{/theta}(x)$이 정답이랑 가깝길 바라기에 다른 정도를 loss function으로 정의하여 풀었는데, 이를 다르게 해석하면 **네트워크의 출력값이 있을때(given), 원하는 정답이 나올 확률이 높길 바란다 **로 볼 수 있다. 따라서 확률분포에 대한 likelihood가 maximize되고 싶기에 확률분포 모델을 정의하여야 한다. 즉, conditional probability에 대한 모델을 정의해야 하며, 학습은 확률분포를 정의하는 파라미터 $\theta$를 추정하는 과정이 된다. 
+Loss function에 대한 두번째 관점은 Maximum Likelihood이며 이는 네트워크 출력값에 대한 해석이 중요하다. 결국 네트워크의 출력값 $f_{ /theta }(x)$이 정답이랑 가깝길 바라기에 다른 정도를 loss function으로 정의하여 풀었는데, 이를 다르게 해석하면 **네트워크의 출력값이 있을때(given), 원하는 정답이 나올 확률이 높길 바란다 **로 볼 수 있다. 따라서 확률분포에 대한 likelihood가 maximize되고 싶기에 확률분포 모델을 정의하여야 한다. 즉, conditional probability에 대한 모델을 정의해야 하며, 학습은 확률분포를 정의하는 파라미터 $\theta$를 추정하는 과정이 된다. 
 
-> **[예시]** 정의한 확률분포 모델이 가우시안이고 표준편차를 무시한다면 $/theta_{2}$일때 나온 네트워크 출력값은 어떤 가우시안 분포의 평균이라 볼 수 있고, 이와 매핑되는 가우시안 분포를 그릴 수 있게 되며, 이때 training db에 있는 고정된 값 y에 대한 likelihood를 구할수 있게 된다. 만약 학습을 통해 $/theta__{1}$의 출력값으로 평균값이 바뀌게 된다면 y의 likelihood는 더 큰 값을 가지게 될 것이다. 이러한 관점에서 likelihood가 최대가 되는 point는 평균(출력값)과 y가 같을 때 임을 알 수 있다. (MSE와 똑같은 얘기이나 관점만 확률적으로 바꾼 것이다.) 
+> **[예시]** <br>정의한 확률분포 모델이 가우시안이고 표준편차를 무시한다면 theta 2일때 나온 네트워크 출력값은 어떤 가우시안 분포의 평균이라 볼 수 있고, 이와 매핑되는 가우시안 분포를 그릴 수 있게 되며, 이때 training db에 있는 고정된 값 y에 대한 likelihood를 구할수 있게 된다. 만약 학습을 통해 theta 1의 출력값으로 평균값이 바뀌게 된다면 y의 likelihood는 더 큰 값을 가지게 될 것이다. 이러한 관점에서 likelihood가 최대가 되는 point는 평균(출력값)과 y가 같을 때 임을 알 수 있다. (MSE와 똑같은 얘기이나 관점만 확률적으로 바꾼 것이다.) 
 
 이러한 가정에서 Loss function을 보면 -log가 붙은 negative log likelihood임을 알 수 있다. (-)가 붙은 이유는 **probability가 커질수록 loss가 작아져야** 하기 때문이고, log가 붙은 이유는 backpropagation의 제약 조건인 **loss는 각 샘플의 loss의 합**을 만족시키기 위해서이다. 이러한 loss function을 정의하여 찾은 $\theta$는 확률분포 모델을 정의하는 파라미터이기에 결국 확률분포 모델을 찾은 것이라고 볼 수 있다. 이는 확률분포를 통한 샘플링을 할 수 있음을 의미한다. 고전적인 machine learning에서는 고정 입력, 고정 출력이나 이러한 관점에서는 확률 분포를 찾은 것이기 때문에 샘플링(=다양한 출력)이 가능해진다. 이는 autoencoder의 관점에서 중요한데, 한가지 입력에 대해 다양한 출력을 내는 것이 가능해야 하기 때문이다.
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_15.png?raw=true" width="650" height="200"></p>
 
-46:16
+Loss function을 negative log likelihood로 정의하였는데, 이것이 앞에서 이야기한 Backpropagation의 두가지 제약조건을 충족시키는지 알아본다.
 
 
 
