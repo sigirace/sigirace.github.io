@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  'Autoencoder의 모든것의 모든것 1'
+title:  'Autoencoder의 모든것의 모든것 1-1'
 toc: true
 categories: Autoencoder
 tags: [Autoencoder]
