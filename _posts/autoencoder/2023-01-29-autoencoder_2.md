@@ -162,7 +162,7 @@ Maximum Likelihood 관점에서 해석을 할 때, 네트워크의 출력값이 
 
 AE는 입력과 출력이 모두 x로 동일하여 p(x|x)이고, variational autoencoder(VAE)는 주어진 것이 없는 p(x)이다. VAE는 training DB에 있는 확률분포를 추정하는 것이다. (후에 상세 설명)
 
-### 3. 참고자료
+### 2.3 참고자료
 
 * [AutoEncoder (1) : Maximum likelihood 관점에서의 해석](https://junstar92.tistory.com/156)
 * [[Optimization Algorithms] Gradient Descent (1) Batch, Stochastic, Mini-batch Gradient descent 배치, 확률적, 미니배치 경사하강법](https://geniewishescometrue.tistory.com/entry/Gradient-Descent) 
