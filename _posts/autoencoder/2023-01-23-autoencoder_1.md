@@ -27,7 +27,7 @@ tags: [Autoencoder]
 
 autoencoder는 레이블이 없는 데이터의 효율적인 코딩을 학습(=unsupervised learning)하는 데 사용되는 인공 신경망의 한 유형이다. 인코딩으로부터 Input을 재생성하려는 시도를 통해 인코딩은 검증되고 정제된다. 일반적으로 autoencoder는 차원축소를 위해 중요하지 않은 데이터(noise)를 무시하도록 훈련시킴으로써 데이터 셋에 대한 <mark style='background-color: #fff5b1'> representation </mark>(인코딩)을 학습한다.
 
-:eyes: **keywords**
+👀 **keywords**
 
 ```markdown
 1. Unsupervised learning
@@ -49,7 +49,7 @@ autoencoder의 중요한 task는 <mark style='background-color: #fff5b1'> Dimens
 
 Manifold learning으로 알려진 비선형 차원 축소는 고차원의 데이터를 낮은 차원의 잠재적인 mainfold들로 투영, 시각화 및 매핑을 학습하는 것을 목표로 한다. 이러한 기법은 svd 그리고 pca와 같이 차원 축소를 위한 linear decomposition의 일반화로 이해할 수 있다. (manifold는 뒷 chapter에서 설명)
 
-:eyes: **keywords**
+👀 **keywords**
 
 ```markdown
 1. Unsupervised learning
@@ -87,7 +87,7 @@ Manifold learning으로 알려진 비선형 차원 축소는 고차원의 데이
 
 입력과 출력이 동일한 값을 만드는 네트워크 구조를 가지고 있으면 autoencoder라 칭하는데, 이때 관계되는 키워드를 아래의 4개로 정리할 수 있다.
 
-:eyes: **keywords**
+👀 **keywords**
 
 ```markdown
 1. Unsupervised learning

@@ -31,7 +31,7 @@ tags: [Autoencoder, Deep Learning, MLE, MSE, Cross Entropy]
 
 딥러닝에서 데이터를 모으는 부분은 고전적 머신러닝과 동일하다. 모델을 정의하는 부분은 역시나 문제에 맞는 딥러닝 모델들을 사용한다. 이때 학습해야 할 파라미터는 주로 네트워크를 구성하는 weight와 bias이다. 이후 loss function을 정의하는 부분에서 딥러닝은 backpropagation(BP)으로 인한 제약조건이 생긴다. 이는 BP에 대한 아래 두 가지의 가정 때문이다.
 
-:eyes: **Assumptions**
+👀 **Assumptions**
 
 ```
 1. 전체 training data의 loss는 sample data로 부터 나온 loss의 합과 같다.
@@ -46,7 +46,7 @@ tags: [Autoencoder, Deep Learning, MLE, MSE, Cross Entropy]
 
 training data 전체의 loss를 최소화 시키는 파라미터를 찾는 학습 방식은 대부분 optimal problem을 찾는 가장 간단한 방식인 gradient descent을 사용한다. 이는 step by step으로 점차 정답에 가까워지는 iterative method이다. 이러한 방식을 위해서는 아래의 질문에 대한 정의가 필요하다.
 
-:eyes: **Definitions**
+👀 **Definitions**
 
 ```
 1. 현재 파라미터에서 어떻게 update 할 것인가
@@ -59,19 +59,19 @@ training data 전체의 loss를 최소화 시키는 파라미터를 찾는 학�
 
 파라미터를 바꿔 loss를 줄이는 것은 알겠으나 파라미터의 차원은 네트워크가 깊어질수록 커지게 된다. 이때 gradient descent 방식으로 파라미터를 조정한다면 각각을 얼마만큼 바꿔줘야 하는지에 대한 문제에 마주친다. 이에 대한 해답은 다음과 같다.
 
-#### **:sunny:** [Taylor expansion](https://darkpgmr.tistory.com/59)
+#### ☀️ [Taylor expansion](https://darkpgmr.tistory.com/59)
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_7_1.png?raw=true" width="400" height="150"></p>
 
 테일러 급수 또는 테일러 전개는 어떤 미지의 함수 f(x)를 근사 다항 함수로 표현하는 것이다. 해당 수식의 x를 $\theta + \Delta \theta$로 $a$를 $\theta$로 치환하면 위의 gradient descent과 동일하게 된다. ($\bigtriangledown L$ 은 미분의 의미)
 
-#### **:sunny:** Approximation
+#### ☀️ Approximation
 
 이는 Taylor Expansion에서 1차 미분만 사용하여 $L(\theta + \Delta \theta)$를 근사한 것이다. 이때 더 많은 차수를 사용한다면 approximation error가 작아지게 된다. 하지만 계산이 복잡하고 시간이 오래 걸리기 때문에 딥러닝에서는 1차 미분항까지만 사용한다. 근사 다항식의 $L(\theta)$를 왼쪽 항으로 옮겨 구한 변화량 $\Delta L$은 앞서 loss는 항상 작아지는 방향으로 움직이는 것으로 정의하였기 때문에 음수가 되길 원한다. 따라서 만약 파라미터의 변화량 $\Delta \theta$가 $-n \bigtriangledown L$(Loss의 미분값)이라면 파라미터의 변화로 인한 Loss의 변화량 $\Delta L$은 언제나 음수이게 된다. 
 
 (추가)<br>미분값들은 데이터 포인트에서 미분을 한 것이기 때문에 더 많은 차수를 사용할 수록 approximation error가 작아지게 된다. 
 
-#### **:sunny:** Learning rate
+#### ☀️ Learning rate
 
 이때 앞에 있는 learning rate $-n$은 매우 작은 값을 취하게 된다. 이는 앞의 approximation 시에 1차 미분만을 사용하였기 때문에 만약 데이터 포인트에서 멀어지는 변화를 갖게 되면 근사값 오차가 커지게 된다.
 
@@ -79,7 +79,7 @@ training data 전체의 loss를 최소화 시키는 파라미터를 찾는 학�
 
 Training DB, 현재 파라미터 그리고 그에대한 loss function이 있다. 모든 training data에 대한 loss는 sample loss의 합으로 가정하였기 때문에 위와 같은 식이 도출된다. 이때 각 sample의 수가 고정인 N이라고 하면 평균 gradient로 redefinition 할 수 있다. (Loss 값이 음수임은 변함이 없기 때문) 만약 데이터의 수가 많이 전체에 대한 연산이 불가능 할 경우 랜덤하게 M개의 batch로 평균 gradient를 구한다. 이는 전체에 대한 gradient와 배치에 대한 gradient가 같을 것이라고 기대하는 것이다. 마지막으로 구한 gradient 값과 learning rate를 곱해 update를 진행한다.
 
-:eyes: **Step, Epoch**<br>1번 update되는 것을 step, 모든 training data를 다 훑으면 epoch이라고 함
+👀 **Step, Epoch**<br>1번 update되는 것을 step, 모든 training data를 다 훑으면 epoch이라고 함
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_9.png?raw=true" width="600" height="350"></p>
 
@@ -93,15 +93,15 @@ Deep neural network에서 학습해야 할 파라미터는 (W,b)이며 이는 la
 
 앞의 내용에서 말했듯 Loss function은 BP를 만족하는 대표적인 두가지인 MSE 또는 CE를 쓴다. 그러면 두 loss 중 어떤것이 좋은가에 대한 기준이 되는 두가지 관점이 있는데, 하나는 Bacpropagation 관점이고 다른 하나는 Maximum Likelyhood 관점이다. 먼저 BP 관점에 대한 해석은 아래와 같다.
 
-**:sunny:** **Tpye 1: MSE**<br>Input 1이 layer 1개를 거친 후 activation function을 거쳐 output이 0인 NN이 있다고 가정한다. 이후 초기값을 서로 다르게 하여 학습을 진행하는데, 그래프를 보면 초기값을 (0.6, 0.9)로 준 것의 output이 0.09로 (2,2)로 준 것보다 학습이 더 잘 되었음을 확인할 수 있다.
+☀️ **Tpye 1: MSE**<br>Input 1이 layer 1개를 거친 후 activation function을 거쳐 output이 0인 NN이 있다고 가정한다. 이후 초기값을 서로 다르게 하여 학습을 진행하는데, 그래프를 보면 초기값을 (0.6, 0.9)로 준 것의 output이 0.09로 (2,2)로 준 것보다 학습이 더 잘 되었음을 확인할 수 있다.
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_11.png?raw=true" width="650" height="250"></p>
 
 이는 초기값이 다르기 때문인데 이유는 다음과 같다. 먼저 BP의 수식을 보면 항상 activation function의 미분값이 들어가 있음을 알 수 있다. 해당 NN에서 사용한 activation function은 파란 선인 sigmoid이므로 미분한 것의 그래프는 빨간 선과 같다. 그래프를 보면 학습이 잘된 것은 미분값이 어느정도 값이 있는 것임을 알 수 있다. 반대로 학습이 잘 되지 않은 것은 미분값이 0에 가까움을 알 수 있다. 학습을 진행하며 activation function의 미분값이 0에 가깝다는 것은 최종적으로 계산된 gradient 값이 0에 가깝고(항상 activation function의 미분값이 들어가 있기 때문에), 파라미터의 변화량이 미미하다는 것이다.
 
-:eyes: **Gradient Vanishing**<br>activation function의 미분값은 maximum 1/4 정도 된다. 따라서 만약 layer가 깊게 쌓인 경우, 앞서 설명하였듯 activation function의 미분값이 항상 곱해지기 때문에 (최대)1/4씩 여러번 곱해지다보면 0에 가까워져 입력단에서는 거의 변화가 일어나지 않는 형상이 발생한다. 이러한 현상을 gradient vanishing이라고 한다. 따라서 최근에는 Relu를 activation function으로 사용여 gradient vanishing problem을 어느정도 완화시킨다.
+👀 **Gradient Vanishing**<br>activation function의 미분값은 maximum 1/4 정도 된다. 따라서 만약 layer가 깊게 쌓인 경우, 앞서 설명하였듯 activation function의 미분값이 항상 곱해지기 때문에 (최대)1/4씩 여러번 곱해지다보면 0에 가까워져 입력단에서는 거의 변화가 일어나지 않는 형상이 발생한다. 이러한 현상을 gradient vanishing이라고 한다. 따라서 최근에는 Relu를 activation function으로 사용여 gradient vanishing problem을 어느정도 완화시킨다.
 
-**:sunny:** **Tpye 2: Cross Entropy**
+☀️ **Tpye 2: Cross Entropy**
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_12.png?raw=true" width="650" height="400"></p>
 
@@ -138,13 +138,13 @@ Loss function을 negative log likelihood로 정의하였는데, 이것이 BP의 
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_16.png?raw=true" width="650" height="400"></p>
 
-**:sunny:** **Univariate cases: 단변량**
+☀️ **Univariate cases: 단변량**
 
 확률분포 모델을 정할때 가우시안과 베르누이 두가지 분포로 가정하는데, 다른 분포들은 가능은하나 수학적으로 어렵기 때문이다. 먼저 가우시안으로 확률분포 모델을 정한다면 수식을 풀었을 때, MSE와 동일함을 알 수 있다. 다음으로 각 이벤트가 나올 확률을 모델링하는 베르누이로 정하였다면 CE와 동일함을 알 수 있다. 앞서 BP 관점에서는 CE가 초기값에 둔감하므로 더 나은 loss라고 판단하였으나, Maximum Likelihood의 관점에서는 네트워크 출력값의 확률분포가 미리 정의한 확률분포에 가까울수록 좋음을 알 수 있다. 그렇기 때문에 데이터가 continuous한 경우 MSE를, descrete한 경우 CE를 쓰는게 좋다고 해석할 수 있다.
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_17.png?raw=true" width="650" height="400"></p>
 
-**:sunny:** **Multivariate cases: 다변량**
+☀️ **Multivariate cases: 다변량**
 
 Multivariate의 경우도 동일하다.
 
@@ -154,7 +154,7 @@ Maximum Likelihood 관점에서 해석을 할 때, 네트워크의 출력값이 
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_19.png?raw=true" width="650" height="400"></p>
 
-**:sunny:** **벤지오 교수의 발표자료**
+☀️ **벤지오 교수의 발표자료**
 
 * 네트워크 입력 X가 주어졌을때(given), 네트워크 출력 Y의 조건부 확률을 추정함
 * 파라미터화: X가 주어진 것이 아니고, 확률분포를 정하는 w를 찾는 것인데 이것이 네트워크의 출력임

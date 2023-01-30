@@ -20,7 +20,7 @@ tags: [Autoencoder, Deep Learning, MLE, MSE, Cross Entropy]
 
 ### 3.1 Introduction
 
-**:sunny:** **Manifold란?**<br>Manifold는 training DB 자체의 고차원 데이터를 공간에 뿌렸을때, 데이터를 error 없이 잘 아우르는 subspace를 의미한다. 이러한 subspace를 잘 찾는 것이 manifold learning이 되고, 이를 projection 시키면 차원이 축소된다.
+☀️ **Manifold란?**<br>Manifold는 training DB 자체의 고차원 데이터를 공간에 뿌렸을때, 데이터를 error 없이 잘 아우르는 subspace를 의미한다. 이러한 subspace를 잘 찾는 것이 manifold learning이 되고, 이를 projection 시키면 차원이 축소된다.
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_22.png?raw=true" width="650" height="400"></p>
 
@@ -28,8 +28,9 @@ Manifold는 원 데이터의 정보를 유지하며 차원을 잘 줄이고 싶�
 
 1. Data compression: 데이터를 압축해서 가지고 있다면 공간을 아낄 수 있음
 2. Data visualization: 데이터를 시각화 할 필요가 있을 때 사용함
-3. <mark style='background-color: #fff5b1'> Curse of dimensionality </mark>: 차원의 저주를 회피하기 위해
-4. <mark style='background-color: #fff5b1'> Discovering most important features </mark>: 차원을 축소하여 정보를 잘 압축했다면 중요 정보만 보전되었을 것이니 주요 feature라고 생각
+3. <mark style='background-color: #ffd33d'> Curse of dimensionality </mark>: 차원의 저주를 회피하기 위해
+4. <mark style='background-color: #fff5b1'> Curse of dimensionality </mark>: 차원의 저주를 회피하기 위해
+5. <mark style='background-color: #fff5b1'> Discovering most important features </mark>: 차원을 축소하여 정보를 잘 압축했다면 중요 정보만 보전되었을 것이니 주요 feature라고 생각
 
 ### 3.2 Objective
 
@@ -53,7 +54,7 @@ t-SNE는 가장 고전적인 방법 중 하나이며, 예시는 28*28 차원의 
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_26.png?raw=true" width="650" height="400"></p>
 
-**:sunny:** **Manifold learning의 가정**
+☀️ **Manifold learning의 가정**
 
 <mark style='background-color: #f6f8fa'> Training DB에 있는 데이터를 공간상에 나타냈을 때, 이를 잘 표현하는 subspace가 있을 것이다. </mark>
 
@@ -69,7 +70,7 @@ Manifold를 잘 찾았다는 것은 유사한 이미지간의 관계성을 잘 �
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_28.png?raw=true" width="650" height="400"></p>
 
-**:sunny:** **MNIST**<br>28*28 차원의 데이터들이 분포되어 있는 것들을 잘 아우르는 2차원 subspace(=manifold)를 잘 찾았다면 각 숫자 두개가 어떤 dominent한 feature일 것이다. 
+☀️ **MNIST**<br>28*28 차원의 데이터들이 분포되어 있는 것들을 잘 아우르는 2차원 subspace(=manifold)를 잘 찾았다면 각 숫자 두개가 어떤 dominent한 feature일 것이다. 
 
 
 
