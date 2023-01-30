@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  'Autoencoder의 모든것의 모든것 1-1'
+title:  'Autoencoder의 모든것의 모든것 (1) 오토인코더란?'
 toc: true
 categories: Autoencoder
 tags: [Autoencoder]
@@ -8,6 +8,12 @@ tags: [Autoencoder]
 
 본 게시물은 이활석님의 [강의](https://www.youtube.com/watch?v=o_peo6U7IRM&t=4)를 보고 정리하는 글이다.
 {: .notice}
+
+<div class="notice">
+<li><a href="https://sigirace.github.io/autoencoder/autoencoder_2/">Autoencoder의 모든것의 모든것 (2) Maximum Likelihood 관점의 Deep Learning</a></li>
+<li><a href="https://sigirace.github.io/autoencoder/autoencoder_3/">Autoencoder의 모든것의 모든것 (3) Manifold Learning</a></li>
+</div>
+
 
 ## 1. Introduction
 
@@ -61,7 +67,7 @@ Manifold learning으로 알려진 비선형 차원 축소는 고차원의 데이
 
 <center>출처: http://videolectures.net/kdd2014_bengio_deep_learning/</center><br>
 
-벤지오 교수님의 기술 분류표 상에서 autoencoder는 representation learning에 속한다고 한다. 
+벤지오 교수의 기술 분류표 상에서 autoencoder는 representation learning에 속한다고 한다. 
 
 
 
