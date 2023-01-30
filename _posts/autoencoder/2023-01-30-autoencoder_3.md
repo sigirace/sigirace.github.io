@@ -28,8 +28,8 @@ Manifold는 원 데이터의 정보를 유지하며 차원을 잘 줄이고 싶�
 
 1. Data compression: 데이터를 압축해서 가지고 있다면 공간을 아낄 수 있음
 2. Data visualization: 데이터를 시각화 할 필요가 있을 때 사용함
-4. <mark style='background-color: #fff5b1'> Curse of dimensionality </mark>: 차원의 저주를 회피하기 위해
-5. <mark style='background-color: #fff5b1'> Discovering most important features </mark>: 차원을 축소하여 정보를 잘 압축했다면 중요 정보만 보전되었을 것이니 주요 feature라고 생각
+4. <mark style='background-color: #fff5b1'>Curse of dimensionality</mark>: 차원의 저주를 회피하기 위해
+5. <mark style='background-color: #fff5b1'>Discovering most important features</mark>: 차원을 축소하여 정보를 잘 압축했다면 중요 정보만 보전되었을 것이니 주요 feature라고 생각
 
 ### 3.2 Objective
 
@@ -73,11 +73,13 @@ Training DB에 있는 데이터를 공간상에 나타냈을 때, 이를 잘 표
 
 Manifold를 잘 찾았다는 것은 유사한 이미지간의 관계성을 잘 찾았다는 것이다. 더하여 확률분포들 또한 잘 찾았다면 샘플링시 기존 training DB에 없는 것들이 나타나게 된다.
 
+#### 3.2.4 Discovering most important features
+
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_28.png?raw=true" width="650" height="400"></p>
 
 ☀️ **MNIST**<br>28*28 차원의 데이터들이 분포되어 있는 것들을 잘 아우르는 2차원 subspace(=manifold)를 잘 찾았다면 각 숫자 두개가 어떤 dominent한 feature일 것이다. 
 
-
+1:07:11
 
 
 

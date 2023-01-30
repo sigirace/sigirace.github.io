@@ -17,13 +17,13 @@ tags: [Autoencoder, Deep Learning, MLE, MSE, Cross Entropy]
 
 ## 2. Revisit Deep Neural Networks
 
-해당 Chapter에서는 DNN이 MLE와 동일함을 보이기 위해 DNN을 풀어 설명한다.
+해당 Chapter에서는 deep neural network(DNN)을 maximum likelihood로 해석하기 위해 DNN을 풀어 설명한다.
 
 ### 2.1 Classic Machine Learning
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_4.png?raw=true" width="650" height="400"></p>
 
-고전적인 머신러닝의 접근방식은 데이터에서 추상화된 정보를 뽑는 것이다. 이를 위해 먼저 데이터를 모은다. 다음으로 문제를 해결할 모델을 정의하고, 모델의 파라미터를 설정한다. 이후 모델에서 나온 정보와 실제 정보의 다른 정도를 계산(measure)하는 loss function을 정의한다. 학습단계에서는 모델을 규정짓는 파라미터를 바꿔가며 앞서 수집한 training data들에 대해 로스가 최소가 되는 파라미터를 찾는다. 마지막으로 test data에 대해 정보 값을 추정한다. 이 과정에서 주요하게 볼 부분은 입력이 고정되면 출력 또한 고정된다는 것이다.
+고전적인 머신러닝의 접근방식은 데이터에서 추상화된 정보를 뽑는 것이다. 이를 위해 먼저 데이터를 모은다. 다음으로 문제를 해결할 모델을 정의하고, 모델의 파라미터를 설정한다. 이후 모델에서 나온 정보와 실제 정보의 다른 정도를 계산(measure)하는 loss function을 정의한다. 학습단계에서는 모델을 규정짓는 파라미터를 바꿔가며 앞서 수집한 training data들에 대해 로스가 최소가 되는 파라미터를 찾는다. 마지막으로 test data에 대해 정보 값을 추정한다. 이 과정에서 주요하게 볼 부분은 <mark style='background-color: #f6f8fa'>입력이 고정되면 출력 또한 고정된다는 것</mark>이다.
 
 ### 2.2 Deep Neural Networks
 
@@ -83,7 +83,7 @@ Training DB, 현재 파라미터 그리고 그에대한 loss function이 있다.
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_9.png?raw=true" width="600" height="350"></p>
 
-Deep neural network에서 학습해야 할 파라미터는 (W,b)이며 이는 layer로 구성되어 연결되어 있다. 이를 미분하는 과정은 복잡하기에 BP Algorithm을 사용한다. 해당 알고리즘은 output layer부터 각 layer 까지 error signal을 구하는 것이다.  첫번째 output layer의 error signal은 먼저 cost를 network 출력 값으로 미분한다. 이는 **loss function은 network 출력단에 해당하는 함수**에 대한 가정 때문이다. 다음으로 activation function의 미분에 입력으로 들어간 값을 대입하여 나온 결과와 element wise 곱을 해준다. 이후 각 layer는 앞에서 전달받은 error signal(about W)과 연산을 통해 계산한다. 
+Deep neural network에서 학습해야 할 파라미터는 (W,b)이며 이는 layer로 구성되어 연결되어 있다. 이를 미분하는 과정은 복잡하기에 BP Algorithm을 사용한다. 해당 알고리즘은 output layer부터 각 layer 까지 error signal을 구하는 것이다.  첫번째 output layer의 error signal은 먼저 cost를 network 출력 값으로 미분한다. 이는 <mark style='background-color: #f6f8fa'>loss function은 network 출력단에 해당하는 함수</mark>에 대한 가정 때문이다. 다음으로 activation function의 미분에 입력으로 들어간 값을 대입하여 나온 결과와 element wise 곱을 해준다. 이후 각 layer는 앞에서 전달받은 error signal(about W)과 연산을 통해 계산한다. 
 
 파라미터 갱신을 위해 궁금한것은 각 layer 별로 (W,b)에 대한 gradient(미분값)이다. 이는 앞선 BP 과정에서 구하였는데, bias에 대한 미분값은 error signal 그 자체이고 weight에 대한 미분값은 error signal과 그 네트워크 layer의 입력으로 들어가는 값과의 곱으로 구할 수 있다. 이러한 과정을 통해 편하고 빠르게 파라미터 갱신을 위한 미분을 진행할 수 있다.
 
@@ -111,19 +111,19 @@ CE에서는 MSE와 다르게 수식상 activation function의 미분값이 사�
 
 따라서 학습을 할 때, 초기값에 둔감하게 반응하게 된다. 
 
-결과적으로 BP 관점의 해석일 때는 CE가 (모두 그런 것은 아니지만) 초기값에 둔감하므로 학습에 좀 더 용이하다는 결론을 내릴 수 있다.
+<mark style='background-color: #f6f8fa'>결과적으로 BP 관점의 해석일 때는 CE가 (모두 그런 것은 아니지만) 초기값에 둔감하므로 학습에 좀 더 용이하다고 할 수 있다.</mark>
 
 ### 2.2.2 View-Point 2: Maximum Likelihood
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_14.png?raw=true" width="650" height="400"></p>
 
-Loss function에 대한 두번째 관점은 Maximum Likelihood이며 이는 네트워크 출력값에 대한 해석이 중요하다. 결국 네트워크의 출력값 $f_{ /theta }(x)$이 정답이랑 가깝길 바라기에 다른 정도를 loss function으로 정의하여 풀었는데, 이를 다르게 해석하면 **네트워크의 출력값이 있을때(given), 원하는 정답이 나올 확률이 높길 바란다 **로 볼 수 있다. 따라서 확률분포에 대한 likelihood가 maximize되고 싶기에 확률분포 모델을 정의하여야 한다. 즉, conditional probability에 대한 모델을 정의해야 하며, 학습은 확률분포를 정의하는 파라미터 $\theta$를 추정하는 과정이 된다. 
+Loss function에 대한 두번째 관점은 Maximum Likelihood이며 이는 네트워크 출력값에 대한 해석이 중요하다. 결국 네트워크의 출력값 $f_{ /theta }(x)$이 정답이랑 가깝길 바라기에 다른 정도를 loss function으로 정의하여 풀었는데, 이를 다르게 해석하면 <mark style='background-color: #f6f8fa'>네트워크의 출력값이 있을때(given), 원하는 정답이 나올 확률이 높길 바란다</mark>로 볼 수 있다. 따라서 확률분포에 대한 likelihood가 maximize되고 싶기에 확률분포 모델을 정의하여야 한다. 즉, conditional probability에 대한 모델을 정의해야 하며, 학습은 확률분포를 정의하는 파라미터 $\theta$를 추정하는 과정이 된다. 
 
 📍 **예시**
 
 > 정의한 확률분포 모델이 가우시안이고 표준편차를 무시한다면 theta 2일때 나온 네트워크 출력값은 어떤 가우시안 분포의 평균이라 볼 수 있고, 이와 매핑되는 가우시안 분포를 그릴 수 있게 되며, 이때 training db에 있는 고정된 값 y에 대한 likelihood를 구할수 있게 된다. 만약 학습을 통해 theta 1의 출력값으로 평균값이 바뀌게 된다면 y의 likelihood는 더 큰 값을 가지게 될 것이다. 이러한 관점에서 likelihood가 최대가 되는 point는 평균(출력값)과 y가 같을 때 임을 알 수 있다. (MSE와 똑같은 얘기이나 관점만 확률적으로 바꾼 것이다.) 
 
-이러한 가정에서 Loss function을 보면 -log가 붙은 negative log likelihood임을 알 수 있다. (-)가 붙은 이유는 **probability가 커질수록 loss가 작아져야** 하기 때문이고, log가 붙은 이유는 BP의 제약 조건인 **loss는 각 샘플의 loss의 합**을 만족시키기 위해서이다. 이러한 loss function을 정의하여 찾은 $\theta$는 확률분포 모델을 정의하는 파라미터이기에 결국 확률분포 모델을 찾은 것이라고 볼 수 있다. 이는 확률분포를 통한 샘플링을 할 수 있음을 의미한다. 고전적인 machine learning에서는 고정 입력, 고정 출력이나 이러한 관점에서는 확률 분포를 찾은 것이기 때문에 샘플링(=다양한 출력)이 가능해진다. 이는 autoencoder(AE)의 관점에서 중요한데, 한가지 입력에 대해 다양한 출력을 내는 것이 가능해야 하기 때문이다.
+이러한 가정에서 Loss function을 보면 -log가 붙은 negative log likelihood임을 알 수 있다. (-)가 붙은 이유는 <mark style='background-color: #f6f8fa'>probability가 커질수록 loss가 작아져야</mark> 하기 때문이고, log가 붙은 이유는 BP의 제약 조건인 <mark style='background-color: #f6f8fa'>loss는 각 샘플의 loss의 합</mark>을 만족시키기 위해서이다. 이러한 loss function을 정의하여 찾은 $\theta$는 확률분포 모델을 정의하는 파라미터이기에 결국 확률분포 모델을 찾은 것이라고 볼 수 있다. 이는 확률분포를 통한 샘플링을 할 수 있음을 의미한다. 고전적인 machine learning에서는 고정 입력, 고정 출력이나 이러한 관점에서는 확률 분포를 찾은 것이기 때문에 샘플링(=다양한 출력)이 가능해진다. 이는 autoencoder(AE)의 관점에서 중요한데, <mark style='background-color: #f6f8fa'>한가지 입력에 대해 다양한 출력을 내는 것이 가능</mark>해야 하기 때문이다.
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_15.png?raw=true" width="650" height="200"></p>
 
@@ -144,7 +144,7 @@ Loss function을 negative log likelihood로 정의하였는데, 이것이 BP의 
 
 ☀️ **Univariate cases: 단변량**
 
-확률분포 모델을 정할때 가우시안과 베르누이 두가지 분포로 가정하는데, 다른 분포들은 가능은하나 수학적으로 어렵기 때문이다. 먼저 가우시안으로 확률분포 모델을 정한다면 수식을 풀었을 때, MSE와 동일함을 알 수 있다. 다음으로 각 이벤트가 나올 확률을 모델링하는 베르누이로 정하였다면 CE와 동일함을 알 수 있다. 앞서 BP 관점에서는 CE가 초기값에 둔감하므로 더 나은 loss라고 판단하였으나, Maximum Likelihood의 관점에서는 네트워크 출력값의 확률분포가 미리 정의한 확률분포에 가까울수록 좋음을 알 수 있다. 그렇기 때문에 데이터가 continuous한 경우 MSE를, descrete한 경우 CE를 쓰는게 좋다고 해석할 수 있다.
+확률분포 모델을 정할때 가우시안과 베르누이 두가지 분포로 가정하는데, 다른 분포들은 가능은하나 수학적으로 어렵기 때문이다. 먼저 가우시안으로 확률분포 모델을 정한다면 수식을 풀었을 때, MSE와 동일함을 알 수 있다. 다음으로 각 이벤트가 나올 확률을 모델링하는 베르누이로 정하였다면 CE와 동일함을 알 수 있다. 앞서 BP 관점에서는 CE가 초기값에 둔감하므로 더 나은 loss라고 판단하였으나, Maximum Likelihood의 관점에서는 네트워크 출력값의 확률분포가 미리 정의한 확률분포에 가까울수록 좋음을 알 수 있다. <mark style='background-color: #f6f8fa'>그렇기 때문에 데이터가 continuous한 경우 MSE를, descrete한 경우 CE를 쓰는게 좋다고 해석할 수 있다.</mark> (2.1에서 주요하게 보았던 부분과 비교)
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_17.png?raw=true" width="650" height="400"></p>
 
