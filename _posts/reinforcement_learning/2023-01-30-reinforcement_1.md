@@ -129,15 +129,64 @@ $$
 
 해당 chapter에서는 agent의 구성요소를 살펴본다.
 
+### 3.1 Policy
 
+- Policy는 agent의 행동을 규정하는 것
+- state가 주어졌을 때 행동을 규정함
+- Deterministic policy: 하나의 action을 매핑함<br>$a = \pi(s)$
+- Stochastic policy: 여러 action의 확률을 매핑함<br>$\pi(a|s) = P[A_t = a| S_t = s]$
 
+### 3.2 Value Function
 
+- Value Function은 미래의 reward를 예측하여 상황(=현재 state)이 얼마나 좋은지/나쁜지를 나타냄<br>☞ 이를 통해 action을 선택함
+- 현재 state에서 policy를 따라 진행하였을 때 받게되는 총 reward의 기대값<br>☞ Stochastic일 경우 확률에 따라 policy가 달라져 reward가 달라지니 기대값을 취함<br>☞ Detrministic일 경우에도 environment로 부터 오는 확률이 존재하기 때문에 기대값을 취함
+- Discount factor를 사용하여 미래의 reward에 불확실성을 포함시킴
 
+$$
+v_{\pi}(s)= E_{\pi}[R_{t+1}+\gamma R_{t+2}+ \gamma^2R_{t+3}+...|S_t=s]
+$$
 
+### 3.3 Model
 
+- Model은 environment의 다음 행동을 예측하는 것
+-  state s에서 action a를 했을때, reward 예측
 
+$$
+R^{a}_{s} = E[R_{t+1}|S_t=s, A_t=a]
+$$
 
+- state s에서 action a를 했을때, 다음 state s`가 나올 확률 (= probability of state transition)
 
+$$
+P^{a}_{ss^\prime} = P[S_{t+1}=s^\prime | S_t = s, A_t = a]
+$$
 
+### 3.4 Maze Example
 
+☀️ **Definition**
 
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/reinforcement/lec1/intro_RL-30.png?raw=true" width="650" height="400"></p>
+
+- Cumulative reward가 최대가 되기 위해 각 time-step의 action에 대한 reward를 1로 설정함
+
+☀️ **Policy**
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/reinforcement/lec1/intro_RL-31.png?raw=true" width="650" height="400"></p>
+
+- 여러 policy가 있겠지만, 예시는 각 state에서의 optimal policy를 나타냄
+
+☀️ **Value Function**
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/reinforcement/lec1/intro_RL-32.png?raw=true" width="650" height="400"></p>
+
+- Policy를 따랐을 때, 각 state에서의 value function
+
+☀️ **Model**
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/reinforcement/lec1/intro_RL-33.png?raw=true" width="650" height="400"></p>
+
+- Model은 1. next reward와 2. next state를 정해야함
+- Next reward는 모두 -1
+- Next state는
+
+1:02:10
