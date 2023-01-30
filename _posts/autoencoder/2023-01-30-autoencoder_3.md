@@ -28,7 +28,6 @@ Manifold는 원 데이터의 정보를 유지하며 차원을 잘 줄이고 싶�
 
 1. Data compression: 데이터를 압축해서 가지고 있다면 공간을 아낄 수 있음
 2. Data visualization: 데이터를 시각화 할 필요가 있을 때 사용함
-3. <mark style='background-color: #ffd33d'> Curse of dimensionality </mark>: 차원의 저주를 회피하기 위해
 4. <mark style='background-color: #fff5b1'> Curse of dimensionality </mark>: 차원의 저주를 회피하기 위해
 5. <mark style='background-color: #fff5b1'> Discovering most important features </mark>: 차원을 축소하여 정보를 잘 압축했다면 중요 정보만 보전되었을 것이니 주요 feature라고 생각
 
