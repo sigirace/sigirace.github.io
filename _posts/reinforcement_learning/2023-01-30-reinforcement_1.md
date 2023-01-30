@@ -103,13 +103,22 @@ Markov state는 history에서 부터 온 모든 유용한 정보를 포함하고
 👀 **Definition of Reward Markov**
 
 ```
-강식신
-$$ P(x)=a^(2) $$
+만약 미래의 State가 현재에만 영향을 받으면, 현재의 State St는 Markov이다. (☞ 필요충분 조건)
 ```
 
+$$
+P[S_{t+1}|S_{t}] = P[S_{t+1}|S_1, ..., S_{t}]
+$$
 
+- 미래는 현재가 주어졌을 때 과거에 독립적이다.
+- Environment state는 Markov이다.
 
+### 2.8 Fully Observable Environments
 
+- Full observability: agent가 environment state를 확인할 수 있을 때<br>$O_{t} = S^{a}_{t} = S^{e}_{t}$<br>☞ Environment와 Agent의 state가 같다.
+- Markov Decision Process (MDP)라고 함
+
+### 2.9 
 
 
 
