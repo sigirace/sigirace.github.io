@@ -160,7 +160,7 @@ Maximum Likelihood 관점에서 해석을 할 때, 네트워크의 출력값이 
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_20.png?raw=true" width="650" height="400"></p>
 
-AE는 입력과 출력이 모두 x로 동일하여 $p(x|x)$이고, variational autoencoder(VAE)는 주어진 것이 없는 $p(x)$이다. VAE는 training DB에 있는 확률분포를 추정하는 것이다. (후에 상세 설명)
+AE는 입력과 출력이 모두 x로 동일하여 p(x|x)이고, variational autoencoder(VAE)는 주어진 것이 없는 p(x)이다. VAE는 training DB에 있는 확률분포를 추정하는 것이다. (후에 상세 설명)
 
 ### 3. 참고자료
 
