@@ -164,9 +164,10 @@ AE는 입력과 출력이 모두 x로 동일하여 $p(x|x)$이고, variational a
 
 ### 3. 참고자료
 
-* https://junstar92.tistory.com/156
-* BGD:  https://geniewishescometrue.tistory.com/entry/Gradient-Descent, https://light-tree.tistory.com/133
-* Gradient: https://velog.io/@abrahamkim98/Deep-Learning%EA%B8%B0%EC%B4%88-2.-Loss-Function
-* 확률분포 샘플링: https://gils-lab.tistory.com/92
-* likelihood: https://jjangjjong.tistory.com/41
-* categorical distribution: https://namyoungkim.github.io/probability/statistics/2017/09/11/probability/
+* [AutoEncoder (1) : Maximum likelihood 관점에서의 해석](https://junstar92.tistory.com/156)
+* [[Optimization Algorithms] Gradient Descent (1) Batch, Stochastic, Mini-batch Gradient descent 배치, 확률적, 미니배치 경사하강법](https://geniewishescometrue.tistory.com/entry/Gradient-Descent) 
+* [[딥러닝 용어정리, MGD(Mini-batch gradient descent), SGD(stochastic gradient descent)의 차이](https://light-tree.tistory.com/133)]
+* [Deep Learning(기초) - 2. Loss Function](https://velog.io/@abrahamkim98/Deep-Learning%EA%B8%B0%EC%B4%88-2.-Loss-Function)
+* [scipy를 이용한 확률 분포 샘플링](https://gils-lab.tistory.com/92)
+* [확률(probability)과 가능도(likelihood) 그리고 최대우도추정(likelihood maximization) ](https://jjangjjong.tistory.com/41)
+* [Probability for Data-Science-12(categorical distribution)](https://namyoungkim.github.io/probability/statistics/2017/09/11/probability/)
