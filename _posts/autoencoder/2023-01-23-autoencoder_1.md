@@ -25,7 +25,7 @@ tags: [Autoencoder]
 
 <center>출처: https://en.wikipedia.org/wiki/Autoencoder</center><br>
 
-autoencoder는 레이블이 없는 데이터의 효율적인 코딩을 학습(=unsupervised learning)하는 데 사용되는 인공 신경망의 한 유형이다. 인코딩으로부터 Input을 재생성하려는 시도를 통해 인코딩은 검증되고 정제된다. 일반적으로 autoencoder는 차원축소를 위해 중요하지 않은 데이터(noise)를 무시하도록 훈련시킴으로써 데이터 셋에 대한 <mark style='background-color: #fff5b1'> representation </mark>(인코딩)을 학습한다.
+autoencoder는 레이블이 없는 데이터의 효율적인 코딩을 학습(=unsupervised learning)하는 데 사용되는 인공 신경망의 한 유형이다. 인코딩으로부터 Input을 재생성하려는 시도를 통해 인코딩은 검증되고 정제된다. 일반적으로 autoencoder는 차원축소를 위해 중요하지 않은 데이터(noise)를 무시하도록 훈련시킴으로써 데이터 셋에 대한 <mark style='background-color: #f6f8fa'> representation(인코딩)</mark>을 학습한다.
 
 👀 **keywords**
 
@@ -37,7 +37,7 @@ autoencoder는 레이블이 없는 데이터의 효율적인 코딩을 학습(=u
 4. Generative model learning
 ```
 
-autoencoder의 중요한 task는 <mark style='background-color: #fff5b1'> Dimensionality reduction </mark>이며 최근에는 <mark style='background-color: #fff5b1'> Generative model learning </mark>으로도 사용하고 있다. 
+autoencoder의 중요한 task는 <mark style='background-color: #f6f8fa'> Dimensionality reduction </mark>이며 최근에는 <mark style='background-color: #f6f8fa'> Generative model learning </mark>으로도 사용하고 있다. 
 
 ### 1.2 Nonlinear dimensionality reduction(NLDR)
 
@@ -96,4 +96,4 @@ Manifold learning으로 알려진 비선형 차원 축소는 고차원의 데이
 4. ML density estimation
 ```
 
-위 네가지 키워드가 어떻게 관계가 있는지 살펴보면, 먼저 autoencoder는 <mark style='background-color: #fff5b1'> 1. unsupervised learning </mark>으로 학습이 이루어지고 이때 loss를 최소화 하기 때문에 학습을 시키는 loss function에 대한 해석이 <mark style='background-color: #fff5b1'> 4. Maximum Likelihood densiti estimation </mark>과 관계있게 된다. 이렇게 학습한 autoencoder에서 입력 부분을 보면 차원 축소이기 때문에 <mark style='background-color: #fff5b1'> 2. Manifold learning </mark>, 출력 부분을 보면 생성 모델이기 때문에 <mark style='background-color: #fff5b1'> 3. Generative model learning </mark>의 개념과 관련이 있다.
+위 네가지 키워드가 어떻게 관계가 있는지 살펴보면, 먼저 autoencoder는 <mark style='background-color: #f6f8fa'> 1. unsupervised learning </mark>으로 학습이 이루어지고 이때 loss를 최소화 하기 때문에 학습을 시키는 loss function에 대한 해석이 <mark style='background-color: #f6f8fa'> 4. Maximum Likelihood densiti estimation </mark>과 관계있게 된다. 이렇게 학습한 autoencoder에서 입력 부분을 보면 차원 축소이기 때문에 <mark style='background-color: #f6f8fa'> 2. Manifold learning </mark>, 출력 부분을 보면 생성 모델이기 때문에 <mark style='background-color: #f6f8fa'> 3. Generative model learning </mark>의 개념과 관련이 있다.

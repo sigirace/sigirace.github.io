@@ -26,7 +26,7 @@ tags: [RL]
 
 - supervisor가 없고 reward signal 만이 있다.<br>☞ 정답을 알려주는 supervisor가 없이 reward 신호만을 통해 정답을 찾아 나간다.
 - 피드백(reward)이 즉각적이지 않을 수 있다.
-- 시간(=순서)이 중요하다.<br>☞ 지도학습에서는 i.i.d(independent and identical distribution) data를 가정한다.<br>    즉, 각 샘플이 독립적으로 뽑혀 서로간의 영향이 없고 동일한 확률분포에서 나온 것<br>☞ 강화학습은 iid를 가정하지 않고, 순서가 있는(=독립적이지 않은) 데이터를 사용한다.
+- 시간(=순서)이 중요하다.<br>☞ 지도학습에서는 i.i.d(independent and identical distribution) data를 가정한다.<br>☞ 즉, 각 샘플이 독립적으로 뽑혀 서로간의 영향이 없고 동일한 확률분포에서 나온 것<br>☞ 강화학습은 iid를 가정하지 않고, 순서가 있는(=독립적이지 않은) 데이터를 사용한다.
 - Agent의 action이 이후에 받게되는 데이터에 영향을 준다<br>☞ 지도학습과 비지도학습은 정해진 데이터 셋 안에서 이루어진다면 강화학습은 매번 데이터가 달라진다.
 
 ## 2. The RL Problem
@@ -76,19 +76,24 @@ tags: [RL]
 
 ### 2.4 History and State
 
-- History는 observations, actions, rewards의 순차적인 기록이다.<br>$H_t = O_1, R_1, A_1, ... , A_{t-1}, O_t, R_t$
+- History는 observations, actions, rewards의 순차적인 기록이다.
+
+$$
+H_t = O_1, R_1, A_1, ... , A_{t-1}, O_t, R_t
+$$
+
 - **State**는 Agent(또는 Environment)가 다음에 어떤 결정을 할 지 결정하기 위한 정보들이다.<br>☞ State는 history의 정보를 가공하여 만드는 것, 즉 history 함수이다.
 
 ### 2.5 Environment State
 
-- Environment의 state $S^{e}_{t}$는 envirionment의 private한 표현이다.<br>☞ 보통 agent에게 보이지 않는다.<br>☞ 보이더라도 관계없는 정보들이다.
+- Environment의 state $S^{e}_{t}$는 envirionment의 private한 표현이다.<br>☞ 보통 agent에게 보이지 않으며, 보이더라도 관계없는 정보들이다.
 - environment가 다음 observation/ reward를 주기 위해 사용한 data이다.
 
 📍 **예시**
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/reinforcement/lec1/intro_RL-38.png?raw=true" width="400" height="400"></p>
 
-> 예시 environment는 게임기이고, 그 안에는 다음 화면(=observation)과 점수(=reward)를 계산하기 위한 현재 state, 들어온 agent의 action 등등이 있을 것이다. 이는 environment가 다음 obserbation과 reward를 계산하기 위해 필요한 정보(=environment state)이지만 사용자에게는 아무 쓸모가 없는 데이터이다.
+> 예시 environment는 게임기이고, 그 안에는 다음 화면(=observation)과 점수(=reward)를 계산하기 위한 현재 state, 들어온 agent의 action 등등이 있을 것이다. 이는 environment가 다음 obserbation과 reward를 계산하기 위해 필요한 정보(=environment state)이지만 사용자에게는 쓸모가 없는 데이터이다.
 
 ### 2.6 Agent State
 
@@ -115,8 +120,12 @@ $$
 
 ### 2.8 Fully Observable Environments
 
-- Full observability: agent가 environment state를 확인할 수 있을 때<br> $ O_t = S^a_t = S^e_t $ <br>☞ Environment와 Agent의 state가 같다.
+- Full observability: agent가 environment state를 확인할 수 있을 때, Environment와 Agent의 state가 같다.<br>
 - Markov Decision Process (MDP)라고 함
+
+$$
+O_t = S^a_t = S^e_t
+$$
 
 ### 2.9 Partially Observable Environments
 
@@ -133,8 +142,17 @@ $$
 
 - Policy는 agent의 행동을 규정하는 것
 - state가 주어졌을 때 행동을 규정함
-- Deterministic policy: 하나의 action을 매핑함<br>$a = \pi(s)$
-- Stochastic policy: 여러 action의 확률을 매핑함<br>$\pi(a|s) = P[A_t = a| S_t = s]$
+- Deterministic policy: 하나의 action을 매핑함
+
+$$
+a = \pi(s)
+$$
+
+- Stochastic policy: 여러 action의 확률을 매핑함
+
+$$
+\pi(a|s) = P[A_t = a| S_t = s]
+$$
 
 ### 3.2 Value Function
 
