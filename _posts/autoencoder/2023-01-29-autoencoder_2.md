@@ -69,7 +69,7 @@ training data 전체의 loss를 최소화 시키는 파라미터를 찾는 학�
 
 이는 Taylor Expansion에서 1차 미분만 사용하여 $L(\theta + \Delta \theta)$를 근사한 것이다. 이때 더 많은 차수를 사용한다면 approximation error가 작아지게 된다. 하지만 계산이 복잡하고 시간이 오래 걸리기 때문에 딥러닝에서는 1차 미분항까지만 사용한다. 근사 다항식의 $L(\theta)$를 왼쪽 항으로 옮겨 구한 변화량 $\Delta L$은 앞서 loss는 항상 작아지는 방향으로 움직이는 것으로 정의하였기 때문에 음수가 되길 원한다. 따라서 만약 파라미터의 변화량 $\Delta \theta$가 $-n \bigtriangledown L$(Loss의 미분값)이라면 파라미터의 변화로 인한 Loss의 변화량 $\Delta L$은 언제나 음수이게 된다. 
 
-(추가)<br>미분값들은 데이터 포인트에서 미분을 한 것이기 때문에 더 많은 차수를 사용할 수록 approximation error가 작아지게 된다. 
+👀 **추가**<br>미분값들은 데이터 포인트에서 미분을 한 것이기 때문에 더 많은 차수를 사용할 수록 approximation error가 작아지게 된다. 
 
 #### ☀️ Learning rate
 
@@ -123,7 +123,7 @@ Loss function에 대한 두번째 관점은 Maximum Likelihood이며 이는 네�
 
 > 정의한 확률분포 모델이 가우시안이고 표준편차를 무시한다면 theta 2일때 나온 네트워크 출력값은 어떤 가우시안 분포의 평균이라 볼 수 있고, 이와 매핑되는 가우시안 분포를 그릴 수 있게 되며, 이때 training db에 있는 고정된 값 y에 대한 likelihood를 구할수 있게 된다. 만약 학습을 통해 theta 1의 출력값으로 평균값이 바뀌게 된다면 y의 likelihood는 더 큰 값을 가지게 될 것이다. 이러한 관점에서 likelihood가 최대가 되는 point는 평균(출력값)과 y가 같을 때 임을 알 수 있다. (MSE와 똑같은 얘기이나 관점만 확률적으로 바꾼 것이다.) 
 
-이러한 가정에서 Loss function을 보면 -log가 붙은 negative log likelihood임을 알 수 있다. (-)가 붙은 이유는 <mark style='background-color: #f6f8fa'>probability가 커질수록 loss가 작아져야</mark> 하기 때문이고, log가 붙은 이유는 BP의 제약 조건인 <mark style='background-color: #f6f8fa'>loss는 각 샘플의 loss의 합</mark>을 만족시키기 위해서이다. 이러한 loss function을 정의하여 찾은 $\theta$는 확률분포 모델을 정의하는 파라미터이기에 결국 확률분포 모델을 찾은 것이라고 볼 수 있다. 이는 확률분포를 통한 샘플링을 할 수 있음을 의미한다. 고전적인 machine learning에서는 고정 입력, 고정 출력이나 이러한 관점에서는 확률 분포를 찾은 것이기 때문에 샘플링(=다양한 출력)이 가능해진다. 이는 autoencoder(AE)의 관점에서 중요한데, <mark style='background-color: #f6f8fa'>한가지 입력에 대해 다양한 출력을 내는 것이 가능</mark>해야 하기 때문이다.
+이러한 가정에서 Loss function을 보면 -log가 붙은 negative log likelihood임을 알 수 있다. (-)가 붙은 이유는 <mark style='background-color: #f6f8fa'>probability가 커질수록 loss가 작아져야</mark> 하기 때문이고, log가 붙은 이유는 BP의 제약 조건인 <mark style='background-color: #f6f8fa'>loss는 각 샘플의 loss의 합</mark>을 만족시키기 위해서이다. 이러한 loss function을 정의하여 찾은 $\theta$는 확률분포 모델을 정의하는 파라미터이기에 결국 확률분포 모델을 찾은 것이라고 볼 수 있다. 이는 확률분포를 통한 샘플링을 할 수 있음을 의미한다. 고전적인 machine learning에서는 고정 입력, 고정 출력이나 이러한 관점에서는 확률 분포를 찾은 것이기 때문에 샘플링(=다양한 출력)이 가능해진다. 이는 autoencoder(AE)의 관점에서 중요한데, <mark style='background-color: #f6f8fa'>한가지 입력에 대해 다양한 출력을 내는 것이 가능</mark>해야 하기 때문이다. (2.1에서 주요하게 보았던 부분과 비교)
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_15.png?raw=true" width="650" height="200"></p>
 
@@ -144,7 +144,7 @@ Loss function을 negative log likelihood로 정의하였는데, 이것이 BP의 
 
 ☀️ **Univariate cases: 단변량**
 
-확률분포 모델을 정할때 가우시안과 베르누이 두가지 분포로 가정하는데, 다른 분포들은 가능은하나 수학적으로 어렵기 때문이다. 먼저 가우시안으로 확률분포 모델을 정한다면 수식을 풀었을 때, MSE와 동일함을 알 수 있다. 다음으로 각 이벤트가 나올 확률을 모델링하는 베르누이로 정하였다면 CE와 동일함을 알 수 있다. 앞서 BP 관점에서는 CE가 초기값에 둔감하므로 더 나은 loss라고 판단하였으나, Maximum Likelihood의 관점에서는 네트워크 출력값의 확률분포가 미리 정의한 확률분포에 가까울수록 좋음을 알 수 있다. <mark style='background-color: #f6f8fa'>그렇기 때문에 데이터가 continuous한 경우 MSE를, descrete한 경우 CE를 쓰는게 좋다고 해석할 수 있다.</mark> (2.1에서 주요하게 보았던 부분과 비교)
+확률분포 모델을 정할때 가우시안과 베르누이 두가지 분포로 가정하는데, 다른 분포들은 가능은하나 수학적으로 어렵기 때문이다. 먼저 가우시안으로 확률분포 모델을 정한다면 수식을 풀었을 때, MSE와 동일함을 알 수 있다. 다음으로 각 이벤트가 나올 확률을 모델링하는 베르누이로 정하였다면 CE와 동일함을 알 수 있다. 앞서 BP 관점에서는 CE가 초기값에 둔감하므로 더 나은 loss라고 판단하였으나, Maximum Likelihood의 관점에서는 네트워크 출력값의 확률분포가 미리 정의한 확률분포에 가까울수록 좋음을 알 수 있다. <mark style='background-color: #f6f8fa'>그렇기 때문에 데이터가 continuous한 경우 MSE를, descrete한 경우 CE를 쓰는게 좋다고 해석할 수 있다.</mark>
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_17.png?raw=true" width="650" height="400"></p>
 
