@@ -3,11 +3,18 @@ layout: single
 title:  'Autoencoder의 모든것의 모든것 1-2'
 toc: true
 categories: Autoencoder
-tags: [Autoencoder, Deep Learning, MLE, MSE, CE]
+tags: [Autoencoder, Deep Learning, MLE, MSE, Cross Entropy]
 ---
 
 본 게시물은 이활석님의 [강의](https://www.youtube.com/watch?v=o_peo6U7IRM&t=4)를 보고 정리하는 글이다.
 {: .notice}
+
+<div class="notice">
+<h3>강의 리스트</h3>
+<li><a href="https://sigirace.github.io/autoencoder/autoencoder_1/">Autoencoder의 모든것의 모든것 1-1</a></li>
+</div>
+
+
 
 ## 2. Revisit Deep Neural Networks
 
@@ -126,3 +133,5 @@ BGD -> https://geniewishescometrue.tistory.com/entry/Gradient-Descent, https://l
 gradient -> https://velog.io/@abrahamkim98/Deep-Learning%EA%B8%B0%EC%B4%88-2.-Loss-Function
 
 확률분포 샘플링 -> https://gils-lab.tistory.com/92
+
+probability vs likelihood -> https://jjangjjong.tistory.com/41
