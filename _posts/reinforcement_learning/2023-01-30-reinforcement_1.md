@@ -115,10 +115,23 @@ $$
 
 ### 2.8 Fully Observable Environments
 
-- Full observability: agent가 environment state를 확인할 수 있을 때<br>$O_{t} = S^{a}_{t} = S^{e}_{t}$<br>☞ Environment와 Agent의 state가 같다.
+- Full observability: agent가 environment state를 확인할 수 있을 때<br> $ O_t = S^a_t = S^e_t $ <br>☞ Environment와 Agent의 state가 같다.
 - Markov Decision Process (MDP)라고 함
 
-### 2.9 
+### 2.9 Partially Observable Environments
+
+- Partial observility: environment와 agent의 state가 같지 않은 경우
+- Agent는 자신의 state를 표현해야한다.
+  - History 자체를 쓰거나
+  - RNN같은 순차적인 정보를 쓰거나
+
+## 3. Inside An RL Agent
+
+해당 chapter에서는 agent의 구성요소를 살펴본다.
+
+
+
+
 
 
 
