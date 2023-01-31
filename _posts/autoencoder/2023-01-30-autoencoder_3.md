@@ -4,7 +4,6 @@ title:  'Autoencoder의 모든것의 모든것 (3) Manifold Learning'
 toc: true
 categories: Autoencoder
 tags: [Autoencoder, Deep Learning, MLE, MSE, Cross Entropy]
-
 ---
 
 본 게시물은 이활석님의 [강의](https://www.youtube.com/watch?v=o_peo6U7IRM&t=4)를 보고 정리하는 글이다.
@@ -77,9 +76,58 @@ Manifold를 잘 찾았다는 것은 유사한 이미지간의 관계성을 잘 �
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_28.png?raw=true" width="650" height="400"></p>
 
-☀️ **MNIST**<br>28*28 차원의 데이터들이 분포되어 있는 것들을 잘 아우르는 2차원 subspace(=manifold)를 잘 찾았다면 각 숫자 두개가 어떤 dominent한 feature일 것이다. 
+28*28(=784) 차원의 손글씨 이미지들을(=MNIST) 잘 아우르는 2차원 subspace(=manifold)가 있다고 가정하면, 각 축은 어떤 domimant한 feature일 것이다. Manifold를 잘 찾았다면 feature 또한 잘 찾은 것이라고 볼 수 있다. 이때의 feature는 unsupervised learning이기 때문에 자동으로 찾아진다.
 
-1:07:11
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_29.png?raw=true" width="650" height="400"></p>
+
+왼쪽 그림의 고차원 공간에서 manifold를 찾고 오른쪽 그림의 저차원으로 차원축소를 하였을 때, 같은 distance metric이라도 결과가 달라짐을 볼 수 있다. 이때 거리가 가깝다는 의미는 각 차원마다 달라지게 되는데, 원본인 고차원 공간에서는 단순히 데이터 공간상에서 가깝다는 의미이다. 반면 저차원의 manifold에서는 dominant한 feature들이 가깝다고 볼 수 있다.
+
+📍 **예시**
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_30.png?raw=true" width="650" height="400"></p>
+
+- 1번과 3번그림의 데이터 공간상의 중간 지점은 2번 그림의 위치이나 이는 의미상 가운데가 아님
+- 의미가 없는(손이 두개, 잔상) 이유는 manifold에서 벗어났기 때문
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_31.png?raw=true" width="650" height="400"></p>
+
+- manifold에서 중간의 위치에 있다면 의미적으로 중간에 있음을 알 수 있음
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_32.png?raw=true" width="650" height="400"></p>
+
+Feature를 잘 찾는 다는 것을 다르게 표현하면 Entangled(섞여있음) / Disentangled(안섞여있음)로 표현한다. 만약 MNIST 데이터를 2D로 압축했다면, 가장 dominant한 feature는 숫자가 다른 것이다. 만약 학습이 잘 되었다면 manifold를 visualize 했을 때, 명확히 구분(=Disentangled)되어야 한다.
+
+### 3.3 Dim Reduction
+
+#### 3.3.1 Texanomy
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_33.png?raw=true" width="650" height="400"></p>
+
+#### 3.3.2 PCA
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_34.png?raw=true" width="650" height="400"></p>
+
+PCA는 원 데이터를 sample공간에 뿌리고, project시에 분산이 최대가 되는 plane을 찾는 것이다. Projection에 대한 수식을 보면 원래 데이터 sample에다가 평균을 뺀다. 이는 covariance matrix를 eigenvalue decomposition하기 때문이다. W는 eigenvalue 큰 element로 eigenvector를 찾아 원하는 차원 수 만큼 큰 순서대로 뽑아 W matrix 구성하여 projection하면 차원이 축소된다. 이러한 수식은 DNN과 유사한데, Autoencoder가 PCA를 포함하는 방법론이기 때문이다.
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_35.png?raw=true" width="650" height="400"></p>
+
+PCA는 linear hyperplane에 projection 하기 때문에 왼쪽 상단과 같이 꼬여있는 데이터 분포에 대해서는 entangled 되어있음을 볼 수 있다. 이러한 데이터 분포는 Non-linear 차원축소 방식을 사용하면 disentangled 될 수 있다.
+
+#### 3.3.3 Isomap & LLE
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_36.png?raw=true" width="650" height="400"></p>
+
+Isomap과 LLE의 첫번째 step은 주변의 data를 clustering 하는 과정에서 시작한다. 그 이유는 데이터 공간상에서 가까우면 manifold 상에서도 가까울 것이라고 가정하기 때문이다.
+
+### 3.4 Density Estimation
+
+Autoencoder는 density estimaiton임을 앞장에서 확인하였다.
+
+#### 3.4.1 Parzen Winodws
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_37.png?raw=true" width="650" height="400"></p>
+
+1:15:54
 
 
 
@@ -87,4 +135,30 @@ Manifold를 잘 찾았다는 것은 유사한 이미지간의 관계성을 잘 �
 
 
 
-https://kh-mo.github.io/notation/2019/03/10/manifold_learning/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[의미를 보존하는 공간, manifold](https://kh-mo.github.io/notation/2019/03/10/manifold_learning/)
+
+[PCA & eigenvector & eigenvalue](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jinp7&logNo=221312142481)
+
+[PCA 강필성](https://www.youtube.com/watch?v=bEX6WPMiLvo&list=PLetSlH8YjIfWMdw9AuLR5ybkVvGcoG2EW&index=4)
+
+[Kernel/Kernel trick(커널과 커널트릭)](https://sanghyu.tistory.com/14)
+
+https://jayhey.github.io/novelty%20detection/2017/11/02/Novelty_detection_Gaussian/
+
+https://jayhey.github.io/novelty%20detection/2017/11/03/Novelty_detection_MOG/
+
+https://jayhey.github.io/novelty%20detection/2017/11/08/Novelty_detection_Kernel/
