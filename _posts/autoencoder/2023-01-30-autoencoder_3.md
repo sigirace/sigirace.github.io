@@ -162,3 +162,8 @@ https://jayhey.github.io/novelty%20detection/2017/11/02/Novelty_detection_Gaussi
 https://jayhey.github.io/novelty%20detection/2017/11/03/Novelty_detection_MOG/
 
 https://jayhey.github.io/novelty%20detection/2017/11/08/Novelty_detection_Kernel/
+
+[밀도추정](https://blog.mathpresso.com/mathpresso-%EB%A8%B8%EC%8B%A0-%EB%9F%AC%EB%8B%9D-%EC%8A%A4%ED%84%B0%EB%94%94-14-%EB%B0%80%EB%8F%84-%EC%B6%94%EC%A0%95-density-estimation-38fd7ef729bb)
+
+[커널밀도추정](https://seongkyun.github.io/study/2019/02/03/KDE/)
+
