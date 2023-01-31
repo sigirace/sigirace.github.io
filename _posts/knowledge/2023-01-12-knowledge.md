@@ -2,7 +2,7 @@
 layout: single
 title:  'knowledge'
 toc: true
-categories: [Develope Knowledge]
+categories: [Additional Knowledge]
 tags: [github.io, markdown]
 ---
 
