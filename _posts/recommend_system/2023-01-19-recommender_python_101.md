@@ -2,7 +2,7 @@
 layout: single
 title:  '추천시스템 튜토리얼'
 toc: true
-categories: Recommender System
+categories: [Recommender System]
 tags: [python, recommender system]
 ---
 
