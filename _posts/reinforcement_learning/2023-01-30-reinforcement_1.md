@@ -136,7 +136,7 @@ $$
 
 ## 3. Inside An RL Agent
 
-해당 chapter에서는 agent의 구성요소를 살펴본다.
+해당 chapter에서는 agent의 구성요소인 Policy, Value Function, Model을 살펴본다. 강화학습 문제에서 agent는 구성요소 3개를 모두 가지고 있지 않을 수 있으며, 각 상황에 따라 다르게 접근해야 한다.
 
 ### 3.1 Policy
 
@@ -185,7 +185,8 @@ $$
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/reinforcement/lec1/intro_RL-30.png?raw=true" width="650" height="400"></p>
 
-- Cumulative reward가 최대가 되기 위해 각 time-step의 action에 대한 reward를 1로 설정함
+- Cumulative reward가 최대가 되기 위해 각 time-step의 action에 대한 reward를 -1로 설정함
+- -1로 설정한 이유는 이동 횟수를 최소화 하기 위해서임
 
 ☀️ **Policy**
 
@@ -198,13 +199,70 @@ $$
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/reinforcement/lec1/intro_RL-32.png?raw=true" width="650" height="400"></p>
 
 - Policy를 따랐을 때, 각 state에서의 value function
+- 각 state일때 goal까지의 reward 합
 
 ☀️ **Model**
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/reinforcement/lec1/intro_RL-33.png?raw=true" width="650" height="400"></p>
 
-- Model은 1. next reward와 2. next state를 정해야함
-- Next reward는 모두 -1
-- Next state는
+- 이는 agent가 내부적으로 갖고있는 model of environment, 즉 agent가 생각하는 environment에 대한 model<br>☞ agent는 environment 전체를 알 수 없기에 그림상 path가 이상해 보임(=imperfect)
+- Model은 next reward와 next state transition를 정해야함
+- Next reward는 모두 -1임을 알 수 있음
+- Next state는 하얀색 부분으로 움직일 수 있다는 의미
 
-1:02:10
+### 3.5 Categorizing RL agents
+
+Agent가 가지고 있는 상황에 따라 문제가 다르게 정의된다.
+
+- Value Based: Agent가 value function만을 가지고 있음
+- Policy Based: Agent가 policy만을 가지고 있음
+- Actor Critic: Agent가 policy와 value function을 가지고 있음
+- Model Free: Agent가 내부적으로 model을 만들지 않고 policy or/and value function만 가지고 문제 해결
+- Model Based: Agent가 내부적으로 environment에 대한 model을 만들고 policy or/and value function를 통해 문제 해결
+
+☀️ **분류표**
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/reinforcement/lec1/intro_RL-36.png?raw=true" width="650" height="400"></p>
+
+- 각 문제의 영역은 상황에 따라 겹칠 수 있음
+
+### 3.6 Learning and Planning
+
+- Learning: Environment를 모르는 상태에서 agent가 environment와 상호작용을 통해 policy를 개선시켜나감
+- Planning: Environment(=action에 대한 reward와 state transition)를 알고있기 때문에, agent 내부적으로 computation을 통해 policy 개선
+
+📍 **Learning 예시**
+
+> Agent가 observation에 맞추어 게임 플레이하는 것이 environment와의 상호작용이며, 이를 통해 점차적으로 좋은 policy를 찾아간다.
+
+📍 **Planning 예시**
+
+> Agent가 perfect한 model을 알고있어 어떤 state에서 어떤 action을 하였을 때, 얼마만큼의 reward를 받는지 query를 통해 알 수 있는 상황이다. 최적의 policy를 도출(=plan)해 낼 수 있다. 예시로는 tree search가 있다.
+
+## 4. Problem within RL
+
+강화학습은 agent가 environment와 상호작용을 반복하며 시행착오를 통해 좋은 policy를 찾는 과정이다. 이때 좋은 policy를 찾는 방법은 1. environment로부터 정보를 얻어 environment를 이해하는 과정, 2. 모인 정보를 바탕으로 최선의 선택을 내리는 과정 두가지가 있다.
+
+### 4.1 Exploration and Exploitation
+
+- Exploration: 새로운 방법을 시도 하는 것, 결과가 나빠질 수 도 있으나 좋아질 수 도 있음
+- Exploitation: 알고있는 것 중 최선의 선택을 하는 것, 결과가 더 좋아지지 않음
+
+### 4.2 Prediction and Control
+
+- Prediction: policy가 주어졌을 때, 미래를 평가하는 것으로 value function을 잘 학습시키는 문제
+- Control: best policy를 찾아 미래를 최적화하는 문제
+
+📍 **Prediction 예시**
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/reinforcement/lec1/intro_RL-44.png?raw=true" width="650" height="400"></p>
+
+- 한칸씩 움직이며 reward는 -1
+- A 혹은 B지점으로 가면 각각 reward 10, 5를 받고 $A^\prime, B^\prime$으로 이동
+- 각 state에서 uniform random policy(like 주사위 던지기)로 이동하는 것을 여러번 수행했을 때, 미래의 reward(=value function) 계산하는 문제
+
+📍 **Control 예시**
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/reinforcement/lec1/intro_RL-45.png?raw=true" width="650" height="400"></p>
+
+- 최적의 policy $\pi$를 찾는 문제
