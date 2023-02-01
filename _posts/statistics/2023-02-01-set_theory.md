@@ -49,7 +49,7 @@ Set theory is the branch of mathematical logic that studies sets, which can be i
 
 ☀️ **disjoint sets**
 
-- 서로 공통 원소가 없는 집합들<br>☞ $ A \cap B = \varnothing $ 
+- 서로 공통 원소가 없는 집합들<br>☞ $ A \cap B = \varnothing $
 
 ☀️ **partition**
 
@@ -57,24 +57,32 @@ Set theory is the branch of mathematical logic that studies sets, which can be i
 
 ☀️ **cartesian product**
 
-- 각 집합의 원소를 성분으로하는 튜플들의 집합이며 원소들의 순서는 곱의 순서와 같음<br>
-- $A_1 \times A_2 \times ... A_n = \lbrace (x_1, x_2, ... x_m) | x_1 \in A_1, x_2 \in A_2, ... , x_n \in A_n \rbrace$
+- 각 집합의 원소를 성분으로하는 튜플들의 집합이며 원소들의 순서는 곱의 순서와 같음<br>☞ $A_1 \times A_2 \times ... A_n = \lbrace (x_1, x_2, ... x_m) | x_1 \in A_1, x_2 \in A_2, ... , x_n \in A_n \rbrace$
+
+☀️ **power set**
+
+- 집합의 모든 부분집합 (공집합도 포함)<br>☞ $2^A$ the set of all subsets of A
+
+☀️ **cardinality**
+
+- 집합의 원소 개수
+
+☀️ **denumerable**
+
+- countably infinite, all denumerable sets are of the same cardinality<br>📍짝수의 집합은 denumerable
+
+## 3. Function or Mapping
+
+$$
+f\, : \, U \rightarrow V
+$$
+
+- domain: $U$
+- codomain: $V$
+- image: 정의역의 원소에 대응하는 공역의 원소들<br>☞ $f(A) = \lbrace f(x) \in V : x \in A \rbrace$ where $A \subseteq U$
+- range: $f(U)$ (image of domain)
 
 
-
-
-
-
-
-- subset
-- universal set
-- disjoint sets
-- prtition
-- catesian product
-- power set
-- cardinality
-- denumerable
-- uncountable
 
 ### 2. Example
 
