@@ -31,27 +31,34 @@ Set theory is the branch of mathematical logic that studies sets, which can be i
 
 ☀️ **set**
 
-- collections of objects (e.g., {1, 2, 3, 4, 5})
+- collections of objects<br>☞ {1, 2, 3, 4, 5}
 
 ☀️ **element**
 
-- member of a set (e.g., 1 $\in$ {1, 2, 3})
+- member of a set<br>☞ 1 $\in$ {1, 2, 3}
 
 ☀️ **subset**
 
-- {a, b} is a subset of $ \lbrace a, b, c \lbrace$
+- 부분집합
+
+  ☞ {a, b} is a subset of $ \lbrace a, b, c \rbrace$
 
 ☀️ **universal set**
 
-- $ \lbrace x, y, z \lbrace$ is a universal set of {x, y} and {y, z}<br>☞ subset들의 전체 집합
+- subset들의 전체 집합<br>☞ $ \lbrace x, y, z \rbrace$ is a universal set of {x, y} and {y, z}<br>
 
 ☀️ **disjoint sets**
 
-- $ A \cap B = \varnothing $<br>☞ disjoint는 서로 공통 원소가 없다는 뜻
+- 서로 공통 원소가 없는 집합들<br>☞ $ A \cap B = \varnothing $ 
 
-☀️ **prtition**
+☀️ **partition**
 
-- if $A = \{ 1, 2, 3, 4 \}$, then partition of $A: $
+- 공집합이 아닌 부분집합들로 이루어진 집합<br>☞ if $A = \lbrace 1, 2, 3, 4 \rbrace$, then partition of $A: \lbrace \lbrace 1, 2 \rbrace , \lbrace 3 \rbrace , \lbrace 4 \rbrace \rbrace$
+
+☀️ **cartesian product**
+
+- 각 집합의 원소를 성분으로하는 튜플들의 집합이며 원소들의 순서는 곱의 순서와 같음<br>
+- $A_1 \times A_2 \times ... A_n = \lbrace (x_1, x_2, ... x_m) | x_1 \in A_1, x_2 \in A_2, ... , x_n \in A_n \rbrace$
 
 
 
