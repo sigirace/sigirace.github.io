@@ -39,11 +39,25 @@ Set theory is the branch of mathematical logic that studies sets, which can be i
 
 ☀️ **subset**
 
-- {a, b} is a subset of ${a, b, c}$
+- {a, b} is a subset of $ \lbrace a, b, c \lbrace$
 
 ☀️ **universal set**
 
-- $\{x, y, z\}$
+- $ \lbrace x, y, z \lbrace$ is a universal set of {x, y} and {y, z}<br>☞ subset들의 전체 집합
+
+☀️ **disjoint sets**
+
+- $ A \cap B = \varnothing $<br>☞ disjoint는 서로 공통 원소가 없다는 뜻
+
+☀️ **prtition**
+
+- if $A = \{ 1, 2, 3, 4 \}$, then partition of $A: $
+
+
+
+
+
+
 
 - subset
 - universal set
