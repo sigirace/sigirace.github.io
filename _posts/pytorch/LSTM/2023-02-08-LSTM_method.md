@@ -34,7 +34,7 @@ LSTM과 GRU는 위와 같은 short-term memory 문제를 해결하기 위해 고
 
 위 그림에 표시된 gate (forget, input, output in LSTM/ reset, update in GRU)들은 sequence와 같은 순차적인 데이터가 입력될 때, 어떤 데이터를 보관하거나 버리는 것이 중요한지 학습할 수 있다. 이를 통해 관련된 정보를 긴 sequence에서도 전달 할 수 있게 된다. 
 
-따라서 이번 글에서는 LSTM이 gate를 활용하여 정보를 전달하는 방법을 이해하는 것을 목표로 한다.
+즉, LSTM 및 GRU에서 short-term memory를 해결하기 위해 gate가 중요한 역할임을 알 수 있다. 따라서 이번 글에서는 LSTM이 gate를 활용하여 정보를 전달하는 방법을 이해하는 것을 목표로 한다.
 
 ### 1.3 Review of Recurrent Neural Network
 
@@ -52,7 +52,8 @@ RNN은 RNN cell들의 연속적인 결합으로 되어있으며, hidden state는
 
 ```
 1. 입력(vector)과 이전 hidden state를 결합시켜, 현재 입력과 이전 입력에 대한 정보를 갖도록 한다. 
-2. 이후 tanh를 사용한 activation function을 거쳐 새로운 hidden state 상태를 출력 값으로 전달한다. 
+2. 이후 tanh를 사용한 activation function을 거쳐 새로운 hidden state 상태를 출력 값으로 전달한다.
+3. 다음 step에서 위 과정 반복
 ```
 
 ### 1.4 Tanh activation
@@ -79,7 +80,7 @@ LSTM은 RNN과 유사한 데이터 처리 흐름을 가지고 있다. RNN과의 
 
 ### 2.1 Core Concept
 
-LSTM의 핵심은 cell state와 다양한 gate들이다. cell state는 cell에서 가장 위에 그어진 윗 선에 해당하며(hidden state는 아래 그어진 선), sequence chain(반복되는 cell의 구조)을 통해 관련된 정보를 전달하는 역할을 한다. Cell state는 각 gate에서 전달된 정보(hidden state와 input vector의 연산)들과 linear한 연산들을 수행하는데, 이를 통해 sequence가 길어짐에도 이전의 정보를 포함할 수 있게 한다. 즉, short-term memory 문제를 줄여 네트워크의 memory 역할을 수행하게 한다. 각 gate는 input vector가 cell state와 연산되기 전, 어떤 정보를 기억하고 잊을지 결정하는 역할을 수행한다.
+LSTM의 핵심은 cell state와 다양한 gate들이다. cell state는 cell에서 가장 위에 그어진 윗 선에 해당하며(hidden state는 아래 그어진 선), sequence chain(반복되는 cell의 구조)을 통해 관련된 정보를 전달하는 역할을 한다. Cell state는 각 gate에서 전달된 정보(hidden state와 input vector의 연산)들과 linear한 연산들을 수행하는데, 이를 통해 sequence가 길어짐에도 이전의 정보를 포함할 수 있게 한다. 즉, short-term memory 문제를 완화시킴으로 네트워크의 memory 역할을 수행하게 한다. 각 gate는 input vector가 cell state와 연산되기 전, 어떤 정보를 기억하고 잊을지 결정하는 역할을 수행한다.
 
 ### 2.2 Sigmoid
 
