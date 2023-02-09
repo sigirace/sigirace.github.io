@@ -113,9 +113,9 @@ Output gate는 다음 step으로 전달할 hidden state를 결정한다. hidden 
 
 위와 같은 과정을 거쳐서 나온 새로운 cell state와 hidden state는 다음 step의 LSTM cell로 전달되게 된다.
 
+## 3. Conclusion
 
-
-
+RNN은 sequence 데이터에 대한 처리에 효과적이지만, 입력 데이터(sequence)의 길이가 길수록 앞부분의 정보를 잃어버리는 short-term memory 문제가 있다. 이를 해결하기 위한 방법으로 LSTM 및 GRU가 고안되었으며, 이는 gate를 통해 정보의 흐름을 효과적으로 제어하는 방식을 사용한다. LSTM과 GRU는 음성, 자연어, 시계열 등의 에측 및 분류에 사용될 수 있으며, 이와 같은 task를 수행하는 다양한 알고리즘들에 영감을 주었다.
 
 
 
