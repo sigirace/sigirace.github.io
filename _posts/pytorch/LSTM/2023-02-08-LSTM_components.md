@@ -17,7 +17,7 @@ LSTM(input_size, hidden_size, num_layers, bias, batch_first, dropout, bidirectio
 
 ### 1.1 input_size / hidden_size
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_c_2.png?raw=true" width="800" height="300"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm_c/lstm_c_2.png?raw=true" width="800" height="300"></p>
 
 ```
 input_size – The number of expected features in the input x
@@ -30,7 +30,7 @@ hidden_size – The number of features in the hidden state h
 
 ### 1.2 num_layers
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_c_3.png?raw=true" width="350" height="350"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm_c/lstm_c_3.png?raw=true" width="350" height="350"></p>
 
 ```
 num_layers – Number of recurrent layers.
@@ -52,7 +52,7 @@ bias – If False, then the layer does not use bias weights b_ih and b_hh.
 
 ### 1.4 batch_first
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_c_5.png?raw=true" width="850" height="500"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm_c/lstm_c_5.png?raw=true" width="850" height="500"></p>
 
 ```
 batch_first – If True, then the input and output tensors are provided as (batch, seq, feature) 
@@ -81,7 +81,7 @@ except the last layer, with dropout probability equal to dropout.
 
 ### 1.6 bidirectional
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_c_6.png?raw=true" width="850" height="500"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm_c/lstm_c_6.png?raw=true" width="850" height="500"></p>
 
 ```
 bidirectional – If True, becomes a bidirectional LSTM. 
@@ -108,7 +108,7 @@ input, (h_0, c_0)
 
 ### 2.2 Components
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_c_7.png?raw=true" width="500" height="300"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm_c/lstm_c_7.png?raw=true" width="450" height="200"></p>
 
 ## 3. Outputs
 
@@ -135,7 +135,7 @@ output, (h_n, c_n)
 
 📍 **예시**
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_c_4.png?raw=true" width="900" height="500"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm_c/lstm_c_4.png?raw=true" width="900" height="500"></p>
 
 > Hidden size: 2, Input size 3 일때 (첫번째 layer의) 각 cell 내부에서 연산되는 과정
 
