@@ -9,10 +9,6 @@ tags: [lstm, pytorch]
 본 게시물은 [Pytorch 공식 문서](https://pytorch.org/docs/stable/generated/torch.nn.LSTM.html)를 참고하여 LSTM의 구성요소에 대해 정리하는 글이다.
 {: .notice}
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_c_7.png?raw=true" width="600" height="500"></p>
-
-<center>출처: https://discuss.pytorch.org/t/rnn-output-vs-hidden-state-dont-match-up-my-misunderstanding/43280</center><br>
-
 ## 1. Parameters
 
 ```python
@@ -21,16 +17,16 @@ LSTM(input_size, hidden_size, num_layers, bias, batch_first, dropout, bidirectio
 
 ### 1.1 input_size / hidden_size
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_c_2.png?raw=true" width="600" height="250"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_c_2.png?raw=true" width="800" height="300"></p>
 
 ```
 input_size – The number of expected features in the input x
 hidden_size – The number of features in the hidden state h
 ```
 
-- <mark style='background-color: #f6f8fa'> input_size </mark>는 입력되는 **데이터의 차원**이다. 단일로 입력되는 데이터는 (sequence_length, input_size)로 구성되며, sequence_length는 시계열 혹은 문장의 길이, input_size는 시계열에 포함된 feature 수 혹은 단어의 임베딩의 차원으로 볼 수 있다.
+- <mark style='background-color: #f6f8fa'>&nbsp;input_size </mark>는 입력되는 **데이터의 차원**이다. 단일로 입력되는 데이터는 (sequence_length, input_size)로 구성되며, sequence_length는 시계열 혹은 문장의 길이, input_size는 시계열에 포함된 feature 수 혹은 단어의 임베딩의 차원으로 볼 수 있다.
 
-- <mark style='background-color: #f6f8fa'> hidden_size </mark>는 **hidden state의 차원**이다. 입력된 데이터가 연산을 통해 가지게 될 차원으로 볼 수 있다.
+- <mark style='background-color: #f6f8fa'>&nbsp;hidden_size </mark>는 **hidden state의 차원**이다. 입력된 데이터가 연산을 통해 가지게 될 차원으로 볼 수 있다.
 
 ### 1.2 num_layers
 
@@ -43,7 +39,7 @@ with the second LSTM taking in outputs of the first LSTM and computing the final
 [Default: 1]
 ```
 
-- <mark style='background-color: #f6f8fa'> num_layers </mark>는 **LSTM cell을 stack하는 수**이다. 유의할 점은 첫번째 layer에서는 input으로 입력 데이터가 들어가나 두번째 layer는 input으로 첫번째 layer의 output인 hidden state가 들어간다는 것이다. 따라서 두번째 lstm의 input과 연산되는 weight는 차원이 바뀌게 된다. (✤ 참고: variables의 weight_ih_l[k], weight_hh_l[k])
+- <mark style='background-color: #f6f8fa'>&nbsp;num_layers </mark>는 **LSTM cell을 stack하는 수**이다. 유의할 점은 첫번째 layer에서는 input으로 입력 데이터가 들어가나 두번째 layer는 input으로 첫번째 layer의 output인 hidden state가 들어간다는 것이다. 따라서 두번째 lstm의 input과 연산되는 weight는 차원이 바뀌게 된다. (✤ 참고: variables의 weight_ih_l[k], weight_hh_l[k])
 
 ### 1.3 bias
 
@@ -52,7 +48,7 @@ bias – If False, then the layer does not use bias weights b_ih and b_hh.
 [Default: True]
 ```
 
-- <mark style='background-color: #f6f8fa'> bias </mark>는 hidden state와 input이 각 gate에서 matrix와 vector의 곱 연산(선형변환)시 따라오는 것으로 **hidden sate의 차원과 동일**하다.
+- <mark style='background-color: #f6f8fa'>&nbsp;bias </mark>는 hidden state와 input이 각 gate에서 matrix와 vector의 곱 연산(선형변환)시 따라오는 것으로 **hidden sate의 차원과 동일**하다.
 
 ### 1.4 batch_first
 
@@ -81,7 +77,7 @@ except the last layer, with dropout probability equal to dropout.
 [Default: 0]
 ```
 
-- <mark style='background-color: #f6f8fa'>(    )dropout </mark>은 0이 아닐시 마지막 layer를 제외한 각 LSTM의 각 layer의 출력에 입력한 인자의 확률을 가진 dropout layer를 추가 한다.
+- <mark style='background-color: #f6f8fa'>&nbsp;dropout </mark>은 0이 아닐시 마지막 layer를 제외한 각 LSTM의 각 layer의 출력에 입력한 인자의 확률을 가진 dropout layer를 추가 한다.
 
 ### 1.6 bidirectional
 
@@ -92,11 +88,11 @@ bidirectional – If True, becomes a bidirectional LSTM.
 [Default: False]
 ```
 
-- <mark style='background-color: #f6f8fa'> bidirectional </mark>은 각 layer를 양방향 LSTM cell로 구성할지 결정하는 것이다. 일반적으로 양방향 LSTM을 사용할 경우 sequence 데이터에서 많은 정보를 추출할 수 있기 때문에 성능이 좋게 나타난다. 어느 한 time step의 hidden state는 보통 순방향과 역방향의 hidden state를 concatenation하여 다음 layer로 전달하는데, 이때 hidden state는 2*hidden_size의 크기를 가진다.
+- <mark style='background-color: #f6f8fa'>&nbsp;bidirectional </mark>은 각 layer를 양방향 LSTM cell로 구성할지 결정하는 것이다. 일반적으로 양방향 LSTM을 사용할 경우 sequence 데이터에서 많은 정보를 추출할 수 있기 때문에 성능이 좋게 나타난다. 어느 한 time step의 hidden state는 보통 순방향과 역방향의 hidden state를 concatenation하여 다음 layer로 전달하는데, 이때 hidden state는 2*hidden_size의 크기를 가진다.
 
 ### 1.7 proj_size
 
-- <mark style='background-color: #f6f8fa'> proj_size </mark>
+- <mark style='background-color: #f6f8fa'>&nbsp;proj_size </mark>
 
 ## 2. CLASS
 
