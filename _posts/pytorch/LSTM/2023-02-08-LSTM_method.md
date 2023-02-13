@@ -34,13 +34,13 @@ LSTM과 GRU는 위와 같은 short-term memory 문제를 해결하기 위해 고
 
 위 그림에 표시된 gate (forget, input, output in LSTM/ reset, update in GRU)들은 sequence와 같은 순차적인 데이터가 입력될 때, **어떤 데이터를 보관하거나 버리는 것이 중요한지 학습**할 수 있다. 이는 긴 sequence에서 앞선 데이터를 뒤까지 전달 할 수 있다는 의미와 동일하다.
 
-앞선 내용을 통해 short-term memory를 해결하기 위해 gate가 중요한 역할을 수행함을 간단하게 소개하였다. 이번 포스트의 목적은 원리를 간단히 이해하는 것이 아닌 gate가 실제로 어떤 역할을 하는지, 내부 과정들을 이해하는 것을 목표로 한다.
+앞선 내용을 통해 short-term memory를 해결하기 위해 gate가 중요한 역할을 수행함을 간단하게 소개하였다. 이번 포스트의 목적은 원리를 간단히 이해하는 것이 아닌 LSTM의 gate가 실제로 어떤 역할을 하는지, 내부 과정들을 이해하는 것을 목표로 한다.
 
 ### 1.3 Review of Recurrent Neural Network
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_m_5.gif?raw=true" width="600"></p>
 
-LSTM을 이해하기 위해, 먼저 RNN 방식의 리뷰가 필요하다. RNN의 첫번째 단계는 sequence의 데이터를(문장의 단어)를 기계가 읽을 수 있는 vector로 변환(NLP에서는 임베딩 과정) 하는 것이다. 다음으로 RNN은 vector로 변환된 sequence를 하나씩 처리한다.
+LSTM을 이해하기 위해, 먼저 RNN 방식의 리뷰가 필요하다. RNN을 수행하기 앞서 sequence의 데이터를(문장의 단어)를 기계가 읽을 수 있는 vector로 변환(Embedding in NLP)하는 과정이 필요하다. 이후 vector로 변환된 sequence를 RNN을 통해 하나씩 처리한다.
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_m_6.gif?raw=true" width="600"></p>
 
