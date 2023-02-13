@@ -155,14 +155,5 @@ output, (h_n, c_n)
 
 ## 5. Variables
 
-- **weight_ih_l[k]** – the learnable input-hidden weights of the k-th layer (W_ii|W_if|W_ig|W_io), of shape (4*hidden_size, input_size) for k = 0. Otherwise, the shape is (4*hidden_size, num_directions * hidden_size). If `proj_size > 0` was specified, the shape will be (4*hidden_size, num_directions * proj_size) for k > 0
-- **weight_hh_l[k]** – the learnable hidden-hidden weights of the k-th layer (W_hi|W_hf|W_hg|W_ho), of shape (4*hidden_size, hidden_size). If `proj_size > 0` was specified, the shape will be (4*hidden_size, proj_size).
-- **bias_ih_l[k]** – the learnable input-hidden bias of the k-th layer (b_ii|b_if|b_ig|b_io), of shape (4*hidden_size)
-- **bias_hh_l[k]** – the learnable hidden-hidden bias of the k-th layer (b_hi|b_hf|b_hg|b_ho), of shape (4*hidden_size)
-- **weight_hr_l[k]** – the learnable projection weights of the k-th layer of shape (proj_size, hidden_size). Only present when `proj_size > 0` was specified.
-- **weight_ih_l[k]_reverse** – Analogous to weight_ih_l[k] for the reverse direction. Only present when `bidirectional=True`.
-- **weight_hh_l[k]_reverse** – Analogous to weight_hh_l[k] for the reverse direction. Only present when `bidirectional=True`.
-- **bias_ih_l[k]_reverse** – Analogous to bias_ih_l[k] for the reverse direction. Only present when `bidirectional=True`.
-- **bias_hh_l[k]_reverse** – Analogous to bias_hh_l[k] for the reverse direction. Only present when `bidirectional=True`.
-- **weight_hr_l[k]_reverse** – Analogous to weight_hr_l[k] for the reverse direction. Only present when `bidirectional=True` and `proj_size > 0` was specified.
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm_c/lstm_c_8.png?raw=true" width="650" height="550"></p>
 
