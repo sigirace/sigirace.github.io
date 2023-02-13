@@ -103,8 +103,8 @@ input, (h_0, c_0)
 ### 2.1 Shape
 
 - input : $(N, L, H_{in})$ when batch_first=True
-- $h_0$ : $(D*num_layers, N, H_{out})$
-- $c_0$ : $(D*num_layers, N, H_{cell})$
+- $h_0$ : $(D*layers, N, H_{out})$
+- $c_0$ : $(D*layers, N, H_{cell})$
 
 ### 2.2 Components
 
@@ -119,8 +119,8 @@ output, (h_n, c_n)
 ### 3.1 Shape
 
 - output : $(N, L, D*H_{out})$ when batch_first=True
-- $h_n$ : $(D*num_layers, N, H_{out})$
-- $c_n$ : $(D*num_layers, N, H_{cell})$
+- $h_n$ : $(D*layers, N, H_{out})$
+- $c_n$ : $(D*layers, N, H_{cell})$
 
 ## 4. Class
 
