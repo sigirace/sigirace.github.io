@@ -65,7 +65,7 @@ See the Inputs/Outputs sections below for details.
 [Default: False]
 ```
 
-- <mark style='background-color: #f6f8fa'> batch_first </mark>는 mini batch 학습시 batch size가 데이터 shape의 가장 첫번째 요소인지 확인하는 것이다. 아래는 단방향(bidirectional=False)일때의 batch_first에 따른 data set과 output의 형 변화 예시이다.
+- <mark style='background-color: #f6f8fa'>&nbsp;batch_first </mark>는 mini batch 학습시 batch size가 데이터 shape의 가장 첫번째 요소인지 확인하는 것이다. 아래는 단방향(bidirectional=False)일때의 batch_first에 따른 data set과 output의 형 변화 예시이다.
 
 📍**예시**
 
@@ -76,12 +76,12 @@ See the Inputs/Outputs sections below for details.
 ### 1.5 dropout
 
 ```
-dropout – If non-zero, introduces a Dropout layer on the outputs of each LSTM layer except the last layer,
-with dropout probability equal to dropout.
+dropout – If non-zero, introduces a Dropout layer on the outputs of each LSTM layer 
+except the last layer, with dropout probability equal to dropout.
 [Default: 0]
 ```
 
-- <mark style='background-color: #f6f8fa'> dropout </mark>은 0이 아닐시 마지막 layer를 제외한 각 LSTM의 각 layer의 출력에 입력한 인자의 확률을 가진 dropout layer를 추가 한다.
+- <mark style='background-color: #f6f8fa'>(    )dropout </mark>은 0이 아닐시 마지막 layer를 제외한 각 LSTM의 각 layer의 출력에 입력한 인자의 확률을 가진 dropout layer를 추가 한다.
 
 ### 1.6 bidirectional
 
