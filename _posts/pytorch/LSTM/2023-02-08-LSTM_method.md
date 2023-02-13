@@ -24,27 +24,27 @@ tags: [timeseries, lstm]
 
 > gradient가 작아 신경망 가중치를 업데이트 시키지 못하는 것
 
-RNN에서 매우 작은 gradient를 전달받는 계층은 학습을 중단한다. 이는 보통 앞쪽의 layer에서 발생하며, 이로인해 RNN은 긴 문장에서 본 내용을 잊을 수 있다. 이를 short-term memory(단기 기억)이라고 한다.
+RNN에서 매우 작은 gradient를 전달받는 계층은 학습을 중단한다. 이는 보통 앞쪽의 layer에서 발생하기에 긴 문장에서 RNN은 이전에 본 내용을 잊을 수 있다. 이를 short-term memory(단기 기억)이라고 한다.
 
 ### 1.2 LSTM and GRU as a solution
 
-LSTM과 GRU는 위와 같은 short-term memory 문제를 해결하기 위해 고안되었다. 이것들은 gate라고 불리는 내부 메커니즘을 가지고 있어 sequence에서의 정보 흐름을 조절할 수 있다.
+LSTM과 GRU는 위와 같은 short-term memory 문제를 해결하기 위해 고안되었다. 문제 해결의 핵심은 gate라고 불리는 내부 메커니즘을 가지고 있는 것으로, 이를 통해 sequence에서 정보의 흐름을 조절할 수 있게 된다.
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_m_3.png?raw=true" width="600"></p>
 
-위 그림에 표시된 gate (forget, input, output in LSTM/ reset, update in GRU)들은 sequence와 같은 순차적인 데이터가 입력될 때, 어떤 데이터를 보관하거나 버리는 것이 중요한지 학습할 수 있다. 이를 통해 관련된 정보를 긴 sequence에서도 전달 할 수 있게 된다. 
+위 그림에 표시된 gate (forget, input, output in LSTM/ reset, update in GRU)들은 sequence와 같은 순차적인 데이터가 입력될 때, **어떤 데이터를 보관하거나 버리는 것이 중요한지 학습**할 수 있다. 이는 긴 sequence에서 앞선 데이터를 뒤까지 전달 할 수 있다는 의미와 동일하다.
 
-즉, LSTM 및 GRU에서 short-term memory를 해결하기 위해 gate가 중요한 역할임을 알 수 있다. 따라서 이번 글에서는 LSTM이 gate를 활용하여 정보를 전달하는 방법을 이해하는 것을 목표로 한다.
+앞선 내용을 통해 short-term memory를 해결하기 위해 gate가 중요한 역할을 수행함을 간단하게 소개하였다. 이번 포스트의 목적은 원리를 간단히 이해하는 것이 아닌 gate가 실제로 어떤 역할을 하는지, 내부 과정들을 이해하는 것을 목표로 한다.
 
 ### 1.3 Review of Recurrent Neural Network
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_m_5.gif?raw=true" width="600"></p>
 
-LSTM을 이해하기 위해, 먼저 RNN 방식에 대해 리뷰한다. RNN의 첫번째 단계는 sequence의 데이터를(문장의 단어)를 기계가 읽을 수 있는 vector로 변환(NLP에서는 임베딩 과정) 하는 것이다. 그런 다음 RNN은 vector의 sequence를 하나씩 처리한다.
+LSTM을 이해하기 위해, 먼저 RNN 방식의 리뷰가 필요하다. RNN의 첫번째 단계는 sequence의 데이터를(문장의 단어)를 기계가 읽을 수 있는 vector로 변환(NLP에서는 임베딩 과정) 하는 것이다. 다음으로 RNN은 vector로 변환된 sequence를 하나씩 처리한다.
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_m_6.gif?raw=true" width="600"></p>
 
-RNN은 이전의 hidden state를 다음 step으로 전달한다. 여기서의 hidden state는 네트워크가 이전 step에서 본 정보이며, 신경망의 메모리 역할을 수행한다. (=이전의 정보를 내재하고 있다.)
+RNN은 이전의 hidden state를 다음 step으로 전달한다. 여기서의 hidden state는 네트워크가 이전 step에서 본 정보이며, 신경망의 메모리 역할을 수행한다. (이전의 정보를 내재하고 있다는 의미)
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_m_7.gif?raw=true" width="600"></p>
 
@@ -64,13 +64,13 @@ Tanh는 입력 값들을 항상 -1과 1사이로 조절하며, 신경망을 통�
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_m_9.gif?raw=true" width="600"></p>
 
-vetocr가 신경망을 통해 전달될 때, 다양한 수학 연산을 거치게 된다. 만약 계속 3을 곱하는 신경망이 구성되어 있다면, 입력된 vector가 신경망을 연속적으로 통과할 시 어떠한 값은 폭발할 것이며 이로 인해 다른 값은 상대적으로 매우 작아보이게 된다.
+Vetocr가 신경망을 통해 전달될 때, 다양한 수학 연산을 거치게 된다. 만약 계속 3을 곱하는 신경망이 구성되어 있다고 가정해보자. 입력된 vector가 신경망을 연속적으로 통과할 시 어떠한 값은 폭발할 것이며 이로 인해 다른 값은 상대적으로 매우 작아보이게 된다.
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_m_10.gif?raw=true" width="600"></p>
 
-Tanh 함수는 출력 값을 -1과 1 사이에 있도록 하여 위와 같이 신경망의 출력을 조절한다. 
+이러한 문제를 방지하기 위해 출력 직전에 tanh 함수를 사용한다. Tanh는 출력 값을 -1과 1 사이에 있도록 하여 신경망의 출력이 폭발하지 않도록 조절한다. 
 
-위 과정에서 소개한 Input vector와 hidden state의 연속적인 연산이 RNN의 처리 과정이다. 이를통해 연속된 데이터, 즉 sequence에 대한 정보처리가 가능하게 된다.
+위 과정에서 본 **Input vector와 hidden state의 연속적인 연산**이 RNN의 처리 과정이다. 이를통해 연속된 데이터, 즉 **sequence에 대한 정보 처리**가 가능하게 된다.
 
 ## 2. LSTM
 
