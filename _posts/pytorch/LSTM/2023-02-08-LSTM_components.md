@@ -92,18 +92,46 @@ bidirectional – If True, becomes a bidirectional LSTM.
 
 ### 1.7 proj_size
 
-- <mark style='background-color: #f6f8fa'>&nbsp;proj_size </mark>
+- <mark style='background-color: #f6f8fa'>&nbsp;proj_size </mark>는 LSTM cell의 output 중 하나인 $h_t$을 learnable projection matrix를 통해 선형변환시키는 인자이다. (개인적으로 왜 사용해야 하는지 아직 의문이기 때문에 공식문서에서 첨부한 논문을 보고 추후 업데이트 하기로 한다.)
 
-## 2. CLASS
+## 2. Inputs
 
-### 2.1 Componenets
+```
+input, (h_0, c_0)
+```
+
+### 2.1 Shape
+
+- input : $(N, L, H_{in})$ when batch_first=True
+- $h_0$ : $(D*num_layers, N, H_{out})$
+- $c_0$ : $(D*num_layers, N, H_{cell})$
+
+### 2.2 Components
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm/lstm_c_7.png?raw=true" width="500" height="300"></p>
+
+## 3. Outputs
+
+```
+output, (h_n, c_n)
+```
+
+### 3.1 Shape
+
+- output : $(N, L, D*H_{out})$ when batch_first=True
+- $h_n$ : $(D*num_layers, N, H_{out})$
+- $c_n$ : $(D*num_layers, N, H_{cell})$
+
+## 4. Class
+
+### 4.1 Componenets
 
 - $i_t, f_t, o_t$ : input / forget/ output gate의 출력
 - $c_t, g_t$ : cell state/ cell state를 구하기 위한 중간 연산(i_t와 element-wise 곱을 수행함)
 - $W_i, W_h$ : input과 hidden의 선형결합시에 사용되는 가중치
 - $b_i, h_i$ : bias
 
-### 2.2 Calculate
+### 4.2 Calculate
 
 📍 **예시**
 
@@ -111,25 +139,30 @@ bidirectional – If True, becomes a bidirectional LSTM.
 
 > Hidden size: 2, Input size 3 일때 (첫번째 layer의) 각 cell 내부에서 연산되는 과정
 
-### 1.3 Component Shape
+### 4.3 Component Shape at Calculate
 
-- $x_t$ : [input_size, 1]
-- $h_t$ : [hidden_size, 1]
+- $x_t$ : [batch_size, input_size]
+- $h_t$ : [batch_size, hidden_size]
 - $W_{i}$
-  - at first layer : [hidden_size, input_size]  
+  - at first layer : [hidden_size, input_size] ☞ transpose at calculate
   - otherwise : [hidden_size, num_directions * hidden_size] 
   - proj_size > 0 : [hidden_size, proj_size] not at first layer
 - $W_{h}$
-  - at first layer : [hidden_size, hidden_size]
+  - [hidden_size, hidden_size]
   - proj_size > 0 : [hidden_size, proj_size]
 - $b_i$ : [hidden_size]
 - $b_h$ : [hidden_size]
 
-## 3. Inputs
-
-## 4. Outputs
-
 ## 5. Variables
 
-
+- **weight_ih_l[k]** – the learnable input-hidden weights of the k-th layer (W_ii|W_if|W_ig|W_io), of shape (4*hidden_size, input_size) for k = 0. Otherwise, the shape is (4*hidden_size, num_directions * hidden_size). If `proj_size > 0` was specified, the shape will be (4*hidden_size, num_directions * proj_size) for k > 0
+- **weight_hh_l[k]** – the learnable hidden-hidden weights of the k-th layer (W_hi|W_hf|W_hg|W_ho), of shape (4*hidden_size, hidden_size). If `proj_size > 0` was specified, the shape will be (4*hidden_size, proj_size).
+- **bias_ih_l[k]** – the learnable input-hidden bias of the k-th layer (b_ii|b_if|b_ig|b_io), of shape (4*hidden_size)
+- **bias_hh_l[k]** – the learnable hidden-hidden bias of the k-th layer (b_hi|b_hf|b_hg|b_ho), of shape (4*hidden_size)
+- **weight_hr_l[k]** – the learnable projection weights of the k-th layer of shape (proj_size, hidden_size). Only present when `proj_size > 0` was specified.
+- **weight_ih_l[k]_reverse** – Analogous to weight_ih_l[k] for the reverse direction. Only present when `bidirectional=True`.
+- **weight_hh_l[k]_reverse** – Analogous to weight_hh_l[k] for the reverse direction. Only present when `bidirectional=True`.
+- **bias_ih_l[k]_reverse** – Analogous to bias_ih_l[k] for the reverse direction. Only present when `bidirectional=True`.
+- **bias_hh_l[k]_reverse** – Analogous to bias_hh_l[k] for the reverse direction. Only present when `bidirectional=True`.
+- **weight_hr_l[k]_reverse** – Analogous to weight_hr_l[k] for the reverse direction. Only present when `bidirectional=True` and `proj_size > 0` was specified.
 
