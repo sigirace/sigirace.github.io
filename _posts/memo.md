@@ -16,3 +16,24 @@ lstm 코드 구현: https://notebook.community/jhjungCode/pytorch-tutorial/16_MN
 
 initialization PyTorch: https://gist.github.com/SauravMaheshkar/5704edf87c33ab09033dc9c0a10adaa1
 
+gradient histogram: https://stackoverflow.com/questions/42315202/understanding-tensorboard-weight-histograms
+
+gradient: https://sdolnote.tistory.com/entry/Gradient
+
+many to one: https://discuss.pytorch.org/t/many-to-one-lstm-input-shape/142468
+
+one to many: https://discuss.pytorch.org/t/how-to-create-a-lstm-with-one-to-many/108659/4
+
+keras: https://stackoverflow.com/questions/52138290/how-can-we-define-one-to-one-one-to-many-many-to-one-and-many-to-many-lstm-ne/52139618#52139618
+
+return_sequence: https://stackoverflow.com/questions/62204109/return-sequences-false-equivalent-in-pytorch-lstm
+
+keras -ml : https://machinelearningmastery.com/timedistributed-layer-for-long-short-term-memory-networks-in-python/
+
+TimeDistributed: https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=chunjein&logNo=221589624838
+
+LSTM AE : https://data-newbie.tistory.com/136
+
+https://data-newbie.tistory.com/567
+
+LSTM-KERAS (KR): https://yjjo.tistory.com/32
