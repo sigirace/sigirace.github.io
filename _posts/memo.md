@@ -37,3 +37,23 @@ LSTM AE : https://data-newbie.tistory.com/136
 https://data-newbie.tistory.com/567
 
 LSTM-KERAS (KR): https://yjjo.tistory.com/32
+
+
+
+
+
+timedistributed:
+
+https://stackoverflow.com/questions/47305618/what-is-the-role-of-timedistributed-layer-in-keras
+
+https://medium.com/smileinnovation/how-to-work-with-time-distributed-data-in-a-neural-network-b8b39aa4ce00
+
+https://study-grow.tistory.com/entry/pytorch-pytorch-cross-entropy-%EC%82%AC%EC%9A%A9%EC%8B%9C-%EC%A3%BC%EC%9D%98%ED%95%A0-%EC%A0%90-tf-sparse-categorical-cross-entropy-in-pytorch
+
+
+
+autograd: https://velog.io/@olxtar/PyTorch-Autograd
+
+https://gist.github.com/jonlachmann/5cd68c9667a99e4f89edc0c307f94ddb
+
+https://stackoverflow.com/questions/70968393/pytorch-many-to-many-time-series-lstm-always-predicts-the-mean
