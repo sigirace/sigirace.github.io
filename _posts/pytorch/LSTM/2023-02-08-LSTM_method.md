@@ -4,7 +4,6 @@ title:  'LSTM의 모든것 (1) LSTM 및 내부 Gate에 대한 이해'
 toc: true
 categories: [Deep Learning]
 tags: [timeseries, lstm]
-
 ---
 
 본 게시물은 LSTM의 이론에 대해 [해당 포스트](https://medium.com/towards-data-science/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21)를 정리하는 글이다.

@@ -57,3 +57,116 @@ autograd: https://velog.io/@olxtar/PyTorch-Autograd
 https://gist.github.com/jonlachmann/5cd68c9667a99e4f89edc0c307f94ddb
 
 https://stackoverflow.com/questions/70968393/pytorch-many-to-many-time-series-lstm-always-predicts-the-mean
+
+
+
+I have a questions about implementation of many-to-many lstm.
+Currently, I'm converting codes implemented in Keras into pytorch, but understanding of output dimension are holding me back.
+Below are the questions about it.
+
+[enter image description here](https://i.stack.imgur.com/9jZFC.png)
+
+**What is the difference between timedistributed and linear?**
+
+Below are TimeDistributed Reference as described in Keras documents and other publications
+
+“This wrapper allows to apply a layer to every temporal slice of an input.”
+“TimeDistributedDense applies a same Dense (fully-connected) operation to every timestep of a 3D tensor.” 
+
+So, I understand it conceptually means calculating cost for each time step and backpropagating the error to early steps to update weight.
+
+This is an example of the difference between TimeDistributed and Dense(Linear).
+
+- [Keras] many-to-many lstm using TimeDistributed layer
+
+```
+ from keras.models import Model
+ from keras.layers import Input, Dense, LSTM, TimeDistributed
+ import numpy as np
+
+
+ x = np.array([[[1.], [2.], [3.], [4.], [5.]]])
+ y = np.array([[[2.], [3.], [4.], [5.], [6.]]])
+ xInput = Input(batch_shape=(None, 5, 1))
+ xLstm = LSTM(3, return_sequences=True)(xInput)
+ xOutput = TimeDistributed(Dense(1))(xLstm)
+ model = Model(xInput, xOutput)
+ model.compile(loss='mean_squared_error', optimizer='adam')
+ print(model.summary)
+```
+
+[enter image description here](https://i.stack.imgur.com/YvQrJ.png)
+
+- [Keras] many-to-many lstm using Dense layer
+
+```
+ xInput = Input(batch_shape=(None, 5, 1))
+ xLstm = LSTM(3, return_sequences=True)(xInput)
+ xOutput = Dense(1)(xLstm)
+ model = Model(xInput, xOutput)
+ model.compile(loss='mean_squared_error', optimizer='adam')
+ print(model.summary())
+```
+
+[enter image description here](https://i.stack.imgur.com/BA2S9.png)
+
+Now it's my turn to implement this as Pytorch.
+Pytorch does not provide a module for timedistributed, so it refers to the code created by a great developer.
+
+```
+class TimeDistributed(nn.Module):
+    def __init__(self, module, batch_first=False):
+        super(TimeDistributed, self).__init__()
+        self.module = module
+        self.batch_first = batch_first
+
+    def forward(self, x):
+        if len(x.size()) <= 2:
+            return self.module(x)
+        # Squash samples and timesteps into a single axis
+        x_reshape = x.contiguous().view(-1, x.size(-1))  # (samples * timesteps, hidden_size)
+        y = self.module(x_reshape)
+        # We have to reshape Y
+        if self.batch_first:
+            y = y.contiguous().view(x.size(0), -1, y.size(-1))  # (samples, timesteps, output_size)
+        else:
+            y = y.view(-1, x.size(1), y.size(-1))  # (timesteps, samples, output_size)
+        return y
+
+```
+
+In this code, I have a question.
+
+If nn.Linear(hidden_size, output_size) layer is connected next to LSTM layer, not TimeDistributed layer, It seems to be no difference in calculation as well as results.
+
+[Linear layer]
+calculate: (samples, timesteps, hidden_size) * (hidden_size, output_size)
+output: (samples, timesteps, output_size)
+
+[TimeDistributed]
+calculate: (samples * timesteps, hidden_size) * (hidden_size, output_size)
+output: (samples, timesteps, output_size)
+
+Therefore, I'm very curious about how TimeDistributed's error propagation process at each time steps.
+(...And if there is no difference with linear layer, is it okay to just use it?)
+
+
+
+please answer the questions!🥲
+
+
+
+
+I ask about some parts of the implementation of many-to-manilstm that I can't understand.
+
+
+
+**2. Forecast for subsequent time steps**
+
+[enter image description here](https://i.stack.imgur.com/pbrGT.png)
+
+Which input sequence should I configure in this case of many-to-many type?
+
+Should I repeat the last input of the sequence using repeat vector like one-to-many?
+
+In addition, in the case of output, do I need to derive the result using slice like [:,n:-1,:?]?
