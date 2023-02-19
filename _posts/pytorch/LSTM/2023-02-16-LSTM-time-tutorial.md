@@ -11,8 +11,6 @@ tags: [timeseries, lstm]
 
 <div class="notice">
 <li><a href="https://sigirace.github.io/deep%20learning/LSTM_method///">LSTM의 모든것 (1) LSTM 및 내부 Gate에 대한 이해</a></li>
-</div>
-<div class="notice">
 <li><a href="https://sigirace.github.io/deep%20learning/LSTM_components//">LSTM의 모든것 (2) PyTorch 공식 문서로 보는 구성요소</a></li>
 </div>
 
