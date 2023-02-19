@@ -1,13 +1,20 @@
 ---
 layout: single
-title:  'LSTM의 모든것 (4) Timeseries forecasting tutorial'
+title:  'LSTM의 모든것 (4) Timeseries forecasting - Make Dataset'
 toc: true
 categories: [Deep Learning]
 tags: [timeseries, lstm]
 ---
 
-본 게시물은 LSTM으로 구현한 [시계열 예측 예제](https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/structured_data/time_series.ipynb#scrollTo=6GmSTHXw6lI1)를 정리하는 글이다.
+본 게시물은 LSTM을 사용한 [시계열 예측 예제](https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/structured_data/time_series.ipynb#scrollTo=6GmSTHXw6lI1) 내용 중 데이터 셋을 만드는 부분을 정리하는 글이다.
 {: .notice}
+
+<div class="notice">
+<li><a href="https://sigirace.github.io/deep%20learning/LSTM_method///">LSTM의 모든것 (1) LSTM 및 내부 Gate에 대한 이해</a></li>
+</div>
+<div class="notice">
+<li><a href="https://sigirace.github.io/deep%20learning/LSTM_components//">LSTM의 모든것 (2) PyTorch 공식 문서로 보는 구성요소</a></li>
+</div>
 
 ## 1. Introduce
 
@@ -464,7 +471,62 @@ def make_dataset(self, data):
 WindowGenerator.make_dataset = make_dataset
 ```
 
+앞서 생성한 WindowGenerator의 객체에는 train, valid, test data가 포함되어있다. 이들에 대한 접근 및 변형(make_dataset 함수등)을 위해 @property를 추가해준다. 또한 배치의 예시를 쉽게 확인하기 위하여 example 함수를 생성한다.
 
+```python
+@property
+def train(self):
+  return self.make_dataset(self.train_df)
+
+@property
+def val(self):
+  return self.make_dataset(self.val_df)
+
+@property
+def test(self):
+  return self.make_dataset(self.test_df)
+
+@property
+def example(self):
+  """Get and cache an example batch of `inputs, labels` for plotting."""
+  result = getattr(self, '_example', None)
+  if result is None:
+    # No example batch was found, so get one from the `.train` dataset
+    result = next(iter(self.train))
+    # And cache it for next time
+    self._example = result
+  return result
+
+WindowGenerator.train = train
+WindowGenerator.val = val
+WindowGenerator.test = test
+WindowGenerator.example = example
+```
+
+이로 인하여 WindowGenerator 객체는 tf.data.Dataset 개체에 대한 접근이 가능하기 때문에, 데이터를 쉽게 반복할 수있다. element_spec은 데이터셋의 구조, 유형 등을 알려준다.
+
+```python
+# Each element is an (inputs, label) pair.
+w2.train.element_spec
+```
+
+```
+(TensorSpec(shape=(None, 6, 19), dtype=tf.float32, name=None),
+ TensorSpec(shape=(None, 1, 1), dtype=tf.float32, name=None))
+```
+
+이후 데이터 셋을 반복하여 배치를 생성한다.
+
+```python
+for example_inputs, example_labels in w2.train.take(1):
+  print(f'Inputs shape (batch, time, features): {example_inputs.shape}')
+  print(f'Labels shape (batch, time, features): {example_labels.shape}')
+```
+
+```
+Inputs shape (batch, time, features): (32, 6, 19)
+Labels shape (batch, time, features): (32, 1, 1)
+```
 
 
 

@@ -28,7 +28,7 @@ keras: https://stackoverflow.com/questions/52138290/how-can-we-define-one-to-one
 
 return_sequence: https://stackoverflow.com/questions/62204109/return-sequences-false-equivalent-in-pytorch-lstm
 
-keras -ml : https://machinelearningmastery.com/timedistributed-layer-for-long-short-term-memory-networks-in-python/
+keras -timedistributed : https://machinelearningmastery.com/timedistributed-layer-for-long-short-term-memory-networks-in-python/
 
 TimeDistributed: https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=chunjein&logNo=221589624838
 
