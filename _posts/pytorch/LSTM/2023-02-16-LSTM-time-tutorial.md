@@ -65,7 +65,7 @@ date_time = pd.to_datetime(df.pop('Date Time'), format='%d.%m.%Y %H:%M:%S')
 df.head()
 ```
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm_tuto_keras/lstm-t-k_1.png?raw=true" width="900" height="200"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm_tuto_keras/lstm-t-k_1.png?raw=true" width="900" height="250"></p>
 
 구성된 데이터를 그래프로 확인해본다. 위는 전체 데이터에 대한 [T, p, rho]의 시간별 그래프이고, 아래는 20(480시간)일의 시간별 그래프이다.
 
@@ -80,7 +80,7 @@ plot_features.index = date_time[:480]
 _ = plot_features.plot(title="Subsample Plot", subplots=True)
 ```
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm_tuto_keras/lstm-t-k_2.png?raw=true" width="600" height="500"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm_tuto_keras/lstm-t-k_2.png?raw=true" width="600" height="450"></p>
 
 ### 📌 Inspect and cleanup
 
@@ -275,26 +275,32 @@ class WindowGenerator():
   def __init__(self, input_width, label_width, shift,
                train_df=train_df, val_df=val_df, test_df=test_df,
                label_columns=None):
-    # Store the raw data.
+    # 원본 데이터를 저장함
     self.train_df = train_df
     self.val_df = val_df
     self.test_df = test_df
 
-    # Work out the label column indices.
+    # label, column 인덱싱
     self.label_columns = label_columns
     if label_columns is not None:
+      # {label_name0:0, label_name1:1, ...}
       self.label_columns_indices = {name: i for i, name in
                                     enumerate(label_columns)}
+    # {column_name0:0, column_name1:1, ...}        
     self.column_indices = {name: i for i, name in
                            enumerate(train_df.columns)}
 
-    # Work out the window parameters.
+    # window parameter 저장
+    # input_width: input time step / label_width: output size
+    # shift: input time 후 몇 시점 뒤를 label의 시점으로 할 것인지
     self.input_width = input_width
     self.label_width = label_width
     self.shift = shift
 
+    # 하나의 window의 총 size
     self.total_window_size = input_width + shift
-
+		
+    # input, output 인덱싱
     self.input_slice = slice(0, input_width)
     self.input_indices = np.arange(self.total_window_size)[self.input_slice]
 
@@ -318,7 +324,12 @@ w1 = WindowGenerator(input_width=24, label_width=1, shift=24,
 w1
 ```
 
-
+```
+Total window size: 48
+Input indices: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23]
+Label indices: [47]
+Label column name(s): ['T (degC)']
+```
 
 ```python
 w2 = WindowGenerator(input_width=6, label_width=1, shift=1,
@@ -326,13 +337,132 @@ w2 = WindowGenerator(input_width=6, label_width=1, shift=1,
 w2
 ```
 
+````
+Total window size: 7
+Input indices: [0 1 2 3 4 5]
+Label indices: [6]
+Label column name(s): ['T (degC)']
+````
 
+### 📌 Split
 
+앞서 WindowGenerator는 Input과 Output의 index 정의를 하였지만, 실제로 이를 잘라서 구성하지는 않았다. 따라서 split_window 함수를 통해 이를 실제 윈도우 단위로 잘라서 리턴해주는 작업을 수행한다.
 
+🤪[image9]
 
+이는 앞서 구성한 w2 객체에 대한 split_window 예시이다.
 
+```python
+def split_window(self, features):
+  inputs = features[:, self.input_slice, :]
+  labels = features[:, self.labels_slice, :]
+  if self.label_columns is not None:
+    labels = tf.stack(
+        [labels[:, :, self.column_indices[name]] for name in self.label_columns],
+        axis=-1)
 
+  # Slicing doesn't preserve static shape information, so set the shapes
+  # manually. This way the `tf.data.Datasets` are easier to inspect.
+  inputs.set_shape([None, self.input_width, None])
+  labels.set_shape([None, self.label_width, None])
 
+  return inputs, labels
+
+WindowGenerator.split_window = split_window
+```
+
+```python
+# Stack three slices, the length of the total window.
+example_window = tf.stack([np.array(train_df[:w2.total_window_size]),
+                           np.array(train_df[100:100+w2.total_window_size]),
+                           np.array(train_df[200:200+w2.total_window_size])])
+
+example_inputs, example_labels = w2.split_window(example_window)
+
+print('All shapes are: (batch, time, features)')
+print(f'Window shape: {example_window.shape}')
+print(f'Inputs shape: {example_inputs.shape}')
+print(f'Labels shape: {example_labels.shape}')
+```
+
+```
+All shapes are: (batch, time, features)
+Window shape: (3, 7, 19)
+Inputs shape: (3, 6, 19)
+Labels shape: (3, 1, 1)
+```
+
+일반적으로 Tensorflow의 데이터는 [batch, time step, feature]로 구성된다. 위 예제에서는 3개의 배치를 가진 7 time step 및 19 features의 window를 구성하였다. 이때, 앞의 6 step은 Input이며 마지막 1 step은 label을 구성한다. feature의 경우 초기화시 1개의 label을 입력하였기에 label은 1개의 차원을 가지게 된다.
+
+### 📌 Plot
+
+구성된 window에 대한 시각화를 수행한다.
+
+```python
+w2.example = example_inputs, example_labels
+```
+
+```python
+def plot(self, model=None, plot_col='T (degC)', max_subplots=3):
+  inputs, labels = self.example
+  plt.figure(figsize=(12, 8))
+  plot_col_index = self.column_indices[plot_col]
+  max_n = min(max_subplots, len(inputs))
+  for n in range(max_n):
+    plt.subplot(max_n, 1, n+1) 
+    plt.ylabel(f'{plot_col} [normed]')
+    plt.plot(self.input_indices, inputs[n, :, plot_col_index],
+             label='Inputs', marker='.', zorder=-10)
+
+    if self.label_columns:
+      label_col_index = self.label_columns_indices.get(plot_col, None)
+    else:
+      label_col_index = plot_col_index
+
+    if label_col_index is None:
+      continue
+
+    plt.scatter(self.label_indices, labels[n, :, label_col_index],
+                edgecolors='k', label='Labels', c='#2ca02c', s=64)
+    if model is not None:
+      predictions = model(inputs)
+      plt.scatter(self.label_indices, predictions[n, :, label_col_index],
+                  marker='X', edgecolors='k', label='Predictions',
+                  c='#ff7f0e', s=64)
+
+    if n == 0:
+      plt.legend()
+
+  plt.xlabel('Time [h]')
+
+WindowGenerator.plot = plot
+
+w2.plot()
+```
+
+🤪[image10]
+
+### 📌 Create tf.data.Dataset
+
+make_dataset 함수를 통해 time series DataFrame을 tf.keras.utils.timeseries_dataset_from_array를 사용해 (input_window, label_window)쌍의 tf.data.Dataset로 변환한다.
+
+```python
+def make_dataset(self, data):
+  data = np.array(data, dtype=np.float32)
+  ds = tf.keras.utils.timeseries_dataset_from_array(
+      data=data,
+      targets=None,
+      sequence_length=self.total_window_size,
+      sequence_stride=1,
+      shuffle=True,
+      batch_size=32,)
+
+  ds = ds.map(self.split_window)
+
+  return ds
+
+WindowGenerator.make_dataset = make_dataset
+```
 
 
 
