@@ -355,7 +355,7 @@ Label column name(s): ['T (degC)']
 
 앞서 WindowGenerator는 Input과 Output의 index 정의를 하였지만, 실제로 이를 잘라서 구성하지는 않았다. 따라서 split_window 함수를 통해 이를 실제 윈도우 단위로 잘라서 리턴해주는 작업을 수행한다.
 
-🤪[image9]
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm_tuto_keras/lstm-t-k_9.png?raw=true" width="400" height="250"></p>
 
 이는 앞서 구성한 w2 객체에 대한 split_window 예시이다.
 
@@ -447,7 +447,7 @@ WindowGenerator.plot = plot
 w2.plot()
 ```
 
-🤪[image10]
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/pytorch/lstm_tuto_keras/lstm-t-k_10.png?raw=true" width="600" height="300"></p>
 
 ### 📌 Create tf.data.Dataset
 
