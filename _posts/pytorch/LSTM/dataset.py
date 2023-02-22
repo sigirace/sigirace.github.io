@@ -11,14 +11,10 @@ from sklearn.preprocessing import StandardScaler
 mpl.rcParams['figure.figsize'] = (8, 6)
 mpl.rcParams['axes.grid'] = False
 
-train_df = pd.read_csv('/content/drive/MyDrive/solar/new/train_df.csv')
-val_df   = pd.read_csv('/content/drive/MyDrive/solar/new/val_df.csv')
-test_df  = pd.read_csv('/content/drive/MyDrive/solar/new/test_df.csv')
-
 class WindowGenerator():
   def __init__(self, input_width, label_width, shift, batch_size, target,
               #  train_df=train_df, val_df=val_df, test_df=test_df,
-               label_columns=None, download=False):
+               label_columns=None, download=True):
     
     self.download = download
     self.batch_size = batch_size
@@ -105,7 +101,7 @@ class WindowGenerator():
       csv_path, _ = os.path.splitext(zip_path)
       df = pd.read_csv(csv_path)
     else:
-      df = pd.read_csv('/content/drive/MyDrive/solar/new/jena_climate_2009_2016.csv')
+      df = pd.read_csv('본인 경로')
     
     df = df[5::6]
     date_time = pd.to_datetime(df.pop('Date Time'), format='%d.%m.%Y %H:%M:%S')

@@ -6,7 +6,7 @@ categories: [Deep Learning]
 tags: [timeseries, lstm]
 ---
 
-본 게시물은 LSTM을 사용한 [시계열 예측 예제](https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/structured_data/time_series.ipynb#scrollTo=6GmSTHXw6lI1) 내용 중 데이터 셋을 만드는 부분을 정리하는 글이다.
+본 게시물은 Tensorflow의 LSTM을 사용한 [시계열 예측 예제](https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/structured_data/time_series.ipynb#scrollTo=6GmSTHXw6lI1) 내용 중 데이터 셋을 만드는 부분을 정리하는 글이다.
 {: .notice}
 
 <div class="notice">
@@ -526,7 +526,7 @@ Inputs shape (batch, time, features): (32, 6, 19)
 Labels shape (batch, time, features): (32, 1, 1)
 ```
 
-
+다음 포스트에서는 구성한 데이터셋을 통해 모델링을 수행하도록 한다.
 
 
 
