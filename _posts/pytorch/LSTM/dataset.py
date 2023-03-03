@@ -18,7 +18,7 @@ class WindowGenerator():
     
     self.download = download
     self.batch_size = batch_size
-    trian_df, val_df, test_df = self.get_data()
+    train_df, val_df, test_df = self.get_data()
 
     self.target = target
     self.train_df, self.scaler_list = self.train_scaling(train_df, self.target)
