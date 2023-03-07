@@ -1,12 +1,12 @@
 ---
 layout: single
-title:  'LSTM의 모든것 (5) Timeseries forecasting - Modeling'
+title:  'LSTM의 모든것 (5) Timeseries forecasting - Single step model'
 toc: true
 categories: [Deep Learning]
 tags: [timeseries, lstm]
 ---
 
-본 게시물은 Tensorflow의 LSTM을 사용한 [시계열 예측 예제](https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/structured_data/time_series.ipynb#scrollTo=6GmSTHXw6lI1) 내용 모델링을 적용하는 부분을 정리하는 글이다.
+본 게시물은 Tensorflow의 LSTM을 사용한 [시계열 예측 예제](https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/structured_data/time_series.ipynb#scrollTo=6GmSTHXw6lI1) 내용 중 single step modeling을 적용하는 부분을 정리하는 글이다.
 {: .notice}
 
 <div class="notice">
@@ -20,6 +20,7 @@ tags: [timeseries, lstm]
 
 ```python
 import dataset as ds
+import tensorflow as tf
 ```
 
 ## 2. Single step model
@@ -105,12 +106,18 @@ performance['Linear'] = linear.evaluate(single_step_window.test, verbose=0)
 
 ```
 Epoch 1/20
-1534/1534 [==============================] - 8s 5ms/step - loss: 0.0096 - mean_absolute_error: 0.0721 - val_loss: 82249.0547 - val_mean_absolute_error: 286.7191
+1534/1534 [==============================] - 9s 6ms/step - loss: 0.6883 - mean_absolute_error: 0.5809 - val_loss: 0.0796 - val_mean_absolute_error: 0.2212
 Epoch 2/20
-1534/1534 [==============================] - 6s 4ms/step - loss: 0.0093 - mean_absolute_error: 0.0707 - val_loss: 85541.4922 - val_mean_absolute_error: 292.3961
+1534/1534 [==============================] - 11s 7ms/step - loss: 0.0204 - mean_absolute_error: 0.0966 - val_loss: 0.0039 - val_mean_absolute_error: 0.0471
 Epoch 3/20
-1534/1534 [==============================] - 7s 4ms/step - loss: 0.0092 - mean_absolute_error: 0.0702 - val_loss: 88454.2031 - val_mean_absolute_error: 297.3310
-439/439 [==============================] - 2s 4ms/step - loss: 88454.1797 - mean_absolute_error: 297.3310
+1534/1534 [==============================] - 11s 7ms/step - loss: 0.0054 - mean_absolute_error: 0.0424 - val_loss: 0.0030 - val_mean_absolute_error: 0.0403
+Epoch 4/20
+1534/1534 [==============================] - 9s 6ms/step - loss: 0.0051 - mean_absolute_error: 0.0399 - val_loss: 0.0029 - val_mean_absolute_error: 0.0399
+Epoch 5/20
+1534/1534 [==============================] - 9s 6ms/step - loss: 0.0050 - mean_absolute_error: 0.0398 - val_loss: 0.0029 - val_mean_absolute_error: 0.0400
+Epoch 6/20
+1534/1534 [==============================] - 9s 6ms/step - loss: 0.0051 - mean_absolute_error: 0.0398 - val_loss: 0.0029 - val_mean_absolute_error: 0.0401
+439/439 [==============================] - 2s 4ms/step - loss: 0.0029 - mean_absolute_error: 0.0401
 ```
 
 결과가 썩 좋지 못하나 예측한 내용을 샘플을 확인해본다.
@@ -123,7 +130,11 @@ single_step_window.plot(linear)
 
 Input 데이터 포인트와 output 데이터 포인트 그리고 예측한 데이터 포인트를 확인할 수 있다. 학습 결과와 마찬가지로 좋지 못한 모습이다.
 
-이번엔 step size를 조정하여 24시간의 Input 데이터가 들어갔을 때 24시간 후를 예측하는 데이터 셋을 구성 및 linear model에 대한 학습을 수행한다.
+이번엔 Input length를 조정하여 24시간의 Input 데이터가 들어갔을 때 각 시간의 1step 뒤를 예측하는 데이터 셋을 아래와 같이 구성한다. 여러 Input이 들어갔을 뿐 예측하는 step은 하나(single)이다.
+
+🤪[image13]
+
+이후 linear model을 적용하여 학습을 수행한다.
 
 ```python
 wide_window = WindowGenerator(
@@ -139,6 +150,90 @@ Input indices: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 2
 Label indices: [ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
 Label column name(s): ['T (degC)']
 ```
+
+```python
+history = compile_and_fit(linear, wide_window)
+
+val_performance_wide['Linear'] = linear.evaluate(wide_window.val)
+performance_wide['Linear'] = linear.evaluate(wide_window.test, verbose=0)
+```
+
+````
+Epoch 1/20
+1533/1533 [==============================] - 16s 10ms/step - loss: 0.0049 - mean_absolute_error: 0.0390 - val_loss: 0.0029 - val_mean_absolute_error: 0.0399
+Epoch 2/20
+1533/1533 [==============================] - 12s 8ms/step - loss: 0.0049 - mean_absolute_error: 0.0390 - val_loss: 0.0028 - val_mean_absolute_error: 0.0396
+Epoch 3/20
+1533/1533 [==============================] - 8s 5ms/step - loss: 0.0049 - mean_absolute_error: 0.0389 - val_loss: 0.0028 - val_mean_absolute_error: 0.0394
+Epoch 4/20
+1533/1533 [==============================] - 10s 6ms/step - loss: 0.0049 - mean_absolute_error: 0.0389 - val_loss: 0.0028 - val_mean_absolute_error: 0.0394
+Epoch 5/20
+1533/1533 [==============================] - 9s 6ms/step - loss: 0.0049 - mean_absolute_error: 0.0389 - val_loss: 0.0028 - val_mean_absolute_error: 0.0395
+438/438 [==============================] - 2s 4ms/step - loss: 0.0028 - mean_absolute_error: 0.0395
+````
+
+````python
+wide_window.plot(linear)
+````
+
+🤪[image14]
+
+수행 결과 대체로 잘 맞는 것 처럼 보이나 어느 시점에는 맞지 않는 그래프도 보임을 알 수 있다. 또한 validation dataset에 대해 mae가 줄어든 모습을 볼 수 있는데, 이는 학습이 잘 되었다는 의미일 수도 있으나 metric의 평균을 내는 특성으로 인해 값이 낮아진 것일 수 있다.
+
+Linear Model의 장점은 해석하기가 상대적으로 간단하다는 것이다. 구성한 Dense Layer에 있는 weight를 가져와 각 Input feature에 할당된 가중치를 시각화 할 수 있다.
+
+````python
+plt.bar(x = range(len(wide_window.train_df.columns)),
+        height=linear.layers[0].kernel[:,0].numpy())
+axis = plt.gca()
+axis.set_xticks(range(len(wide_window.train_df.columns)))
+_ = axis.set_xticklabels(wide_window.train_df.columns, rotation=90)
+````
+
+🤪[image15]
+
+이번 튜토리얼에서는 T (degC)에 많은 가중치를 둔 모델이 생성됨을 확인할 수 있다. 그러나 이는 절대적인 것은 아니고, Layer의 weight를 어떻게 초기화 하느냐에 따라 달라질 수 있다.
+
+### 2.2 Multi layer
+
+이번에는 모델 구성 시 한 층이 아닌 다층의 layer를 쌓은 결과를 확인해 본다.
+
+````python
+dense = tf.keras.Sequential([
+    tf.keras.layers.Dense(units=64, activation='relu'),
+    tf.keras.layers.Dense(units=64, activation='relu'),
+    tf.keras.layers.Dense(units=1)
+])
+
+history = compile_and_fit(dense, wide_window)
+
+val_performance_wide['Dense'] = dense.evaluate(wide_window.val)
+performance_wide['Dense'] = dense.evaluate(wide_window.test, verbose=0)
+````
+
+````
+Epoch 1/20
+1533/1533 [==============================] - 20s 12ms/step - loss: 0.0205 - mean_absolute_error: 0.0701 - val_loss: 0.0046 - val_mean_absolute_error: 0.0520
+Epoch 2/20
+1533/1533 [==============================] - 13s 8ms/step - loss: 0.0048 - mean_absolute_error: 0.0432 - val_loss: 0.0037 - val_mean_absolute_error: 0.0458
+Epoch 3/20
+1533/1533 [==============================] - 14s 9ms/step - loss: 0.0043 - mean_absolute_error: 0.0405 - val_loss: 0.0035 - val_mean_absolute_error: 0.0447
+Epoch 4/20
+1533/1533 [==============================] - 13s 9ms/step - loss: 0.0040 - mean_absolute_error: 0.0392 - val_loss: 0.0035 - val_mean_absolute_error: 0.0444
+Epoch 5/20
+1533/1533 [==============================] - 13s 9ms/step - loss: 0.0038 - mean_absolute_error: 0.0382 - val_loss: 0.0032 - val_mean_absolute_error: 0.0424
+Epoch 6/20
+1533/1533 [==============================] - 13s 8ms/step - loss: 0.0037 - mean_absolute_error: 0.0382 - val_loss: 0.0033 - val_mean_absolute_error: 0.0426
+Epoch 7/20
+1533/1533 [==============================] - 13s 9ms/step - loss: 0.0035 - mean_absolute_error: 0.0376 - val_loss: 0.0037 - val_mean_absolute_error: 0.0460
+438/438 [==============================] - 2s 5ms/step - loss: 0.0037 - mean_absolute_error: 0.0460
+````
+
+수행 결과 오히려 mae가 높아진 것을 확인 할 수 있다. 모델이 복잡한 것(=깊은 것)이 능사가 아님을 확인하였다.
+
+### 2.3 Multi step layer
+
+🤪[image15]
 
 
 
