@@ -117,3 +117,11 @@ keras loss, metric: https://stackoverflow.com/questions/51256695/loss-metrics-an
 optuna + wandb: https://github.com/nzw0301/optuna-wandb/blob/main/part-1/wandb_optuna.py
 
 api: add32e093cd85d238c6d390e5d59c238637259f8
+
+
+
+Data Augmentation
+
+https://ratsgo.github.io/generative%20model/2017/12/17/compare/
+
+https://github.com/uchidalab/time_series_augmentation/blob/master/docs/AugmentationMethods.md
