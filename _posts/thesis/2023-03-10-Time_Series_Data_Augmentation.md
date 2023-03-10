@@ -28,3 +28,24 @@ Neural networks는 패턴 인식에서 강력한 도구가 되었으며 이는 l
 
 ## 1. Introduction
 
+데이터의 양을 늘리면 일반화에 도움이 되고, 결과적으로 많은 기계 학습 모델의 정확성에 도움이 된다는 것은 잘 알려져 있다. 그러나 이미지 도메인과 달리 시계열 데이터 세트는 비교적 작은 데이터셋을 구성하는 경향이 있다. 예를 들어, 가장 많이
+
+
+
+In fact, it is well-known that increasing the amount ofdata helps with generalization and, in turn, the accuracy ofmany machine learning models [5]–[7].However, unlike the image domain, time series datasets tendto be tiny in comparison.
+
+For example, one of the most usedsources of time series classification datasets, the University ofCalifornia Riverside (UCR) Time Series Archive [8], contains85 time series datasets but only 10 have more than 1,000training samples and the largest, ElectricDevices, only has8,926.
+
+By comparison, the popular image datasets, ImageNetLarge Scale Visual Recognition Challenge (ILSVRC) [9],MNIST [10], and CIFAR [11], have 1.2 million, 60,000, and50,000 training patterns respectively.
+
+Thus, in order to use thefull potential of modern machine learning methods, there is aneed for time series classification data.
+
+
+
+실제로, 데이터의 양을 늘리면 일반화에 도움이 되고, 결과적으로 많은 기계 학습 모델[5]–[7]의 정확성에 도움이 된다는 것은 잘 알려져 있다.그러나 이미지 도메인과 달리 시계열 데이터 세트는 비교적 작은 경향이 있다.
+
+예를 들어, 가장 많이 사용되는 시계열 분류 데이터 세트의 소스 중 하나인 캘리포니아 대학교 리버사이드(UCR) 시계열 아카이브[8]는 85개의 시계열 데이터 세트를 포함하고 있지만 1,000개 이상의 교육 샘플을 보유한 것은 10개뿐이고 가장 큰 Electric Devices는 8,926개만 있다.
+
+이에 비해 인기 있는 이미지 데이터 세트인 ImageNet Large Scale Visual Recognition Challenge(ILSVRC)[9], MNIST[10] 및 CIFAR[11]는 각각 120만, 60,000, 50,000개의 훈련 패턴을 가지고 있다.
+
+따라서 현대 기계 학습 방법의 잠재력을 최대한 활용하기 위해서는 시계열 분류 데이터가 필요하다.

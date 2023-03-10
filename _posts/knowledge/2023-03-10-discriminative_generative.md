@@ -22,7 +22,7 @@ tags: [Discriminative, Generative]
 
 > 데이터 X가 생성되는 과정을 두개의 확률모형 p(Y), p(X/Y)로 정의하고, 베이즈룰을 사용해 p(Y/X)를 간접적으로 도출하는 모델
 
-해당 모델의 특징은 레이블 Y에 대한 정보가 있어도, 없어도 구축할 수 있다는 것이다. 전자는 지도학습 기반의 generative model이라 하며, 선혈판별분석이 대표적이고, 후자를 비지도학습 기반의 generative model이라 하며 가우시안믹스처모델, 토픽모델링이 대표적인 사례이다. 또한, generative model은 distribution을 학습하는 것을 목표로 하며, 베이지안 추론과 마찬가지로 학습데이터가 많을수록 discriminative model과 비슷한 성능을 가지는 경향이 있다.아울러 generative model은 p(X|Y)를 정의하기 때문에 이를 활용해 X를 샘플링 할 수 있다.
+해당 모델의 특징은 레이블 Y에 대한 정보가 있어도, 없어도 구축할 수 있다는 것이다. 전자는 지도학습 기반의 generative model이라 하며, 선혈판별분석이 대표적이고, 후자를 비지도학습 기반의 generative model이라 하며 가우시안믹스처모델, 토픽모델링이 대표적인 사례이다. 또한, generative model은 distribution을 학습하는 것을 목표로 하며, 베이지안 추론과 마찬가지로 학습데이터가 많을수록 discriminative model과 비슷한 성능을 가지는 경향이 있다.아울러 generative model은 p(X/Y)를 정의하기 때문에 이를 활용해 X를 샘플링 할 수 있다.
 
 
 
