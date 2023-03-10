@@ -1,18 +1,19 @@
-Abstract—Neural networks have become a powerful tool in
-pattern recognition and part of their success is due to generalization from using large datasets. However, unlike other
-domains, time series classification datasets are often small. In
-order to address this problem, we propose a novel time series
-data augmentation called guided warping. While many data
-augmentation methods are based on random transformations,
-guided warping exploits the element alignment properties of
-Dynamic Time Warping (DTW) and shapeDTW, a high-level
-DTW method based on shape descriptors, to deterministically
-warp sample patterns. In this way, the time series are mixed
-by warping the features of a sample pattern to match the
-time steps of a reference pattern. Furthermore, we introduce
-a discriminative teacher in order to serve as a directed reference
-for the guided warping. We evaluate the method on all 85 datasets
-in the 2015 UCR Time Series Archive with a deep convolutional
-neural network (CNN) and a recurrent neural network (RNN).
-The code with an easy to use implementation can be found at
-https://github.com/uchidalab/time series augmentation.
+In recent times, deep neural networks have become commonplace and continue to set the state-of-the-art benchmarks
+across many domains, such as natural scene object classification [1], machine translation [2], graph classification [3], and
+more. Part of the recent successes is due to the increase in
+data availability and the advancement of hardware to support
+it [4]. In fact, it is well-known that increasing the amount of
+data helps with generalization and, in turn, the accuracy of
+many machine learning models [5]–[7].
+However, unlike the image domain, time series datasets tend
+to be tiny in comparison. For example, one of the most used
+sources of time series classification datasets, the University of
+California Riverside (UCR) Time Series Archive [8], contains
+85 time series datasets but only 10 have more than 1,000
+training samples and the largest, ElectricDevices, only has
+8,926. By comparison, the popular image datasets, ImageNet
+Large Scale Visual Recognition Challenge (ILSVRC) [9],
+MNIST [10], and CIFAR [11], have 1.2 million, 60,000, and
+50,000 training patterns respectively. Thus, in order to use the
+full potential of modern machine learning methods, there is a
+need for time series classification data.
