@@ -1,19 +1,13 @@
-In recent times, deep neural networks have become commonplace and continue to set the state-of-the-art benchmarks
-across many domains, such as natural scene object classification [1], machine translation [2], graph classification [3], and
-more. Part of the recent successes is due to the increase in
-data availability and the advancement of hardware to support
-it [4]. In fact, it is well-known that increasing the amount of
-data helps with generalization and, in turn, the accuracy of
-many machine learning models [5]–[7].
-However, unlike the image domain, time series datasets tend
-to be tiny in comparison. For example, one of the most used
-sources of time series classification datasets, the University of
-California Riverside (UCR) Time Series Archive [8], contains
-85 time series datasets but only 10 have more than 1,000
-training samples and the largest, ElectricDevices, only has
-8,926. By comparison, the popular image datasets, ImageNet
-Large Scale Visual Recognition Challenge (ILSVRC) [9],
-MNIST [10], and CIFAR [11], have 1.2 million, 60,000, and
-50,000 training patterns respectively. Thus, in order to use the
-full potential of modern machine learning methods, there is a
-need for time series classification data.
+Data augmentation for images is a well-explored field,
+especially in combination with neural networks. It has almost become a standard practice for image classification.
+For example, many of the popular Convolutional Neural
+Networks (CNN) based architectures used a form of data
+augmentation in their training, such as the original proposals of
+AlexNet [11], Very Deep Convolutional Networks (VGG) [13],
+and Residual Networks (ResNet) [14]. Comparatively, there
+are fewer established time series data augmentation methods
+and fewer standard data augmentation practices in time series
+classification [15]. Most of the methods that exist are just
+time series adaptations inspired by image recognition. These
+methods generally rely on simple transformations, such as
+jittering (adding noise), scaling, rotation, etc.

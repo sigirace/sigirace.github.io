@@ -38,7 +38,7 @@ tags: [Discriminative, Generative]
 
 generative model의 목적 중 하나는 데이터의 분포를 학슴하는 것라고 하였다. 이는 모델에 데이터를 넣으면 실제 데이터의 확률에 가까운 값을 반환하는 것과 동일하다. 이를 도식화한 그림은 아래와 같다.
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/knowledge/dis_vs_gen/dis_gen_2.png?raw=true" width="400", height="200"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/knowledge/dis_vs_gen/dis_gen_2.png?raw=true" width="400" height="200"></p>
 
 ### 3. Difference
 
