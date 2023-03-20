@@ -154,6 +154,8 @@ $$
 \pi(a|s) = P[A_t = a| S_t = s]
 $$
 
+☞ 즉, policy는 state를 넣으면 action을 뱉는 mapping function과 비슷하다.
+
 ### 3.2 Value Function
 
 - Value Function은 미래의 reward를 예측하여 상황(=현재 state)이 얼마나 좋은지/나쁜지를 나타냄<br>☞ 이를 통해 action을 선택함
@@ -266,3 +268,5 @@ Agent가 가지고 있는 상황에 따라 문제가 다르게 정의된다.
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/reinforcement/lec1/intro_RL-45.png?raw=true" width="650" height="400"></p>
 
 - 최적의 policy $\pi$를 찾는 문제
+
+☞ 3강에서 자세히 설명
