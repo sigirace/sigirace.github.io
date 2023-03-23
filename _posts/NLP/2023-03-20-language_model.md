@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  '1. 언어모델이란?'
+title:  'LM(1)_언어모델이란?'
 toc: true
 categories: [Language Model]
 tags: [LM]
