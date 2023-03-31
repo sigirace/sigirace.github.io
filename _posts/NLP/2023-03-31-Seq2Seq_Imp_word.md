@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  'LM(5) Sequence to Sequence 구현 문자 단위'
+title:  'LM(5) Sequence to Sequence 구현1 (문자)'
 toc: true
 categories: [Language Model]
 tags: [LM]
