@@ -1,13 +1,13 @@
 ---
 layout: single
-title:  'LM(5) Sequence to Sequence 구현 1 문자 레벨'
+title:  'LM(5) Sequence to Sequence 구현 문자 단위'
 toc: true
 categories: [Language Model]
 tags: [LM]
 
 ---
 
-이번 포스팅에서는 Keras를 사용한 문자 단위의 seq2seq 번역기를 구현해본다.
+이번 포스팅에서는 Pytorch를 사용한 문자 단위의 seq2seq 번역기를 구현해본다.
 {: .notice}
 
 ## 1. Dataset
@@ -201,3 +201,5 @@ https://wikidocs.net/86900
 https://boysboy3.tistory.com/113
 
 https://codlingual.tistory.com/91
+
+pad seq - https://discuss.pytorch.org/t/how-to-do-padding-based-on-lengths/24442
