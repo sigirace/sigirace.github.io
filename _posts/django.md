@@ -1,5 +1,13 @@
 **Django 정리**
 
+## 0. Tip
+
+- migration 파일 삭제 in shell
+
+````
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+````
+
 
 
 ## 1. Poetry 설치
