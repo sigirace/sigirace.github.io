@@ -161,3 +161,9 @@ class User(AbstractUser):
 https://www.hides.kr/938
 
 https://docs.djangoproject.com/en/4.1/topics/auth/customizing/
+
+https://kimdoky.github.io/django/2018/11/26/django-username-verbose/
+
+https://www.hides.kr/942
+
+https://d-life93.tistory.com/424
