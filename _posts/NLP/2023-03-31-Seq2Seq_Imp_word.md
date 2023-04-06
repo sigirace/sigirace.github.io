@@ -203,3 +203,7 @@ https://boysboy3.tistory.com/113
 https://codlingual.tistory.com/91
 
 pad seq - https://discuss.pytorch.org/t/how-to-do-padding-based-on-lengths/24442
+
+
+
+https://github.com/VumBleBot/Group-Activity/issues/7

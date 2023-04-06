@@ -158,6 +158,12 @@ class User(AbstractUser):
 	last_name = models.CharField(max_length=150, editable=False)
 ````
 
+
+
+
+
+
+
 https://www.hides.kr/938
 
 https://docs.djangoproject.com/en/4.1/topics/auth/customizing/
@@ -167,3 +173,9 @@ https://kimdoky.github.io/django/2018/11/26/django-username-verbose/
 https://www.hides.kr/942
 
 https://d-life93.tistory.com/424
+
+https://velog.io/@pjh1011409/%EB%A1%9C%EA%B7%B8%EC%9D%B8#-payload
+
+
+
+비밀번호암호화: https://velog.io/@misun9283/django-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EC%95%94%ED%98%B8%ED%99%94-%EB%B0%8F-%ED%86%A0%ED%81%B0-%EB%B0%9C%ED%96%89
