@@ -7,12 +7,46 @@ tags: [LM]
 
 ---
 
-이번 포스팅에서는 Pytorch를 사용한 문자 단위의 seq2seq 번역기를 구현해본다.
+이번 포스팅에서는 Pytorch로 seq2seq 영한 번역기를 구현해본다.
 {: .notice}
 
-## 1. Dataset
+## 1. Prepare
 
-### 1.1 데이터 불러오기
+### 1.1 Mecab 설치
+
+이번 실습은 colab 환경에서 수행하며, 한국어 tokenizing을 위한 mecab 설치 코드는 [여기]()에서 복붙해온다.
+
+### 1.2 Import module
+
+설치가 끝났다면 아래 모듈들을 import 시킨다. 만약 wandb를 사용하지 않는다면 wandb를 모두 삭제한다.
+
+````python
+import os
+
+import wandb
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.nn.utils.rnn import pad_sequence
+from torchtext.data.metrics import bleu_score
+
+from sklearn.model_selection import train_test_split
+
+import random
+import pandas as pd
+import re
+import nltk
+from konlpy.tag import Mecab
+nltk.download('punkt')
+os.environ["WANDB_API_KEY"] = 'your api key'
+os.environ['WANDB_SILENT']="true"
+````
+
+
+
+## 2. Dataset
+
+### 2.1 데이터 불러오기
 
 번역기 모델을 훈련시키기 위해서는 훈련 데이터로 병렬 코퍼스(parallel corpus)가 필요하다.
 
@@ -23,12 +57,11 @@ tags: [LM]
 이번 실습에서는 영어-한국어 병렬 코퍼스를 사용할 것이며, [여기](http://www.manythings.org/anki)에서 kor-eng.zip 파일을 다운로드 받을 수 있다. 다운로드 받은 파일을 구글 드라이브에 저장하고, 코랩을 통해 확인해본다.
 
 ````python
-import pandas as pd
+data_path = '/content/drive/MyDrive/DL/NLP/data/kor.txt'
 
-data_path = 'your_txt_file_path'
-corpus = pd.read_csv(data_path, names=['eng', 'kor', 'etc'], sep='\t')
-del corpus['etc']
-print('전체 데이터 개수 :',len(corpus))
+# data load
+df = pd.read_csv(data_path, delimiter='\t', names=['src', 'trg', 'etc'])[['src', 'trg']]
+print('전체 데이터 개수 :',len(df))
 ````
 
 ````
@@ -38,7 +71,7 @@ print('전체 데이터 개수 :',len(corpus))
 전체 코퍼스를 구성하는 전체 병렬 데이터 쌍은 총 5749개이다. 구성을 확인하면 아래와 같다.
 
 ````
-corpus.head()
+df.head()
 ````
 
 🤪 [image1]
