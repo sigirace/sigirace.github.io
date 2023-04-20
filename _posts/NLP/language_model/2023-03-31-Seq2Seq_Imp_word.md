@@ -14,7 +14,7 @@ tags: [LM]
 
 ### 1.1 Mecab 설치
 
-이번 실습은 colab 환경에서 수행하며, 한국어 tokenizing을 위한 mecab 설치 코드는 [여기]()에서 복붙해온다.
+이번 실습은 colab 환경에서 수행하며, 한국어 tokenizing을 위한 mecab 설치 코드는 [여기](https://sigirace.github.io/knowledge/colab_mecab/)에서 복붙해온다.
 
 ### 1.2 Import module
 
