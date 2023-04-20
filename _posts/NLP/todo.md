@@ -1,0 +1,1 @@
+토크나이징: https://github.com/VumBleBot/Group-Activity/issues/7
