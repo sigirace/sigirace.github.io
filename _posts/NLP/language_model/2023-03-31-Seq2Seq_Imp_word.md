@@ -497,7 +497,7 @@ for epoch in range(N_EPOCHS):
 
 wnadb를 통해 train 및 val loss가 정상적으로 잘 떨어지고 있음을 확인할 수 있다.
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/nlp/seq2seq/seq_imp5.png?raw=true" width="800" height="300"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/nlp/seq2seq/seq_imp5.png?raw=true" width="800" height="400"></p>
 
 ### 4.5 Inference
 
