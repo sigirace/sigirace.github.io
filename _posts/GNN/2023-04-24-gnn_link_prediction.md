@@ -38,8 +38,6 @@ GNN의 이전 포스트에서는 homogeneous graphs(=단일 유형의 노드만 
 
 먼저 GCN에서 GraphSAGE로 방법론의 전환 이유에 대해 알아본다. GCN은 학습 프레임워크로 인해 아래의 어려움을 겪고 있다.
 
-GCNs suffer from several issues caused by their very learning framework:
-
 1. **대규모 네트워크 학습**: GCN에서 임베딩을 학습시키기 위해선 모든 노드의 정보가 필요하다. 따라서 모델을 배치 단위로 학습할 수 없고, 이는 대규모 데이터 처리시 한계가 존재한다.
 2. **신규 노드의 일반화**: GCN은 고정된 단일 그래프를 가정한다. 그러나 신규 노드는 빠르게 생성되기 때문에 실제 애플리케이션에 적용하는데 한계가 존재한다. (예: Twitter의 게시물, YouTube의 비디오 등)
 
