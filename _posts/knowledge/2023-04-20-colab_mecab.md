@@ -10,9 +10,9 @@ tags: [Mecab, colab]
 본 게시물에서는 colab 환경에서 mecab을 실행하는 코드를 공유한다.
 {: .notice}
 
-## Code
+## Old code
 
-최종 확인일 2023년 4월
+최종 확인일 2023년 4월 -> 오류 발생 아래 최신버전 업데이트
 
 ````python
 import os
@@ -57,5 +57,30 @@ os.chdir('/content/mecab-python-0.996')
 !apt-get install g++ openjdk-8-jdk 
 !pip3 install konlpy JPype1-py3
 !bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
+````
+
+## New code
+
+최종 확인일 2023년 6월
+
+````python
+!pip install Korpora
+````
+
+위 코드 실행 후 런타임 재시작
+
+````python
+!git clone https://github.com/SOMJANG/Mecab-ko-for-Google-Colab.git
+ls
+cd Mecab-ko-for-Google-Colab/
+!bash install_mecab-ko_on_colab_light_220429.sh
+
+from konlpy.tag import Mecab
+mecab = Mecab()
+print(mecab.pos("솜씨좋은장씨의 개발블로그"))
+````
+
+````
+(['안녕', '하', '세요'], [['안녕', '하', '세요'], ['안녕', '?']])
 ````
 
