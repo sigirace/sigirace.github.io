@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  '1. 데이터 프레임'
+title:  'ADP 실기 1장 데이터 프레임'
 toc: true
 categories: [ADP]
 tags: [ADP 실기]
