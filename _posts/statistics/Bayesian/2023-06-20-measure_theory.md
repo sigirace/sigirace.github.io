@@ -12,17 +12,17 @@ tags: [Measure, Bayesian]
 
 ## 1. Sigma Field
 
-📍**Set Function**
+👀 **Set Function**
 
-> 함수는 set에 수를 할당함 (example:cardinality, length,area)
+> Set function은 set에 수를 할당함 (example:cardinality, length,area)
 
-👀 **Axioms**
+📍 **Axioms of Sigma Field**
 
 1. 공집합 포함
 2. 하나의 집합이 포함되면 그 여집합 또한 포함
 3. closed under countable union: 모든 부분 집합들의 '가산 합집합'이 또한 포함
 
-☀️ **Properties**
+☀️ **Properties of Sigma Field** 
 
 1. 전체 집합 또한 sigma field
 2. closed under countable intersection: 모든 부분 집합 '가산 교집합' 또한 포함
