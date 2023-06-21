@@ -84,11 +84,5 @@ $$
 
 
 
-### 2. Example
-
-### 3. Function or Mapping
-
-
-
 
 
