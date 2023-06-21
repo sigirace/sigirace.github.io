@@ -90,7 +90,7 @@ $$
 
 📍 **Example**
 
-😗[Image 2-4]
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/reinforcement/lec2/RL-2-4.png?raw=true" width="600" height="500"></p>
 
 ### 2.2 Retrun
 
