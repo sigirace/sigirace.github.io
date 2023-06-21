@@ -3,7 +3,7 @@ layout: single
 title:  'Probability Theory (1) Set Theory'
 toc: true
 categories: [Statistics]
-tags: [Statistics, PDF, PMF, 확률질량함수, 확률밀도함수]
+tags: [Set, Bayesian]
 
 ---
 
@@ -13,8 +13,6 @@ tags: [Statistics, PDF, PMF, 확률질량함수, 확률밀도함수]
 <div class="notice">
 <li><a href="https://sigirace.github.io/autoencoder/autoencoder_2/">강의 목록 추후 업로드</a></li>
 </div>
-
-
 ## 1. Intorduction
 
 👀 **Definition**
