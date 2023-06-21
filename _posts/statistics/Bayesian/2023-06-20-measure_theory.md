@@ -40,7 +40,7 @@ tags: [Measure, Bayesian]
 
 집합 U에 존재하는 부분집합에 양수인 실수를 매핑하는 것
 
-### 👀 Definition
+👀 **Definition**
 
 - set과 subset들로 이루어진 sigma field에 measure를 씌울 수 있으면 이를 measurable space라고 함
 - measurable space에 있는 measure는 set function
