@@ -12,11 +12,11 @@ tags: [Measure, Bayesian]
 
 ## 1. Sigma Field
 
-👀 **Set Function**
+👀 **Definition**
 
-> Set function은 set에 수를 할당함 (example:cardinality, length,area)
+> 확률 공간에서 사건들의 집합을 나타내는 개념
 
-📍 **Axioms of Sigma Field**
+☀️ **Axioms of Sigma Field**
 
 1. 공집합 포함
 2. 하나의 집합이 포함되면 그 여집합 또한 포함
@@ -42,12 +42,20 @@ tags: [Measure, Bayesian]
 
 👀 **Definition**
 
-- set과 subset들로 이루어진 sigma field에 measure를 씌울 수 있으면 이를 measurable space라고 함
-- measurable space에 있는 measure는 set function
+- 전체 집합 U 또는 U의 sigma field는 measurable space를 형성함 (U, B)
+
+- measuralbe sapce에서 정의된 measure mu는 set function
+
+  mu: B -> [0, infinity]
+
   - 공집합에 대한 measure는 0
   - disjoint(=겹치는 부분이 없는, 서로소)한 sigma field에 대한 measure는 countable additivity
+
 - 확률의 경우 전체 집합에 대한 measure는 1
+
 - 비공식적으로, A가 B의 부분집합이면 measure 또한 A가 B보다 작음 (=단조성)
 
+👀 **Set Function**
 
+> Set function은 set에 수를 할당함 (example:cardinality, length,area)
 
