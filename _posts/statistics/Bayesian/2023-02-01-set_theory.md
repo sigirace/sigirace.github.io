@@ -55,7 +55,13 @@ Set theory is the branch of mathematical logic that studies sets, which can be i
 
 ☀️ **cartesian product**
 
-- 각 집합의 원소를 성분으로하는 튜플들의 집합이며 원소들의 순서는 곱의 순서와 같음<br>☞ $A_1 \times A_2 \times ... A_n = \lbrace (x_1, x_2, ... x_m) | x_1 \in A_1, x_2 \in A_2, ... , x_n \in A_n \rbrace$
+- 각 집합의 원소를 성분으로하는 튜플들의 집합이며 원소들의 순서는 곱의 순서와 같음
+
+$$
+A_1 \times A_2 \times ... A_n = \lbrace (x_1, x_2, ... x_m) | x_1 \in A_1, x_2 \in A_2, ... , x_n \in A_n \rbrace
+$$
+
+
 
 ☀️ **power set**
 
