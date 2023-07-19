@@ -281,7 +281,7 @@ print ('Test_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_test_sc.min(), X_test_sc.max()
 ````
 
 ````
-							(min, max) (mean, std)
+		(min, max) (mean, std)
 Train_scaled (-2.00, 3.13) (0.00, 1.00)
 Test_scaled (-2.46, 2.34) (0.03, 1.06)
 ````
@@ -308,7 +308,7 @@ print ('Test_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_test_sc.min(), X_test_sc.max()
 ````
 
 ````
-							(min, max) (mean, std)
+		(min, max) (mean, std)
 Train_scaled (0.00, 1.00) (0.43, 0.26)
 Test_scaled (-0.09, 1.00) (0.44, 0.28)
 ````
@@ -335,7 +335,7 @@ print ('Test_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_test_sc.min(), X_test_sc.max()
 ````
 
 ````
-							(min, max) (mean, std)
+		(min, max) (mean, std)
 Train_scaled (0.04, 1.00) (0.61, 0.24)
 Test_scaled (0.08, 1.00) (0.62, 0.24)
 ````
@@ -361,7 +361,7 @@ print ('Test_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_test_sc.min(), X_test_sc.max()
 ````
 
 ````
-							(min, max) (mean, std)
+		(min, max) (mean, std)
 Train_scaled (-1.60, 2.80) (-0.02, 0.64)
 Test_scaled (-2.00, 1.60) (-0.01, 0.68)
 ````
