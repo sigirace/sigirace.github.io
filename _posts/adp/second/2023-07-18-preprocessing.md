@@ -7,6 +7,9 @@ tags: [ADP 실기]
 
 ---
 
+본 게시물은 데이터 전처리 종류와 방식에 대한 내용을 소개한다.
+{: .notice}
+
 ## 1. 데이터 전처리 종류
 
 - 데이터 클리닝: **결측치** 처리, **이상치** 확인 및 정제
@@ -180,7 +183,7 @@ sk_oh_encoded = oh.transform(df)
 pd.DataFrame(sk_oh_encoded.astype('int'), columns=oh.get_feature_names_out())
 ````
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/adp/preproc/oh2.png?raw=true" width="400" height="200"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/adp/preproc/oh2.png?raw=true" width="350" height="200"></p>
 
 ````python
 oh.inverse_transform(pd.DataFrame([1, 0, 0, 0]).T)

@@ -6,6 +6,9 @@ categories: [ADP]
 tags: [ADP 실기]
 ---
 
+본 게시물은 데이터 프레임의 조작에 대한 내용을 소개한다.
+{: .notice}
+
 ## Dataframe
 
 ### 1. iloc
