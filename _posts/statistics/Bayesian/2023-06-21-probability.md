@@ -20,8 +20,6 @@ tags: [Measure, Bayesian]
 
 📍 **Example**
 
-
-
   <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p1.png?raw=true" width="600" height="300"></p>
 
 - 주사위 던지기 실험에서 sample space는 {1, 2, 3, 4, 5, 6}으로 정의됨
