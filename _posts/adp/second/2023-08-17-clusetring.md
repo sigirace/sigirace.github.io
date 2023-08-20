@@ -59,7 +59,7 @@ print(liver.Dataset.unique())
 liver.head()
 ````
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/adp/knn/knn1.png?raw=true" width="800" height="200"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/adp/knn/knn1.png?raw=true" width="900" height="270"></p>
 
 ````python
 # 성별 분류 전처리
@@ -68,7 +68,7 @@ liver.Gender = np.where(liver.Gender=='Female',0,1)
 liver.head()
 ````
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/adp/knn/knn2.png?raw=true" width="800" height="150"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/adp/knn/knn2.png?raw=true" width="900" height="200"></p>
 
 ````python
 # 결측치 확인
