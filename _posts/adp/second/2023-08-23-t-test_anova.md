@@ -507,3 +507,169 @@ ms=10, ax=ax)
 
 - 상호작용 그래프에서 두 선이 서로 교차시에 상호작용 존재함
 - interaction_plot의 parameter는 x1, x2, y 순으로 작성
+
+## 8. 교차분석(카이제곱 검정)
+
+### 8.1 Concept
+
+> 각 범주에 따른 결과변수의 분포를 설명하거나, 범주형 변수가 두 개 이상인 경우 상관이 있는지를 검정
+
+- 교차표를 통해 각 셀의 관찰빈도와 기대빈도 간의 차이를 검정
+  - 관찰빈도: 자료로부터 얻은 빈도 분포
+  - 기대빈도: 두 변소가 독립일 때, 이론적으로 기대할 수 있는 빈도분포 (각 범주의 기대빈도는 5 이상)
+- 적합성 검정, 독립성 검정, 동질성 검정
+
+📍 **Example**
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/adp/t/ch1.png?raw=true" width="600" height="230"></p>
+
+- 환자군이면서 과체중인 사람의 관찰 빈도는 25, 기대빈도는 전체의 40%인 14
+- 관찰빈도와 기대빈도의 차이가 유의한 차이가 있는지를 카이제곱 통계량을 이용하여 검정
+
+### 8.2 적합성 검정
+
+### 8.2.1 Concept
+
+> 각 범주에 따른 데이터의 빈도분포가 이론적으로 기대하는 분포를 따르는지를 검정
+
+- ex) 주사위를 굴렸을 때, 각 주사위의 값(범주)이 1/6의 확률(빈도분포)이 맞는지 검정
+
+### 8.2.2 parameters
+
+````
+scipy.stats.chisquare( f_obs , f_exp =None , ddof =0 , axis =0 )
+````
+
+- f_obs: 관찰 빈도로 pd.value_counts() 결과 값 입력
+- f_exp: 각 카테고리의 기대 빈도
+- doff: p-value에 대한 자유도를 조정 (k-1-ddof)
+
+### 8.2.3 Implementation
+
+😗 **타이타닉호의 생존자 중 남, 녀의 비율 검정**
+
+- H0: 타이타닉호의 생존자 중 남자의 비율이 50%, 여자의 비율이 50%
+- H0: 타이타닉호의 생존자 중 남자의 비율이 50%, 여자의 비율이 50%가 아님
+
+````python
+import pandas as pd
+# 데이터 불러오기
+df = pd.read_csv("https://raw.githubusercontent.com/ADPclass/ADP_book_ver01/main/data/titanic.csv")
+# titanic 데이터의 구조 확인
+df.info()
+````
+
+````
+Data columns (total 11 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   survived     891 non-null    int64  
+ 1   pclass       891 non-null    int64  
+ 2   sex          891 non-null    object 
+ 3   age          714 non-null    float64
+ 4   sibsp        891 non-null    int64  
+ 5   parch        891 non-null    int64  
+ 6   fare         891 non-null    float64
+ 7   embarked     889 non-null    object 
+ 8   class        891 non-null    object 
+ 9   adult_male   891 non-null    bool   
+ 10  embark_town  889 non-null    object 
+dtypes: bool(1), float64(2), int64(4), object(4)
+````
+
+- target인 sex 변수 확인 결과 결측치가 없으며, 명목형 변수임을 확인
+
+````python
+df_t = df[df['survived']==1]
+table= df_t[['sex']].value_counts()
+table
+````
+
+````
+sex   
+female    233
+male      109
+````
+
+- 교차분석을 위해 명목형 변수에 대한 도수분포표를 생성 ☞ 관찰빈도를 확인
+
+````python
+from scipy.stats import chisquare
+chi = chisquare(table, f_exp=[171,171])
+print('<적합도 검정>\n',chi)
+````
+
+````
+<적합도 검정>
+ Power_divergenceResult(statistic=44.95906432748538, pvalue=2.0119672574477235e-11)
+````
+
+- 적합도 검정 수행
+  - p-value < 0.05 ☞ 귀무가설 기각 ☞ 남:녀 != 50:50
+
+### 8.3 독립성 검정
+
+### 8.3.1 Concept
+
+> 모집단이 두 개의 변수 A, B에 의해 범주화 되었을 때, 이 두 변수들 사이의 관계가 독립인지 검정
+
+📍 **Example**
+
+- 환자의 비만유무와 질환 유무가 주어졌을 때, 비만에 따른 질환 비율에 차이가 존재하는지 검정
+
+### 8.3.2 Parameters
+
+````python
+scipy.stats.chi2_contingency((observed, correction=True, lambda_=None ))
+````
+
+- observed: 관찰빈도로 pd.crosstab 결과를 입력
+- expected: 수행 결과로 테이블 합계를 기반으로 한 기대빈도
+
+### 8.3.3 Implementation
+
+😗 **타이타닉 데이터에서 좌석등급과 생존여부가 서로 독립인지 검정**
+
+- H0: 두 변수는 독립
+- H1: 두 변수는 독립이 아님
+
+````python
+df = pd.read_csv("https://raw.githubusercontent.com/ADPclass/ADP_book_ver01/main/data/titanic.csv")
+table = pd.crosstab(df['class'], df['survived'])
+table
+````
+
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/adp/t/ch2.png?raw=true" width="200" height="100"></p>
+
+- 독립 검정을 위해 crosstab(교차표) 생성
+
+````python
+from scipy.stats import chi2_contingency
+chi, p, df, expect = chi2_contingency(table) 
+print('Statistic:', chi)
+print('p-value:', p)
+print('df:', df)
+print('expect: \n', expect)
+````
+
+````
+Statistic: 102.88898875696056
+p-value: 4.549251711298793e-23
+df: 2
+expect: 
+ [[133.09090909  82.90909091]
+ [113.37373737  70.62626263]
+ [302.53535354 188.46464646]]
+````
+
+- 독립성 검정 수행
+  - p-value < 0.05 ☞ 귀무가설 기각 ☞ 독립이 아님
+
+### 8.4 동질성 검정
+
+> 모집단이 임의의 변수에 따라 R개 속성으로 범주화 되었을 때, R개의 부분 모집단에서 추출한 표본이 C개의 범주화된 집단의 분포가 서로 동일한지 검정
+
+- 독립성 검정과 계산 법 및 방법이 동일
+- 가설 설정만 다름
+  - H0: class의 분포는 survived에 관계없이 동일
+  - H1: class의 분포는 survived에 관계없이 동일하지 않음
