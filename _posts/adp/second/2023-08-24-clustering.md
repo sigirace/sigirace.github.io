@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  'ADP 실기 13장 Cluster analysis'
+title:  'ADP 실기 14장 Cluster analysis'
 toc: true
 categories: [ADP]
 tags: [ADP 실기]
