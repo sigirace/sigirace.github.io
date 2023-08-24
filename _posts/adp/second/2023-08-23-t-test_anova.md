@@ -1,13 +1,13 @@
 ---
 layout: single
-title:  'ADP 실기 12장 T-test & ANOVA'
+title:  'ADP 실기 12장 Statisitc test'
 toc: true
 categories: [ADP]
 tags: [ADP 실기]
 
 ---
 
-본 게시물은 T-test & ANOVA 에 대해 소개한다.
+본 게시물은 다양한 통계적 검정 방법에 대해 소개한다.
 {: .notice}
 
 ## 1. T-검정
