@@ -153,7 +153,6 @@ p-value : 0.6015863303793882
   - p-value > 0.05 ☞ 정상성을 갖지 않음 ☞ 1차 차분 혹은 로그변환 필요
 
 ````python
-from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 diff_data = training.diff(1)
 diff_data = diff_data.dropna()
 diff_data.plot()
@@ -196,6 +195,7 @@ p-value : 2.0851606399611424e-22
 ### 3.3 Implementation
 
 ````python
+from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 plot_pacf(diff_data) # AR(p)의 값 확인 가능
 plt.show()
 ````
