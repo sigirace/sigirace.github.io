@@ -237,7 +237,9 @@ y_train : (120,)  y_test : (30,)
 📍**층화 추출법**
 
 ````python
-X_train, X_test, y_train, y_test = train_test_split(iris.drop(columns='Class'), iris['Class'], test_size = 0.2, stratify =iris['Class'])
+X_train, X_test, y_train, y_test = train_test_split(iris.drop(columns='Class'), 
+                                                    iris['Class'], test_size = 0.2, 
+                                                    stratify =iris['Class'])
 print('X_train :', X_train.shape, '\tX_test :', X_test.shape)
 print('y_train :', y_train.shape, '\ty_test :', y_test.shape)
 ````
@@ -279,8 +281,14 @@ X_train_sc = StdScaler.transform(X_train)
 X_test_sc = StdScaler.transform(X_test)
 # 결과 확인
 print('\t\t(min, max) (mean, std)')
-print ('Train_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_train_sc.min(), X_train_sc.max(), X_train_sc.mean(), X_train_sc.std()))
-print ('Test_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_test_sc.min(), X_test_sc.max(), X_test_sc.mean(), X_test_sc.std()))
+print ('Train_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_train_sc.min(), 
+                                                 X_train_sc.max(), 
+                                                 X_train_sc.mean(), 
+                                                 X_train_sc.std()))
+print ('Test_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_test_sc.min(), 
+                                                X_test_sc.max(), 
+                                                X_test_sc.mean(), 
+                                                X_test_sc.std()))
 ````
 
 ````
@@ -306,8 +314,14 @@ X_train_sc = MmScaler.transform(X_train)
 # Test 데이터의 스케일링
 X_test_sc = MmScaler.transform(X_test)
 print('\t\t(min, max) (mean, std)')
-print ('Train_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_train_sc.min(), X_train_sc.max(), X_train_sc.mean(), X_train_sc.std()))
-print ('Test_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_test_sc.min(), X_test_sc.max(), X_test_sc.mean(), X_test_sc.std()))
+print ('Train_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_train_sc.min(), 
+                                                 X_train_sc.max(), 
+                                                 X_train_sc.mean(), 
+                                                 X_train_sc.std()))
+print ('Test_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_test_sc.min(), 
+                                                X_test_sc.max(), 
+                                                X_test_sc.mean(), 
+                                                X_test_sc.std()))
 ````
 
 ````
@@ -333,8 +347,14 @@ X_train_sc = MaScaler.transform(X_train)
 # Test 데이터의 스케일링
 X_test_sc = MaScaler.transform(X_test)
 print('\t\t(min, max) (mean, std)')
-print ('Train_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_train_sc.min(), X_train_sc.max(), X_train_sc.mean(), X_train_sc.std()))
-print ('Test_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_test_sc.min(), X_test_sc.max(), X_test_sc.mean(), X_test_sc.std()))
+print ('Train_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_train_sc.min(), 
+                                                 X_train_sc.max(), 
+                                                 X_train_sc.mean(), 
+                                                 X_train_sc.std()))
+print ('Test_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_test_sc.min(), 
+                                                X_test_sc.max(), 
+                                                X_test_sc.mean(), 
+                                                X_test_sc.std()))
 ````
 
 ````
@@ -359,8 +379,14 @@ X_train_sc = RuScaler.transform(X_train)
 # Test 데이터의 스케일링
 X_test_sc = RuScaler.transform(X_test)
 print('\t\t(min, max) (mean, std)')
-print ('Train_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_train_sc.min(), X_train_sc.max(), X_train_sc.mean(), X_train_sc.std()))
-print ('Test_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_test_sc.min(), X_test_sc.max(), X_test_sc.mean(), X_test_sc.std()))
+print ('Train_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_train_sc.min(), 
+                                                 X_train_sc.max(), 
+                                                 X_train_sc.mean(), 
+                                                 X_train_sc.std()))
+print ('Test_scaled (%.2f, %.2f) (%.2f, %.2f)'%(X_test_sc.min(), 
+                                                X_test_sc.max(), 
+                                                X_test_sc.mean(), 
+                                                X_test_sc.std()))
 ````
 
 ````
@@ -468,7 +494,9 @@ principal_iris.head()
 import matplotlib.pyplot as plt
 import seaborn as sns
 plt.title('2 component PCA' )
-sns.scatterplot (x = 'pc1', y = 'pc2', hue = iris.Class, data = principal_iris)
+sns.scatterplot (x = 'pc1', y = 'pc2', 
+                 hue = iris.Class, 
+                 data = principal_iris)
 plt.show()
 ````
 
