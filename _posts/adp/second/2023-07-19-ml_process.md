@@ -257,9 +257,11 @@ for i, feature in zip(range(12), features):
 
 ````python
 from sklearn.model_selection import train_test_split
-x = df[['CRIM', 'ZN', 'INDUS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']].values
+x = df[['CRIM', 'ZN', 'INDUS', 'NOX', 'RM', 'AGE', 'DIS', 
+        'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']].values
 y = df['PRICE'].values
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+x_train, x_test, y_train, y_test = train_test_split(x, y, 
+                                                    test_size=0.2, random_state=42)
 print('학습데이터세트 PRICE 평균: ', y_train.mean())
 print('평가데이터세트 PRICE 평균: ', y_test.mean())
 ````
@@ -390,7 +392,11 @@ dtype: int64
 
 ````python
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(iris_dt, iris_label, test_size=0.2, random_state=0, stratify=iris_label)
+x_train, x_test, y_train, y_test = train_test_split(iris_dt, 
+                                                    iris_label, 
+                                                    test_size=0.2, 
+                                                    random_state=0, 
+                                                    stratify=iris_label)
 ````
 
 ### 3.3 모델 학습
