@@ -7,3 +7,17 @@ entity: 상위 폴더 이름 (팀/ 개인)
 project: 프로젝트 이름
 
 name: 실험 이름
+
+
+
+코랩 세션 끊김
+
+
+
+```
+function ClickConnect(){
+    console.log("코랩 연결 끊김 방지"); 
+    document.querySelector("colab-toolbar-button#connect").click() 
+}
+setInterval(ClickConnect, 60 * 1000)
+```
