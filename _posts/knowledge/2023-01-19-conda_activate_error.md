@@ -3,7 +3,7 @@ layout: single
 title:  '[MAC ERROR] Your shell has not been properly configured to use conda activate'
 toc: true
 categories: [troubleshooting]
-tags: [conda, path, linux]
+tags: [Conda, Linux]
 
 ---
 

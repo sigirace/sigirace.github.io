@@ -1,9 +1,9 @@
 ---
 layout: single
-title:  'LSTM의 모든것 (4) Timeseries forecasting - Make Dataset'
+title:  'LSTM의 모든것 (3) Timeseries forecasting - Make Dataset'
 toc: true
-categories: [Deep Learning]
-tags: [timeseries, lstm]
+categories: [Time Series]
+tags: [LSTM]
 ---
 
 본 게시물은 Tensorflow의 LSTM을 사용한 [시계열 예측 예제](https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/structured_data/time_series.ipynb#scrollTo=6GmSTHXw6lI1) 내용 중 데이터 셋을 만드는 부분을 정리하는 글이다.
@@ -12,6 +12,7 @@ tags: [timeseries, lstm]
 <div class="notice">
 <li><a href="https://sigirace.github.io/deep%20learning/LSTM_method///">LSTM의 모든것 (1) LSTM 및 내부 Gate에 대한 이해</a></li>
 <li><a href="https://sigirace.github.io/deep%20learning/LSTM_components//">LSTM의 모든것 (2) PyTorch 공식 문서로 보는 구성요소</a></li>
+<li><a href="https://sigirace.github.io/deep%20learning/LSTM-modeling_tutorial///">LSTM의 모든것 (4) Timeseries forecasting - Single step model</a></li>
 </div>
 
 ## 1. Introduce

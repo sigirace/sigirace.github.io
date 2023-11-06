@@ -2,8 +2,8 @@
 layout: single
 title:  'LSTM의 모든것 (1) LSTM 및 내부 Gate에 대한 이해'
 toc: true
-categories: [Deep Learning]
-tags: [timeseries, lstm]
+categories: [Time Series]
+tags: [LSTM]
 ---
 
 본 게시물은 LSTM의 이론에 대해 [해당 포스트](https://medium.com/towards-data-science/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21)를 정리하는 글이다.
@@ -11,7 +11,10 @@ tags: [timeseries, lstm]
 
 <div class="notice">
 <li><a href="https://sigirace.github.io/deep%20learning/LSTM_components//">LSTM의 모든것 (2) PyTorch 공식 문서로 보는 구성요소</a></li>
+<li><a href="https://sigirace.github.io/deep%20learning/LSTM-time-tutorial//">LSTM의 모든것 (3) Timeseries forecasting - Make Dataset</a></li>  
+<li><a href="https://sigirace.github.io/deep%20learning/LSTM-modeling_tutorial///">LSTM의 모든것 (4) Timeseries forecasting - Single step model</a></li>
 </div>
+
 
 
 

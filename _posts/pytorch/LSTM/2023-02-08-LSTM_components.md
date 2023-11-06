@@ -2,8 +2,8 @@
 layout: single
 title:  'LSTM의 모든것 (2) PyTorch 공식 문서로 보는 구성요소'
 toc: true
-categories: [Deep Learning]
-tags: [lstm, pytorch]
+categories: [Time Series]
+tags: [LSTM, Pythorch]
 ---
 
 본 게시물은 [Pytorch 공식 문서](https://pytorch.org/docs/stable/generated/torch.nn.LSTM.html)를 참고하여 LSTM의 구성요소에 대해 정리하는 글이다.
@@ -11,6 +11,8 @@ tags: [lstm, pytorch]
 
 <div class="notice">
 <li><a href="https://sigirace.github.io/deep%20learning/LSTM_method///">LSTM의 모든것 (1) LSTM 및 내부 Gate에 대한 이해</a></li>
+<li><a href="https://sigirace.github.io/deep%20learning/LSTM-time-tutorial//">LSTM의 모든것 (3) Timeseries forecasting - Make Dataset</a></li>  
+<li><a href="https://sigirace.github.io/deep%20learning/LSTM-modeling_tutorial///">LSTM의 모든것 (4) Timeseries forecasting - Single step model</a></li>
 </div>
 
 

@@ -3,7 +3,7 @@ layout: single
 title:  'Git Tutorial Merging vs Rebasing'
 toc: true
 categories: [Git]
-tags: [merge, rebase]
+tags: [Merge, Rebase]
 
 
 ---

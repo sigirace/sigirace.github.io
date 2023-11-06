@@ -3,7 +3,7 @@ layout: single
 title:  'Gradient Histogram 해석에 대하여'
 toc: true
 categories: [Deep Learning]
-tags: [gradient, gradient histogram, wandb]
+tags: [Gradient Histogram, Wandb]
 
 ---
 

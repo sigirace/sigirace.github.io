@@ -3,7 +3,7 @@ layout: single
 title:  'Mac(M1)에 mecab 모듈 설치하기'
 toc: true
 categories: [Additional Knowledge]
-tags: [mecab, konlpy]
+tags: [Mecab, konlpy]
 
 ---
 
