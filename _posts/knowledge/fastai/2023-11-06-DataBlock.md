@@ -48,7 +48,7 @@ Fastai에는 이러한 개념에 더해 training 그리고 validation set을 함
 
 ## 3. Example
 
-☀️ **데이터 불러오기**
+### 3.1 **데이터 불러오기**
 
 ````python
 import os
@@ -103,7 +103,7 @@ df.head()
 
 - 데이터 소스 불러오기
 
-☀️ **Datasets 생성**
+### 3.2 Datasets 생성
 
 ````python
 from fastai.data.core import DataLoaders, DataLoaders
@@ -171,7 +171,7 @@ dsets.train[0]
 
 - 그러나 위와 같이 모든 데이터가 필요하지 않기에 `get_x`와 `get_y`를 통해 적절하게 배분하여 사용할 수 있음
 
-☀️ **Transforms**
+### 3.3 Transforms
 
 ````python
 from fastai.vision.data import ImageBlock
@@ -198,7 +198,7 @@ print(dsets.train.vocab[idx])
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/fastai/datablock/2.png?raw=true" width="150" height="150"></p>
 
-☀️ **데이터 분할**
+### 3.4 데이터 분할
 
 ````python
 def splitter(df):
@@ -230,7 +230,7 @@ dsets.valid[4]
 - 지금까지는 `is_valid` 열을 사용하지 않았기에 DataBlock이 랜덤하게 분할을 사용함
 - splitter 함수를 인자로 추가하여 `is_valid` 열을 사용하여 데이터를 분할 시킴
 
-☀️ **DataLoaders**
+### 3.5 DataLoaders
 
 ````python
 from fastai.vision.augment import RandomResizedCrop
