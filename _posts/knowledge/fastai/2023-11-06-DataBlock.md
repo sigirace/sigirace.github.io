@@ -3,7 +3,7 @@ layout: single
 title:  'Constructing a DataBlock using Fastai'
 toc: true
 categories: [Fastai]
-tags: [DataBlock]
+tags: [DataBlock, DataSets, DataLoaders, RandomResizedCrop, ImageBlock, CategoryBlock]
 
 ---
 
@@ -175,9 +175,9 @@ dsets.train[0]
 
 ````python
 from fastai.vision.data import ImageBlock
-from fastai.data.block import MultiCategoryBlock
+from fastai.data.block import CategoryBlock
 
-dblock = DataBlock(blocks=(ImageBlock, MultiCategoryBlock), get_x=get_x, get_y=get_y)
+dblock = DataBlock(blocks=(ImageBlock, CategoryBlock), get_x=get_x, get_y=get_y)
 dsets = dblock.datasets(df)
 dsets.train[0]
 ````
