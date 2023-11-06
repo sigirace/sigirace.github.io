@@ -3,7 +3,7 @@ layout: single
 title:  'Introduction to Reinforcement Learning'
 toc: true
 categories: [Reinforcement Learning]
-tags: [RL]
+tags: []
 
 ---
 
