@@ -153,7 +153,7 @@ dsets.train[0]
 
 😗 **why it’s been printed out two times?**
 
-> 출력이 두번 나오는 이유는 Fastai의 `DataBlock`이 기본적으로 `Datasets`를 생성할 때, Input(입력)과 Target(목표) 두 가지를 가정하기 때문
+- 출력이 두번 나오는 이유는 Fastai의 `DataBlock`이 기본적으로 `Datasets`를 생성할 때, Input(입력)과 Target(목표) 두 가지를 가정하기 때문
 
 ````python
 def get_x(r): return os.path.join(save_dir, r['fname'])
