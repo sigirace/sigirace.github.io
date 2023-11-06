@@ -3,7 +3,7 @@ layout: single
 title:  'Time Series Data Augmentation for Neural Networks by Time Warping with a Discriminative Teacher'
 toc: true
 categories: [Thesis]
-tags: [Data Augmentation, Timeseires]
+tags: [Data Augmentation, Time Series]
 
 ---
 

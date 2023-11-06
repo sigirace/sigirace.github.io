@@ -3,7 +3,7 @@ layout: single
 title:  'LM(5) Sequence to Sequence 구현'
 toc: true
 categories: [Language Model]
-tags: [LM]
+tags: [Sequence to Sequence]
 
 ---
 

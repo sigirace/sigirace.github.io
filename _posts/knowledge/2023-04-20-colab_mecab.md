@@ -3,7 +3,7 @@ layout: single
 title:  'Colab에서 Mecab 실행하기'
 toc: true
 categories: [Knowledge]
-tags: [Mecab, colab]
+tags: [Mecab, Colab]
 
 ---
 

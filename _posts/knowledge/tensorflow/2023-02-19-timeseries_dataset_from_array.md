@@ -3,7 +3,7 @@ layout: single
 title:  'timeseries_dataset_from_array'
 toc: true
 categories: [TensorFlow]
-tags: [tensorflow, timeseries]
+tags: [Time Series]
 ---
 
 본 게시물은 tensorflow의 [포스트](https://www.tensorflow.org/api_docs/python/tf/keras/utils/timeseries_dataset_from_array)를 보고 정리하는 글이다.
