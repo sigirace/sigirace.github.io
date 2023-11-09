@@ -10,10 +10,11 @@ tags: [LSTM]
 {: .notice}
 
 <div class="notice">
-<li><a href="https://sigirace.github.io/deep%20learning/LSTM_components//">LSTM의 모든것 (2) PyTorch 공식 문서로 보는 구성요소</a></li>
-<li><a href="https://sigirace.github.io/deep%20learning/LSTM-time-tutorial//">LSTM의 모든것 (3) Timeseries forecasting - Make Dataset</a></li>  
-<li><a href="https://sigirace.github.io/deep%20learning/LSTM-modeling_tutorial///">LSTM의 모든것 (4) Timeseries forecasting - Single step model</a></li>
+<li><a href="https://sigirace.github.io/deep%20learning/LSTM_components/">LSTM의 모든것 (2) PyTorch 공식 문서로 보는 구성요소</a></li>
+<li><a href="https://sigirace.github.io/deep%20learning/LSTM-time-tutorial/">LSTM의 모든것 (3) Timeseries forecasting - Make Dataset</a></li>  
+<li><a href="https://sigirace.github.io/deep%20learning/LSTM-modeling_tutorial/">LSTM의 모든것 (4) Timeseries forecasting - Single step model</a></li>
 </div>
+
 
 
 

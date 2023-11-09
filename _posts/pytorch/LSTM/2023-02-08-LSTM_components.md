@@ -10,10 +10,11 @@ tags: [LSTM, Pythorch]
 {: .notice}
 
 <div class="notice">
-<li><a href="https://sigirace.github.io/deep%20learning/LSTM_method///">LSTM의 모든것 (1) LSTM 및 내부 Gate에 대한 이해</a></li>
-<li><a href="https://sigirace.github.io/deep%20learning/LSTM-time-tutorial//">LSTM의 모든것 (3) Timeseries forecasting - Make Dataset</a></li>  
-<li><a href="https://sigirace.github.io/deep%20learning/LSTM-modeling_tutorial///">LSTM의 모든것 (4) Timeseries forecasting - Single step model</a></li>
+<li><a href="https://sigirace.github.io/deep%20learning/LSTM_method/">LSTM의 모든것 (1) LSTM 및 내부 Gate에 대한 이해</a></li>
+<li><a href="https://sigirace.github.io/deep%20learning/LSTM-time-tutorial/">LSTM의 모든것 (3) Timeseries forecasting - Make Dataset</a></li>  
+<li><a href="https://sigirace.github.io/deep%20learning/LSTM-modeling_tutorial/">LSTM의 모든것 (4) Timeseries forecasting - Single step model</a></li>
 </div>
+
 
 
 ## 1. Parameters
