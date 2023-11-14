@@ -53,7 +53,7 @@ print('============')
 print(pd.read_csv(ratings_path)[["userId", "movieId"]].head())
 ````
 
-🤪[image1]
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/gnn/link_predict/lpimp1.png?raw=true" width="500" height="300"></p>
 
 movie.csv의 movieId는 각 영화에 고유 식별자를 할당하고 장르 열은 해당 영화의 장르를 나타낸다. 해당 정보는 그래프를 생성시 노드의 feature로 사용할 수 있다.
 
@@ -69,7 +69,7 @@ movie_feat = torch.from_numpy(genres.values).to(torch.float)
 assert movie_feat.size() == (9742, 20)  # 20 genres in total.
 ````
 
-🤪[image2]
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/gnn/link_predict/lpimp2.png?raw=true" width="500" height="200"></p>
 
 또한, ratings.csv는 사용자(userId)와 영화(movieId)를 연결하는 정보를 가지고 있다. 
 
@@ -105,7 +105,7 @@ print("===========================================")
 print(unique_movie_id.head())
 ````
 
-🤪[image3]
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/gnn/link_predict/lpimp3.png?raw=true" width="500" height="400"></p>
 
 ````python
 # 사용자와 영화 사이의 연결된 정보를 얻기 위해 rating_df와 merge 수행
@@ -125,7 +125,7 @@ print("=================================================")
 print(ratings_movie_id.head())
 ````
 
-🤪[image4]
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/gnn/link_predict/lpimp4.png?raw=true" width="500" height="400"></p>
 
 ````python
 # 사용자와 영화의 'edge_index'를 COO format으로 만듦
@@ -137,7 +137,7 @@ print("=================================================")
 print(edge_index_user_to_movie)
 ````
 
-🤪[image5]
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/gnn/link_predict/lpimp5.png?raw=true" width="500" height="150"></p>
 
 ````python
 # 사용자와 영화의 'edge_index'를 COO format으로 만듦
@@ -149,12 +149,8 @@ print("=================================================")
 print(edge_index_user_to_movie)
 ````
 
-🤪[image6]
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/gnn/link_predict/lpimp6.png?raw=true" width="500" height="100"></p>
 
-With this, we are ready to initialize our HeteroData object and pass the necessary information to it. Note that we also pass in a node_id vector to each node type in order to reconstruct the original node indices from sampled subgraphs. We also take care of adding reverse edges to the HeteroData object. This allows our GNN model to use both directions of the edge for message passing:
+# TODO
 
-이를 통해 우리는 HeteroData 객체를 초기화하고 필요한 정보를 전달할 준비가 되었습니다. 또한 샘플링된 하위 그래프에서 원래 노드 인덱스를 재구성하기 위해 node_id 벡터를 각 노드 유형으로 전달합니다. 또한 HeteroData 개체에 역 에지를 추가하는 작업도 처리합니다. 이를 통해 GNN 모델은 메시지 전달에 에지의 양방향을 사용할 수 있습니다:
-
-위 과정을 통해 HeteroData object를 초기화하고 필요한 정보를 전달할 준비를 하였다. 
-
-또한 전달한다 node_id vector를 각 노드의 유형에 재구축하기위해 원래 노드 인덱스
+https://medium.com/@pytorch_geometric/link-prediction-on-heterogeneous-graphs-with-pyg-6d5c29677c70
