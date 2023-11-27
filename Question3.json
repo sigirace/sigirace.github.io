@@ -1,0 +1,25 @@
+{
+  "student_id": "4606ce03-0d42-4097-a2a0-54077b2bc1bf",
+  "student_sex": "MALE",
+  "student_grade": "INTERMEDIATE",
+  "school_district": "SEONGBUK GANGBUK",
+  "question_id": "046b8983-05b7-4f6c-a49c-a54bb4d938f1",
+  "subject": "MATH",
+  "difficulty": "EASY",
+  "answers": {
+    "STAGE_BASE": {
+      "question": "철수가 시속 4km/h로 x시간 걸을 때, 총 걸은 거리 ykm라 하자. 이때 y가 x에 정비례하는지, 반비례하는지 판단하시오.",
+      "answer": "정비례한다",
+      "answerIMG": "answerIMG/Student_252/MATH/Question3_BASE.png"
+    },
+    "STAGE_COMPREHENSION": {
+      "question": "문제에서 x와 y 사이의 관계식을 말해볼래? (문제:철수가 시속 4km/h로 x시간 걸을 때, 총 걸은 거리 ykm라 하자. 이때 y가 x에 정비례하는지, 반비례하는지 판단하시오.)",
+      "answer": "y=ax",
+      "answerIMG": "answerIMG/Student_252/MATH/Question3_COMPREHENSION.png"
+    },
+    "STAGE_EMOTION": {
+      "question": "이 문제는 너한테 어떤 것 같아 (“좋았어“, “그냥 그랬어“, “별로였어“ 중에서 1개 선택)?  그리고 왜 그렇게 생각하는지 말해볼래?",
+      "answer": "애매하게 해서 그냥 그래어"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "student_id": "1d8db254-a906-425b-beea-4b0bbed3c00d",
+  "student_sex": "MALE",
+  "student_grade": "INTERMEDIATE",
+  "school_district": "SEONGDONG-GWANGJIN",
+  "question_id": "c093f74a-7324-4ea1-8529-11605b99c107",
+  "subject": "KOREAN",
+  "difficulty": "HARD",
+  "answers": {
+    "STAGE_BASE": {
+      "question": "<보기>는 문장의 짜임을 기준으로 각 문장을 두 가지로 분류해 놓은 것이다. (가)와 (나)에 해당하는 문장의 짜임이 무엇인지 쓰시오.",
+      "question_content": "(가) 철수가 집에 갔다. 눈이 펑펑 내린다. 그와 그녀는 길에서 부딪쳤다.(나)그는 작은 집에 산다.눈이 세상을 덮을 정도로 내린다.그와 그녀는 숙제를 하고 있다.",
+      "answer": "가는 설명이 적은 반면 나는 표현이 풍부하다."
+    },
+    "STAGE_COMPREHENSION": {
+      "question": "홑문장과 겹문장의 차이가 무엇인지 말해보자.",
+      "answer": "주어와 서술어의 갯수"
+    },
+    "STAGE_EMOTION": {
+      "question": "이 문제는 너한테 어떤 것 같아 (“좋았어“, “그냥 그랬어“, “별로였어“ 중에서 1개 선택)?  그리고 왜 그렇게 생각하는지 말해볼래?",
+      "answer": "별로였다. 헷갈린다."
+    }
+  }
+}
