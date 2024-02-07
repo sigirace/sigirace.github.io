@@ -3,7 +3,7 @@ layout: single
 title:  'Sampling (2) Inverse CDF Sampling이 뭐야?'
 toc: true
 categories: [Statistics]
-tags: [Sampling, PDF, CDF]
+tags: [Inverse CDF Sampling, PDF, CDF, Uniform Distribution]
 
 ---
 
@@ -48,19 +48,16 @@ F(X) \equiv U \sim Uniform(0,1) \\
 \Leftrightarrow X = F^{-1}(U)
 $$
 위 식을 하나하나 살펴보자
-
-> $ F(X) \equiv U \sim Uniform(0,1) $
->
-> ☞ 어떤 확률 분포 f(x)의 CDF F(X)는 Uniform distribution과 동일한 결과를 가짐
->
-> $ F(X) \bullet F^{-1}(X) = F^{-1}(U) $
->
-> ☞ 양 변의 CDF의 역함수를 취함
->
-> $ X = F^{-1}(U) $
->
-> ☞ 확률 변수 X는 CDF의 역함수에 Unifrom distribution의 결과를 input으로 넣으면 구할 수 있음
-
+$$
+F(X) \equiv U \sim Uniform(0,1) \\
+☞ 어떤 \ 확률 \ 분포 \ f(x)의 \ CDF \ F(X)는 \ Uniform \ Distribution과 \ 동일한 \ 결과를 \ 가짐 \\
+\\
+F(X) \bullet F^{-1}(X) = F^{-1}(U) \\
+☞ 양 \ 변의 \ CDF의 \ 역함수를 \ 취함 \\
+\\
+X = F^{-1}(U) \\
+☞ 확률 \ 변수 \ X는 \ CDF의 \ 역함수에 \ Unifrom \ Distribution의 \ 결과를 \ input으로 \ 넣으면 \ 구할 \ 수 \ 있음
+$$
 즉, sampling이 쉬운 uniform distribution과 CDF의 특성을 활용한 트릭으로 목표 확률 분포의 sampling을 수행할 수 있게 된다.
 
 
@@ -68,17 +65,25 @@ $$
 ### 2.2 Example
 
 좀 더 직관적인 이해를 위해 지수 분포(exponential distribution)에 inverse CDF sampling을 적용해 본다. Exponential distribution은 아래와 같은 식으로 표현할 수 있다.
+
+
 $$
 f_X(x)=e^{-x}
 $$
+
+
 먼저, 확률 변수 X에 대한 sampling을 위해 pdf의 cdf를 구해본다.
+
+
 $$
 F(x) = \int_0^x f(x) dx\\
 = \int_0^x e^{-x^{\prime}} dx^{\prime}\\
 = [- e^{-x^{\prime}}]_0^x \\
 = 1 - e^{-x}
 $$
-이때, CDF의 결과는 uniform distribution에 속하므로 $F(x)$를 원소 $u$로 치환한 뒤 역함수를 구한다.
+
+
+이때, CDF의 결과는 uniform distribution에 속하므로 F(x)를 원소 u로 치환한 뒤 역함수를 구한다.
 $$
 u = 1-e^{-x} \\
 e^{-x} = 1 - u \\
