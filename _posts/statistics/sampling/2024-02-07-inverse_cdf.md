@@ -87,14 +87,14 @@ $$
 $$
 u = 1-e^{-x} \\
 e^{-x} = 1 - u \\
-- x = ln(1-u) \\
-x = - ln(1-u)
+-x = ln(1-u) \\
+x = -ln(1-u)
 $$
 이를 통해 uniform distiribution에서 sampling 된 특정 값을 CDF의 역함수의 입력 값으로 사용하게 되면 원래의 확률 변수의 sampling이 가능함을 알 수 있다. 조금 더 정리를 하면 아래와 같다.
 $$
 u_i = U(0,1) \\
 x_i = inverseCDF(u_i) \\
-= - ln(1-u_i)
+= -ln(1-u_i)
 $$
 
 
