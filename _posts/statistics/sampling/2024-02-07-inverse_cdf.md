@@ -47,17 +47,36 @@ F(X) \equiv U \sim Uniform(0,1) \\
 \Leftrightarrow F(X) \bullet F^{-1}(X) = F^{-1}(U) \\
 \Leftrightarrow X = F^{-1}(U)
 $$
+
+
 위 식을 하나하나 살펴보자
+
+
 $$
-F(X) \equiv U \sim Uniform(0,1) \\
-☞ 어떤 \ 확률 \ 분포 \ f(x)의 \ CDF \ F(X)는 \ Uniform \ Distribution과 \ 동일한 \ 결과를 \ 가짐 \\
-\\
-F(X) \bullet F^{-1}(X) = F^{-1}(U) \\
-☞ 양 \ 변의 \ CDF의 \ 역함수를 \ 취함 \\
-\\
-X = F^{-1}(U) \\
-☞ 확률 \ 변수 \ X는 \ CDF의 \ 역함수에 \ Unifrom \ Distribution의 \ 결과를 \ input으로 \ 넣으면 \ 구할 \ 수 \ 있음
+F(X) \equiv U \sim Uniform(0,1)
 $$
+
+
+☞ 어떤 확률 분포 f(x)의 CDF F(X)는 Uniform Distribution과 동일한 결과를 가짐
+
+
+$$
+F(X) \bullet F^{-1}(X) = F^{-1}(U)
+$$
+
+
+☞ 양변의 CDF의 역함수를 취함
+
+
+$$
+X = F^{-1}(U)
+$$
+
+
+☞ 확률 변수 X는 CDF의 역함수에 Unifrom Distribution의 결과를 input으로 넣으면 구할 수 있음
+
+
+
 즉, sampling이 쉬운 uniform distribution과 CDF의 특성을 활용한 트릭으로 목표 확률 분포의 sampling을 수행할 수 있게 된다.
 
 
