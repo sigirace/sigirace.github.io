@@ -43,10 +43,16 @@ $$
 
 CDF의 속성을 통해 알 수 있듯 어떤 확률 분포의 CDF는 확률 변수의 모든 가능한 값에 대해서 0~1 사이의 값을 도출한다. 이때, 동일하게 0~1 사이의 값을 가지는 uniform distribution의 sampling 결과를 사용하여 CDF의 역함수를 통해 목표 확률 분포에서 어떤 값에 해당하는지 알 수 있다. 이는 아래의 식을 본다면 좀 더 직관적으로 이해할 수 있을 것이다.
 $$
-F(X) \equiv U \sim Uniform(0,1) \\
-\Leftrightarrow F(X) \bullet F^{-1}(X) = F^{-1}(U) \\
+F(X) \equiv U \sim Uniform(0,1)
+$$
+$$
+\Leftrightarrow F(X) \bullet F^{-1}(X) = F^{-1}(U)
+$$
+
+$$
 \Leftrightarrow X = F^{-1}(U)
 $$
+
 
 
 위 식을 하나하나 살펴보자
@@ -103,18 +109,25 @@ $$
 
 
 이때, CDF의 결과는 uniform distribution에 속하므로 F(x)를 원소 u로 치환한 뒤 역함수를 구한다.
+
+
 $$
 u = 1-e^{-x} \\
 e^{-x} = 1 - u \\
 -x = ln(1-u) \\
 x = -ln(1-u)
 $$
+
+
 이를 통해 uniform distiribution에서 sampling 된 특정 값을 CDF의 역함수의 입력 값으로 사용하게 되면 원래의 확률 변수의 sampling이 가능함을 알 수 있다. 조금 더 정리를 하면 아래와 같다.
+
+
 $$
 u_i = U(0,1) \\
 x_i = inverseCDF(u_i) \\
 = -ln(1-u_i)
 $$
+
 
 
 ### 2.3 Visualization
