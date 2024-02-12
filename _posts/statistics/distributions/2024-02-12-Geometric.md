@@ -38,12 +38,6 @@ $$
 
 - p: 성공 확률
 
-$$
-\frac{1}{3}
-$$
-
-
-
 ## 4. Summary statistics
 
 - Expectation: $\frac{1}{p}$
