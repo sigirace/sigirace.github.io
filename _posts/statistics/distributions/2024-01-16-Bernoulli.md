@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  'Discrete distribution (1) Bernoulli distribution'
+title:  'Discrete distribution (1) Bernoulli Distribution'
 toc: true
 categories: [Probability Distribution]
 tags: [Discrete, Bernoulli]
@@ -34,7 +34,7 @@ $$
 ## 3. Theta
 
 $$
-X 	\sim Bern(p)
+X \sim Bern(p)
 $$
 
 - p: 성공 확률
@@ -50,22 +50,17 @@ $$
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 베르누이 분포를 시각화하는 함수
 def plot_bernoulli_distribution(p):
-    # 베르누이 확률 질량 함수 (PMF)
     bernoulli_pmf = [1-p, p]
 
-    # 결과를 나타내는 라벨
     labels = ['Failure (0)', 'Success (1)']
 
-    # 그래프 생성
     plt.bar(labels, bernoulli_pmf, color=['red', 'blue'])
     plt.ylim(0, 1)
     plt.title(f'Bernoulli Distribution (p = {p})')
     plt.ylabel('Probability')
     plt.show()
 
-# 여러 성공 확률에 대한 베르누이 분포 시각화
 for p in [0.2]:
     plot_bernoulli_distribution(p)
 ````
