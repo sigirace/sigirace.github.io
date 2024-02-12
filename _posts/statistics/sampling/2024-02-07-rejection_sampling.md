@@ -21,8 +21,8 @@ tags: [Rejection Sampling, PDF, CDF, Uniform Distribution]
 
 Rejection Sampling을 수행하기 위한 준비물은 아래 3가지이다.
 
-- Target density f(x): 목표 확률 분포
-- Proposal density g(x): 제안 분포
+- Target density: 목표 확률 분포는 sampling의 target이며, 수학적인 계산으로 쉽게 sample을 추출할 수 없는 분포이다. 
+- Proposal density: 제안 분포는 
 - Envelope function e(x): 덮개 함수
 
 
