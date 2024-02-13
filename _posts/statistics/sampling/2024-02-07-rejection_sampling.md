@@ -7,10 +7,10 @@ tags: [Rejection Sampling, PDF, CDF, Uniform Distribution]
 
 ---
 
-<<<<<<< HEAD
 
 
-## 1. Rejection Sampling
+
+# 1. Rejection Sampling
 
 ### 1.1 Definition
 
@@ -26,12 +26,6 @@ Rejection Sampling을 수행하기 위한 준비물은 아래 3가지이다.
 - Proposal density: 제안 분포는 
 - Envelope function e(x): 덮개 함수
 
-
-
 $$
 f(x) = 0.3 \cdot e^{-0.2 x^2} + 0.7 \cdot e^{-0.2(x - 10)^2}
 $$
-=======
-본 게시물은 통계의 본질님의 유튜브 [강의](https://www.youtube.com/watch?v=_jG3FQkprgo)를 보고 정리하는 글이다.
-{: .notice}
->>>>>>> parent of 55144f3f (update)
