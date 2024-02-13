@@ -7,8 +7,6 @@ tags: [Rejection Sampling, PDF, CDF, Uniform Distribution]
 
 ---
 
-
-
 # 1. Rejection Sampling
 
 ### 1.1 Definition
