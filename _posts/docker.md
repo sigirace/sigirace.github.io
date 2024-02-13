@@ -2,7 +2,7 @@
 
 -> 이미지 리스트
 
-### docker ps -a 
+### docker ps -a
 
 -> 컨테이너 리스트 (process)
 
@@ -12,7 +12,7 @@
 
 `-rm`: 컨테이너 내리면 삭제함
 
-### docker exec -it mycontainer bash 
+### docker exec -it mycontainer bash
 
 -> bash로 실행시키려면 -it을 통해 터미널을 붙여야 함
 
@@ -26,7 +26,7 @@
 
 ### docker image import [export_name] [image_name]
 
-### docker exec -it mycontainer bash 
+### docker exec -it mycontainer bash
 
 -> 진입
 
@@ -36,11 +36,11 @@
 
 `-o`: output하라는 명령어
 
-### docker image load -i mysave.img 
+### docker image load -i mysave.img
 
 -> 내가 가진 현재 이미지에 동일하게 풀림
 
-### ADD [source] [destination] 
+### ADD [source] [destination]
 
 -> ADD 명령어는 source를 destination으로 복사
 
@@ -51,8 +51,6 @@
 ### docker image pull [계졍]/[repository]:[tag]
 
 ### docker run -d --restart=always -p 5000:5000 --name myregistry registry
-
-
 
 ## Network
 
@@ -86,19 +84,10 @@ su - [user] -> login
 
 contianer-ip.sh
 
-### docker network create [network_name] 
+### docker network create [network_name]
 
 -> default: bridge
 
 ### docker network connect [brdige_ name] [container_name]
 
 -> container에 다른 bridge와 통신하기 위한 새로운 Ip가 할당됨
-
-
-
-
-
-
-
-
-
