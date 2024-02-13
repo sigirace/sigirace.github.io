@@ -9,7 +9,6 @@ tags: [Rejection Sampling, PDF, CDF, Uniform Distribution]
 
 
 
-
 # 1. Rejection Sampling
 
 ### 1.1 Definition
@@ -28,4 +27,6 @@ Rejection Sampling을 수행하기 위한 준비물은 아래 3가지이다.
 
 $$
 f(x) = 0.3 \cdot e^{-0.2 x^2} + 0.7 \cdot e^{-0.2(x - 10)^2}
+
+
 $$
