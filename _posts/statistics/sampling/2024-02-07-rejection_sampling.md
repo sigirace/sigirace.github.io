@@ -40,7 +40,7 @@ $$
 
 📍 **Note1: Target distribution**
 
-- 주어진 target distribution은 실제 $(-\infin, \infin)$ 의 구간에서 적분시 전체 면적이 1이 아니기에 확률 밀도라고 보긴 어려움
+- 주어진 target distribution은 실제 $(-\infty, \infty)$ 의 구간에서 적분시 전체 면적이 1이 아니기에 확률 밀도라고 보긴 어려움
 
 - 그러나 sample을 추출하기 어려운 분포라는 뜻으로 사용함
 
@@ -147,8 +147,6 @@ plt.show()
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/sampling/reject/r2.png?raw=true" width="600" height="300"></p>
 
 - Target distribution과 유사하게 sampling이 수행된 것을 알 수 있음
-
-
 
 🏃 **Next Step**
 
