@@ -7,8 +7,6 @@ tags: [Inverse CDF Sampling, PDF, CDF, Uniform Distribution]
 
 ---
 
-
-
 ## 1. CDF
 
 Inverse CDF sampling을 알아보기 전에 CDF의 성질에 대해 알아본다.
@@ -35,14 +33,11 @@ $$
 - 이는 확률의 합이 1이 된다는 사실로 부터 도출됨
 - 따라서 CDF는 0 부터 1 사이의 값을 가질 수 있음
 
-
-
 ## 2. Inverse CDF Method
 
 ### 2.1 Method
 
 CDF의 속성을 통해 알 수 있듯 어떤 확률 분포의 CDF는 확률 변수의 모든 가능한 값에 대해서 0~1 사이의 값을 도출한다. 이때, 동일하게 0~1 사이의 값을 가지는 uniform distribution의 sampling 결과를 사용하여 CDF의 역함수를 통해 목표 확률 분포에서 어떤 값에 해당하는지 알 수 있다. 이는 아래의 식을 본다면 좀 더 직관적으로 이해할 수 있을 것이다.
-
 
 $$
 F(X) \equiv U \sim Uniform(0,1) \\
@@ -50,53 +45,37 @@ F(X) \equiv U \sim Uniform(0,1) \\
 \Leftrightarrow X = F^{-1}(U)
 $$
 
-
-
-
 위 식을 하나하나 살펴보자
-
 
 $$
 F(X) \equiv U \sim Uniform(0,1)
 $$
 
-
 ☞ 어떤 확률 분포 f(x)의 CDF F(X)는 Uniform Distribution과 동일한 결과를 가짐
-
 
 $$
 F(X) \bullet F^{-1}(X) = F^{-1}(U)
 $$
 
-
 ☞ 양변의 CDF의 역함수를 취함
-
 
 $$
 X = F^{-1}(U)
 $$
 
-
 ☞ 확률 변수 X는 CDF의 역함수에 Unifrom Distribution의 결과를 input으로 넣으면 구할 수 있음
 
-
-
 즉, sampling이 쉬운 uniform distribution과 CDF의 특성을 활용한 트릭으로 목표 확률 분포의 sampling을 수행할 수 있게 된다.
-
-
 
 ### 2.2 Example
 
 좀 더 직관적인 이해를 위해 지수 분포(exponential distribution)에 inverse CDF sampling을 적용해 본다. Exponential distribution은 아래와 같은 식으로 표현할 수 있다.
 
-
 $$
 f_X(x)=e^{-x}
 $$
 
-
 먼저, 확률 변수 X에 대한 sampling을 위해 pdf의 cdf를 구해본다.
-
 
 $$
 F(x) = \int_0^x f(x) dx\\
@@ -105,9 +84,7 @@ F(x) = \int_0^x f(x) dx\\
 = 1 - e^{-x}
 $$
 
-
 이때, CDF의 결과는 uniform distribution에 속하므로 F(x)를 원소 u로 치환한 뒤 역함수를 구한다.
-
 
 $$
 u = 1-e^{-x} \\
@@ -116,9 +93,7 @@ e^{-x} = 1 - u \\
 x = -ln(1-u)
 $$
 
-
 이를 통해 uniform distiribution에서 sampling 된 특정 값을 CDF의 역함수의 입력 값으로 사용하게 되면 원래의 확률 변수의 sampling이 가능함을 알 수 있다. 조금 더 정리를 하면 아래와 같다.
-
 
 $$
 u_i = U(0,1) \\
@@ -126,13 +101,11 @@ x_i = inverseCDF(u_i) \\
 = -ln(1-u_i)
 $$
 
-
-
 ### 2.3 Visualization
 
 위 내용을 python을 통해 시각화해본다.
 
-````python
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -159,7 +132,7 @@ plt.xlabel('Sampling Index')
 plt.ylabel('Value')
 plt.legend()
 plt.show()
-````
+```
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/sampling/inverse_cdf/1.png?raw=true" width="600" height="300"></p>
 
@@ -207,4 +180,3 @@ Inverse CDF 방법을 통해 직관적으로 와닿지 않던 sampling에 대해
 
 - Inverse CDF 방법 외 다른 sampling 방법들을 알아보자
 - 가장 기초적인 **Rejection Sampling**을 배워보자
-
