@@ -1,114 +1,65 @@
 ```yaml
 layout: single
-title:  'Binomial Distribution'
+title:  'PMF vs PDF2'
 toc: true
 categories: [Statistics]
 tags: [PDF, PMF]
 ```
 
-이항분포에 대한 정리
+본 게시물은 통계의 본질님의 유튜브 [강의](https://www.youtube.com/watch?v=_jG3FQkprgo)를 보고 정리하는 글이다.
 {: .notice}
 
-## 1. Definition
+## 1. 확률 질량 함수 (PMF)
 
-> 연속된 n번의 독립적 시행에서 각 시행이 확률 p를 가질 때(=베르누이 시행)의 확률 분포
+👀 **확률 질량 함수란?**
 
-📍**베르누이 시행**
-
-- 두 가지 결과가 있는 단일 시행
-- ex) 동전 던지기 -> {앞, 뒤}
-- n=1일 때 이행 분포는 베르누이 분포와 동일
-
-## 2. PMF
+> 확률 질량 함수(probability mass function, PMF)는 이산 확률 변수의 분포를 나타며, 특정 값에 대한 확률을 나타내는 함수이다.
 
 $$
-f_x(x) = \binom{n}{x}p^x(1-p)^{n-x}
+f_X(x) = Pr(X=x)
+$$$$
+Pr(X=x) = Pr({s \in S : X(s) = x})
 $$
 
-- p: 성공 확률
-- n: 시행 횟수
-- x: 성공 횟수
-- $\binom{n}{x}$: 이항계수
+위 수식을 순서대로 해석하면 다음과 같다. 1. 확률 질량 함수 f_X(x)는 이산 확률 변수 X가 x일 확률이고, 2. 이는 표본공간 S의 원소인 사건 s이 이산 확률 변수 X를 통해 매핑된 실수 x의 확률이다.
 
-📍**조합**
+📍 **확률 질량 함수 예시**
 
-$$
-C(n, r) = \binom{n}{r} = \frac{n!}{r!(n-r)!}
-
+> S: 동전을 한번 던졌을 때 모든 결과의 표본 공간  
+> X: S에 의해 정의되는 확률 변수
+> 
+> S의 원소인 사건 s는 앞면과 뒷면이며, 사건이 확률변수를 통해 매핑된 실수 x는 0과 1이다. 또한 앞면과 뒷면이 나올 확률은 모두 1/2로 동일하므로 확률 질량 함수 pmf는 다음과 같다.
 
 $$
-
-📍**순열**
-
-$$
-P(n, r) = \frac{n!}{(n-r)!}
+f_X(x) = \begin{cases}  1/2 & x \in \{0,1\} \\\\  0 & x \notin \{0,1\} \end{cases}
 $$
 
-📍**독립**
+## 2. 확률 밀도 함수 (PDF)
 
-- n개의 확률의 곱으로 표현
-- 서로 다른 사건의 확률을 곱할 수 있다는 것은 독립을 의미
+👀 **확률 밀도 함수란?**
 
-$$
-\text{독립} : \, P(A \cap B) = P(A) \cdot P(B) \\
-\text{일반} : \, p(A \cap B) = p(A) \cdot p(B | A)
-$$
+> 확률 밀도 함수(probability density function, PMF)는 연속 확률 변수의 분포를 나타며, 범위에 대한 확률을 나타내는 함수이다.
 
-📍 **독립 항등 분포(i.i.d)**
-
-- 각 독립 변수가 같으면서 (=항등)
-- 서로 영향을 미치지 않음 (=독립)
-
-## 3. Theta
+- 확률 밀도 함수의 조건
 
 $$
-X \sim \text{Bin}(n, p) \\
-\text{Bern}(p) = \text{Bin}(1,p)
+모든 \,실수값\,x에 대해 f(x) \geq 0\\
+$$$$
+\int_{-\infty}^{\infty}f(x) = 1
 $$
 
-- p: 성공 확률
-- n: 시행 횟수
+- 확률 밀도 함수와 누적 분포 함수의 관계
 
-## 4. Summary statistics
+$$
+F(x) = \int_{-\infty}^{x}f(x)dx
+$$$$
+f(x)=\frac{d}{dx}F(x)
+$$
 
-- Expectation: $np$
-- Variance: $np(1-p)$
+📍 **확률 밀도 함수 예시**
 
-## 5. Visualization
+> 박테리아가 일반적으로 4시간에서 6시간을 산다고 가정해본다. 이때 박테리아가 정확히 5시간을 살고 죽을 가능성은 없으므로 이에대한 확률은 0과 같다. 그러나 막테리아가 5시간에서 5시간 10분 사이에 죽을 확률은 정량화 할 수 있다. 더 나아가 만약 이 확률이 2%라고 가정하면, 5시간에서 5시간 1분 사이에 죽을 확률은 0.2%라고 정량화 할 수 있다.
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.stats import binom
-
-def plot_binomial_distribution(n, p):
-    x = np.arange(0, n+1)
-    binomial_pmf = binom.pmf(x, n, p)
-
-    plt.bar(x, binomial_pmf, color='skyblue')
-    plt.ylim(0, 1)
-    plt.title(f'Binomial Distribution (n = {n}, p = {p})')
-    plt.xlabel('Number of Successes')
-    plt.ylabel('Probability')
-    plt.xticks(x)
-    plt.grid(axis='y', linestyle='--', alpha=0.7)
-    plt.show()
-
-n = 10
-probabilities = [0.1, 0.5]
-
-for p in probabilities:
-    plot_binomial_distribution(n, p)
-```
-
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/distributions/bi1.png?raw=true" width="600" height="400"></p>
-
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/distributions/bi2.png?raw=true" width="600" height="400"></p>
-
-👀 **N이 충분히 크면??**
-
-- n이 100 이상일 경우 정규분포와 유사함을 알 수 있음
-
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/distributions/bi3.png?raw=true" width="600" height="400"></p>
-
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/distributions/bi4.png?raw=true" width="600" height="400"></p>
+$$
+f(x) = \begin{cases}  1/12 & 0 < x < 12 \\\\  0 & otherwise \end{cases}
+$$
