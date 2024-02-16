@@ -2,7 +2,7 @@
 layout: single
 title:  'Sampling (2) Inverse CDF Sampling이 뭐야?'
 toc: true
-categories: [Statistics]
+categories: [Sampling]
 tags: [Inverse CDF Sampling, PDF, CDF, Uniform Distribution]
 
 ---

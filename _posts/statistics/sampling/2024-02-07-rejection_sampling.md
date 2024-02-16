@@ -2,7 +2,7 @@
 layout: single
 title:  'Sampling (3) Rejection Sampling이 뭐야?'
 toc: true
-categories: [Statistics]
+categories: [Sampling]
 tags: [Rejection Sampling, PDF, CDF, Uniform Distribution]
 
 ---

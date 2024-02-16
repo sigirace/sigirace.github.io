@@ -41,12 +41,8 @@ tags: [Measure, Bayesian]
 - sigma field는 sample space의 power set
 - radnom variable X에 대한 확률 계산: P(X<=10)은 sample space의 부분집합인 {1,2,4,6}에 대한 probabilty measure
 
-
-
 random variables에 대한 추가적인 정리
 {: .notice}
-
-
 
 ## 1. Random Variable
 
@@ -62,9 +58,9 @@ random variables에 대한 추가적인 정리
 📍**Example**
 
 > 동전을 5번 던지는 실험에서 random variable X는 동전의 앞면의 개수<br>이때의 sample space는 {TTTTT, TTTTH, TTTHH, ... , HHHHH}
->
+> 
 > X(TTTTT) = 0, X(TTHTT) = 1 ..
->
+> 
 > Range(X) = {0, 1, 2, 3, 4, 5}
 
 ## 2. Discrete Random Variables
@@ -90,25 +86,25 @@ $$
 📍**Example**
 
 > 동전을 두개 던지는 실험에서 관측된 앞면의 수를 random variable X라고 정의했을 때, PMF는 아래와 같이 정의할 수 있음
->
+> 
 > 1. sample space S 정의
->
+> 
 > $$
 > S=\{HH, HT, TH, TT\}
 > $$
->
+> 
 > 2. X의 range
->
+> 
 > $$
 > R_x = \{0, 1, 2\}
 > $$
->
+> 
 > 3. pmf 정의
->
+> 
 > $$
 > P_x(0) = P(X=0)=P(\{TT\}) = \frac{1}{4} \\
-> P_x(1) = P(X=1)=P(\{HT, TH\}) = \frac{1}{2} \\ 
-> P_x(2) = P(X=2)=P(\{HH\}) = \frac{1}{4} \\
+P_x(1) = P(X=1)=P(\{HT, TH\}) = \frac{1}{2} \\ 
+P_x(2) = P(X=2)=P(\{HH\}) = \frac{1}{4} \\
 > $$
 
 ### 3.2 Probability Distribution

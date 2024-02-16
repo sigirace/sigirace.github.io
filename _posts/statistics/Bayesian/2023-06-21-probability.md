@@ -20,12 +20,10 @@ tags: [Measure, Bayesian]
 
 📍 **Example**
 
-  <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p1.png?raw=true" width="600" height="300"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p1.png?raw=true" width="600" height="300"></p>
 
 - 주사위 던지기 실험에서 sample space는 {1, 2, 3, 4, 5, 6}으로 정의됨
 - sample space에 대한 measure를 정의
-
-
 
 ### 1.2 Conditions of a sample space
 
@@ -37,11 +35,9 @@ tags: [Measure, Bayesian]
 
 ### 1.3 Definition of Probability
 
-  <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p2.png?raw=true" width="600" height="200"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p2.png?raw=true" width="600" height="200"></p>
 
 - 결국 확률은 sample space 위에서 정의된 set function
-
-
 
 ## 2. Probability Allocation Function
 
@@ -51,47 +47,31 @@ tags: [Measure, Bayesian]
 
 📍**pmf, pdf**
 
-
-
-  <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p3.png?raw=true" width="600" height="200"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p3.png?raw=true" width="600" height="200"></p>
 
 - Large P is set function: 어떤 사건(set)에 대한 확률
 - small p is probability allocation function(paf)
-
-
 
 ## 3. Conditional Probability
 
 ### 3.1 Definition of Conditional Probabilty
 
-
-
-  <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p4.png?raw=true" width="600" height="100"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p4.png?raw=true" width="600" height="100"></p>
 
 - conditional probability는 bayesian statistics로 형성됨
 
 👀 **Bayes`s Rule**
 
-
-
-  <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p6.png?raw=true" width="600" height="100"></p>
-
-
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p6.png?raw=true" width="600" height="100"></p>
 
 ☀️ **Chain rule**
 
-
-
-  <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p5.png?raw=true" width="600" height="300"></p>
-
-
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p5.png?raw=true" width="600" height="300"></p>
 
 ☀️ **Likelihood, posterior, prior**
 
-  <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p7.png?raw=true" width="600" height="250"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p7.png?raw=true" width="600" height="250"></p>
 
 ## 4. Independent
 
-
-
-  <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p8.png?raw=true" width="600" height="300"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/probability/p8.png?raw=true" width="600" height="300"></p>

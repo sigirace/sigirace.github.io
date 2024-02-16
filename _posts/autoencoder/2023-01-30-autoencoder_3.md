@@ -14,12 +14,11 @@ tags: [Autoencoder, Deep Learning, MLE, MSE, Cross Entropy]
 <li><a href="https://sigirace.github.io/autoencoder/autoencoder_2/">Autoencoder의 모든것의 모든것 (2) Maximum Likelihood 관점의 Deep Learning</a></li>
 </div>
 
-
 ## 3. Manifold Learning
 
 ### 3.1 Introduction
 
-☀️ **Manifold란?**<br>Manifold는 training DB 자체의 고차원 데이터를 공간에 뿌렸을때, 데이터를 error 없이 잘 아우르는 subspace를 의미한다. 이러한 subspace를 잘 찾는 것이 manifold learning이 되고, 이를 projection 시키면 차원이 축소된다.
+☀️ **Manifold란?**<br>Manifold는 training DB 자체를 고차원 데이터를 공간에 뿌렸을때, 데이터를 error 없이 잘 아우르는 subspace를 의미한다. 이러한 subspace를 잘 찾는 것이 manifold learning이 되고, 이를 projection 시키면 차원이 축소된다.
 
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/autoencoder/autoencoder1_22.png?raw=true" width="650" height="400"></p>
 
@@ -27,8 +26,8 @@ Manifold는 원 데이터의 정보를 유지하며 차원을 잘 줄이고 싶�
 
 1. Data compression: 데이터를 압축해서 가지고 있다면 공간을 아낄 수 있음
 2. Data visualization: 데이터를 시각화 할 필요가 있을 때 사용함
-4. <mark style='background-color: #f6f8fa'>Curse of dimensionality</mark>: 차원의 저주를 회피하기 위해
-5. <mark style='background-color: #f6f8fa'>Discovering most important features</mark>: 차원을 축소하여 정보를 잘 압축했다면 중요 정보만 보전되었을 것이니 주요 feature라고 생각
+3. <mark style='background-color: #f6f8fa'>Curse of dimensionality</mark>: 차원의 저주를 회피하기 위해
+4. <mark style='background-color: #f6f8fa'>Discovering most important features</mark>: 차원을 축소하여 정보를 잘 압축했다면 중요 정보만 보전되었을 것이니 주요 feature라고 생각
 
 ### 3.2 Objective
 
@@ -57,7 +56,8 @@ t-SNE는 가장 고전적인 방법 중 하나이며, 예시는 28*28 차원의 
 👀 **Manifold learning의 가정**
 
 ```
-Training DB에 있는 데이터를 공간상에 나타냈을 때, 이를 잘 표현하는 subspace가 있을 것이다. 
+Training DB에 있는 데이터를 공간상에 나타냈을 때, 
+이를 잘 표현하는 subspace가 있을 것이다. 
 ```
 
 위 그림에서 롤처럼 표시된 공간은 전체 공간에 대한 subspace이고, 이는 원래 공간보다 저차원일 것이다. 따라서 가정과 같이 데이터를 잘 나타내는 subspace(=manifold)를 잘 찾을 수 있다면, 데이터의 압축 혹은 저차원으로의 변경이 효과적일 것이다. 이러한 manifold를 찾는 것이 manifold learning이라고 한다.
@@ -129,26 +129,6 @@ Autoencoder는 density estimaiton임을 앞장에서 확인하였다.
 
 1:15:54
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 [의미를 보존하는 공간, manifold](https://kh-mo.github.io/notation/2019/03/10/manifold_learning/)
 
 [PCA & eigenvector & eigenvalue](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jinp7&logNo=221312142481)
@@ -166,4 +146,3 @@ https://jayhey.github.io/novelty%20detection/2017/11/08/Novelty_detection_Kernel
 [밀도추정](https://blog.mathpresso.com/mathpresso-%EB%A8%B8%EC%8B%A0-%EB%9F%AC%EB%8B%9D-%EC%8A%A4%ED%84%B0%EB%94%94-14-%EB%B0%80%EB%8F%84-%EC%B6%94%EC%A0%95-density-estimation-38fd7ef729bb)
 
 [커널밀도추정](https://seongkyun.github.io/study/2019/02/03/KDE/)
-

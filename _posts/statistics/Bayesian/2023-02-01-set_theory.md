@@ -38,7 +38,7 @@ Set theory is the branch of mathematical logic that studies sets, which can be i
 ☀️ **subset**
 
 - 부분집합
-
+  
   ☞ {a, b} is a subset of $ \lbrace a, b, c \rbrace$
 
 ☀️ **universal set**
@@ -60,8 +60,6 @@ Set theory is the branch of mathematical logic that studies sets, which can be i
 $$
 A_1 \times A_2 \times ... A_n = \lbrace (x_1, x_2, ... x_m) | x_1 \in A_1, x_2 \in A_2, ... , x_n \in A_n \rbrace
 $$
-
-
 
 ☀️ **power set**
 
@@ -85,8 +83,3 @@ $$
 - codomain: $V$
 - image: 정의역의 원소에 대응하는 공역의 원소들<br>☞ $f(A) = \lbrace f(x) \in V : x \in A \rbrace$ where $A \subseteq U$
 - range: $f(U)$ (image of domain)
-
-
-
-
-

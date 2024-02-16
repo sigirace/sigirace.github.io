@@ -46,7 +46,7 @@ $$
 
 ## 5. Visualization
 
-````python
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -63,6 +63,6 @@ def plot_bernoulli_distribution(p):
 
 for p in [0.2]:
     plot_bernoulli_distribution(p)
-````
+```
 
-  <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/distributions/b1.png?raw=true" width="600" height="400"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/distributions/b1.png?raw=true" width="600" height="400"></p>
