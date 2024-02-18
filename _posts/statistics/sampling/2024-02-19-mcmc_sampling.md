@@ -21,8 +21,6 @@ tags: [MCMC, Markov Chain, Monte Carlo]
 
 - 상태의 변화를 전이라고 함
 
-<br>
-
 📍 **수학적 표현**
 
 $$
@@ -35,8 +33,6 @@ $$
 - 메모리가 1인 Markov chain 표현
 
 - 메모리가 1이면 상태는 이전의 상태에만 의존함
-
-<br>
 
 📍 **Example**
 
@@ -82,8 +78,6 @@ Step 9: Rainy
 Final State: Rainy
 ```
 
-<br>
-
 ### 1.2 Monte Carlo
 
 👀 **Definition**
@@ -92,23 +86,17 @@ Final State: Rainy
 
 - 무수한 수행을 통해 수치적으로 계산하기 어려운 값을 근사하려는 방법론
 
-<br>
-
 📍 **근사화 이유**
 
 - 계산하려는 값이 닫힌 형식(=closed form)으로 표현되지 않을 경우
 
 - 수리적으로 복잡할 경우
 
-<br>
-
 📍**Note: closed form**
 
 - 주어진 문제가 일반적으로 알려진 함수나 수학 연산으로 해를 구할 수 있는 식
 
-- 혹은 해석이 가능한 식 (ex 무한개의 더하기라도 $\sum$으로 표현하여 해석)
-
-<br>
+- 혹은 해석이 가능한 식 (ex 무한개의 더하기라도 \sum으로 표현하여 해석)
 
 📍**Example**
 
@@ -135,8 +123,6 @@ print(f"Estimated π: {pi_estimate}")
 ```
 Estimated π: 3.138
 ```
-
-<br>
 
 📍 **Visualization**
 
@@ -180,7 +166,7 @@ plt.axis('equal')
 plt.show()
 ```
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/sampling/mcmc/mc1.png?raw=true" width="600" height="300"></p>
+![](https://github.com/sigirace/page-images/blob/main/statistics/sampling/mcmc/mc1.png?raw=true)
 
 ### 1.3 Markov Chain Monte Carlo (MCMC)
 
@@ -192,8 +178,6 @@ plt.show()
 
 - Sampling: 확률 분포로부터 표본을 추출하는 것
 
-<br>
-
 📍**Requirements**
 
 - Sampling을 위한 target 분포(=확률분포)가 있어야 함
@@ -202,17 +186,13 @@ plt.show()
 
 $$
 f(x) = 0.3 \cdot e^{-0.2 x^2} + 0.7 \cdot e^{-0.2(x - 10)^2}
-$$
-
-<br>
+$$  
 
 ## 2. Sampling Process
 
 ### 2.1 Random Initialization
 
 - Sample space에서 random point를 선택
-
-<br>
 
 📍 **Example**
 
@@ -236,11 +216,9 @@ plt.legend()
 plt.show()
 ```
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/sampling/mcmc/mc2.png?raw=true" width="600" height="300"></p>
+![](https://github.com/sigirace/page-images/blob/main/statistics/sampling/mcmc/mc2.png?raw=true)
 
 - Sample space 중 initial point로 7 선택
-
-<br>
 
 📍**Note: Sample space**
 
@@ -250,9 +228,7 @@ plt.show()
 
 - ex) 주사위 던지기의 샘플공간 ☞ {1, 2, 3, 4, 5, 6}
 
-- ex) 정규분포의 샘플공간 ☞ {$-\infty, \infty$}
-
-<br>
+- ex) 정규분포의 샘플공간 ☞ {-\infty, \infty}
 
 ### 2.2 Recommend
 
@@ -266,13 +242,11 @@ plt.show()
 
 - 제안된 샘플 포인트와 그 포인트에서의 타겟 분포의 값 비교
   
-  - ${f(x_1) \over f(x_0)}>1$ 일 경우 accept
+  - {f(x_1) \over f(x_0)}>1 일 경우 accept
 
 - Accept일 경우 샘플 포인트를 중심으로 과정 반복
 
 - Reject일 경우 다음 step으로 이동
-
-<br>
 
 📍**Note: MCMC 방법에 따른 분포의 형태**
 
@@ -280,15 +254,11 @@ plt.show()
 
 - Hastings: 일반적인 확률 분포
 
-<br>
-
 📍**Note: Hasting 알고리즘**
 
 - 제안분포를 g(x)라고 할 때 아래와 같이 정규화
   
-  - ${f(x_1)}/{g(x_1|x_0)} \over {f(x_0)}/{g(x_0|x_1)}$
-
-<br>
+  - {^{f(x_1)}/_{g(x_1|x_0)}} \over {^{f(x_0)}/_{g(x_0|x_1)}}
 
 📍**Example: 제안분포 생성**
 
@@ -317,9 +287,7 @@ plt.legend()
 plt.show()
 ```
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/sampling/mcmc/mc3.png?raw=true" width="600" height="300"></p>
-
-<br>
+![](https://github.com/sigirace/page-images/blob/main/statistics/sampling/mcmc/mc3.png?raw=true)
 
 📍**Example: 신규 포인트 추천**
 
@@ -363,27 +331,23 @@ plt.legend()
 plt.show()
 ```
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/sampling/mcmc/mc4.png?raw=true" width="600" height="300"></p>
+![](https://github.com/sigirace/page-images/blob/main/statistics/sampling/mcmc/mc4.png?raw=true)
 
 - Accept인 경우
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/sampling/mcmc/mc5.png?raw=true" width="600" height="300"></p>
+![](https://github.com/sigirace/page-images/blob/main/statistics/sampling/mcmc/mc5.png?raw=true)
 
 - Reject인 경우
-
-<br>
 
 ### 2.3 Resurrection
 
 - 일명 **패자부활전**으로 reject된 샘플들을 무조건 이용하지 않는 것이 아니라 통계적으로 수용할 수 있도록 함
 
-- 원래 샘플을 $x_1$, 제안분포를 통해 새로 제안받은 샘플을 $x_2$라 할 때 다음을 비교
+- 원래 샘플을 x_1, 제안분포를 통해 새로 제안받은 샘플을 x_2라 할 때 다음을 비교
   
-  - ${f(x_1) \over f(x_0)}>u$
+  - {f(x_1) \over f(x_0)}>u
   
-  - 이때 u는 uniform distribution $U_{(0,1)}$에서 추출한 임의의 샘플
-
-<br>
+  - 이때 u는 uniform distribution U_{(0,1)}에서 추출한 임의의 샘플
 
 📍**Note: Why doing resurrection?**
 
@@ -392,8 +356,6 @@ plt.show()
 - 샘플은 계속해서 target distribution 의 높은 부분으로 수렴함
 
 - 패자부활전 없이는 낮은 확률을 가진 샘플들이 추출되지 않는 문제가 발생함
-
-<br>
 
 ## 3. Visualization
 
@@ -465,11 +427,9 @@ plt.title('MCMC Sampling with Histogram Normalized by Integral Result')
 plt.show()
 ```
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/sampling/mcmc/mc6.png?raw=true" width="600" height="300"></p>
+![](https://github.com/sigirace/page-images/blob/main/statistics/sampling/mcmc/mc6.png?raw=true)
 
 - MCMC의 metropolis 방식에 따른 sampling 수행 결과
-
-<br>
 
 🏃**Next Step**
 
