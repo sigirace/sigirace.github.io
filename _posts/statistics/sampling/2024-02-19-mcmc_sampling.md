@@ -1,5 +1,4 @@
 ---
-
 layout: single
 title:  'Sampling (4) Markov Chanin Monte Carlo가 뭐야?'
 toc: true
@@ -8,7 +7,7 @@ tags: [MCMC, Markov Chain, Monte Carlo]
 
 ---
 
-본 게시물은 공돌이의 수학정리노트의 [Markov Chain Monte Carlo]([Markov Chain Monte Carlo - 공돌이의 수학정리노트 (Angelo's Math Notes)](https://angeloyeo.github.io/2020/09/17/MCMC.html))을 참고하여 작성하였다.
+본 게시물은 공돌이의 수학정리노트의 [Markov Chain Monte Carlo](https://angeloyeo.github.io/2020/09/17/MCMC.html)을 참고하여 작성하였다.
 {: .notice}
 
 ## 1. Introduce
