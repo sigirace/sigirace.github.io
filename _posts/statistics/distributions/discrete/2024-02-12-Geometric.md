@@ -4,6 +4,7 @@ title:  'Discrete distribution (3) Geometric Distribution'
 toc: true
 categories: [Probability Distribution]
 tags: [Discrete, Geometric]
+
 ---
 
 여러 분포들에 대한 소개

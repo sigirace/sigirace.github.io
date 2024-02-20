@@ -25,7 +25,9 @@ tags: [Discrete, Geometric]
 
 ## 2. PDF
 
-
+$$
+f(x) = {{1} \over {\sigma \sqrt{2}}} \exp^{{-(x-\mu)^2} \over {2 \sigma^2}}, (-\infty \leq x \leq \infty)
+$$
 
 - $\mu$: 평균
 
@@ -82,12 +84,16 @@ plt.show()
 
 📍 **PDF**
 
+$$
+\phi(x) = {{1} \over {\sqrt{2\pi}}}\exp({-x^2}/2), (-\infty \leq x \leq \infty)
+$$
+
 <br>
 
 📍**Transform**
 
 $$
-
+X \sim N( \mu, \sigma^2) \Rightarrow Z={{X-\mu} \over \sigma} \sim N(0,1)
 $$
 
 <br>
@@ -95,3 +101,9 @@ $$
 📍**Calculate Probability**
 
 - 확률 분포가 정규분포인 경우 표준정규분포로 치환하여 특정 범위의 확률을 쉽계 계산 할 수 있음
+
+$$
+P(a \leq X \leq b) = P({{a-\mu} \over {\sigma}} \leq {{X-\mu}\over {\sigma}} \leq {{b-\mu} \over {\sigma}}) \\
+= P({{a-\mu} \over {\sigma}} \leq Z \leq {{b-\mu} \over {\sigma}} ) \\
+= \phi({{b-\mu} \over {\sigma}})-\phi({{a-\mu} \over {\sigma}})
+$$
