@@ -1,6 +1,6 @@
 ---
 layout: single
-title: 'Continuous distribution (1) Normal Distribution'
+title:  'Continuous distribution (1) Normal Distribution'
 toc: true
 categories: [Probability Distribution]
 tags: [Continuous, Normal, Gaussian]
