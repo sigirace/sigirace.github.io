@@ -24,3 +24,13 @@ tags: [Discrete, Geometric]
 <br>
 
 ## 2. PDF
+
+
+
+- $\mu$: 평균
+
+- $\sigma^2$: 분산
+
+<br>
+
+# 
