@@ -76,7 +76,7 @@ plt.title('Various Normal pdfs')
 plt.show()
 ```
 
-[normal1]
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/distributions/normal1.png?raw=true" width="600" height="400"></p>
 
 ## 6. Standard Normal Distribution
 
