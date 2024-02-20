@@ -22,3 +22,15 @@ tags: [Discrete, Geometric]
 - 중심극한정리로 이용하며 단순하고 정확한 근사 가능
 
 <br>
+
+## 2. PDF
+
+$$
+f(x) = {{1} \over {\sigma \sqrt{2}}} \exp^{{-(x-\mu)^2} \over {2 \sigma^2}}, (-\infty \leq x \leq \infty)
+$$
+
+- $\mu$: 평균
+
+- $\sigma^2$: 분산
+
+<br>
