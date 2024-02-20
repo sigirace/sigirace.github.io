@@ -24,9 +24,3 @@ tags: [Discrete, Geometric]
 <br>
 
 ## 2. PDF
-
-$$
-f(x) = {{1} \over {\sigma \sqrt{2}}} \exp^{{-(x-\mu)^2} \over {2 \sigma^2}}, (-\infty \leq x \leq \infty)
-$$
-
-- 
