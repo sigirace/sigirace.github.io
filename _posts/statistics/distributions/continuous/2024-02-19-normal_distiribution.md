@@ -83,7 +83,7 @@ plt.show()
 📍 **PDF**
 
 $$
-\phi(x) = {{1} \over {\sqrt{2\pi}}}\exp({-x^2}/2), (-\infty \leq x \leq \infty)
+
 $$
 
 <br>
@@ -99,7 +99,3 @@ $$
 📍**Calculate Probability**
 
 - 확률 분포가 정규분포인 경우 표준정규분포로 치환하여 특정 범위의 확률을 쉽계 계산 할 수 있음
-
-$$
-
-$$
