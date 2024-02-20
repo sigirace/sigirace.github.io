@@ -33,4 +33,14 @@ tags: [Discrete, Geometric]
 
 <br>
 
-# 
+## 3. Theta
+
+$$
+X \sim N(\mu, \sigma^2)
+$$
+
+- $\mu$: 평균
+
+- $\sigma^2$: 분산
+
+<br>
