@@ -25,13 +25,34 @@ tags: [Discrete, Geometric]
 
 ## 2. PDF
 
+{% raw %}
 $$
-f(x) = {{1} \over {\sigma \sqrt{2}}} \exp^{{-(x-\mu)^2} \over {2 \sigma^2}}, (-\infty \leq x \leq \infty)
+f(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right), \quad (-\infty \leq x \leq \infty)
+$$
+{% endraw %}
+
+- $\mu$: 평균
+
+- $\sigma^2$: 분산
+
+<br>
+
+## 3. Theta
+
+$$
+X \sim N(\mu, \sigma^2)
 $$
 
 - $\mu$: 평균
 
 - $\sigma^2$: 분산
+
+<br>
+
+## 4. Summary Statistics
+
+- Expectation: $\mu$
+- Variance: $\sigma^2$
 
 <br>
 
