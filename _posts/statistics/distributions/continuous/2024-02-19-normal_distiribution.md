@@ -1,10 +1,10 @@
----
+```yaml
 layout: single
-title:  'Continuous distribution (1) Normal Distribution'
+title:  'Discrete distribution (3) Geometric Distribution'
 toc: true
 categories: [Probability Distribution]
-tags: [Continuous, Normal, Gaussian]
----
+tags: [Discrete, Geometric]
+```
 
 여러 분포들에 대한 소개
 {: .notice}
