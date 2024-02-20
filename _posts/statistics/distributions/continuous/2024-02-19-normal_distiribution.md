@@ -101,7 +101,5 @@ $$
 - 확률 분포가 정규분포인 경우 표준정규분포로 치환하여 특정 범위의 확률을 쉽계 계산 할 수 있음
 
 $$
-P(a \leq X \leq b) = P({{a-\mu} \over {\sigma}} \leq {{X-\mu}\over {\sigma}} \leq {{b-\mu} \over {\sigma}}) \\
-= P({{a-\mu} \over {\sigma}} \leq Z \leq {{b-\mu} \over {\sigma}} ) \\
-= \phi({{b-\mu} \over {\sigma}})-\phi({{a-\mu} \over {\sigma}})
+
 $$
