@@ -82,16 +82,12 @@ plt.show()
 
 📍 **PDF**
 
-$$
-
-$$
-
 <br>
 
 📍**Transform**
 
 $$
-X \sim N( \mu, \sigma^2) \Rightarrow Z={{X-\mu} \over \sigma} \sim N(0,1)
+
 $$
 
 <br>
