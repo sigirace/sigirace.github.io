@@ -20,7 +20,7 @@ tags: [Continuous, Exponential]
 
 {% raw %}
 $$
-f(x; \lambda) = \begin{cases} \lambda e^{-\lambda x} \ (\text{where} x \geq 0) \\ 0 \;\;\;\;\;\;\;\;\;\;\;\;\; (\text{where} x \lt 0) \end{cases}
+f(x; \lambda) = \begin{cases} \lambda e^{-\lambda x} \ (\text{where} x \geq 0) \\ 0 \;\;\;\;\;\;\;\; (\text{where} x \lt 0) \end{cases}
 $$
 
 {% endraw %}
@@ -37,8 +37,8 @@ $$
 
 ## 4. Summary Statistics
 
-- Expectation: $\frac {1} {\mu}$
-- Variance: $\frac {1} {\mu^2}$
+- Expectation: $\frac {1} {\lambda}$
+- Variance: $\frac {1} {\lambda^2}$
 
 ## 5. Visualization
 
@@ -121,6 +121,8 @@ f(x) = \frac {e^{-\lambda t} {\lambda t}^x} {x!}
 $$
 
 ✏️ **x = 0 일 경우**
+
+<br>
 $$
 f(0) = e^{-\lambda t}
 $$
@@ -129,6 +131,8 @@ $$
 - 즉, 사건 발생까지의 대기시간이 단위 시간인 t보다 클 확률과 같음
 
 ✏️ **여사건 표현**
+
+<br>
 $$
 1 - f(0) = 1 - e^{-\lambda t}
 $$
