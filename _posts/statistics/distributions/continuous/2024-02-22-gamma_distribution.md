@@ -24,6 +24,10 @@ tags: [Discrete, Geometric]
 
 
 
+> If  \(X_1, ..., X_{\alpha}\) are independent random variables each having an exponential distribution with parameter \(\lambda\), then the random variable \(X = X_1 + ... + X_{\alpha}\) has a gamma distribution with parameters \(\alpha\) and \(\beta = 1/\lambda\).
+
+
+
 
 ## 2. PDF
 
