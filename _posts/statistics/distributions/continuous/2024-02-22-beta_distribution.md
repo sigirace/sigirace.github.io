@@ -133,14 +133,11 @@ $$
 > 이제 베이즈 추정법을 통해 실제 10% 주문서가 성공할 확률을 추정해보자.
 
 - 주문서가 발릴 확률을 확률변수 $\theta$로 설정
-- 베이즈 추정법
 
-{% raw %}
+✏️ **베이즈 추정법**
 $$
 f_{(\theta \mid X)}(\theta \mid x)= \frac {f_{(X \mid \theta)}(X \mid \theta) f_{\theta}(\theta)}{f_X(x)}
 $$
-
-{% endraw %}
 
 - $f_{(\theta \mid  X)}(\theta \mid x)$: 사후확률, posterior
   - 데이터 X를 관측한 후 업데이트된 확률변수의 분포
@@ -241,7 +238,7 @@ f(\theta \mid x) \propto \theta^{\alpha+x+1} \cdot (1-\theta)^{\beta - x + n-1}
 $$
 {% endraw %}
 
-- 따라서 posterior의 분포는 $\Beta(\alpha + x, \beta - x + n)$으로 베타분포로 정의 할 수 있음
+- 따라서 posterior의 분포는 $B(\alpha + x, \beta - x + n)$으로 베타분포로 정의 할 수 있음
 - 이렇게 prior와 posterior이 같은 연산을 나타내는 경우 켤례사전분포라고 함
 
 <br>
