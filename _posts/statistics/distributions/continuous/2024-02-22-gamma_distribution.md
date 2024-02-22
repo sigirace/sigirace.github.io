@@ -3,7 +3,7 @@ layout: single
 title:  'Continuous distribution (3) Gamma Distribution'
 toc: true
 categories: [Probability Distribution]
-tags: [Discrete, Geometric]
+tags: [Continuous, Gamma]
 ---
 
 여러 분포들에 대한 소개
@@ -48,6 +48,8 @@ $$
 $$
 {% endraw %}
 
+- 감마함수는 factorial을 식수 및 복소수로 확장한 것
+
 📍 **감마함수로부터 감마분포 유도**
 
 {% raw %}
@@ -56,7 +58,7 @@ $$
 $$
 {% endraw %}
 
-- 위 식에서 확률변수 X=x라 할 때, 구간 0에서 $\infity$ 까지의 적분은 1이 되어야 함
+- 위 식에서 확률변수 X=x라 할 때, 구간 0에서 $\infty$ 까지의 적분은 1이 되어야 함
 - 양변을 $\Gamma(\alpha)$로 나눔
 
 {% raw %}
@@ -69,7 +71,7 @@ $$
 
 - CDF에서 $f(x)$만을 나타낸 것
 
-### 3. Theta
+## 3. Theta
 
 $$
 X \sim \text{Gamma}(\alpha, \beta)
@@ -78,7 +80,12 @@ $$
 - $\alpha (k)$: 사건의 발생 횟수 (지수분포의 개수), 형상 매개변수
 - $\beta (\theta)$: 단위 시간당 사건의 발생 횟수, 척도 매개변수
 
-## 4. Visualization
+## 4. Summary Statistics
+
+- Expectation: $\frac {\alpha} {\lambda}$
+- Variance: $\frac {\alpha} {\lambda^2}$
+
+## 5. Visualization
 
 ````python
 import numpy as np
@@ -118,13 +125,13 @@ plt.grid(True)
 plt.show()
 ````
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/distributions/gam2.png?raw=true" width="600" height="400"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/distributions/gam2.png?raw=true" width="600" height="500"></p>
 
 - 형상 모수가 클 수록 분포가 완만해짐
 - 사건의 수가 증가함에 따라, 해당 사건들이 발생하는 데 필요한 총 시간의 분포가 넓어짐
 - 사건들이 발생하는 데 걸리는 총 시간이 길어질 확률이 높아진다는 것을 의미
 
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/distributions/gam1.png?raw=true" width="600" height="400"></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/statistics/distributions/gam1.png?raw=true" width="600" height="500"></p>
 
 - 척도 모수가 클 수록 분포가 완만해짐
 - 척도 모수가 크다 ☞ $\lambda$가 작다
