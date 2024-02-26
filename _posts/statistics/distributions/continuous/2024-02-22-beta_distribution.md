@@ -3,7 +3,7 @@ layout: single
 title:  'Continuous distribution (4) Beta Distribution'
 toc: true
 categories: [Probability Distribution]
-tags: [Continuous, Beta]
+tags: [Continuous, Beta, Bayesian Estimation]
 
 ---
 
