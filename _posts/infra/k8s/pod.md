@@ -517,16 +517,6 @@ kubectl rollout undo deploy http-go --to-revision=1
 
 
 
-목) 어깨
-
-금) 이두, 삼두
-
-토) 유산소
-
-일) 등
-
-
-
 
 
 
