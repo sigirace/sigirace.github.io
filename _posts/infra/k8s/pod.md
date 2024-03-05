@@ -1,4 +1,22 @@
-[pod]
+---
+layout: single
+title:  'k8s (3) Pod 정리'
+toc: true
+categories: [K8S]
+tags: [Pod]
+
+---
+
+[데브옵스(DevOps)를 위한 쿠버네티스 마스터](https://www.inflearn.com/course/%EB%8D%B0%EB%B8%8C%EC%98%B5%EC%8A%A4-%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%EB%A7%88%EC%8A%A4%ED%84%B0/dashboard) 강의 정리
+{: .notice}
+
+
+
+## 1. Pod
+
+### 1.1 속성
+
+[Image_pod1]
 
 - 쿠버네티스는 컨테이너를 개별적으로 배포하지 않고 컨테이너의 포드를 배포 및 운영
 - 일반적으로 포드는 단일 컨테이너만 포함하지만 다수의 컨테이너 포함 가능
@@ -8,23 +26,35 @@
 - 여러 노드에 걸쳐서 생성되지 않고 단일 노드에서만 생성 및 실행
 - 다수 컨테이너일 경우 컨테이너간 자원 공유 가능
 
-📍 장점
+<br>
+
+### 1.2 장점
 
 - 연관된 프로세스를 하나의 환경에서 동작하는 것처럼 함께 실행
 - 그러나 다소 격리된 상태로 유지
 
+<br>
 
+### 1.3 네트워크 구조
 
-📍 네트워크 구조
+[Image_pod2]
 
-- pod이 할당받은 네트워크 대역대에서 순차적으로 증가하는 형태
-- 서로간의 통신도 잘 됨
+- pod가 할당받은 네트워크 대역대에서 순차적으로 증가하는 형태
+  - 클러스터에서 각 pod는 고유한 IP를 할당 받음
+  - pod IP 주소는 클러스터 내 사전 정의된 네트워크 대역대에서 할당 됨
+
 - NAT 게이트웨이가 따로 존재하지 않음
-- 외부에서 해당 IP로 접근하는 것은 불가능하며 외부에 서비스 객체 생성해야함
+  - k8s 네트워크 핵심 원칙 중 하나는 모든 pod가 서로를 직접 접근할 수 있어야 한다는 것
+  - 따라서 VM이나 물리적 네트워크에서 흔히 볼 수 있는 NAT 게이트웨이가 필요하지 않음
+
+- 외부에서 해당 IP로 접근하는 것은 불가능하며 서비스라는 객체를 생성해야함
+  - pod는 클러스터 내부에서만 라우팅 될 수 있음
+  - 클러스터 외부 네트워크에서는 접근할 수 없음
+
+<br>
 
 
-
-📍 파드 구성요소
+### 1.4 구성요소
 
 - apiVersion: 쿠버네티스의 api 가 일치해야 통신 가능 일종의 프로토콜
 - kind: 리소스의 유형 결정 (pod, replica, service ...)
@@ -34,7 +64,7 @@
 
 
 
-📍 쿠버네티스 리소스 종류
+📍 **쿠버네티스 리소스 종류**
 
 - **Pod (파드)**: 쿠버네티스 애플리케이션의 기본적인 빌딩 블록으로, 하나 이상의 컨테이너가 포함된 그룹입니다. 파드는 스케일링, 네트워킹, 스토리지 리소스를 공유합니다.
 - **Service (서비스)**: 파드 집합에 대한 안정적인 네트워크 주소를 제공합니다. 서비스는 파드에 도달하기 위한 내부 네트워크에서의 고정 IP 주소와 포트를 정의하며, 로드 밸런싱을 제공합니다.
@@ -43,15 +73,29 @@
 
 
 
-[pod 실습]
+📍 **서비스 유형**
 
+- **ClusterIP**: 기본 서비스 유형으로, 클러스터 내부에서만 접근할 수 있는 내부 IP를 생성합니다.
+- **NodePort**: 클러스터의 모든 노드에 특정 포트를 개방하고, 이 포트를 통해 서비스에 접근할 수 있게 합니다. 이를 통해 클러스터 외부에서도 서비스에 접근할 수 있습니다.
+- **LoadBalancer**: 클라우드 제공업체의 로드 밸런서를 사용하여 서비스에 외부 IP 주소를 할당합니다. 이를 통해 클러스터 외부에서 서비스에 접근할 수 있으며, 트래픽을 자동으로 파드에 분산시킵니다.
+
+<br>
+
+### 1.5 Pod 실습
+
+```
 cd ~
-
 mkdir yaml
-
 cd yaml
+```
 
+- YAML 파일 저장소 설정
+
+```
 vi go-http-pod.yaml
+```
+
+- yaml 파일 생성
 
 ```yaml
 apiVersion: v1
@@ -68,61 +112,120 @@ spec:
     - containerPort: 8080
 ```
 
+- pod yaml descriptor
+
+```
 kubectl create -f go-http-pod.yaml
+```
 
 - 파일에 정의된 내용을 기반으로 쿠버네티스 리소스를 생성
 
+```
 kubectl get pod http-go
-
 kubectl get pod http-go -o wide
+```
 
 - 생성 확인
 
+```
 kubectl annotate pod http-go test1234=test1234
+```
 
 - 주석생성
 
+```
 kubectl delete -f go-http-pod.yaml
+```
 
 - 삭제
 
+```
 kubectl delete pod --all
+```
 
 - 모두삭제
 
+<br>
 
+## 2. Probe
 
-[Probes]
+### 2.1 속성
 
 - 각각의 기능들이 포드를 보조하는 역할을 수행
-- 포드 내부에 설정파일로 존재
+- 포드 내부에 설정파일 작성
 
-📍 Liveness Probe
+<br>
+
+### 2.2 Liveness Probe
 
 - 살아있는지 판단하고 살아있지 않다면 다시 시작 ☞ 가용성
 
-📍 Readiness Probe
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-exec
+spec:
+  containers:
+  - name: liveness
+    image: registry.k8s.io/busybox
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      periodSeconds: 5
+```
+
+<br>
+
+### 2.3 Readiness Probe
 
 - 포드가 준비된 상태에 있는지 확인하고 정상 서비스를 시작
 - 포드가 준비되지 않은 경우 로드밸런싱을 하지 않음
   - 서비스가 포드로 로드밸런싱을 할텐데 레디니스 체크 후 로드밸런싱 리스트 생성
 
-📍 Startup Probe
+```yaml
+readinessProbe:
+  exec:
+    command:
+    - cat
+    - /tmp/healthy
+  initialDelaySeconds: 5
+  periodSeconds: 5
+```
 
-- 애플리케이션 시작 시기를 확이냏서 가용성을 높임
+<br>
+
+### 2.4 Startup Probe
+
+- 애플리케이션 시작 시기를 확인해서 가용성을 높임
 - Liveness와 Readiness를 비활성화하고 컨테이너가 시작할 수 있는 시간을 벌어줌
 
-https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+<br>
 
+### 2.5 참고 사이트
 
+- [영문 가이드](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+- [Pod 라이프사이클](https://kubernetes.io/ko/docs/concepts/workloads/pods/pod-lifecycle/)
 
-[레이블과 셀렉터]
+<br>
 
-- 모든 서비스에 레이블과 셀렉터 없이는 돌아가 ㄹ수 없음
+## 3. 레이블과 셀렉터
 
-📍 레이블
+- 모든 서비스에 레이블과 셀렉터 없이는 돌아갈 수 없음
 
-- 리소스를 인식하기 위한 바코드 역할
+<br>
+
+### 3.1 레이블
+
 - 리소스의 목적에 따라 검색을 수행할 수 있게 됨
   - 다수의 레이블을 가질 수 있음
   - 만드는 시점에 레이블을 첨부하나 수정, 추가 가능
@@ -131,9 +234,7 @@ https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-read
   - app: 애플리케이션 구성요소, 마이크로서비스 유형 지정
   - rel: 애플리케이션 버전 지정 (release, 버전)
 
-
-
-📍 포드 생성 시 레이블 지정
+📍 **포드 생성 시 레이블 지정 예시**
 
 - metadata의 labels에 지정 > 여러개 가능
 
@@ -145,71 +246,82 @@ metadata:
 		key2: value2
 ```
 
+<br>
 
+### 3.2 레이블 및 셀렉터 명령어
 
-📍 명령어
-
+```
 kubectl label pod [name] [key]=[value]
+```
 
 - 레이블을 추가 및 수정
 
+```
 kubectl label pod [name] [key]=[value] --overite
+```
 
 - 기존 레이블 수정
 
+```
 kubectl label pod [name] [key]-
+```
 
 - 레이블 삭제
 
+```
 kubectl get pod --show-lables
+```
 
 - 레이블 확인
 
+```
 kubectl get pod -L [key1],[key2]
+```
 
 - 특정 레이블 컬럼으로 확인
 
+```
 kubectl get pod --show-lables -l ['key']
-
 kubectl get pod --show-lables -l ['key' = or != 'value']
+```
 
 - 필터링하여 검색
 
+<br>
 
+### 3.3 참고 사이트
 
-📍 레이블 배치 전략
+- [레이블 배치 전략](https://cast.ai/blog/kubernetes-labels-expert-guide-with-10-best-practices/)
 
-https://cast.ai/blog/kubernetes-labels-expert-guide-with-10-best-practices/
+<br>
 
+## 4. Replication Controller
 
-
-[Replication Controller]
-
-📍 Replication Controller
+### 4.1 속성
 
 - replicaset의 구버전 (v1.8 이전)
 - 포드가 잘 생성되었는지 감시하고, 장애가 났다면 재생성
 - 지속적으로 모니터링하고 실제 포드수가 원하는 포드수와 맞는지 체크
 
+<br>
 
+### 4.2 구성 요소
 
-📍 레플리케이션 컨트롤러 세가지 요소
+- 레이블 셀렉터: 포드의 범위를 결정 ☞ 어떤 레이블을 가진 pod를 복제할 것인가
+- 복제본 수: 포드의 복제 수를 결정
+- 포드 템플릿: 포드의 모양을 설명, 포드의 정보
 
-- 레이블 셀렉터: 포드의 범위를 결정
-- 복제본 수: 포드의 수를 결정
-- 포드 템플릿: 새로운 포드의 모양을 설명, 레플리카셋 하위에 포드가 생성되기 위한 포드의 정보
+<br>
 
-
-
-📍 레플리케이션 컨트롤러의 장점
+### 4.3 장점
 
 - 포드가 없는 경우 새 포드를 실행
 - 노드 장애 발생시 다른 노드에 복제본 생성
 - 수동, 자동으로 수평 스케일링
 
+<br>
 
-
-📍 레플리케이션 컨트롤러 실습
+### 4.4 Replication Controller 실습
 
 ```yaml
 # replication.yaml
@@ -236,81 +348,95 @@ spec:
 
 - pod의 템플릿이 가지고 있는 label과 셀렉터 부분의 label이 동일해야함
 
-
-
+```
 kubectl create -f replication.yaml
+```
 
 - replication controller 생성
 
+```
 kubectl get pod
+```
 
 - 생성 확인
 
-kubectl delete pod nginx-2wc9b
-
+```
+kubectl delete pod [pod_name]
 kubectl get pod
+```
 
 - 삭제 후 rc에 의해 신규 파드 생성 확인
 
-kubectl label pod nginx-85vgc app-
-
+```
+kubectl label pod [pod_name] app-
 kubectl get pod
+```
 
 - 라벨 삭제 및 rc에 의해 신규 파드 생성 확인
 
+```
 kubectl get pod -o wide
+```
 
 - Node 확인
 
+```
 kubectl get nodes -w
+```
 
-- worker2 정지
+- 😗 worker2를 정지 시켜보자
 - 노드의 상태가 Ready로 변경
 
+```
 kubectl get pod -w
+```
 
 - 5분 후에 변경사항 반영됨
 - 컨테이너를 빠르게 반응하면 자원 문제가 발생할 수 있기에 시간 텀을 둠
 - 5분 뒤에 terminating > pending 상태를 거쳐 worker1에 생성됨
 
+```
 kubectl get nodes -w
+```
 
-- worker2 시작
+- 😗 worker2를 시작 시켜보자
 - worker2가 ready로 변경
 
+```
 kubectl get pod -o wide
+```
 
 - 장애가 났을때 만들어졌던 파드들은 삭제됨
 - 쿠버네티스 자체 리소스가 충분하기에 worker1에만 배치됨
   - 리소스가 부족하면 분산배치함
 
+📍 **레플리케이션 수정**
 
-
-📍 레플리케이션 수정
-
-✏️ 명령어
-
+```
 kubectl scale rc [name] --replicas=[num]
-
 kubectl edit rc [name]
+```
 
+- 직접 수정
 
-
-✏️ 복사후 configure
-
+```
 cp [old_yaml] [new_yaml]
-
 kubectl apply -f [new_yaml]
+```
 
+- yaml 파일 신규 생성 및 수정 후 configure
 
+📍 **레플리케이션 삭제**
 
-📍 레플리케이션 삭제
-
+```
 kubectl delete rc [name]
+```
 
 
 
-[ReplicaSet]
+## 5. ReplicaSet
+
+### 5.1 속성
 
 - 레플리케이션 컨트롤러와 거의 동일하게 동작
 - 레플리케이션 컨트롤러는 레이블을 유연하게 선택하기 어려운 단점이 있음
@@ -515,9 +641,93 @@ kubectl rollout undo deploy http-go --to-revision=1
 
 [Namespaces]
 
+- 하나의 클러스터에서도 권한을 나누어 자신만의 공간에 원하는 포드나 자원들을 배치하고 통신을 할 수 있게함
+- 자원을 한정되게 하여 안정적으로 서비스를 관리하게 만들어줌
+
+- 리소스를 각각의 분리된 영역으로 나누기좋은 방법
+- 여러 네임스페이스를 사용하면 복잡한 쿠버네티스 시스템을 더 작은 그룹으로 분할
+- 멀티 테넌트 환경을 분리하여 리소스를 생산, 개발, QA 환경 등으로 사용
+- 리소스 이름은 네임스페이스 내에서만 고유 명칭 사용
+  - 아이디는 게임 서버 내에서만 유일한 개념
 
 
 
+kubectl get ns
+
+- 현재 클러스터의 기본 네임스페이스 확인
+- 기존에 사용하는 것은 default
+- kubectl get시에 옵션 없이 사용하면 default 네임스페이스에 질의
+
+kubectl get po --namespace [namespace_name]
+
+- 특정 namespace에 질의
+
+kubectl get [resource] --all-namespaces
+
+- 전체 네임스페이스 대상으로 질의
+
+
+
+📍 namespace 실습
+
+생성방식1
+
+kubectl create ns [ns_name]
+
+- 네임스페이스 생성
+
+생성방식2
+
+kubectl create ns [ns_name] --dry-run=client -o yaml > [ns_name.yaml]
+
+- --dry-run: 문법 검사
+- -o yaml: yaml 파일 생성
+- yaml 파일로 저장
+
+kubectl create -f [ns_name.yaml]
+
+kubectl get ns
+
+- 확인
+
+nginx 배포
+
+kubectl create deploy nginx --image nginx --port 80 -n [ns_name]
+
+- 배포
+
+kubectl get pod -n office
+
+- 조회
+
+
+
+default 수정
+
+vim ~/.kube/config
+
+```
+# 수정전
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+    
+# 수정후
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+    namespace: [ns_name]
+```
+
+
+
+namespace 삭제
+
+kubectl delete ns [ns_name]
+
+- 네임스페이스에서 삭제한 모든 것들이 삭제됨
 
 
 
