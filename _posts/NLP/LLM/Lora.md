@@ -67,3 +67,36 @@ $$
 
 
 
+## 3. Aren't Existing Solutions Good Enough?
+
+The problem we set out to tackle is by no means new.
+
+- 본 논문에서 해결하고자 하는 문제는 새로운 것이 아니다.
+
+Since the inception of transfer learning, dozens of works have sought to make model adaptation more parameter- and compute-efficient.
+
+- Transfer learning의 시작부터, 여러 연구들은 모델의 학습을 parameter, 계산 측면에서 효율적으로 만들고자 시도했다.
+
+
+
+Using language modeling as an example, there are two prominent strategies when it comes to efficient adaptations: adding adapter layers (Houlsby et al., 2019; Rebuffi et al., 2017; Pfeiffer et al., 2021; R¨uckl´e et al., 2020) or optimizing some forms of the input layer activations (Li & Liang, 2021; Lester et al., 2021; Hambardzumyan et al., 2020; Liu et al., 2021). 
+
+
+
+- Language model을 예로들자면, 두 가지의 저명한 전략들이 있다 효율적인 학습에 대해
+- adapter layer를 추가하는것 또는 
+- input layer의 최적화하는것 몇 input 형태를
+
+
+
+언어 모델링을 예로 들 때, 효율적인 적응에 있어서 두 가지 주요 전략이 있습니다: 어댑터 레이어 추가하기 (Houlsby et al., 2019; Rebuffi et al., 2017; Pfeiffer et al., 2021; R¨uckl´e et al., 2020) 또는 입력 레이어 활성화의 일부 형태를 최적화하기 (Li & Liang, 2021; Lester et al., 2021; Hambardzumyan et al., 2020; Liu et al., 2021). 
+
+
+
+
+
+However, both strategies have their limitations, especially in a large-scale and latency-sensitive production scenario.
+
+
+
+그러나, 두 전략 모두 대규모 및 대기 시간에 민감한 생산 시나리오에서는 특히 한계를 가지고 있습니다.
