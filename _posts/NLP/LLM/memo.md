@@ -22,6 +22,14 @@ agnostic: 불가지론 (딥러닝 분야에서는 모델에 구애받지 않음)
 
 subsequent: 후속
 
+inception: 시작
+
+ have sought to: ~하려고 노력하다
+
+when it comes to : ~에 관해서
+
+
+
 
 
 
