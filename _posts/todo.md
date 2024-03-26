@@ -729,3 +729,58 @@ TADGAN
 
 또한 이를 통해 최종적으로는 삼성물산의 O&M 사업의 경쟁력을 확보를 목적으로 합니다.
 
+
+
+
+
+
+
+[경력사항]
+
+- T5
+
+
+
+[기타]
+
+- 이직 희망 사유
+- 문제 발생 시 해결 방법
+- 스트레스 해소 방법
+- 업무적으로 문제가 발생했을 때 대처 방식
+
+
+
+[다른 의견]
+
+- 내부에서 발표자의 방향을 이미 검토해 봄 다른 새로운 아이디어나 의견
+- 전처리
+  - 결측치 이상치
+  - https://ok-lab.tistory.com/189
+
+
+
+[꼬리질문]
+
+- 데이터 증강
+  - timegan
+  - https://towardsdatascience.com/modeling-and-generating-time-series-data-using-timegan-29c00804f54d
+  - https://github.com/jsyoon0823/TimeGAN
+
+
+
+- tadgan
+  - https://smilegate.ai/2021/06/01/tadgan/
+
+
+
+[과제 강/약점]
+
+- 그린수소가 어려운 이유
+  - https://blog.naver.com/ginius94/223302728265
+
+
+
+
+
+
+
