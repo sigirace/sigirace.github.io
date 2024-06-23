@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  'MLOps Model Development (1) MLOps Model Development'
+title: "MLOps Model Development (1) MLOps Model Development"
 toc: true
 categories: [MLOps]
 tags: [Model Development]
@@ -32,8 +32,6 @@ Machin Learning 프로젝트의 첫 번째 단계는 비즈니스 맥락을 이�
 
 앞선 과정들이 준비되었다면 모델을 점진적으로 고차원으로 개발하고 평가하는 과정을 수행해야한다. 해당 과정을 수행할 시 다양한 모델을 구축할 것이며 각 모델의 파라미터들을 조정하며 많은 실험 결과를 산출하게 된다. 이때 만약 실험의 결과를 기록하거나 추적할 수 없다면 최적의 결과를 찾기까지 많은 시간이 소모될 것이다. 반면 실험 결과를 추적할 수 있다면, 주요하게 작용한 feature, parameter 등을 고려해 최적의 결과로 수렴하는 과정이 수월해지며, 협업시에도 빠른 의사결정을 할 수 있을 것이다. 따라서 다양한 가설을 통해 구축한 모델을 실험하고 점진적으로 모델을 개선시키기 위해서는 tracking이 필요하다.
 
-
-
 ## 3. Development Tools
 
 효과적인 모델 개발 및 평가를 위한 필수 조건 중 하나는 엔지니어의 개발 환경을 구축하는 것이다. 아래의 기능들은 반복 가능하고 신뢰성 있는 개발 환경을 구축하는데 필요한 것들이다.
@@ -46,8 +44,6 @@ Machin Learning 프로젝트의 첫 번째 단계는 비즈니스 맥락을 이�
 
 많은 기업들이 컴퓨팅 요구사항에 맞게 cloud 혹은 on-prem의 분석 환경을 제공한다. 그러나 의존성과 환경이 서로 호환되지 않는 경우가 종종 있기에 개발자들은 본인이 원하는 환경(=sandbox environment)을 구축하는 능력이 필요하다. 개발 환경과 제공되는 환경 간의 불일치를 최소화하는 것이 신속한 모델 개발을 가능하게 하는 데 중요하기 때문이다.
 
-
-
 ## 4. Decision Optimization
 
 Machine Learning은 운영 의사 결정을 최적화 하는데 사용되곤 한다. 하지만 모델은 비즈니스의 의사 결정이 아니라 단순 예측치만을 제공할 뿐이다. 따라서 모델을 사용하여 의사 결정을 내리는 정책을 세워야 한다.
@@ -58,9 +54,7 @@ Machine Learning은 운영 의사 결정을 최적화 하는데 사용되곤 한
 >
 > 반면 임계값을 높게 설정한다면 거짓 양성의 수는 감소하지만 False Negative(=거짓 음성)의 수가 증가한다. 이는 거짓 음성이 실제로 질병을 갖고 있는 놓칠 수 있는 위험을 야기한다.
 
-위의 예시로 알 수 있듯, 모델 예측을 올바르게 사용하기 위한 적절한 의사결정 정책이 없다면 비즈니스 효과를 오히려 부정적으로 이끌 수 있다. ["Tuning The Model For Business Value"](https://wandb.ai/wandb_course/lesson3%20followup/reports/Finding-Which-Lemons-are-Lemons-Assessing-and-Optimizing-Business-Value-With-ML--VmlldzoyNTU4NjY5#tuning-the-model-for-business-value) 이 블로그의 글은 비즈니스 가치를 극대화 하는 방법을 보여주는 실제적인 예시를 보여주며 의사 결정 최적화를 쉽게 이룰 수 있는 Tracking Tool을 소개한다. 
-
-
+위의 예시로 알 수 있듯, 모델 예측을 올바르게 사용하기 위한 적절한 의사결정 정책이 없다면 비즈니스 효과를 오히려 부정적으로 이끌 수 있다. ["Tuning The Model For Business Value"](https://wandb.ai/wandb_course/lesson3%20followup/reports/Finding-Which-Lemons-are-Lemons-Assessing-and-Optimizing-Business-Value-With-ML--VmlldzoyNTU4NjY5#tuning-the-model-for-business-value) 이 블로그의 글은 비즈니스 가치를 극대화 하는 방법을 보여주는 실제적인 예시를 보여주며 의사 결정 최적화를 쉽게 이룰 수 있는 Tracking Tool을 소개한다.
 
 ## 5. Governance
 
@@ -75,8 +69,6 @@ Machine Learning에서 발생할 수 있는 bias들의 원인은 매우 다양�
 - **Lerning bias**: 모델이 훈련되는 방식에 따른 것으로 훈련 데이터에 따라 모델이 치우친 결과른 내는 것이다.
 - **Evaluation bias**: 모델이 검증되는 방식에 대한 것으로 평가시 지표나 데이터의 구성에 따라 성능이 달라질 수 있다.
 - **Deployment bias**: ML system의 최종 구현 및 사용 방식에 대한 것으로 실제 환경에서 특정 그룹이 불공평하게 영향을 받을 수 있다.
-
-
 
 ## 6. Future Plans
 

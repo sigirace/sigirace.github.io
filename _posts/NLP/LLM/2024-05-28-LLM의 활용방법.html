@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>2024-05-28-LLM의 활용방법.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="1-large-language-model">1. Large Language Model</h2>
+<blockquote>
+<p>서비스를 위한 LLM의 종류에 대한 설명</p>
+</blockquote>
+<p>✏️ <strong>읽기 전에 알아보는 LLM 기초 상식</strong></p>
+<ul>
+<li>Large Language Model(LLM)은 Language Model(LM)에서 발전한 것</li>
+<li>LM은 문장에서 특정 단어의 뒤에 어떤 단어가 나올 확률을 계산하는 것 ex) 오늘 점심은 [다음 나올 단어 ☞ 구내식당-90%, 외식-9.9%, 휴지-0.01% ...]
+<ul>
+<li>확률에 의해 추출된 단어를 연결(concat)시켜 새로운 문장을 생성</li>
+<li>확률을 계산하기 위해 문장(=학습 데이터)을 학습시킴</li>
+<li>따라서, 학습 데이터인 문장에 의존적, 도메인 의존적인 모델이 구축됨</li>
+<li>데이터를 학습시킨다는 것은 신경망의 parameter를 update 한다는 뜻</li>
+</ul>
+</li>
+<li>LLM은 LM보다 훨씬 많은 parameter를 가진 큰 신경망 (<code>Transformer</code> 구조는 동일)
+<ul>
+<li>LM보다 더 많은 데이터들을 학습할 수 있음 ☞ 다양한 질문에 대한 답변 가능(일반화)</li>
+<li>LM보다 더 복잡한 연산을 통해 확률을 계산할 수 있음 ☞ 고품질 추론 가능(성능)</li>
+</ul>
+</li>
+<li>Parameter가 많아질수록 다양한 질문에 대한 답변(일반화) 및 답변의 품질(성능)이 높아짐</li>
+<li>Parameter가 많아질수록 학습 및 연산(답변) 과정이 길어짐
+<ul>
+<li>서비스에 이용하기 위해서는 GPU 필요</li>
+<li>연산을 위한 parameter 담길 공간인 메모리 또한 중요</li>
+</ul>
+</li>
+</ul>
+<p>📍<strong>Transformer Architecture</strong></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/nlp/llm/transformer_archi.png?raw=true" width="600" height="550"></p>
+<p style="text-align: center;"> LLM 모델에서 사용되는 아키텍처</p>
+<p>📍 <strong>LLM with GPU</strong></p>
+<ul>
+<li>📜 <a href="https://infoengineer.tistory.com/106">가정집에서 LLM을 직접 돌려보려는 사람을 위한 GPU 선택 이야기</a></li>
+</ul>
+<h3 id="11-foundation-model">1.1 Foundation Model</h3>
+<p>👀 <strong>정의</strong></p>
+<blockquote>
+<p>방대한 양의 데이터를 학습하여 특정 Task를 지정하지 않아도 다양한 Task를 수행할 수 있는 대규모 언어 모델</p>
+</blockquote>
+<ul>
+<li>빅테크에서 서비스 중인 LLM인 GPT, Gemmini 등이 예시</li>
+<li>Task: 요약, 분류, 번역, 생성, QA 등</li>
+</ul>
+<p>🔴 <strong>한계점</strong></p>
+<ul>
+<li>모델이 공개된 것이 아닌 API 사용이므로 사용하기는 편리하나 금융, 방산 등 기업 적용시 한계 ☞ Cloud Service</li>
+<li>일반 기업에서는 opt out 방식으로 정보를 활용</li>
+<li>opt out: 정보 주체의 동의를 받지 않고 개인정보를 수집, 이용한 후 당사자가 거부 의사를 밝히면 개인정보 활용을 중지</li>
+</ul>
+<h3 id="12-open-model">1.2 Open Model</h3>
+<p>👀 <strong>정의</strong></p>
+<blockquote>
+<p>누구나 사용할 수 있도록 공개한 대규모 언어 모델</p>
+</blockquote>
+<ul>
+<li><strong>기업에서 컨트롤 가능하며, 오너십을 가지고 운영 가능</strong></li>
+<li>최초 모델 다운로드 후 오프라인에서 사용가능 ☞ <code>On-prem 가능</code></li>
+<li>Hugging Face에서 제공하는 LLaMA, Mistral 등이 예시</li>
+</ul>
+<p>🔴 <strong>한계점</strong></p>
+<ul>
+<li>영어 기반임으로 한국어에 대한 답변 품질이 좋지 못함</li>
+</ul>
+<p>☀️ <strong>대안</strong></p>
+<ul>
+<li>한국어 데이터 기반으로 학습한 모델들이 등장</li>
+<li>HuggingFace에서 ko로 검색하면 나오는 모델들</li>
+<li><a href="https://huggingface.co/MLP-KTLim/llama-3-Korean-Bllossom-8B">Llama</a>, <a href="https://huggingface.co/OrionStarAI/Orion-14B-Base">Orion</a> 등</li>
+</ul>
+<h3 id="13-sllm">1.3 sLLM</h3>
+<p>👀 <strong>정의</strong></p>
+<blockquote>
+<p>Large Langue Model에 비해 Parameter 개수가 작은 모델</p>
+</blockquote>
+<ul>
+<li>GPT 3.0의 Parameter는 약 1700억 (모델 버전이 올라갈수록 높아짐)</li>
+<li>sLLM의 가장 작은 버전은 약 70억개</li>
+</ul>
+<p>🔴 <strong>한계점</strong></p>
+<ul>
+<li>일반화 성능이 떨어지며 품질이 좋지 못할 수 있음</li>
+</ul>
+<p>☀️ <strong>대안</strong></p>
+<ul>
+<li>일반적인 상황이 아닌 특정 도메인(화학, 법률, 의료 등)에서 활용될 수 있도록 학습수행</li>
+</ul>
+<p>📌 <strong>더 알아보기</strong></p>
+<ul>
+<li>llama, mistral 등 다양한 open model 중 용량이 작은 7B, 14B 등의 모델을 sLLM이라고 부름</li>
+<li>📜 <a href="https://www.igloo.co.kr/security-information/%EC%9E%91%EC%A7%80%EB%A7%8C-%EC%98%A4%ED%9E%88%EB%A0%A4-%EC%A2%8B%EC%95%84-%EC%86%8C%ED%98%95-%EC%96%B8%EC%96%B4-%EB%AA%A8%EB%8D%B8sllm/">작지만 오히려 좋아! 소형 언어모델(sLLM)</a></li>
+</ul>
+<br>
+<h2 id="2-using-on-service">2. Using on Service</h2>
+<blockquote>
+<p>서비스를 위한 LLM의 사용 방법에 대한 설명</p>
+</blockquote>
+<ul>
+<li>위 두 종류의 제공되는 LLM은 기업의 데이터를 알지 못함 ☞ 기업 정보 질의에 대한 답변 불가능</li>
+<li>따라서, 기업 서비스에 사용되려면 <code>프롬프트 엔지니어링</code> 또는 <code>학습</code> 이 필요하며 이들은 기업의 데이터에 기반함</li>
+<li>prompt eng: 언어모델에 사족을 다는 과정</li>
+</ul>
+<h3 id="21-prompt-engineering">2.1 Prompt Engineering</h3>
+<p>👀 <strong>정의</strong></p>
+<blockquote>
+<p>LLM에게 특정 작업을 수행하도록 지시하는 프롬프트 설계를 하는 과정</p>
+</blockquote>
+<ul>
+<li><code>프롬프트 설계</code> 및 <code>프롬프트 최적화</code>를 하는 것으로 모델의 연산을 위한 parameter는 변화하지 않음
+<ul>
+<li>프롬프트 설계: 모델이 주어진 작업을 수행하기 위해 필요한 정보를 프롬프트에 포함시키는 것</li>
+<li>프롬프트 최적화: 모델의 성능을 극대화 하기 위해 다양한 프롬프트를 시도하고 조정함</li>
+</ul>
+</li>
+<li>질의에 모델이 작업을 수행하는 방법에 대한 예시를 제공하는 <code>작업 예시 포함</code> 방법도 있음</li>
+</ul>
+<p>🔴 <strong>한계점</strong></p>
+<ul>
+<li>학습되지 않은 정보에 대해서 답변하는데 한계가 존재함</li>
+<li>질의시마다 관련된 예시를 생성해야 함</li>
+<li>예시에 국한된(overfitting) 답변을 생성할 수 있음</li>
+</ul>
+<p>☀️ <strong>대안</strong></p>
+<ul>
+<li><strong>RAG</strong>: 관련된 정보를 DB 내에서 검색하여 예시를 풍부하게 증강함</li>
+<li><strong>Fine tuning</strong>: 특정한 정보를 학습시켜 답변이 가능하도록 함</li>
+</ul>
+<h3 id="22-few-shot-learningfsl">2.2 Few-shot Learning(FSL)</h3>
+<p>👀 <strong>정의</strong></p>
+<blockquote>
+<p>LLM에 소수의 예시를 사용하여 빠르게 학습하는 기술</p>
+</blockquote>
+<ul>
+<li>데이터 수집이 어렵거나 비용이 많이 드는 상황에서 유리함</li>
+<li>새로운 작업이나 도메인에 빠르게 적응할 수 있음 (전문용어, 새로운 도메인 등)</li>
+</ul>
+<p>🔴 <strong>한계점</strong></p>
+<ul>
+<li>일반화 능력의 한계: Few-shot learning은 제공된 예제와 유사한 작업에는 잘 동작하나, 예제와 다른 상황에서는 일반화가 어려움</li>
+<li>프롬프트 민감성: Few-shot learning의 성능은 제공된 프롬프트의 질과 형식에 크게 의존함</li>
+</ul>
+<p>🗣️ <strong>예시</strong></p>
+<pre class="hljs"><code><div>## Few shot learning 학습 데이터
+
+Q: What is the capital of France?
+A: Paris
+
+Q: What is the capital of Italy?
+A: Rome
+
+Q: What is the capital of Japan?
+A: Tokyo
+</div></code></pre>
+<p>📌 <strong>더 알아보기</strong></p>
+<ul>
+<li>📼 <a href="https://www.youtube.com/watch?v=yppOxUAQGZA">프롬프트 엔지니어링 기초1-퓨샷러닝</a></li>
+</ul>
+<h3 id="23-ragretrival-augmented-generation">2.3 RAG(Retrival-Augmented Generation)</h3>
+<blockquote>
+<p>프롬프트에 검색을 통한 정보를 포함하여 정보에 기반한 응답을 생성하는 기술</p>
+</blockquote>
+<ul>
+<li>검색을 통해 질의와 유사한 정보를 추출하는 검색 엔진 필요</li>
+<li>프롬프트에 정보를 포함하기 때문에 프롬프트 엔지니어링의 범주에 속한다고 볼 수 있음</li>
+<li><code>Prompt Engineering</code>과 동일하게 모델 내의 parameter는 수정되지 않음</li>
+</ul>
+<p>📍 <strong>Rag Architecture</strong></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/nlp/llm/rag_archi_aws.png?raw=true" width="600" height="350"></p>
+<p style="text-align: center;">AWS의 Retrieval Augmented Generation (RAG) 아키텍처 설명</p>
+<ol>
+<li>프롬프트와 질문내용을 LLM 서비스에 전달하여 질의</li>
+<li>질문 내용과 유사한 문서를 <code>Vector Storage</code>에서 검색 (보유한 문서는 미리 저장되어 있음 ☞ 아래 Vector Storage 참조)</li>
+<li>검색한 문서를 LLM 서비스에 전달x
+<ul>
+<li>프롬프트의 길이는 한정적이기 때문에 적절한 문서 수에 대한 설정이 필요</li>
+</ul>
+</li>
+<li>전달받은 문서를 활용해 향상된 프롬프트 질의 생성 및 LLM 전달
+<ul>
+<li><code>2.1 Prompt Engineering</code>의 <code>FSL</code>참조</li>
+<li>프롬프트에 추가적으로 예시를 전달해주는 형식</li>
+</ul>
+</li>
+<li>LLM의 수행 결과 전달</li>
+</ol>
+<p>📍 <strong>Vector &amp; Embedding</strong></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/nlp/llm/vector_embed1.png?raw=true" width="600" height="350"></p>
+<p style="text-align: center;">자연어의 임베딩 과정</p>
+<ul>
+<li>Vector: 실수의 집합</li>
+<li>Embedding: 텍스트를 실수로 표현한 결과</li>
+</ul>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/nlp/llm/vector_embed2.png?raw=true" width="600" height="350"></p>
+<p style="text-align: center;">자연어의 임베딩 결과</p>
+<p>📍 <strong>Vector Storage</strong></p>
+<blockquote>
+<p>LLM 질의에 활용할 보유 문서들은 임베딩(embedding)과정을 거쳐 Vector Storage(DB)에 저장됨</p>
+</blockquote>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/nlp/llm/rag_embed1.png?raw=true" width="600" height="250"></p>
+<p style="text-align: center;">RAG 검색증강 생성 설명</p>
+<ul>
+<li>LOAD: 검색에 활용할 문서들을 불러옴</li>
+<li>SPLIT: 문서를 특정 기준에 따라 구문(<code>chunk</code>)으로 나누는 과정
+<ul>
+<li>프롬프트의 길이는 한정적이기 때문에 문서 전체를 질의에 담을 수 없음</li>
+<li>정보가 잘 분산될 수 있는 단위로 나누는 과정이 필요</li>
+<li>나누는 방법은 다양하게 존재</li>
+</ul>
+</li>
+<li>EMBED: <code>chunk</code>를 모델이 활용할 수 있는 숫자로 변환하는 과정
+<ul>
+<li><code>chunk</code>는 작은 단위인 토큰(단어와 비슷함)으로 나누어짐</li>
+<li>토큰은 <code>임베딩 모델</code>을 통해 의미를 포함한 숫자로 변환됨</li>
+<li>임베딩 모델은 다양하게 존재(openAI, huggingface 등..)</li>
+<li>각 <code>chunk</code>에 포함된 토큰들이 변환된 숫자 집합(vector) 생성</li>
+</ul>
+</li>
+<li>STORE: 변환된 숫자의 집합인 vector는 이를 저장할 수 있는 vector storage에 저장됨
+<ul>
+<li>Vector Storage는 다양한 종류가 있음</li>
+</ul>
+</li>
+</ul>
+<p>🟢 <strong>장점</strong></p>
+<ul>
+<li>정확성 향상: 주어진 문서 내에서 답을 찾도록 하여 잘못된 대답을 하는 <code>할루시네이션</code> 문제를 최소화</li>
+<li>도메인 특화: 어떠한 도메인의 기업이라도 보유한 데이터를 기반으로 별도 학습 없이 성능이 좋은 LLM(GPT, Gemmini)를 통해 고품질 답변 생성 가능</li>
+</ul>
+<p>🔴 <strong>한계점</strong></p>
+<ul>
+<li>데이터 의존성
+<ul>
+<li>높은 품질의 검색 데이터를 필요로 함</li>
+<li>문서에 기반한 대답을 하기에 최신의 데이터가 아닐경우 잘못된 답변이 나올 수 있음</li>
+</ul>
+</li>
+<li>검색엔진의 한계
+<ul>
+<li>벡터 유사도를 통해 유사 문서를 찾기에 관련성이 낮거나 적절하지 않은 문서가 검색될 수 있음</li>
+</ul>
+</li>
+</ul>
+<p>🗣️ <strong>Example</strong></p>
+<pre class="hljs"><code><div># Query ☞ LLM
+[프롬프트] (검색된 기존 데이터)
+리뷰: 영화는 환상적이었고 매 순간을 즐겼습니다.
+감성: 긍정적
+리뷰: 줄거리가 지루하고 예측 가능했습니다.
+감정: 부정적
+리뷰: 연기는 훌륭했지만 뛰어나지는 않았습니다.
+감성: 중립
+
+[질문]
+리뷰: 영화 촬영은 놀라웠지만 이야기의 깊이가 부족했습니다.
+이 리뷰의 감성은 뭐야?
+
+# 프롬프트에 대한 모델 수행 및 결과
+부정
+</div></code></pre>
+<p>📌 <strong>더 알아보기</strong></p>
+<ul>
+<li>📜 <a href="https://techscene.tistory.com/entry/%EC%B1%97GPT%EA%B0%80-%EB%A7%8C%EB%82%9C-RAG-Few-Shot-LLM%EC%9C%BC%EB%A1%9C-%ED%83%84%EC%83%9D%ED%95%9C-%EC%B0%A8%EC%84%B8%EB%8C%80-GenAI">RAG와 Few-shot learning의 상호작용</a></li>
+</ul>
+<h3 id="24-fine-tuning">2.4 Fine tuning</h3>
+<p>👀 <strong>정의</strong></p>
+<blockquote>
+<p>사전 훈련(pretrained)된 대형 언어 모델을 특정 작업이나 도메인에 맞추어 추가로 훈련시키는 과정</p>
+</blockquote>
+<ul>
+<li>사전 훈련된 모델이란 제공자가 대형 데이터 셋으로 미리 학습시킨 모델</li>
+<li>사전 훈련되지 않은 모델은 모델의 아키텍쳐만 가지고 있는 것은 parameter가 <code>초기 상태</code></li>
+<li>GPT, Llama 등 앞서 소개한 Large Language Model 들이 모두 사전 훈련 모델로 볼 수 있음</li>
+<li>사전 훈련된 LLM은 언어에 대한 일반적인 이해도를 갖추고 있기 때문에 대부분의 작업 수행 가능</li>
+<li>Fine tuning은 특정 작업을 수행하도록 전문화된 모델을 얻기 위해 사용</li>
+<li>도메인에 적합한 데이터 셋을 통해 사전훈련된 LLM의 <code>parameter</code>를 <code>update</code></li>
+</ul>
+<p>🟢 <strong>장점</strong></p>
+<ul>
+<li>LLM이 일반적인 지식 외에 추가 정보 없이 특정 도메인에 대한 대답도 가능하게 함</li>
+</ul>
+<p>🔴 <strong>한계점</strong></p>
+<ul>
+<li>학슴을 위한 구체적인 데이터 세트가 필요함</li>
+<li>학습을 위한 인프라가 필요함 (GPU-모델에 따른 memory)</li>
+</ul>
+<p>📍 <strong>Transfer Learning</strong></p>
+<p>👀 <strong>정의</strong></p>
+<blockquote>
+<p>Pre-trained Model(사전 학습 모델)에 새로운 지식을 학습시켜 다른 작업에 활용되게 하는 기술</p>
+</blockquote>
+<ul>
+<li>fine tuning은 transfer learning의 한 방법</li>
+</ul>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/nlp/llm/transfer_learning1.png?raw=true" width="600" height="250"></p>
+<p style="text-align: center;">Transfer Learning의 방법들</p>
+<ul>
+<li>Feature-based approach: pre-trained transformer의 <code>parameter</code>는 고정하고 classification layer를 <code>update</code></li>
+<li>Update the output layers: pre-trained transformer의 <code>parameter</code>는 고정하고 <code>output layer(fc)</code>를 <code>update</code></li>
+<li>update all layers: 전체 모델의 <code>parameter</code>를 <code>update</code></li>
+<li>오른쪽으로 갈 수록 fine tuning의 비용과 성능 향상 효과가 증가함</li>
+<li>학습 비용을 줄이기 위해 <code>Parameter Efficient Fine Tuning(PEFT)</code> 가 고안되었으며 예시로 <code>Low-Rank Adaption(LoRA)</code> 등이 있음</li>
+<li>오른쪽으로 갈 수록 미세 조정의 비용과 성능 향상 효과가 증가함</li>
+</ul>
+<p>📍 <strong>Prompt Engineering vs Fine Tuning</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Prompt Engineering</th>
+<th>Fine Tuning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>목적</td>
+<td>학습 없이 더 나은 답변을 얻기 위함</td>
+<td>특정 도메인에서 향상된 성능을 얻기 위함</td>
+</tr>
+<tr>
+<td>방식</td>
+<td>많은 정보가 포함된 입력을 수행</td>
+<td>특정 도메인에 대한 데이터셋으로 학습</td>
+</tr>
+<tr>
+<td>장점</td>
+<td>학습을 위한 리소스가 필요 없음</td>
+<td>특정 도메인에 대해 깊이 있는 답변을 얻을 수 있음</td>
+</tr>
+<tr>
+<td>단점</td>
+<td>좋은 prompt를 생성하기 위해 작업이 필요</td>
+<td>학습을 위한 리소스가 필요함 (GPU)</td>
+</tr>
+</tbody>
+</table>
+<p>📌 <strong>더 알아보기</strong></p>
+<ul>
+<li>📜 <a href="https://developer.nvidia.com/blog/an-introduction-to-large-language-models-prompt-engineering-and-p-tuning/">Prompt tuning의 방법 soft prompt</a></li>
+</ul>
+<h3 id="25-%E2%9D%A4%EF%B8%8F%E2%80%8D%F0%9F%94%A5-peft-%E2%9D%A4%EF%B8%8F%E2%80%8D%F0%9F%94%A5">2.5 ❤️‍🔥 PEFT ❤️‍🔥</h3>
+<p>👀 <strong>정의</strong></p>
+<blockquote>
+<p>LLM의 전체 parameter를 update하는 것이 아닌 소수의 (추가) 모델 파라미터만 fine tuning하여 계산 및 저장 비용을 줄이는 기법</p>
+</blockquote>
+<ul>
+<li>LLM의 전체 <code>parameter</code>를 <code>update</code>하는 것은 많은 비용 발생</li>
+<li>PEFT는 사전 학습된 대규모 모델을 다양한 애플리케이션에 효율적으로 적용하기 위한 라이브러리</li>
+<li>성능 또한 모든 <code>parameter</code>를 <code>fine tuning</code> 한 것과 비슷함</li>
+</ul>
+<p>🟢 <strong>장점</strong></p>
+<ul>
+<li>비용이 절약됨 ☞ 가성비 모델 생성</li>
+</ul>
+<p>🔴 <strong>한계점</strong></p>
+<ul>
+<li>완벽한 성능을 보장하진 않음 (만능이 아님)</li>
+<li>전문적이며 정확한 지식이 필요한 곳에는 <code>fully fine tuning</code>을 권장</li>
+<li>새로운 데이터에 대한 지속적인 <code>fine tuning</code> 필요</li>
+<li>과거의 데이터를 잊지 못하며 원문 위치, 첨부파일 제공 어려움</li>
+</ul>
+<p>📍 <strong>LoRA</strong></p>
+<p>👀 <strong>정의</strong></p>
+<blockquote>
+<p>대규모 LLM을 학습하는 대신 저차원의 model을 학습하여 update 해야할 parameter의 수를 줄이는 기법</p>
+</blockquote>
+<ul>
+<li><code>Transformer</code> 구조의 각 <code>layer</code>에 학습 가능한 <code>rank decomposition matrices</code>를 삽입</li>
+<li><code>Downstream task</code>에서의 학습가능한 파라미터 수를 크게 줄임</li>
+</ul>
+<p>✏️ <strong>알고리즘</strong></p>
+<p><strong>1. 가정</strong></p>
+<blockquote>
+<ol>
+<li>고도화된 LLM이 가지고 있는 parameter가 내가 하고싶은 일에 비해 과도하게 많다</li>
+<li>내가 필요한 parameter는 일부분이라고 생각함</li>
+<li>intrinsic dimension, Low Rank(deep learning)</li>
+</ol>
+</blockquote>
+<p><strong>2. 방법론</strong></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/nlp/llm/lora_archi1.png?raw=true" width="300" height="300"></p>
+<p style="text-align: center;">LoRA 아키텍처</p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/nlp/llm/lora_archi2.png?raw=true" width="500" height="300"></p>
+<p style="text-align: center;">LoRA 적용</p>
+<ul>
+<li>Pretrained Weights는 freeze</li>
+<li>A, B 저차원의 weight matrix를 학습</li>
+</ul>
+<p>📍 <strong>Quantization</strong></p>
+<p>👀 <strong>정의</strong></p>
+<blockquote>
+<p>LLM의 parameter를 실수형에서 정수형으로 바꾸어 비트수를 줄이는 과정</p>
+</blockquote>
+<ul>
+<li>32bit 부동 소수점 형태를 8bit로 변환 ☞ 모델 size 4배 축소</li>
+<li>크기가 줄어들고 계산 효율성이 향상</li>
+<li>비트수를 N배 줄이면 곱셈의 복잡도는 N*N으로 감소</li>
+<li>추론 속도와 메모리 사용량도 두배에서 네배까지 효율적</li>
+</ul>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/nlp/llm/quan.png?raw=true" width="500" height="300"></p>
+<p style="text-align: center;">양자화 설명</p>
+<br>
+
+</body>
+</html>
