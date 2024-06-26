@@ -36,6 +36,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .highlight .m { color: var(--jp-mirror-editor-number-color) } /* Literal.Number */
 .highlight .s { color: var(--jp-mirror-editor-string-color) } /* Literal.String */
 .highlight .ow { color: var(--jp-mirror-editor-operator-color); font-weight: bold } /* Operator.Word */
+.highlight .pm { color: var(--jp-mirror-editor-punctuation-color) } /* Punctuation.Marker */
 .highlight .w { color: var(--jp-mirror-editor-variable-color) } /* Text.Whitespace */
 .highlight .mb { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Bin */
 .highlight .mf { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Float */
@@ -14464,6 +14465,10 @@ a.anchor-link {
   display: none;
 }
 
+.highlight  {
+  margin: 0.4em;
+}
+
 /* Input area styling */
 .jp-InputArea {
   overflow: hidden;
@@ -14473,26 +14478,9 @@ a.anchor-link {
   overflow: hidden;
 }
 
-.CodeMirror.cm-s-jupyter .highlight pre {
-/* weird, but --jp-code-padding defined to be 5px but 4px horizontal padding is hardcoded for pre.CodeMirror-line */
-  padding: var(--jp-code-padding) 4px;
+.CodeMirror pre {
   margin: 0;
-
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-
-}
-
-.jp-OutputArea-output pre {
-  line-height: inherit;
-  font-family: inherit;
-}
-
-.jp-RenderedText pre {
-  color: var(--jp-content-font-color1);
-  font-size: var(--jp-code-font-size);
+  padding: 0;
 }
 
 /* Using table instead of flexbox so that we can use break-inside property */
@@ -14604,7 +14592,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <li>각 <code>열</code>은 <code>서로 다른 데이터 타입</code>을 지닐 수 있음</li>
 </ul>
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/python_preprocessing/s_p.png?raw=true" width="600" height="300"></p>
-
 </div>
 </div>
 </div>
@@ -14620,7 +14607,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14637,6 +14624,35 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Requirement already satisfied: pandas in /opt/homebrew/Caskroom/miniconda/base/envs/ml/lib/python3.9/site-packages (1.5.3)
+Requirement already satisfied: pytz&gt;=2020.1 in /opt/homebrew/Caskroom/miniconda/base/envs/ml/lib/python3.9/site-packages (from pandas) (2023.3)
+Requirement already satisfied: python-dateutil&gt;=2.8.1 in /opt/homebrew/Caskroom/miniconda/base/envs/ml/lib/python3.9/site-packages (from pandas) (2.8.2)
+Requirement already satisfied: numpy&gt;=1.20.3 in /opt/homebrew/Caskroom/miniconda/base/envs/ml/lib/python3.9/site-packages (from pandas) (1.24.3)
+<span class="ansi-red-fg">ERROR: Could not install packages due to an OSError: [Errno 2] No such file or directory: &#39;/opt/homebrew/Caskroom/miniconda/base/envs/ml/lib/python3.9/site-packages/numpy-1.24.3.dist-info/METADATA&#39;
+</span><span class="ansi-red-fg">
+</span>Note: you may need to restart the kernel to use updated packages.
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -14651,7 +14667,23 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>📍 <strong>DataFrame 생성의 다양한 방법</strong></p>
+<p>Case1. 배열 사용</p>
+<ul>
+<li>columns 인자를 사용</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14661,9 +14693,34 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="s1">&#39;kor&#39;</span><span class="p">,</span> <span class="mi">80</span><span class="p">],[</span><span class="s1">&#39;math&#39;</span><span class="p">,</span><span class="mi">70</span><span class="p">]])</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">])</span>
+<span class="n">array</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">'kor'</span><span class="p">,</span> <span class="mi">80</span><span class="p">],[</span><span class="s1">'math'</span><span class="p">,</span><span class="mi">70</span><span class="p">]]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/python_preprocessing/array.png?raw=true" width="200" height="150"></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'subject'</span><span class="p">,</span> <span class="s1">'score'</span><span class="p">])</span>
 <span class="n">df</span>
 </pre></div>
 
@@ -14678,94 +14735,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
+<div class="jp-OutputArea-child">
 
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>subject</th>
-      <th>score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>kor</td>
-      <td>80</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>math</td>
-      <td>70</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>📍 <strong>DataFrame 생성의 다양한 방법</strong></p>
-<p>Case1. columns 인자를 사용</p>
-
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="s1">&#39;kor&#39;</span><span class="p">,</span> <span class="mi">80</span><span class="p">],[</span><span class="s1">&#39;math&#39;</span><span class="p">,</span><span class="mi">70</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">])</span>
-<span class="n">df1</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -14839,7 +14811,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;subject&#39;</span><span class="p">:[</span><span class="s1">&#39;kor&#39;</span><span class="p">,</span> <span class="s1">&#39;math&#39;</span><span class="p">],</span> <span class="s1">&#39;score&#39;</span><span class="p">:[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">70</span><span class="p">]})</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'subject'</span><span class="p">:[</span><span class="s1">'kor'</span><span class="p">,</span> <span class="s1">'math'</span><span class="p">],</span> <span class="s1">'score'</span><span class="p">:[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">70</span><span class="p">]})</span>
 <span class="n">df2</span>
 </pre></div>
 
@@ -14854,7 +14826,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -14948,7 +14922,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -15092,7 +15068,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -15193,7 +15171,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -15310,7 +15290,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -15375,7 +15357,9 @@ memory usage: 4.8 KB
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -15522,7 +15506,9 @@ memory usage: 4.8 KB
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -15596,7 +15582,9 @@ memory usage: 4.8 KB
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -15622,49 +15610,9 @@ memory usage: 4.8 KB
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># index 수정</span>
-<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'A'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">]</span>
 
-<span class="c1"># index를 list로 변경하여 확인</span>
-<span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&#39;A&#39;, &#39;B&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 인덱스가 변경된 데이터프레임 확인</span>
+<span class="c1"># 인덱스가 변경된 데이터프레임 확인</span>
 <span class="n">df</span>
 </pre></div>
 
@@ -15679,7 +15627,9 @@ memory usage: 4.8 KB
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -15739,13 +15689,12 @@ memory usage: 4.8 KB
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>📌 <strong>set_index</strong></p>
 <p>DataFrame 내의 열을 인덱스로 변경<br></p>
-<blockquote>
-<p>DataFrame.set_index(keys, drop=True, append=False, inplace=True)</p>
+<blockquote><p>DataFrame.set_index(keys, drop=True, append=False, inplace=True)</p>
 </blockquote>
 <ul>
 <li>keys: 인덱스로 사용하고자 하는 컬럼의 이름을 문자형으로 입력</li>
 <li>drop: 인덱스로 세팅한 컬럼을 DataFrame 내에서 삭제할지를 결정</li>
-<li>append: 기존에 존재하던 인덱스를 삭제할지, 컬럼으로 추가할지를 결정</li>
+<li>append: 기존에 존재하던 인덱스를 삭제할지, 유지할지를 결정</li>
 <li>inplace: 원본 객체를 변경할지를 결정</li>
 </ul>
 
@@ -15763,7 +15712,7 @@ memory usage: 4.8 KB
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># class 열을 인덱스로 지정 후 삭제</span>
 <span class="c1"># 기존의 인덱스는 삭제됨</span>
 <span class="c1"># 원본 df를 영구히 변경</span>
-<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;subject&#39;</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'subject'</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">df</span>
 </pre></div>
 
@@ -15778,7 +15727,9 @@ memory usage: 4.8 KB
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -15839,8 +15790,7 @@ memory usage: 4.8 KB
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>📌 <strong>reset_index</strong></p>
 <p>인덱스를 0부터 시작하는 정수로 재설정</p>
-<blockquote>
-<p>DataFrame.reset_index(drop=False, inplace=False)</p>
+<blockquote><p>DataFrame.reset_index(drop=False, inplace=False)</p>
 </blockquote>
 <ul>
 <li>drop: 기존 인덱스를 DataFrame 내에서 삭제할지, 컬럼으로 추가할지를 결정</li>
@@ -15873,7 +15823,9 @@ memory usage: 4.8 KB
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -15958,7 +15910,9 @@ memory usage: 4.8 KB
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -15986,7 +15940,7 @@ memory usage: 4.8 KB
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 데이터프레임의 열 이름 변경</span>
-<span class="n">iris</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">,</span> <span class="s1">&#39;sepal_width&#39;</span><span class="p">,</span> <span class="s1">&#39;petal_length&#39;</span><span class="p">,</span> <span class="s1">&#39;petal_width&#39;</span><span class="p">]</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'sepal_length'</span><span class="p">,</span> <span class="s1">'sepal_width'</span><span class="p">,</span> <span class="s1">'petal_length'</span><span class="p">,</span> <span class="s1">'petal_width'</span><span class="p">]</span>
 <span class="n">iris</span>
 </pre></div>
 
@@ -16001,7 +15955,9 @@ memory usage: 4.8 KB
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -16168,7 +16124,9 @@ memory usage: 4.8 KB
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -16198,7 +16156,7 @@ dtype: object</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># astype을 이용한 데이터 타입 변경</span>
-<span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">iris</span><span class="p">[</span><span class="s1">'sepal_length'</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s1">'sepal_length'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'int'</span><span class="p">)</span>
 <span class="n">iris</span><span class="o">.</span><span class="n">dtypes</span>
 </pre></div>
 
@@ -16213,7 +16171,9 @@ dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -16248,8 +16208,7 @@ dtype: object</pre>
 </ul>
 <p>📌 <strong>슬라이싱</strong></p>
 <p>시작과 끝을 지정해 잘라내는 방법, 데이터프레임이 아닌 list 등에서도 사용 가능</p>
-<blockquote>
-<p>DataFrame[n:m]</p>
+<blockquote><p>DataFrame[n:m]</p>
 </blockquote>
 <ul>
 <li>n번째 행부터 m-1번째 행까지 데이터프레임을 자름</li>
@@ -16286,7 +16245,9 @@ dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -16393,7 +16354,7 @@ dtype: object</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 컬럼명으로 데이터 확인</span>
-<span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal length (cm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">iris</span><span class="p">[</span><span class="s1">'petal length (cm)'</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -16407,7 +16368,9 @@ dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -16438,7 +16401,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 컬럼명의 리스트로 데이터 확인</span>
-<span class="n">iris</span><span class="p">[[</span><span class="s1">&#39;petal length (cm)&#39;</span><span class="p">,</span> <span class="s1">&#39;petal width (cm)&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">iris</span><span class="p">[[</span><span class="s1">'petal length (cm)'</span><span class="p">,</span> <span class="s1">'petal width (cm)'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -16452,7 +16415,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -16531,8 +16496,7 @@ Name: petal length (cm), dtype: float64</pre>
 </ul>
 <p>📌 <strong>iloc</strong></p>
 <p>정수로 특정 행과 열을 선택하고 싶은 경우 사용</p>
-<blockquote>
-<p>DataFrame.iloc[row, column]</p>
+<blockquote><p>DataFrame.iloc[row, column]</p>
 </blockquote>
 <ul>
 <li>인수를 하나만 설정할 경우 행을 지정</li>
@@ -16567,7 +16531,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -16655,7 +16621,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -16720,8 +16688,7 @@ Name: petal length (cm), dtype: float64</pre>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>📌 <strong>loc</strong></p>
 <p>레이블(인덱스 이름 혹은 컬럼명)로 행과 열을 선택하고 싶은 경우 사용</p>
-<blockquote>
-<p>DataFrame.loc[row, column]</p>
+<blockquote><p>DataFrame.loc[row, column]</p>
 </blockquote>
 <ul>
 <li>인수를 하나만 설정할 경우 행을 지정</li>
@@ -16743,7 +16710,7 @@ Name: petal length (cm), dtype: float64</pre>
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># loc에 대한 이해를 위해 인덱스를 변경</span>
 <span class="n">iris_index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-<span class="n">iris_index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;파이썬&#39;</span>
+<span class="n">iris_index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'파이썬'</span>
 <span class="n">iris</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">iris_index</span>
 <span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -16759,7 +16726,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -16845,8 +16814,8 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># &#39;파이썬&#39; 라벨의 행부터 3번째 행까지 데이터 확인</span>
-<span class="n">iris</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;파이썬&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># '파이썬' 라벨의 행부터 3번째 행까지 데이터 확인</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">'파이썬'</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -16860,7 +16829,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -16940,7 +16911,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 컬럼명도 슬라이스로 지정할 수 있음</span>
-<span class="n">iris</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s1">&#39;파이썬&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="s1">&#39;sepal width (cm)&#39;</span><span class="p">:</span><span class="s1">&#39;petal width (cm)&#39;</span><span class="p">]</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s1">'파이썬'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="s1">'sepal width (cm)'</span><span class="p">:</span><span class="s1">'petal width (cm)'</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -16954,7 +16925,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -17038,7 +17011,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 값을 변경할 데이터 확인</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;파이썬&#39;</span><span class="p">,</span> <span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">'파이썬'</span><span class="p">,</span> <span class="s1">'sepal length (cm)'</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -17052,7 +17025,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -17076,7 +17051,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 값 변경</span>
-<span class="n">iris</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;파이썬&#39;</span><span class="p">,</span> <span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">'파이썬'</span><span class="p">,</span> <span class="s1">'sepal length (cm)'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -17091,7 +17066,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -17178,8 +17155,7 @@ Name: petal length (cm), dtype: float64</pre>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="3.3.2-row/-column-Concat">3.3.2 row/ column Concat<a class="anchor-link" href="#3.3.2-row/-column-Concat">&#182;</a></h3><p>concat은 데이터프레임간의 단순한 연결을 의미합니다. concat을 통해 두 개 이상의 데이터프레임을 열 혹은 행 방향으로 붙일 수 있으며, 이를 통해 열 혹은 행을 추가할 수 있습니다.</p>
 <p>📌 <strong>concat</strong></p>
-<blockquote>
-<p>pandas.concat(objs, axis=0, ignore_index=False)</p>
+<blockquote><p>pandas.concat(objs, axis=0, ignore_index=False)</p>
 </blockquote>
 <ul>
 <li>objs: concat을 실행할 객체의 리스트</li>
@@ -17198,7 +17174,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;국어&#39;</span><span class="p">:[</span><span class="mi">80</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">70</span><span class="p">],</span> <span class="s1">&#39;수학&#39;</span><span class="p">:[</span><span class="mi">90</span><span class="p">,</span><span class="mi">70</span><span class="p">,</span><span class="mi">60</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;홍길동&#39;</span><span class="p">,</span> <span class="s1">&#39;김철수&#39;</span><span class="p">,</span> <span class="s1">&#39;이영희&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'국어'</span><span class="p">:[</span><span class="mi">80</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">70</span><span class="p">],</span> <span class="s1">'수학'</span><span class="p">:[</span><span class="mi">90</span><span class="p">,</span><span class="mi">70</span><span class="p">,</span><span class="mi">60</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'홍길동'</span><span class="p">,</span> <span class="s1">'김철수'</span><span class="p">,</span> <span class="s1">'이영희'</span><span class="p">])</span>
 <span class="n">score</span>
 </pre></div>
 
@@ -17213,7 +17189,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -17277,7 +17255,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_student</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;국어&#39;</span><span class="p">:[</span><span class="mi">100</span><span class="p">],</span> <span class="s1">&#39;수학&#39;</span><span class="p">:[</span><span class="mi">100</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;엄친아&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_student</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'국어'</span><span class="p">:[</span><span class="mi">100</span><span class="p">],</span> <span class="s1">'수학'</span><span class="p">:[</span><span class="mi">100</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'엄친아'</span><span class="p">])</span>
 <span class="n">new_student</span>
 </pre></div>
 
@@ -17292,7 +17270,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -17362,7 +17342,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -17431,7 +17413,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_subject</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;과학&#39;</span><span class="p">:[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;홍길동&#39;</span><span class="p">,</span> <span class="s1">&#39;김철수&#39;</span><span class="p">,</span> <span class="s1">&#39;이영희&#39;</span><span class="p">,</span> <span class="s1">&#39;엄친아&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_subject</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'과학'</span><span class="p">:[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'홍길동'</span><span class="p">,</span> <span class="s1">'김철수'</span><span class="p">,</span> <span class="s1">'이영희'</span><span class="p">,</span> <span class="s1">'엄친아'</span><span class="p">])</span>
 <span class="n">new_subject</span>
 </pre></div>
 
@@ -17446,7 +17428,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -17526,7 +17510,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -17604,8 +17590,7 @@ Name: petal length (cm), dtype: float64</pre>
 <li>행과 열 둘다 지정하여 삭제하는 것은 불가능함</li>
 </ul>
 <p>📌 <strong>drop</strong></p>
-<blockquote>
-<p>DataFrame.drop(index=None, climns=None, inplace=False)</p>
+<blockquote><p>DataFrame.drop(index=None, climns=None, inplace=False)</p>
 </blockquote>
 <ul>
 <li>index: 삭제할 행의 인덱스 혹은 인덱스의 리스트를 지정</li>
@@ -17625,7 +17610,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># index를 기준으로 행 삭제</span>
-<span class="n">score</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;엄친아&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'엄친아'</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">score</span>
 </pre></div>
 
@@ -17640,7 +17625,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -17709,7 +17696,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># column명을 기준으로 열 삭제</span>
-<span class="n">score</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;과학&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'과학'</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">score</span>
 </pre></div>
 
@@ -17724,7 +17711,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -17788,8 +17777,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="3.4-%EC%A1%B0%EA%B1%B4%EC%97%90-%EB%A7%9E%EB%8A%94-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%90%EC%83%89-%EB%B0%8F-%EC%88%98%EC%A0%95">3.4 &#51312;&#44148;&#50640; &#47582;&#45716; &#45936;&#51060;&#53552; &#53456;&#49353; &#48143; &#49688;&#51221;<a class="anchor-link" href="#3.4-%EC%A1%B0%EA%B1%B4%EC%97%90-%EB%A7%9E%EB%8A%94-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%90%EC%83%89-%EB%B0%8F-%EC%88%98%EC%A0%95">&#182;</a></h2><h3 id="3.4.1-%EC%A1%B0%EA%B1%B4-%ED%83%90%EC%83%89">3.4.1 &#51312;&#44148; &#53456;&#49353;<a class="anchor-link" href="#3.4.1-%EC%A1%B0%EA%B1%B4-%ED%83%90%EC%83%89">&#182;</a></h3><p>📌 <strong>데이터프레임 조건 탐색</strong></p>
-<blockquote>
-<p>DataFrame[조건식]</p>
+<blockquote><p>DataFrame[조건식]</p>
 </blockquote>
 <p><strong>1. 조건이 하나인 경우</strong></p>
 
@@ -17804,7 +17792,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">score</span><span class="p">[</span><span class="n">score</span><span class="p">[</span><span class="s1">&#39;국어&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">score</span><span class="p">[</span><span class="n">score</span><span class="p">[</span><span class="s1">'국어'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -17818,7 +17806,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -17885,7 +17875,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 둘 다 만족해야 함 (and)</span>
-<span class="n">score</span><span class="p">[(</span><span class="n">score</span><span class="p">[</span><span class="s1">&#39;국어&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">70</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="s1">&#39;수학&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">)]</span>
+<span class="n">score</span><span class="p">[(</span><span class="n">score</span><span class="p">[</span><span class="s1">'국어'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">70</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="s1">'수학'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">)]</span>
 </pre></div>
 
      </div>
@@ -17899,7 +17889,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -17954,7 +17946,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 둘 중 하나만 만족해도 됨 (or)</span>
-<span class="n">score</span><span class="p">[(</span><span class="n">score</span><span class="p">[</span><span class="s1">&#39;국어&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">85</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="s1">&#39;수학&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">85</span><span class="p">)]</span>
+<span class="n">score</span><span class="p">[(</span><span class="n">score</span><span class="p">[</span><span class="s1">'국어'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">85</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="s1">'수학'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">85</span><span class="p">)]</span>
 </pre></div>
 
      </div>
@@ -17968,7 +17960,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -18045,7 +18039,7 @@ Name: petal length (cm), dtype: float64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 결측값 탐색을 위한 결측치 추가</span>
-<span class="n">new_student</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;수학&#39;</span><span class="p">:[</span><span class="mi">100</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;엄친아&#39;</span><span class="p">])</span>
+<span class="n">new_student</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'수학'</span><span class="p">:[</span><span class="mi">100</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'엄친아'</span><span class="p">])</span>
 <span class="n">score</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">score</span><span class="p">,</span> <span class="n">new_student</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">score</span>
 </pre></div>
@@ -18061,7 +18055,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -18145,7 +18141,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -18229,7 +18227,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -18329,7 +18329,9 @@ Name: petal length (cm), dtype: float64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -18371,7 +18373,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -18404,8 +18408,7 @@ dtype: int64</pre>
 <li>dropna()는 결측값이 존재하는 행 또는 열을 삭제</li>
 </ul>
 <p>📌 <strong>dropna</strong></p>
-<blockquote>
-<p>DataFrame.dropna(axis=0, how='any', thresh=None, inplace=False)</p>
+<blockquote><p>DataFrame.dropna(axis=0, how='any', thresh=None, inplace=False)</p>
 </blockquote>
 <ul>
 <li>axis: 0이면 결측값이 포함된 행삭제, 1이면 결측값이 포함된 열 삭제</li>
@@ -18440,7 +18443,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -18508,8 +18513,7 @@ dtype: int64</pre>
 <li>fillna() 함수를 활용하여 다양한 방법으로 결측값을 대체할 수 있음</li>
 </ul>
 <p>📌 <strong>fillna</strong></p>
-<blockquote>
-<p>DataFrame.fillna(value=None, method=None, axis=None, inplace=False)</p>
+<blockquote><p>DataFrame.fillna(value=None, method=None, axis=None, inplace=False)</p>
 </blockquote>
 <ul>
 <li>value: 결측치를 대체할 값 직접 입력</li>
@@ -18543,7 +18547,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -18627,7 +18633,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -18697,7 +18705,7 @@ dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 이전값 대체</span>
-<span class="n">score</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+<span class="n">score</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">'ffill'</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -18711,7 +18719,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -18781,7 +18791,7 @@ dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 다음값 대체</span>
-<span class="n">score</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;bfill&#39;</span><span class="p">)</span>
+<span class="n">score</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">'bfill'</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -18795,7 +18805,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -18873,8 +18885,7 @@ dtype: int64</pre>
 <li>drop_duplicates() 함수를 사용해 중복을 삭제할 수 있음</li>
 </ul>
 <p>📌 <strong>drop_duplicates</strong></p>
-<blockquote>
-<p>DataFrame.drop_duplicates()</p>
+<blockquote><p>DataFrame.drop_duplicates()</p>
 </blockquote>
 <ul>
 <li>inplace가 없으므로 재할당 필요</li>
@@ -18892,7 +18903,7 @@ dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 중복행 생성 ☞ 수학 점수가 중복됨</span>
-<span class="n">score</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;이영희&#39;</span> <span class="p">,</span> <span class="s1">&#39;수학&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">70</span>
+<span class="n">score</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">'이영희'</span> <span class="p">,</span> <span class="s1">'수학'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">70</span>
 <span class="n">score</span>
 </pre></div>
 
@@ -18907,7 +18918,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -18991,7 +19004,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -19061,7 +19076,7 @@ dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 컬럼을 지정</span>
-<span class="n">score</span><span class="p">[</span><span class="s1">&#39;수학&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+<span class="n">score</span><span class="p">[</span><span class="s1">'수학'</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -19075,7 +19090,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -19103,8 +19120,7 @@ Name: 수학, dtype: int64</pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="3.5-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%95%EB%A0%AC">3.5 &#45936;&#51060;&#53552; &#51221;&#47148;<a class="anchor-link" href="#3.5-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%95%EB%A0%AC">&#182;</a></h2><h3 id="3.5.1-%EC%9D%B8%EB%8D%B1%EC%8A%A4-%EA%B8%B0%EC%A4%80-%EC%A0%95%EB%A0%AC">3.5.1 &#51064;&#45937;&#49828; &#44592;&#51456; &#51221;&#47148;<a class="anchor-link" href="#3.5.1-%EC%9D%B8%EB%8D%B1%EC%8A%A4-%EA%B8%B0%EC%A4%80-%EC%A0%95%EB%A0%AC">&#182;</a></h3><p>📌 <strong>sort_index</strong></p>
-<blockquote>
-<p>DataFrame.sort_index(asccending=True, inplace=False)</p>
+<blockquote><p>DataFrame.sort_index(asccending=True, inplace=False)</p>
 </blockquote>
 <ul>
 <li>ascending: True-오름차순, False-내림차순</li>
@@ -19141,7 +19157,9 @@ Name: 수학, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -19243,7 +19261,9 @@ Name: 수학, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -19329,8 +19349,7 @@ Name: 수학, dtype: int64</pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="3.5.2-%EC%BB%AC%EB%9F%BC-%EA%B8%B0%EC%A4%80-%EC%A0%95%EB%A0%AC">3.5.2 &#52972;&#47100; &#44592;&#51456; &#51221;&#47148;<a class="anchor-link" href="#3.5.2-%EC%BB%AC%EB%9F%BC-%EA%B8%B0%EC%A4%80-%EC%A0%95%EB%A0%AC">&#182;</a></h3><p>📌 <strong>sort_values</strong></p>
-<blockquote>
-<p>DataFrame.sort_values(by, ascending=True, inplace=False)</p>
+<blockquote><p>DataFrame.sort_values(by, ascending=True, inplace=False)</p>
 </blockquote>
 <ul>
 <li>by: 정렬 기준으로 사용할 컬럼 혹은 컬럼 리스트<ul>
@@ -19352,7 +19371,7 @@ Name: 수학, dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># sepal length (cm) 컬럼 기준 내림차순 정렬</span>
-<span class="n">iris</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'sepal length (cm)'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -19367,7 +19386,9 @@ Name: 수학, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -19455,7 +19476,7 @@ Name: 수학, dtype: int64</pre>
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 컬럼명 리스트로 정렬</span>
 <span class="c1"># 각각 다른 정렬 방식을 적용할 수 있음</span>
-<span class="n">iris</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">,</span> <span class="s1">&#39;sepal width (cm)&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">'sepal length (cm)'</span><span class="p">,</span> <span class="s1">'sepal width (cm)'</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -19470,7 +19491,9 @@ Name: 수학, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -19556,10 +19579,8 @@ Name: 수학, dtype: int64</pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="3.6-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%91%ED%95%A9">3.6 &#45936;&#51060;&#53552; &#48337;&#54633;<a class="anchor-link" href="#3.6-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%91%ED%95%A9">&#182;</a></h2><p>앞서 수행한 concat(연결)과 다른 방식인 merge(병합) 방식은 두 데이터프레임이 동시에 가지고 있는 특정한 컬럼의 값인 key를 기준으로 병합을 수행한다.</p>
-<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/python_preprocessing/merge.png?raw=true" width="800" height="450"></p>
-<p>📌 <strong>merge</strong></p>
-<blockquote>
-<p>pandas.merge(left, right, how='inner', on=None)</p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/python_preprocessing/merge.png?raw=true" width="800" height="450"></p><p>📌 <strong>merge</strong></p>
+<blockquote><p>pandas.merge(left, right, how='inner', on=None)</p>
 </blockquote>
 <ul>
 <li>left: 왼쪽에 해당하는 데이터프레임</li>
@@ -19586,7 +19607,7 @@ Name: 수학, dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 병합 예시를 위한 데이터프레임 생성</span>
-<span class="n">product</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;product&#39;</span><span class="p">:[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span> <span class="s1">&#39;price&#39;</span><span class="p">:[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">]})</span>
+<span class="n">product</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'product'</span><span class="p">:[</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">'b'</span><span class="p">,</span><span class="s1">'c'</span><span class="p">,</span><span class="s1">'d'</span><span class="p">,</span><span class="s1">'e'</span><span class="p">],</span> <span class="s1">'price'</span><span class="p">:[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">]})</span>
 <span class="n">product</span>
 </pre></div>
 
@@ -19601,7 +19622,9 @@ Name: 수학, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -19676,7 +19699,7 @@ Name: 수학, dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 병합 예시를 위한 데이터프레임 생성</span>
-<span class="n">sale</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;product&#39;</span><span class="p">:[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="s1">&#39;sale&#39;</span><span class="p">:[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]})</span>
+<span class="n">sale</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'product'</span><span class="p">:[</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">'b'</span><span class="p">,</span><span class="s1">'c'</span><span class="p">],</span> <span class="s1">'sale'</span><span class="p">:[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]})</span>
 <span class="n">sale</span>
 </pre></div>
 
@@ -19691,7 +19714,9 @@ Name: 수학, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -19756,7 +19781,7 @@ Name: 수학, dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># inner join 수행</span>
-<span class="n">inner</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">sale</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;product&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+<span class="n">inner</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">sale</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'inner'</span><span class="p">)</span>
 <span class="n">inner</span>
 </pre></div>
 
@@ -19771,7 +19796,9 @@ Name: 수학, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -19840,7 +19867,7 @@ Name: 수학, dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># outer join 수행</span>
-<span class="n">outer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">sale</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;product&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+<span class="n">outer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">sale</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'outer'</span><span class="p">)</span>
 <span class="n">outer</span>
 </pre></div>
 
@@ -19855,7 +19882,9 @@ Name: 수학, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -19936,7 +19965,7 @@ Name: 수학, dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># left join 수행</span>
-<span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">sale</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;product&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">sale</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">)</span>
 <span class="n">left</span>
 </pre></div>
 
@@ -19951,7 +19980,9 @@ Name: 수학, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -20032,7 +20063,7 @@ Name: 수학, dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># right join 수행</span>
-<span class="n">right</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">sale</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;product&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">right</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">sale</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'right'</span><span class="p">)</span>
 <span class="n">right</span>
 </pre></div>
 
@@ -20047,7 +20078,9 @@ Name: 수학, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -20142,7 +20175,9 @@ Name: 수학, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -20199,7 +20234,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -20294,15 +20331,13 @@ dtype: int64</pre>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="3.7-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%9A%94%EC%95%BD">3.7 &#45936;&#51060;&#53552; &#50836;&#50557;<a class="anchor-link" href="#3.7-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%9A%94%EC%95%BD">&#182;</a></h2><p>데이터를 요약하여 원하는 정보를 얻는 것은 데이터가 지닌 값의 특징을 알게 해줍니다. 이와 비슷한 것을 3.2에서 수행해보았는데, 이번 장에서는 세부적으로 데이터를 요약하여 집계하는 방법을 알아보겠습니다.</p>
 <h3 id="3.7.1-%EA%B7%B8%EB%A3%B9%ED%99%94-%EC%A7%91%EA%B3%84">3.7.1 &#44536;&#47353;&#54868; &#51665;&#44228;<a class="anchor-link" href="#3.7.1-%EA%B7%B8%EB%A3%B9%ED%99%94-%EC%A7%91%EA%B3%84">&#182;</a></h3><p>👀 <strong>Definition</strong></p>
-<blockquote>
-<p>그룹화는 하나 이상의 데이터를 조건에 따라 여러개 그룹으로 묶는 것</p>
+<blockquote><p>그룹화는 하나 이상의 데이터를 조건에 따라 여러개 그룹으로 묶는 것</p>
 </blockquote>
 <ul>
 <li>groupby() 함수를 사용함</li>
 </ul>
 <p>📌 <strong>groupby</strong></p>
-<blockquote>
-<p>DataFrame.groupby(by=None, axis=0, sort=False, dropna=True).FUN()</p>
+<blockquote><p>DataFrame.groupby(by=None, axis=0, sort=False, dropna=True).FUN()</p>
 </blockquote>
 <ul>
 <li>by: 그룹을 결정하는 데 사용</li>
@@ -20352,7 +20387,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -20440,8 +20477,8 @@ dtype: int64</pre>
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># class 열 추가</span>
 <span class="c1"># map을 사용해 target 값{0,1,2}을 꽃 이름으로 변환</span>
-<span class="n">iris</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">IRIS</span><span class="o">.</span><span class="n">target</span>
-<span class="n">iris</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;setosa&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s1">&#39;versicolor&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s1">&#39;virginica&#39;</span><span class="p">})</span>
+<span class="n">iris</span><span class="p">[</span><span class="s1">'class'</span><span class="p">]</span>  <span class="o">=</span> <span class="n">IRIS</span><span class="o">.</span><span class="n">target</span>
+<span class="n">iris</span><span class="p">[</span><span class="s1">'class'</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s1">'class'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span><span class="s1">'setosa'</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s1">'versicolor'</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s1">'virginica'</span><span class="p">})</span>
 <span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -20456,7 +20493,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -20549,7 +20588,7 @@ dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 집계함수를 이용한 그룹화</span>
-<span class="n">iris</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'class'</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -20563,7 +20602,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -20642,8 +20683,7 @@ dtype: int64</pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="3.7.2-%EB%8F%84%EC%88%98%EB%B6%84%ED%8F%AC%ED%91%9C">3.7.2 &#46020;&#49688;&#48516;&#54252;&#54364;<a class="anchor-link" href="#3.7.2-%EB%8F%84%EC%88%98%EB%B6%84%ED%8F%AC%ED%91%9C">&#182;</a></h3><p>👀 <strong>Definition</strong></p>
-<blockquote>
-<p>자료를 몇개의 구간으로 나누고, 나누어진 각 구간에 속한 자료의 개수를 정리한 표</p>
+<blockquote><p>자료를 몇개의 구간으로 나누고, 나누어진 각 구간에 속한 자료의 개수를 정리한 표</p>
 </blockquote>
 <ul>
 <li>데이터의 개수가 어떻게 분포되어 있는지 확인</li>
@@ -20663,7 +20703,7 @@ dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 도수분포표</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">'class'</span><span class="p">])</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -20677,7 +20717,9 @@ dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -20722,7 +20764,7 @@ Name: class, dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 데이터를 3등분 하고, 각 구간에 레이블 부여</span>
-<span class="n">three_cut</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal width (cm)&#39;</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">])</span>
+<span class="n">three_cut</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">'petal width (cm)'</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">'low'</span><span class="p">,</span> <span class="s1">'medium'</span><span class="p">,</span> <span class="s1">'high'</span><span class="p">])</span>
 <span class="n">three_cut</span>
 </pre></div>
 
@@ -20737,7 +20779,9 @@ Name: class, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -20775,7 +20819,7 @@ Categories (3, object): [&#39;low&#39; &lt; &#39;medium&#39; &lt; &#39;high&#39;
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 도수분포표를 만들 새로운 열 추가</span>
-<span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal width level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">three_cut</span>
+<span class="n">iris</span><span class="p">[</span><span class="s1">'petal width level'</span><span class="p">]</span> <span class="o">=</span> <span class="n">three_cut</span>
 <span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -20790,7 +20834,9 @@ Categories (3, object): [&#39;low&#39; &lt; &#39;medium&#39; &lt; &#39;high&#39;
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -20888,7 +20934,7 @@ Categories (3, object): [&#39;low&#39; &lt; &#39;medium&#39; &lt; &#39;high&#39;
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal width level&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">iris</span><span class="p">[</span><span class="s1">'petal width level'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -20902,7 +20948,9 @@ Categories (3, object): [&#39;low&#39; &lt; &#39;medium&#39; &lt; &#39;high&#39;
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -20946,7 +20994,7 @@ Name: petal width level, dtype: int64</pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal width level&#39;</span><span class="p">],</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">'petal width level'</span><span class="p">],</span> <span class="n">iris</span><span class="p">[</span><span class="s1">'class'</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -20960,7 +21008,9 @@ Name: petal width level, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21040,7 +21090,7 @@ Name: petal width level, dtype: int64</pre>
 </ul>
 <p>🔥 <strong>꿀팁</strong></p>
 <ul>
-<li>lambda는 apply를 시작할 때 &quot;lambda 뒤에 오는 변수를 가지고 수행할거야!&quot;라는 뜻</li>
+<li>lambda는 apply를 시작할 때 "lambda 뒤에 오는 변수를 가지고 수행할거야!"라는 뜻</li>
 <li>이 변수는 하나의 컬럼일 수도 있고 여러 컬럼일 수 도 있으며 다양한 처리를 수행할 수 있음</li>
 <li>대상이 여러 컬럼일 경우 axis=1를 꼭 명시해야함</li>
 </ul>
@@ -21057,7 +21107,7 @@ Name: petal width level, dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 하나의 컬럼에 대한 수행</span>
-<span class="n">iris</span><span class="p">[</span><span class="s1">&#39;double sepal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal width (cm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">iris</span><span class="p">[</span><span class="s1">'double sepal'</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s1">'sepal width (cm)'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -21072,7 +21122,9 @@ Name: petal width level, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21177,7 +21229,7 @@ Name: petal width level, dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 여러 컬럼에 대한 수행</span>
-<span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal petal sum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;petal length (cm)&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">iris</span><span class="p">[</span><span class="s1">'sepal petal sum'</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">'sepal length (cm)'</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="s1">'petal length (cm)'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -21192,7 +21244,9 @@ Name: petal width level, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21326,7 +21380,7 @@ Name: petal width level, dtype: int64</pre>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="c1"># 데이터프레임 생성</span>
-<span class="n">landmark</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:[</span><span class="s1">&#39;광화문&#39;</span><span class="p">,</span><span class="s1">&#39;호미곶&#39;</span><span class="p">,</span><span class="s1">&#39;첨성대&#39;</span><span class="p">],</span> <span class="s1">&#39;location&#39;</span><span class="p">:[</span><span class="s1">&#39;서울 종로구 사직로 161&#39;</span><span class="p">,</span> <span class="s1">&#39;경북 포항시 남구 호미곶면 대보리 150&#39;</span><span class="p">,</span> <span class="s1">&#39;경북 경주시 인왕동 839-1&#39;</span><span class="p">]})</span>
+<span class="n">landmark</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'name'</span><span class="p">:[</span><span class="s1">'광화문'</span><span class="p">,</span><span class="s1">'호미곶'</span><span class="p">,</span><span class="s1">'첨성대'</span><span class="p">],</span> <span class="s1">'location'</span><span class="p">:[</span><span class="s1">'서울 종로구 사직로 161'</span><span class="p">,</span> <span class="s1">'경북 포항시 남구 호미곶면 대보리 150'</span><span class="p">,</span> <span class="s1">'경북 경주시 인왕동 839-1'</span><span class="p">]})</span>
 <span class="n">landmark</span>
 </pre></div>
 
@@ -21341,7 +21395,9 @@ Name: petal width level, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21406,7 +21462,7 @@ Name: petal width level, dtype: int64</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># location 문자열의 3번째부터 6번째 문자까지 추출</span>
-<span class="n">landmark</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">landmark</span><span class="p">[</span><span class="s1">'location'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -21420,7 +21476,9 @@ Name: petal width level, dtype: int64</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21465,7 +21523,7 @@ Name: location, dtype: object</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 공백을 기준으로 문자열을 나누어 리스트로 반환</span>
-<span class="n">string_list</span> <span class="o">=</span> <span class="n">landmark</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="n">string_list</span> <span class="o">=</span> <span class="n">landmark</span><span class="p">[</span><span class="s1">'location'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span>
 <span class="n">string_list</span>
 </pre></div>
 
@@ -21480,7 +21538,9 @@ Name: location, dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21523,7 +21583,9 @@ Name: location, dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21552,7 +21614,7 @@ Name: location, dtype: object</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># location 컬럼을 공백을 기준으로 나누어 첫번째 문자열을 새로운 컬럼으로 추가</span>
-<span class="n">landmark</span><span class="p">[</span><span class="s1">&#39;location_1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">landmark</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">landmark</span><span class="p">[</span><span class="s1">'location_1'</span><span class="p">]</span> <span class="o">=</span> <span class="n">landmark</span><span class="p">[</span><span class="s1">'location'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">landmark</span>
 </pre></div>
 
@@ -21567,7 +21629,9 @@ Name: location, dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21636,7 +21700,7 @@ Name: location, dtype: object</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># expand=True로 설정하여 리스트를 컬럼으로 확장</span>
-<span class="n">landmark</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">landmark</span><span class="p">[</span><span class="s1">'location'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -21650,7 +21714,9 @@ Name: location, dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21743,7 +21809,7 @@ Name: location, dtype: object</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 서울로 시작하는 행 탐색</span>
-<span class="n">landmark</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;서울&#39;</span><span class="p">)</span>
+<span class="n">landmark</span><span class="p">[</span><span class="s1">'location'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'서울'</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -21757,7 +21823,9 @@ Name: location, dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21786,7 +21854,7 @@ Name: location, dtype: bool</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 1로 끝나는 행 탐색</span>
-<span class="n">landmark</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+<span class="n">landmark</span><span class="p">[</span><span class="s1">'location'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'1'</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -21800,7 +21868,9 @@ Name: location, dtype: bool</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21829,7 +21899,7 @@ Name: location, dtype: bool</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 경북이 포함된 행 탐색</span>
-<span class="n">landmark</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;경북&#39;</span><span class="p">)</span>
+<span class="n">landmark</span><span class="p">[</span><span class="s1">'location'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">'경북'</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -21843,7 +21913,9 @@ Name: location, dtype: bool</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21884,7 +21956,7 @@ Name: location, dtype: bool</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 경북을 경상북도로 변경</span>
-<span class="n">landmark</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;경북&#39;</span><span class="p">,</span> <span class="s1">&#39;경상북도&#39;</span><span class="p">)</span>
+<span class="n">landmark</span><span class="p">[</span><span class="s1">'location'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'경북'</span><span class="p">,</span> <span class="s1">'경상북도'</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -21898,7 +21970,9 @@ Name: location, dtype: bool</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21953,7 +22027,9 @@ Name: location, dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -21961,7 +22037,7 @@ Name: location, dtype: object</pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>datetime.datetime(2024, 6, 20, 16, 25, 42, 104759)</pre>
+<pre>datetime.datetime(2024, 6, 27, 0, 20, 42, 871143)</pre>
 </div>
 
 </div>
@@ -21993,7 +22069,9 @@ Name: location, dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -22001,7 +22079,7 @@ Name: location, dtype: object</pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[2024, 6, 20]</pre>
+<pre>[2024, 6, 27]</pre>
 </div>
 
 </div>
@@ -22042,7 +22120,7 @@ Name: location, dtype: object</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 데이터프레임 생성</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Datetime&#39;</span><span class="p">:[</span><span class="s1">&#39;20230101&#39;</span><span class="p">,</span> <span class="s1">&#39;20230102&#39;</span><span class="p">,</span> <span class="s1">&#39;20230103&#39;</span><span class="p">,</span> <span class="s1">&#39;20230104&#39;</span><span class="p">]})</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'Datetime'</span><span class="p">:[</span><span class="s1">'20230101'</span><span class="p">,</span> <span class="s1">'20230102'</span><span class="p">,</span> <span class="s1">'20230103'</span><span class="p">,</span> <span class="s1">'20230104'</span><span class="p">]})</span>
 <span class="n">df</span>
 </pre></div>
 
@@ -22057,7 +22135,9 @@ Name: location, dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -22136,7 +22216,9 @@ Name: location, dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -22163,7 +22245,7 @@ dtype: object</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 문자열을 날짜로 변환</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Datetime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Datetime&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'Datetime'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Datetime'</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'%Y-%m-</span><span class="si">%d</span><span class="s1">'</span><span class="p">)</span>
 <span class="n">df</span>
 </pre></div>
 
@@ -22178,7 +22260,9 @@ dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -22257,7 +22341,9 @@ dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -22295,7 +22381,7 @@ dtype: object</pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s1">&#39;20230101&#39;</span><span class="p">,</span> <span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s1">'20230101'</span><span class="p">,</span> <span class="s1">'%Y%m</span><span class="si">%d</span><span class="s1">'</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -22309,7 +22395,9 @@ dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -22347,7 +22435,7 @@ dtype: object</pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
-<span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S'</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -22361,7 +22449,9 @@ dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -22369,7 +22459,7 @@ dtype: object</pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&#39;2024-06-20 16:25:42&#39;</pre>
+<pre>&#39;2024-06-27 00:20:42&#39;</pre>
 </div>
 
 </div>
@@ -22387,7 +22477,6 @@ dtype: object</pre>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>🔥 <strong>날짜 포맷</strong></p>
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/python_preprocessing/datetime_format.png?raw=true" width="400" height="400"></p>
-
 </div>
 </div>
 </div>
@@ -22402,8 +22491,7 @@ dtype: object</pre>
 <li>datetime 모듈의 timedelta 패키지를 사용하여 시간 연산이 가능함</li>
 </ul>
 <p>📌 <strong>timedelta</strong></p>
-<blockquote>
-<p>datetime.timedelta(days=0, seconds=0, microseconds=0, miliseconds=0, minutes=0, hours=0, weeks=0)</p>
+<blockquote><p>datetime.timedelta(days=0, seconds=0, microseconds=0, miliseconds=0, minutes=0, hours=0, weeks=0)</p>
 </blockquote>
 
 </div>
@@ -22434,7 +22522,9 @@ dtype: object</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
@@ -22442,7 +22532,7 @@ dtype: object</pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>datetime.datetime(2024, 6, 28, 16, 25, 42, 211577)</pre>
+<pre>datetime.datetime(2024, 7, 5, 0, 20, 42, 976271)</pre>
 </div>
 
 </div>
