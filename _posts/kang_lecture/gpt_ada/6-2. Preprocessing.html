@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>6-2. Preprocessing.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%F0%9F%9A%A7-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%B2%98%EB%A6%AC">🚧 데이터 전처리</h1>
+<p>앞서 데이터 전처리 과정 수행을 위해 시각화와 연계하여 데이터를 확인해야 한다고 하였습니다. 이번 장에서는 이전 확인하였던 olist 구매기록 데이터를 통해 데이터 전처리를 수행하도록 하겠습니다.</p>
+<p>🔗 <strong>한국어 패치 다운로드</strong></p>
+<ul>
+<li>💾 <a href="https://github.com/sigirace/gpt_ada/blob/main/data/koreanize_matplotlib-0.1.1-py3-none-any.whl">Korea matplotlib</a></li>
+<li>💾 <a href="https://github.com/sigirace/gpt_ada/blob/main/data/NanumBarunGothic.ttf">나눔고딕 폰트</a></li>
+</ul>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>가상환경에 한국어를 사용할 수 있도록 whl 파일과 ttf 파일을 제공하였으니, 아래 과정을 수행하며 한국어 환경 설정 수행
+
+- Code interpreter로 제공한 파일들을 다운로드 및 수행
+- 가상환경에 설치 및 한국어를 사용할 수 있도록 설정
+- 설치 완료후 테스트 그래프 제시
+- 모든 설명은 한국어로 진행
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> matplotlib.font_manager <span class="hljs-keyword">as</span> fm
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+<span class="hljs-comment"># 폰트 파일 경로</span>
+font_path = <span class="hljs-string">'/Users/sigi/sigirace.github.io/_posts/kang_lecture/gpt_ada/data/NanumBarunGothic.ttf'</span>
+
+<span class="hljs-comment"># 폰트 등록</span>
+fm.fontManager.addfont(font_path)
+
+<span class="hljs-comment"># 한글 폰트 설정</span>
+plt.rc(<span class="hljs-string">'font'</span>, family=<span class="hljs-string">'NanumBarunGothic'</span>)
+</div></code></pre>
+<p>🧑‍💻: 앞서 저장하였던 데이터를 GPT에 업로드 해주세요!</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>제시한 데이터는 이커머스회사 olist의 구매기록 데이터이다. 이 데이터의 컬럼을 살펴보고 설명해라. 단, 모든 과정에서 설명시 한국어를 사용하고, ace_tools는 사용하지 말아라
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>제공된 이커머스 회사 Olist의 구매기록 데이터에는 다음과 같은 컬럼들이 포함되어 있습니다:
+
+	1.	order_id: 주문을 식별하기 위한 고유 ID입니다.
+	2.	customer_id: 고객을 식별하기 위한 고유 ID입니다.
+	3.	order_status: 주문의 상태를 나타냅니다 (예: 완료, 취소 등).
+	4.	order_purchase_timestamp: 주문이 이루어진 시간입니다.
+	5.	product_category: 제품의 카테고리를 나타냅니다 (예: 전자제품, 의류 등).
+	6.	payment_method: 결제 방법을 나타냅니다 (예: 신용카드, 계좌이체 등).
+	7.	installments: 할부 횟수를 나타냅니다. 고객이 결제를 몇 번에 나누어 했는지를 나타냅니다.
+	8.	item_price_usd: 제품의 가격을 미국 달러로 나타낸 값입니다.
+	9.	shipping_cost_usd: 배송 비용을 미국 달러로 나타낸 값입니다.
+	10.	installment_divide: 할부로 나눈 결제 금액을 나타냅니다.
+	11.	monthly_price: 할부 결제 시 매월 지불해야 하는 금액을 나타냅니다.
+
+이 컬럼들은 각 주문에 대한 세부 정보를 제공하며, 이를 통해 고객 행동 분석, 판매 트렌드 분석 및 기타 비즈니스 인사이트를 도출할 수 있습니다. 추가적인 분석이 필요하시면 말씀해 주세요! 
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+<span class="hljs-comment"># 데이터 불러오기</span>
+file_path = <span class="hljs-string">'./data/olist_order_dataset_processed.csv'</span>
+data = pd.read_csv(file_path)
+
+<span class="hljs-comment"># 데이터의 컬럼을 살펴보기</span>
+columns_info = data.columns
+columns_info
+</div></code></pre>
+<pre class="hljs"><code><div>Index(['order_id', 'customer_id', 'order_status', 'order_purchase_timestamp',
+       'product_category', 'payment_method', 'installments', 'item_price_usd',
+       'shipping_cost_usd', 'installment_divide', 'monthly_price'],
+      dtype='object')
+</div></code></pre>
+<p>🧑‍💻: 실습을 위해 앞서 데이터프레임에 함수를 적용하여 생성하였던 변수 2개를 삭제하겠습니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>installment_divide, monthly_price 두 컬럼은 삭제해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>installment_divide와 monthly_price 두 컬럼을 성공적으로 삭제하였습니다. 이제 남아 있는 컬럼들은 다음과 같습니다:
+
+	<span class="hljs-number">1.</span>	order_id
+	<span class="hljs-number">2.</span>	customer_id
+	<span class="hljs-number">3.</span>	order_status
+	<span class="hljs-number">4.</span>	order_purchase_timestamp
+	<span class="hljs-number">5.</span>	product_category
+	<span class="hljs-number">6.</span>	payment_method
+	<span class="hljs-number">7.</span>	installments
+	<span class="hljs-number">8.</span>	item_price_usd
+	<span class="hljs-number">9.</span>	shipping_cost_usd
+
+이제 이 데이터셋을 통해 다양한 분석을 진행할 수 있습니다. 추가로 필요한 작업이 있으면 알려주세요. 
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 'installment_divide', 'monthly_price' 컬럼 삭제</span>
+data = data.drop(columns=[<span class="hljs-string">'installment_divide'</span>, <span class="hljs-string">'monthly_price'</span>])
+
+<span class="hljs-comment"># 삭제 후 컬럼 목록 확인</span>
+data.columns
+</div></code></pre>
+<pre class="hljs"><code><div># 'installment_divide', 'monthly_price' 컬럼 삭제
+data = data.drop(columns=['installment_divide', 'monthly_price'])
+
+# 삭제 후 컬럼 목록 확인
+data.columns
+</div></code></pre>
+<h2 id="1-%EA%B2%B0%EC%B8%A1%EC%B9%98-%ED%83%90%EC%83%89-%EB%B0%8F-%EC%B2%98%EB%A6%AC">1. 결측치 탐색 및 처리</h2>
+<p>데이터를 적재, 수집하는 과정에서 결측치가 발생할 수 있습니다. 결측치는 데이터 분석시 오류를 발생시키는 주요 원인이기 때문에 전처리 과정을 거쳐야 합니다.</p>
+<p>🧑‍💻: 현재 데이터 셋에서 결측치를 확인해 보도록 하겠습니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>데이터 셋에서 결측치를 확인해주고 컬럼별 결측치의 비율을 알려줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>데이터 셋에서 컬럼별 결측치 개수와 결측치 비율은 다음과 같습니다:
+
+	•	item_price_usd: 결측치 99개, 결측치 비율 9.93%
+	•	shipping_cost_usd: 결측치 99개, 결측치 비율 9.93%
+
+나머지 컬럼들인 order_id, customer_id, order_status, order_purchase_timestamp, product_category, payment_method, installments 컬럼에는 결측치가 없습니다.
+
+즉, item_price_usd와 shipping_cost_usd 컬럼에만 결측치가 존재하며, 두 컬럼 모두 결측치 비율이 약 9.93%입니다. 추가로 조치가 필요하시다면 말씀해 주세요
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 각 컬럼별 결측치 개수 확인</span>
+missing_data = data.isnull().sum()
+
+<span class="hljs-comment"># 각 컬럼별 결측치 비율 계산</span>
+missing_data_percentage = (missing_data / len(data)) * <span class="hljs-number">100</span>
+
+<span class="hljs-comment"># 결측치 개수와 비율을 데이터프레임으로 정리</span>
+missing_data_summary = pd.DataFrame({
+    <span class="hljs-string">'결측치 개수'</span>: missing_data,
+    <span class="hljs-string">'결측치 비율 (%)'</span>: missing_data_percentage
+})
+
+print(missing_data_summary)
+</div></code></pre>
+<pre class="hljs"><code><div>                          결측치 개수  결측치 비율 (%)
+order_id                       0    0.000000
+customer_id                    0    0.000000
+order_status                   0    0.000000
+order_purchase_timestamp       0    0.000000
+product_category               0    0.000000
+payment_method                 0    0.000000
+installments                   0    0.000000
+item_price_usd                99    9.929789
+shipping_cost_usd             99    9.929789
+</div></code></pre>
+<h3 id="12-%EA%B2%B0%EC%B8%A1%EC%B9%98-%EC%B2%98%EB%A6%AC">1.2 결측치 처리</h3>
+<p>결측치를 탐색하여 비율을 확인하였을 때, 일반적으로 5% 이하일 경우 제거하고 5% 이상일 경우 평균, 최빈값 등으로 대체하는 방법을 사용합니다. 이는 데이터의 수가 줄어드는 것을 방지하기 위함입니다. 본 예제에서는 학습을 위해 두 방법 모두 사용하도록 하겠습니다.</p>
+<p>🧑‍💻: 데이터 셋에서 <code>item_price_usd</code>는 주요 컬럼이기에 결측치를 대체하고 <code>shipping_cost_usd</code>는 제거하도록 하겠습니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>shipping_cost_usd 컬럼의 결측치는 삭제해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>shipping_cost_usd 컬럼에서 결측치가 있는 행을 모두 삭제한 후, 데이터셋의 크기는 (898, 9)로 변경되었습니다. 이제 이 데이터셋은 shipping_cost_usd 컬럼에 결측치가 없는 상태입니다.
+
+추가로 필요한 작업이 있으면 알려주세요.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># shipping_cost_usd 컬럼에서 결측치가 있는 행을 삭제</span>
+data_cleaned = data.dropna(subset=[<span class="hljs-string">'shipping_cost_usd'</span>])
+
+<span class="hljs-comment"># 삭제 후 데이터프레임의 크기 확인</span>
+data_cleaned.shape
+</div></code></pre>
+<pre class="hljs"><code><div>(898, 9)
+</div></code></pre>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>item_price_usd의 결측치는 평균으로 대체해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>item_price_usd 컬럼의 결측치를 해당 컬럼의 평균값으로 대체했습니다. 대체 후에는 더 이상 결측치가 없습니다. 이로써 데이터셋의 결측치 처리가 완료되었습니다.
+
+다른 작업이나 추가 요청이 있으시면 말씀해 주세요. 
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># item_price_usd 컬럼의 결측치를 평균 값으로 대체</span>
+mean_item_price = data_cleaned[<span class="hljs-string">'item_price_usd'</span>].mean()
+data_cleaned[<span class="hljs-string">'item_price_usd'</span>].fillna(mean_item_price, inplace=<span class="hljs-literal">True</span>)
+
+<span class="hljs-comment"># 결측치 대체 후 결측치 확인</span>
+data_cleaned[<span class="hljs-string">'item_price_usd'</span>].isnull().sum()
+</div></code></pre>
+<pre class="hljs"><code><div>0
+</div></code></pre>
+<hr>
+<h2 id="2-%EC%9D%B4%EC%83%81%EC%B9%98-%ED%83%90%EC%83%89-%EB%B0%8F-%EC%B2%98%EB%A6%AC">2. 이상치 탐색 및 처리</h2>
+<p>📍 <strong>이상치의 종류</strong></p>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/python_preprocessing/outlier_type.png?raw=true" width="400" height="200"></p>
+<ul>
+<li>이상치는 측정의 변동성, 실험의 오류, 측정 장비의 이상 등으로 발생할 수 있음</li>
+<li>이상치는 분석 모델의 성능을 떨어뜨리거나 분석 결과에 악영향을 줄 수 있음 ☞ 제거 혹은 처리 필요</li>
+</ul>
+<h3 id="21-%EC%9D%B4%EC%83%81%EC%B9%98-%ED%83%90%EC%83%89">2.1 이상치 탐색</h3>
+<p>🧑‍💻: 먼저 데이터의 요약 통계 정보를 통해 이상치를 확인 해보겠습니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>제시한 데이터의 요약 통계정보를 통해 이상치가 있는지 확인해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>데이터의 요약 통계 정보를 통해 몇 가지 이상치가 의심되는 값을 확인할 수 있습니다:
+
+	1.	installments (할부 횟수):
+	•	최대 값이 999로, 일반적인 할부 횟수를 고려할 때 비정상적으로 큰 값입니다. 일반적인 할부는 12개월, 24개월 정도이므로 999는 이상치일 가능성이 높습니다.
+	•	평균은 3.62로, 표준편차가 31.68로 매우 큽니다. 이는 몇몇 값이 전체 데이터를 왜곡할 가능성이 있다는 것을 시사합니다.
+	2.	item_price_usd (제품 가격):
+	•	최소 값이 $1.805, 최대 값이 $9999.000입니다. 일부 제품의 경우 높은 가격이 있을 수 있지만, $9999는 상당히 높은 가격으로, 특정 데이터 입력 오류나 극단값일 가능성이 있습니다.
+	•	표준편차가 $333.61로, 평균 $29.10에 비해 상당히 큽니다. 이는 일부 극단적인 높은 가격이 전체 데이터에 영향을 미쳤을 수 있음을 나타냅니다.
+	3.	shipping_cost_usd (배송 비용):
+	•	최소 값이 -$9.595로, 배송 비용이 음수인 경우는 비정상적입니다. 이는 데이터 입력 오류일 가능성이 있습니다.
+	•	최대 값은 $99999로, 이는 비정상적으로 큰 값입니다. 일반적인 배송비로 보기 어려우므로, 이상치일 가능성이 높습니다.
+	•	표준편차가 $3336.87로, 평균 $115.49에 비해 매우 큽니다. 이는 몇몇 값이 데이터의 평균에 상당한 영향을 미치고 있음을 나타냅니다.
+
+이러한 이상치들은 분석 전에 처리해야 할 가능성이 있습니다. 데이터의 특정 값들을 추가적으로 조사하거나, 이상치를 처리하는 방법을 적용하여 분석의 정확성을 높일 수 있습니다. 추가적인 분석이나 특정 데이터 처리 방법이 필요하시면 알려주세요
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 데이터의 요약 통계 정보 확인</span>
+summary_stats = data.describe()
+
+<span class="hljs-comment"># 요약 통계 정보 출력</span>
+print(summary_stats)
+</div></code></pre>
+<pre class="hljs"><code><div>       installments  item_price_usd  shipping_cost_usd
+count    997.000000      898.000000         898.000000
+mean       3.623872       29.099161         115.493469
+std       31.681427      333.614822        3336.873052
+min        0.000000        1.805000          -9.595000
+25%        1.000000       13.110000           2.464300
+50%        1.000000       17.098100           3.064700
+75%        4.000000       20.898100           5.169425
+max      999.000000     9999.000000       99999.000000
+</div></code></pre>
+<p>🧑‍💻: 이를 좀 더 시각화하여 판단하기 쉽도록 해보겠습니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>수치형 컬럼들에 대해서 개별적으로 box plot 시각화 수행
+
+단, box plot은 개별적으로 수행하 되, 하나의 그리드에 표현
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>위의 그래프는 각 수치형 컬럼에 대한 개별적인 박스 플롯을 보여줍니다. 각 플롯은 컬럼 내 값들의 분포를 시각적으로 표현하며, 이상치를 쉽게 식별할 수 있습니다. 특히 installments, shipping_cost_usd, 그리고 item_price_usd 컬럼에서 이상치가 두드러지게 나타나는 것을 확인할 수 있습니다.
+
+이러한 시각화를 통해 데이터의 특이점이나 이상치를 더 명확하게 파악할 수 있습니다. 추가적인 분석이나 질문이 있으시면 말씀해 주세요!
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+<span class="hljs-comment"># 수치형 컬럼 선택</span>
+numeric_columns = [<span class="hljs-string">'installments'</span>, <span class="hljs-string">'item_price_usd'</span>, <span class="hljs-string">'shipping_cost_usd'</span>]
+
+<span class="hljs-comment"># 박스 플롯 그리기</span>
+plt.figure(figsize=(<span class="hljs-number">15</span>, <span class="hljs-number">10</span>))
+
+<span class="hljs-keyword">for</span> i, column <span class="hljs-keyword">in</span> enumerate(numeric_columns, <span class="hljs-number">1</span>):
+    plt.subplot(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, i)  <span class="hljs-comment"># 3x2 그리드로 배치</span>
+    plt.boxplot(data[column].dropna())  <span class="hljs-comment"># NaN 값 제거 후 박스 플롯 그리기</span>
+    plt.title(column)
+
+plt.tight_layout()
+plt.show()
+</div></code></pre>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/gpt_ada/outliear1.png?raw=true" width="600" height="300"></p>
+<p>🧑‍💻: 극단적인 값이 있어 데이터를 파악하기 어려워 보입니다. 상위, 하위 3% 정도 제거하고 데이터를 확인해보겠습니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>제시한 데이터에서 각 컬럼별 상위, 하위 3% 정도 극단적인 값들을 제거해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>각 수치형 컬럼에서 상위, 하위 3%의 극단적인 값들을 제거한 후의 요약 통계 정보를 확인했습니다. 이 과정을 통해 데이터에서 일부 이상치가 제거되었으며, 통계값들이 더 안정적인 범위로 수렴한 것을 볼 수 있습니다.
+
+예를 들어:
+
+	•	installments: 최대 값이 10으로 줄어들어, 비정상적으로 큰 값이 제거되었습니다.
+	•	item_price_usd: 최대 값이 $34.01로 줄어들었으며, 평균과 표준편차가 줄어들어 안정적인 분포를 보입니다.
+	•	shipping_cost_usd: 최대 값이 $9.69로 줄어들어, 극단적인 높은 배송 비용이 제거되었습니다.
+
+이제 데이터를 활용한 추가 분석이 가능합니다. 다른 분석 작업이나 추가 요청 사항이 있으시면 알려주세요!
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 각 컬럼별 상위, 하위 3% 극단적인 값들을 제거</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">remove_extremes</span><span class="hljs-params">(df, columns, percentile=<span class="hljs-number">0.03</span>)</span>:</span>
+    <span class="hljs-keyword">for</span> column <span class="hljs-keyword">in</span> columns:
+        lower_bound = df[column].quantile(percentile)
+        upper_bound = df[column].quantile(<span class="hljs-number">1</span> - percentile)
+        df = df[(df[column] &gt;= lower_bound) &amp; (df[column] &lt;= upper_bound)]
+    <span class="hljs-keyword">return</span> df
+
+<span class="hljs-comment"># 수치형 컬럼에서 상위, 하위 3% 제거</span>
+cleaned_data = remove_extremes(data, numeric_columns)
+
+<span class="hljs-comment"># 결과 확인</span>
+print(cleaned_data.describe())
+</div></code></pre>
+<pre class="hljs"><code><div>       installments  item_price_usd  shipping_cost_usd
+count    731.000000      731.000000         731.000000
+mean       2.704514       16.681761           3.927773
+std        2.853063        6.765804           2.084227
+min        0.000000        3.781000           1.485800
+25%        1.000000       15.198100           2.601100
+50%        1.000000       17.098100           3.100800
+75%        4.000000       20.881000           5.123350
+max       10.000000       34.008100           9.688100
+</div></code></pre>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>수치형 컬럼들에 대해서 개별적으로 box plot 시각화 수행
+
+단, box plot은 개별적으로 수행하 되, 하나의 그리드에 표현
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>위의 박스 플롯들은 극단적인 값들을 제거한 후 각 수치형 컬럼의 분포를 보여줍니다. 이상치가 제거되면서 플롯이 더 안정적인 형태를 띄고 있으며, 이전보다 데이터의 중심 경향이 더 명확하게 드러납니다.
+
+이제 데이터 분석이 더 신뢰할 수 있는 범위 내에서 진행될 수 있으며, 추가적으로 궁금한 사항이 있거나 다른 작업이 필요하시면 말씀해 주세요!
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 극단값 제거 후 수치형 컬럼들에 대한 박스 플롯 다시 그리기</span>
+
+plt.figure(figsize=(<span class="hljs-number">15</span>, <span class="hljs-number">10</span>))
+
+<span class="hljs-keyword">for</span> i, column <span class="hljs-keyword">in</span> enumerate(numeric_columns, <span class="hljs-number">1</span>):
+    plt.subplot(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, i)  <span class="hljs-comment"># 3x2 그리드로 배치</span>
+    plt.boxplot(cleaned_data[column].dropna())  <span class="hljs-comment"># NaN 값 제거 후 박스 플롯 그리기</span>
+    plt.title(column)
+
+plt.tight_layout()
+plt.show()
+</div></code></pre>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/gpt_ada/outliear2.png?raw=true" width="600" height="300"></p>
+<p>🧑‍💻: 다른 변수에 비해 shipping_cost_usd는 outlier가 많은 것으로 보입니다. 이를 IQR 방식을 통해 제거해보겠습니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>shipping_cost_usd 컬럼에 대해 IQR 방식으로 이상치를 탐색해주고, 이상치의 비율과 상한, 하한에 대해 알려줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>shipping_cost_usd 컬럼에 대해 IQR 방식을 사용하여 이상치를 탐색한 결과는 다음과 같습니다:
+
+	•	하한 (Lower Bound): 약 -1.17
+	•	상한 (Upper Bound): 약 8.89
+	•	이상치 비율: 전체 데이터의 약 2.09%
+
+즉, shipping_cost_usd 값이 -1.17 미만이거나 8.89 초과인 경우가 이상치로 간주됩니다. 이상치는 전체 데이터의 약 2.09%를 차지하고 있습니다.
+
+추가로 궁금한 사항이나 요청이 있으시면 알려주세요.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># IQR 방식으로 이상치 탐색</span>
+Q1 = data_cleaned[<span class="hljs-string">'shipping_cost_usd'</span>].quantile(<span class="hljs-number">0.25</span>)
+Q3 = data_cleaned[<span class="hljs-string">'shipping_cost_usd'</span>].quantile(<span class="hljs-number">0.75</span>)
+IQR = Q3 - Q1
+
+lower_bound = Q1 - <span class="hljs-number">1.5</span> * IQR
+upper_bound = Q3 + <span class="hljs-number">1.5</span> * IQR
+
+<span class="hljs-comment"># 이상치 탐색</span>
+outliers = data_cleaned[(data_cleaned[<span class="hljs-string">'shipping_cost_usd'</span>] &lt; lower_bound) | (data_cleaned[<span class="hljs-string">'shipping_cost_usd'</span>] &gt; upper_bound)]
+
+<span class="hljs-comment"># 이상치 비율 계산</span>
+outliers_ratio = len(outliers) / len(data_cleaned) * <span class="hljs-number">100</span>
+
+lower_bound, upper_bound, outliers_ratio
+</div></code></pre>
+<pre class="hljs"><code><div>(-1.1715874999999998, 8.8889125, 2.0935960591133003)
+</div></code></pre>
+<h3 id="22-%EC%9D%B4%EC%83%81%EC%B9%98-%EC%B2%98%EB%A6%AC">2.2 이상치 처리</h3>
+<p>이상치를 탐색한 후 제거하거나 평균값, 최빈값 등으로 대체하는 처리 과정이 필요합니다. 이는 데이터 분석가가 도메인 전문가와 협의를 통해 수행하여야 합니다. 본 실습에서는 다양한 처리 방법을 학습하기 위해 임의로 진행하도록 하겠습니다.</p>
+<p>🧑‍💻: 데이터에 대해 하한값 미만은 제거하고 상한값 초과 값은 상한값으로 대체하겠습니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>shipping_cost_usd 컬럼에서 하한값 미만은 제거해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>shipping_cost_usd 컬럼에서 하한값(-1.17) 미만의 데이터를 제거한 후, 데이터셋의 크기는 (812, 9)로 유지되었습니다. 이는 제거된 데이터가 극히 적었음을 의미합니다.
+
+이제 데이터셋이 이상치 제거를 통해 정제되었습니다. 추가로 필요하신 작업이 있으면 말씀해 주세요. 
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># item_price_usd 컬럼에서 하한값 이하의 데이터 제거</span>
+cleaned_data = cleaned_data[cleaned_data[<span class="hljs-string">'item_price_usd'</span>] &gt; lower_bound]
+
+<span class="hljs-comment"># 제거 후 데이터 확인</span>
+print(cleaned_data.describe())
+</div></code></pre>
+<pre class="hljs"><code><div>       installments  item_price_usd  shipping_cost_usd
+count    656.000000      656.000000         656.000000
+mean       2.862805       18.045913           4.052822
+std        2.924404        5.722692           2.142393
+min        0.000000        6.840000           1.485800
+25%        1.000000       15.198100           2.732200
+50%        2.000000       17.098100           3.114100
+75%        5.000000       20.900000           5.169900
+max       10.000000       34.008100           9.688100
+</div></code></pre>
+<p>📌 <strong>더 알아보기: 데이터가 변하지 않은 이유</strong></p>
+<ul>
+<li>IQR로 구한 하한값보다 데이터의 최소값이 더 크기 때문에 제거되지 않음</li>
+<li>비율로 연산하기 때문에 -값이 나올 수 있음</li>
+</ul>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>shipping_cost_usd 컬럼에서 상한값 초과는 상한값으로 대체해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>shipping_cost_usd 컬럼에서 상한값(8.89)을 초과하는 값을 상한값으로 대체했습니다. 대체 후의 shipping_cost_usd 컬럼의 통계 정보를 보면, 최대값이 상한값으로 조정된 것을 확인할 수 있습니다.
+
+이로써 해당 컬럼의 이상치 처리 작업이 완료되었습니다. 추가로 궁금한 점이나 요청이 있으면 말씀해 주세요. 
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># shipping_cost_usd 컬럼에서 상한값 초과하는 데이터를 상한값으로 대체</span>
+data_cleaned[<span class="hljs-string">'shipping_cost_usd'</span>] = data_cleaned[<span class="hljs-string">'shipping_cost_usd'</span>].apply(
+    <span class="hljs-keyword">lambda</span> x: upper_bound <span class="hljs-keyword">if</span> x &gt; upper_bound <span class="hljs-keyword">else</span> x
+)
+
+<span class="hljs-comment"># 상한값 초과 데이터 대체 후 데이터 확인</span>
+print(data_cleaned.describe())
+</div></code></pre>
+<pre class="hljs"><code><div>       installments  item_price_usd  shipping_cost_usd
+count    812.000000      812.000000         812.000000
+mean       2.695813       18.040812           3.911310
+std        2.849679        7.608777           2.036154
+min        0.000000        3.781000           1.485800
+25%        1.000000       15.198100           2.601100
+50%        1.000000       17.098100           3.101750
+75%        4.000000       22.420000           5.116225
+max       10.000000       34.008100           8.888912
+</div></code></pre>
+<p>🧑‍💻: 결측치와 이상치의 처리 결과를 확인해보겠습니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>결측치 처리와 이상치 처리 결과를 요약해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>결측치와 이상치 처리 과정을 요약하면 다음과 같습니다:
+
+1. 결측치 처리:
+- shipping_cost_usd 컬럼:
+  - 결측치가 있는 모든 행을 삭제하였습니다. 이로 인해 데이터셋의 크기가 감소했습니다.
+- item_price_usd` 컬럼:
+  - 결측치를 해당 컬럼의 평균값으로 대체하였습니다.
+
+2. 이상치 처리:
+- 상위 및 하위 3% 극단적인 값 제거:
+  - 모든 수치형 컬럼(`installments`, `item_price_usd`, `shipping_cost_usd`)에서 상위 및 하위 3%의 극단적인 값을 제거하였습니다.
+
+- shipping_cost_usd 컬럼의 IQR 방식 이상치 처리:
+  - 하한값: -1.17 미만인 값을 제거하였습니다.
+  - 상한값: 8.89를 초과하는 값을 상한값으로 대체하였습니다.
+
+이로써 데이터셋은 결측치와 이상치가 적절히 처리된 상태입니다. 이렇게 정제된 데이터는 보다 신뢰할 수 있는 분석 결과를 도출하는 데 유용할 것입니다.
+
+추가로 궁금한 점이나 요청이 있으시면 알려주세요.
+</div></code></pre>
+<hr>
+<h2 id="3-feature-engineering">3. Feature Engineering</h2>
+<p>Feature Engineering은 데이터 분석 및 머신러닝 모델링 과정에서 매우 중요한 단계로, 데이터를 바탕으로 새로운 특성(변수)을 생성하거나 기존 특성을 변형하여 분석의 성능을 향상시키는 과정을 말합니다.</p>
+<p>📍<strong>Feature Engineering의 주요 활동</strong></p>
+<ul>
+<li><strong>기존 특성 조합</strong>: 여러 특성을 조합하여 새로운 특성을 만듭니다. 예를 들어, 가격과 수량을 곱하여 총 금액(total amount) 특성을 생성할 수 있습니다.</li>
+<li><strong>날짜/시간 특성 변환</strong>: 날짜 및 시간을 연도, 월, 요일, 시간 등으로 변환해 모델에 유용한 정보를 추가합니다.</li>
+<li><strong>비율 계산</strong>: 두 특성 간의 비율을 계산하여 새로운 특성을 만듭니다. 예를 들어, 매출과 비용을 이용해 이익률을 생성할 수 있습니다.</li>
+</ul>
+<h3 id="31-%EB%82%A0%EC%A7%9C-%ED%8C%8C%EC%83%9D%EB%B3%80%EC%88%98-%EC%83%9D%EC%84%B1">3.1 날짜 파생변수 생성</h3>
+<p>날짜는 Feature Engineering에서 가장 쉽게 사용할 수 있는 데이터입니다. 주말, 주중, 오전, 오후, 공휴일 등 만들어 낼 수 있는 경우의 수가 매우 많기 때문입니다. 따라서 분석하고자 하는 도메인에 맞추어 이를 활용하는 것을 추천드립니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>is_weekend 컬럼을 생성하고 이 값은 order_purchase_timestamp를 통해 주중, 주말로 분리하여 지정해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>order_purchase_timestamp를 기준으로 주중과 주말을 분리하여 is_weekend 컬럼을 생성했습니다. 이 컬럼은 주문이 주말에 발생했을 경우 True, 주중에 발생했을 경우 False 값을 가집니다.
+
+예시로 첫 몇 개의 데이터에서 주중(False)과 주말(True)이 잘 구분된 것을 확인할 수 있습니다. 추가로 작업이 필요하시면 알려주세요.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># is_weekend 컬럼 생성 (주말: True, 주중: False)</span>
+data_cleaned[<span class="hljs-string">'is_weekend'</span>] = data_cleaned[<span class="hljs-string">'order_purchase_timestamp'</span>].dt.weekday &gt;= <span class="hljs-number">5</span>
+
+<span class="hljs-comment"># 주중과 주말을 'Weekday'와 'Weekend'로 구분하여 저장</span>
+data_cleaned[<span class="hljs-string">'is_weekend'</span>] = data_cleaned[<span class="hljs-string">'is_weekend'</span>].apply(<span class="hljs-keyword">lambda</span> x: <span class="hljs-string">'Weekend'</span> <span class="hljs-keyword">if</span> x <span class="hljs-keyword">else</span> <span class="hljs-string">'Weekday'</span>)
+
+<span class="hljs-comment"># 결과 확인</span>
+data_cleaned[[<span class="hljs-string">'order_purchase_timestamp'</span>, <span class="hljs-string">'is_weekend'</span>]].head()
+</div></code></pre>
+<pre class="hljs"><code><div>  order_purchase_timestamp  is_weekend
+0      2017-01-23 18:29:00       False
+1      2017-01-30 10:47:00       False
+2      2017-01-31 17:40:00       False
+3      2017-10-01 20:04:00        True
+4      2017-10-01 09:15:00        True
+</div></code></pre>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>is_weekend을 막대 그래프로 시각화해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div> is_weekend 컬럼의 분포를 보여주는 막대그래프입니다. 주중(Weekday)과 주말(Weekend)로 나누어 각각의 주문 빈도를 확인할 수 있습니다. 이를 통해 주중과 주말의 주문 패턴을 비교할 수 있습니다. 추가로 궁금한 사항이 있으면 알려주세요.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># is_weekend 컬럼의 분포를 막대그래프로 시각화</span>
+plt.figure(figsize=(<span class="hljs-number">8</span>, <span class="hljs-number">6</span>))
+data_cleaned[<span class="hljs-string">'is_weekend'</span>].value_counts().plot(kind=<span class="hljs-string">'bar'</span>, color=<span class="hljs-string">'lightgreen'</span>, edgecolor=<span class="hljs-string">'black'</span>)
+plt.title(<span class="hljs-string">'Distribution of Orders by Weekend'</span>)
+plt.xlabel(<span class="hljs-string">'Is Weekend'</span>)
+plt.ylabel(<span class="hljs-string">'Frequency'</span>)
+plt.xticks(ticks=[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], labels=[<span class="hljs-string">'Weekday'</span>, <span class="hljs-string">'Weekend'</span>], rotation=<span class="hljs-number">0</span>)
+plt.grid(axis=<span class="hljs-string">'y'</span>)
+plt.show()
+</div></code></pre>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/gpt_ada/week_result.png?raw=true" width="600" height="400"></p>
+<h3 id="32-%EC%B6%94%EA%B0%80-%ED%8C%8C%EC%83%9D%EB%B3%80%EC%88%98-%EC%83%9D%EC%84%B1">3.2 추가 파생변수 생성</h3>
+<p>🧑‍💻: 일단 추가 파생변수를 만들어 놓으면 손해는 보지 않습니다. 데이터 분석의 목적과 방법이 명확치 않으면 GPT를 이용하는 것도 아주 좋은 방법입니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>데이터를 보고 추가할 수 있는 파생변수를 제안해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>	1.	order_hour:
+	•	설명: 주문이 이루어진 시각(시간)입니다. order_purchase_timestamp에서 시간을 추출하여 생성할 수 있습니다.
+	•	활용: 특정 시간대에 주문이 집중되는지를 분석할 수 있습니다.
+	2.	order_day:
+	•	설명: 주문이 이루어진 요일입니다. order_purchase_timestamp에서 요일을 추출하여 생성할 수 있습니다.
+	•	활용: 요일별 주문 패턴을 분석할 수 있습니다.
+	3.	order_month:
+	•	설명: 주문이 이루어진 월입니다. order_purchase_timestamp에서 월을 추출하여 생성할 수 있습니다.
+	•	활용: 월별 매출 트렌드를 분석할 수 있습니다.
+	4.	total_cost_usd:
+	•	설명: 제품 가격과 배송비를 합한 총 비용입니다. item_price_usd와 shipping_cost_usd를 더하여 생성할 수 있습니다.
+	•	활용: 고객이 실제로 지불한 총 금액을 분석할 수 있습니다.
+	5.	is_high_value_order:
+	•	설명: 특정 기준 금액 이상인 주문을 “고가 주문”으로 간주하는 플래그 변수입니다.
+	•	활용: 고가 주문을 식별하고, 이러한 주문에 대한 특별한 분석이나 마케팅 전략을 수립할 수 있습니다.
+	6.	days_since_order:
+	•	설명: 현재 시점으로부터 주문이 이루어진 날짜까지의 일수를 계산한 변수입니다.
+	•	활용: 고객의 최신 주문 시점을 파악하고, 재구매를 유도하는 데 사용할 수 있습니다.
+	7.	product_category_group:
+	•	설명: 제품 카테고리를 대분류로 그룹화한 변수입니다. 예를 들어, 비슷한 제품 카테고리들을 하나의 그룹으로 묶을 수 있습니다.
+	•	활용: 제품의 대분류에 따른 구매 패턴을 분석할 수 있습니다.
+	8.	payment_installment_type:
+	•	설명: 할부 횟수에 따른 결제 유형을 나누는 변수입니다. 예를 들어, installments가 1이면 “일시불”, 2 이상이면 “할부”로 구분할 수 있습니다.
+	•	활용: 할부와 일시불 고객의 행동 차이를 분석할 수 있습니다.
+</div></code></pre>
+<p>🧑‍💻: 할부 유형을 구분하여 향후 분석에 활용하는 것도 좋은 아이디어일 것 같습니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>installments의 분포를 시각화해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>그래프는 installments 컬럼의 분포를 나타냅니다. 각 할부 횟수에 따른 빈도를 확인할 수 있으며, 이를 통해 할부가 얼마나 자주 사용되는지, 어떤 할부 횟수가 가장 많이 사용되는지 파악할 수 있습니다. 추가로 분석하거나 시각화할 부분이 있으면 말씀해 주세요. 
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+<span class="hljs-comment"># installments 컬럼의 분포 시각화</span>
+plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
+plt.hist(data_cleaned[<span class="hljs-string">'installments'</span>], bins=range(int(data_cleaned[<span class="hljs-string">'installments'</span>].min()), int(data_cleaned[<span class="hljs-string">'installments'</span>].max()) + <span class="hljs-number">2</span>), edgecolor=<span class="hljs-string">'black'</span>)
+plt.title(<span class="hljs-string">'Distribution of Installments'</span>)
+plt.xlabel(<span class="hljs-string">'Number of Installments'</span>)
+plt.ylabel(<span class="hljs-string">'Frequency'</span>)
+plt.grid(<span class="hljs-literal">True</span>)
+plt.show()
+</div></code></pre>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/gpt_ada/halbu.png?raw=true" width="600" height="300"></p>
+<p>🧑‍💻: 할부 개월수에 따라 유형을 3등분하여 0:일시불, 1~3:일반, 4~: 장기 로 구분하도록 하겠습니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>할부 개월수에 따라 유형을 구분하는 컬럼을 생성해줘
+- 0개월: 일시불
+- 1~3개월: 단기
+- 4개월~: 장기
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>installments 컬럼을 기준으로 할부 개월수에 따라 “일시불”, “단기”, “장기”로 구분하는 installment_duration_type 컬럼을 생성했습니다. 이제 이 컬럼을 사용해 할부 유형에 따른 분석을 진행할 수 있습니다. 추가로 필요한 작업이 있으시면 말씀해 주세요.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 'installment_duration_type' 컬럼 생성: 할부 개월수에 따라 유형 구분</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">categorize_installments</span><span class="hljs-params">(installments)</span>:</span>
+    <span class="hljs-keyword">if</span> installments == <span class="hljs-number">0</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'일시불'</span>
+    <span class="hljs-keyword">elif</span> <span class="hljs-number">1</span> &lt;= installments &lt;= <span class="hljs-number">3</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'단기'</span>
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'장기'</span>
+
+data_cleaned[<span class="hljs-string">'installment_duration_type'</span>] = data_cleaned[<span class="hljs-string">'installments'</span>].apply(categorize_installments)
+
+<span class="hljs-comment"># 새로운 컬럼 확인</span>
+print(data_cleaned[[<span class="hljs-string">'installments'</span>, <span class="hljs-string">'installment_duration_type'</span>]].head())
+</div></code></pre>
+<pre class="hljs"><code><div>   installments installment_duration_type
+0             0                       일시불
+1             0                       일시불
+2             1                        단기
+3             1                        단기
+4             1                        단기
+</div></code></pre>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>installment_duration_type을 막대그래프로 시각화해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>installment_duration_type 컬럼의 분포를 보여주는 막대그래프입니다. 할부 유형이 “일시불”, “단기”, “장기”로 구분되어 각각의 빈도를 확인할 수 있습니다. 이 시각화를 통해 어느 유형의 할부가 더 많이 사용되는지 알 수 있습니다. 추가로 분석하거나 궁금한 점이 있으시면 말씀해 주세요.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># installment_duration_type 컬럼의 분포를 막대그래프로 시각화</span>
+plt.figure(figsize=(<span class="hljs-number">8</span>, <span class="hljs-number">6</span>))
+data_cleaned[<span class="hljs-string">'installment_duration_type'</span>].value_counts().plot(kind=<span class="hljs-string">'bar'</span>, color=<span class="hljs-string">'skyblue'</span>, edgecolor=<span class="hljs-string">'black'</span>)
+plt.title(<span class="hljs-string">'Distribution of Installment Duration Type'</span>)
+plt.xlabel(<span class="hljs-string">'Installment Duration Type'</span>)
+plt.ylabel(<span class="hljs-string">'Frequency'</span>)
+plt.xticks(rotation=<span class="hljs-number">0</span>)
+plt.grid(axis=<span class="hljs-string">'y'</span>)
+plt.show()
+</div></code></pre>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/gpt_ada/halbu_result.png?raw=true" width="600" height="300"></p>
+
+</body>
+</html>

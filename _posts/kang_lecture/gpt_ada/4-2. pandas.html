@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>4-2. pandas.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%F0%9F%90%BC-pandas">🐼 Pandas</h1>
+<h2 id="1-pandas-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B5%AC%EC%A1%B0">1 Pandas 데이터 구조</h2>
+<ul>
+<li>Pandas에서 제공하는 데이터 구조는 Series와 DataFrame이 있음</li>
+</ul>
+<h3 id="11-series">1.1 Series</h3>
+<ul>
+<li>각 값에 <code>라벨(인덱스)</code>이 있고 <code>하나의 데이터 형식</code>으로 이루어진 <code>1차원 배열</code></li>
+<li><code>라벨</code>로 데이터에 접근 할 수 있음</li>
+</ul>
+<h3 id="12-dataframe">1.2 DataFrame</h3>
+<ul>
+<li>행과 열에 라벨이 있는 2차원 배열 ☞ Excel</li>
+<li>각 <code>열</code>은 <code>서로 다른 데이터 타입</code>을 지닐 수 있음</li>
+</ul>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/python_preprocessing/s_p.png?raw=true" width="600" height="300"></p>
+<hr>
+<h2 id="2-dataframe-%EA%B8%B0%EB%B3%B8">2 DataFrame 기본</h2>
+<p>Pandas의 DataFrame을 사용하여 분석하기 위한 가장 첫 단계는 데이터를 <code>호출</code>하고 데이터의 내용과 <code>요약</code>, <code>통계정보</code>를 확인하는 것입니다. 데이터나 분석 도구에 따라 컬럼명이나 컬럼의 타입을 변경해야 할 때도 있습니다.</p>
+<h3 id="21-pandas-%EC%82%AC%EC%9A%A9-%EC%A4%80%EB%B9%84">2.1 Pandas 사용 준비</h3>
+<p>🧑‍💻: olist 구매 기록 데이터를 chat gpt에 업로드 해주세요!</p>
+<p>🔗 <strong>실습 데이터</strong></p>
+<ul>
+<li>💾 <a href="https://github.com/sigirace/gpt_ada/blob/main/data/olist_order_dataset_practice.csv">olist 구매기록 데이터</a></li>
+</ul>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>제시한 데이터는 이커머스회사 olist의 구매기록 데이터이다. 이 데이터의 컬럼을 살펴보고 설명해라. 모든 과정에서 설명시 한국어를 사용하라.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력:Message</strong></p>
+<pre class="hljs"><code><div>이 데이터는 이커머스 회사인 Olist의 구매 기록을 포함하고 있으며, 총 9개의 컬럼으로 구성되어 있습니다. 각 컬럼의 설명은 다음과 같습니다:
+
+1. order_id: 주문 ID로, 각 주문을 고유하게 식별할 수 있는 문자열입니다.
+2. customer_id: 고객 ID로, 주문을 한 고객을 고유하게 식별할 수 있는 문자열입니다.
+3. order_status: 주문 상태를 나타내는 컬럼으로, ‘delivered’(배송 완료)와 같은 상태 정보가 포함됩니다.
+4. order_purchase_timestamp: 주문이 이루어진 시점을 나타내는 타임스탬프로, 주문이 생성된 날짜와 시간이 기록되어 있습니다.
+5. product_category: 구매된 상품의 카테고리를 나타내는 문자열입니다.
+6. payment_method: 결제 수단을 나타내는 컬럼으로, ‘credit_card’(신용카드), ‘boleto’(브라질의 지불 수단) 등이 포함됩니다.
+7. installments: 할부 횟수를 나타내는 컬럼으로, 고객이 구매할 때 선택한 할부 개수입니다. 일부 값은 결측치(NaN)로 표시됩니다.
+8. item_price_usd: 상품의 가격을 미국 달러(USD)로 나타내는 컬럼입니다.
+9. shipping_cost_usd: 배송비를 미국 달러(USD)로 나타내는 컬럼입니다.
+
+이 데이터는 997개의 레코드(행)로 구성되어 있으며, 각 컬럼의 데이터 타입은 문자열(object)과 부동 소수점(float64)으로 구성되어 있습니다. 결측치는 installments, item_price_usd, shipping_cost_usd 컬럼에서 발견됩니다.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력:Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+<span class="hljs-comment"># Load the dataset</span>
+file_path = <span class="hljs-string">'your_file.csv'</span>
+data = pd.read_csv(file_path)
+
+<span class="hljs-comment"># Display the first few rows and columns names of the dataset to understand its structure</span>
+data.head(), data.columns
+</div></code></pre>
+<pre class="hljs"><code><div>(                           order_id                       customer_id  \
+ 0  e481f51cbdc54678b7cc49136f2d6af7  9ef432eb6251297304e76186b10a928d
+ 1  128e10d95713541c87cd1a2e48201934  a20e8105f23924cd00833fd87daa0831
+ 2  0e7e841ddf8f8f2de2bad69267ecfbcf  26c7ac168e1433912a51b924fbd34d34
+ 3  bfc39df4f36c3693ff3b63fcbea9e90a  53904ddbea91e1e92b2b3f1d09a7af86
+ 4  53cdb2fc8bc7dce0b6741e2150273451  b0830fb4747a6c6d20dea0b8c802d7ef
+
+   order_status order_purchase_timestamp product_category payment_method  \
+ 0    delivered          2017.10.2 10:56       housewares    credit_card
+ 1    delivered          2017.8.15 18:29       housewares    credit_card
+ 2    delivered           2017.8.2 18:24       housewares    credit_card
+ 3    delivered         2017.10.23 23:26       housewares         boleto
+ 4    delivered          2018.7.24 20:41        perfumery         boleto
+
+    installments  item_price_usd  shipping_cost_usd
+ 0           1.0          5.6981             1.6568
+ 1           3.0          5.6981             1.4782
+ 2           NaN          5.6981             1.4782
+ 3           1.0          5.6981             2.6790
+ 4           1.0         22.5530             4.3244  ,
+ Index(['order_id', 'customer_id', 'order_status', 'order_purchase_timestamp',
+        'product_category', 'payment_method', 'installments', 'item_price_usd',
+        'shipping_cost_usd'],
+       dtype='object'))
+</div></code></pre>
+<h3 id="22-dataframe-%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0">2.2 DataFrame 출력하기</h3>
+<ul>
+<li><code>head()</code>, <code>tail()</code> 함수를 사용해 데이터를 부분적으로 확인</li>
+<li>함수의 인자로 아무 숫자도 지정하지 않으면 컬럼명을 포함하여 6줄을 출력</li>
+</ul>
+<p>💥 <strong>MISSION</strong></p>
+<blockquote>
+<p>Dataframe의 <code>head()</code>와 <code>tail()</code> 사용해보기</p>
+</blockquote>
+<pre class="hljs"><code><div>print(df.head())
+</div></code></pre>
+<pre class="hljs"><code><div>                           order_id                       customer_id  \
+0  e481f51cbdc54678b7cc49136f2d6af7  9ef432eb6251297304e76186b10a928d
+1  128e10d95713541c87cd1a2e48201934  a20e8105f23924cd00833fd87daa0831
+2  0e7e841ddf8f8f2de2bad69267ecfbcf  26c7ac168e1433912a51b924fbd34d34
+3  bfc39df4f36c3693ff3b63fcbea9e90a  53904ddbea91e1e92b2b3f1d09a7af86
+4  53cdb2fc8bc7dce0b6741e2150273451  b0830fb4747a6c6d20dea0b8c802d7ef
+
+  order_status order_purchase_timestamp product_category payment_method  \
+0    delivered          2017.10.2 10:56       housewares    credit_card
+1    delivered          2017.8.15 18:29       housewares    credit_card
+2    delivered           2017.8.2 18:24       housewares    credit_card
+3    delivered         2017.10.23 23:26       housewares         boleto
+4    delivered          2018.7.24 20:41        perfumery         boleto
+
+   installments  item_price_usd  shipping_cost_usd
+0           1.0          5.6981             1.6568
+1           3.0          5.6981             1.4782
+2           NaN          5.6981             1.4782
+3           1.0          5.6981             2.6790
+4           1.0         22.5530             4.3244                                order_id                       customer_id  \
+992  65b923f47b964f5e6be363f33a1cd0ed  c0dfb57c7c700f11633aba234dcce6b7
+993  c762b7683314cc1cf880475f78aa3821  79c4c03824db69d2f61c1e8d8ec24443
+994  088a21dbb29d74a07738fb93a96b507a  fd04c6764e22cc8daca7064ed73fdf6c
+995  088a21dbb29d74a07738fb93a96b507a  fd04c6764e22cc8daca7064ed73fdf6c
+996  088a21dbb29d74a07738fb93a96b507a  fd04c6764e22cc8daca7064ed73fdf6c
+...
+993           2.0         17.0981                NaN
+994           1.0             NaN             9.5950
+995           1.0         17.0981            -9.5950
+996           1.0         17.0981             9.5950
+</div></code></pre>
+<h3 id="23-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%9D%98-%ED%83%80%EC%9E%85-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0">2.3 데이터의 타입 확인하기</h3>
+<ul>
+<li><code>object</code>: 문자열</li>
+<li><code>int</code>, <code>float</code>, <code>decimal</code> ..: 숫자형</li>
+<li><code>bool</code>: 불리안</li>
+</ul>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>제시한 데이터에서 컬럼들의 타입을 알려줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>제시한 데이터의 각 컬럼에 대한 데이터 타입은 다음과 같습니다:
+
+• order_id: object (문자열)
+• customer_id: object (문자열)
+• order_status: object (문자열)
+• order_purchase_timestamp: object (문자열)
+• product_category: object (문자열)
+• payment_method: object (문자열)
+• installments: float64 (실수형)
+• item_price_usd: float64 (실수형)
+• shipping_cost_usd: float64 (실수형)
+
+대부분의 컬럼이 문자열로 되어 있으며, installments, item_price_usd, shipping_cost_usd 컬럼은 실수형(float64) 데이터 타입을 가지고 있습니다.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Checking the data types of each column in the dataset</span>
+data_types = data.dtypes
+data_types
+</div></code></pre>
+<h3 id="24-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%80%EC%9E%85-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0">2.4 데이터 타입 변경하기</h3>
+<p>🧑‍💻: 구매 빈도는 정수여야 할 것 같습니다. 데이터의 타입을 변경하도록 해볼까요?</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>installments의 컬럼을 정수형으로 변경해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>installments 컬럼을 정수형(int64)으로 성공적으로 변환했습니다. 이제 이 컬럼은 더 이상 실수형이 아닌 정수형 데이터를 포함하고 있습니다. 
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Converting the 'installments' column to integer type</span>
+data[<span class="hljs-string">'installments'</span>] = data[<span class="hljs-string">'installments'</span>].fillna(<span class="hljs-number">0</span>).astype(int)
+
+<span class="hljs-comment"># Verifying the change</span>
+data[<span class="hljs-string">'installments'</span>].dtype
+</div></code></pre>
+<p>📌 <strong>더 알아보기</strong></p>
+<ul>
+<li>데이터 타입을 변경하는 것은 <code>전처리</code>의 영역에 속함</li>
+</ul>
+<h3 id="25-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%9D%98-%EC%9E%90%EB%A3%8C%ED%98%95%ED%83%9C-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0">2.5 데이터의 자료형태 확인하기</h3>
+<ul>
+<li>데이터의 자료형태는 <code>시각화</code>, <code>전처리</code> 그리고 <code>분석</code> 시 모두 중요하게 적용되는 개념</li>
+<li>각 형태에 따라 다른 기법이 사용됨</li>
+</ul>
+<p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/gpt_ada/data_type.png?raw=true" width="600" height="300"></p>
+<table>
+<thead>
+<tr>
+<th>분류</th>
+<th>상세 분류</th>
+<th>설명</th>
+<th><strong>예시</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>범주형</strong></td>
+<td></td>
+<td>몇 개의 범주로 나누어진 자료를 의미</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>명목형</strong></td>
+<td>순서 관계가 없는 자료</td>
+<td>성별(남성, 여성), 혈액형(A형, B형, O형, AB형 등)</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>순서형</strong></td>
+<td>순서 관계가 존재하는 자료</td>
+<td>교육 수준(고졸, 대졸, 석사 등), 등급(1등급, 2등급 등)</td>
+</tr>
+<tr>
+<td><strong>수치형</strong></td>
+<td></td>
+<td>이산형과 연속형으로 이루어진 자료를 의미</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>이산형</strong></td>
+<td>구분된 값을 가짐</td>
+<td>출산 횟수, 방문 횟수</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>연속형</strong></td>
+<td>연속적인 값을 가짐</td>
+<td>신장, 체중, 온도</td>
+</tr>
+</tbody>
+</table>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>제시한 데이터에서 컬럼들의 타입을 수치형, 범주형으로 구분하여 알려주고 리스트로 저장해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력:Message</strong></p>
+<pre class="hljs"><code><div>• 범주형(Categorical) 컬럼:
+	• order_id
+	• customer_id
+	• order_status
+	• order_purchase_timestamp
+	• product_category
+	• payment_method
+• 수치형(Numerical) 컬럼:
+	• installments
+	• item_price_usd
+	• shipping_cost_usd
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 수치형(Numerical) 컬럼 리스트</span>
+numerical_columns = [<span class="hljs-string">'installments'</span>, <span class="hljs-string">'item_price_usd'</span>, <span class="hljs-string">'shipping_cost_usd'</span>]
+
+<span class="hljs-comment"># 범주형(Categorical) 컬럼 리스트</span>
+categorical_columns = [<span class="hljs-string">'order_id'</span>, <span class="hljs-string">'customer_id'</span>, <span class="hljs-string">'order_status'</span>, <span class="hljs-string">'order_purchase_timestamp'</span>, <span class="hljs-string">'product_category'</span>, <span class="hljs-string">'payment_method'</span>]
+
+numerical_columns, categorical_columns
+</div></code></pre>
+<pre class="hljs"><code><div>(['order_id',
+  'customer_id',
+  'order_status',
+  'order_purchase_timestamp',
+  'product_category',
+  'payment_method'],
+ ['installments', 'item_price_usd', 'shipping_cost_usd'])
+</div></code></pre>
+<h3 id="26-dataframe-%EC%9A%94%EC%95%BD-%EB%B0%8F-%ED%86%B5%EA%B3%84-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0">2.6 DataFrame 요약 및 통계 확인하기</h3>
+<ul>
+<li>데이터의 내용을 확인했다면 그 이후에 데이터프레임의 <code>요약</code>, <code>통계정보</code>를 확인함</li>
+<li><code>info()</code> 함수를 통해 <code>총 데이터의 건수</code>, <code>각 컬럼의 데이터 형식</code> 그리고 <code>결측치의 건수</code>를 확인할 수 있음</li>
+<li>수치형 컬럼이 존재하는 경우 <code>describe()</code>함수를 사용하여 수치형 컬럼들의 <code>n-percentile</code> 분포도, 평균값, 최대값, 최소값을 확인할 수 있음</li>
+<li>이러한 과정은 <code>EDA</code>에 속함</li>
+</ul>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>제시한 데이터의 요약 및 통계정보를 확인해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>제시된 데이터의 요약 및 통계 정보는 다음과 같습니다:
+
+수치형 컬럼의 통계 정보:
+
+ • installments:
+ • 총 개수: 997
+ • 평균: 3.62
+ • 표준 편차: 31.68
+ • 최소값: 0
+ • 1사분위값: 1
+ • 중앙값: 1
+ • 3사분위값: 4
+ • 최대값: 999
+ • item_price_usd:
+ • 총 개수: 898
+ • 평균: 29.10
+ • 표준 편차: 333.61
+ • 최소값: 1.805
+ • 1사분위값: 13.11
+ • 중앙값: 17.10
+ • 3사분위값: 20.90
+ • 최대값: 9999
+ • shipping_cost_usd:
+ • 총 개수: 898
+ • 평균: 115.49
+ • 표준 편차: 3336.87
+ • 최소값: -9.595
+ • 1사분위값: 2.46
+ • 중앙값: 3.06
+ • 3사분위값: 5.17
+ • 최대값: 99999
+
+범주형 컬럼의 요약 정보:
+
+ • order_id:
+ • 총 개수: 997
+ • 고유값: 894
+ • 최빈값: 52eb8ce94864a3bb1be410a545f9ed4c (6회 발생)
+ • customer_id:
+ • 총 개수: 997
+ • 고유값: 894
+ • 최빈값: 4aa0005ef4b8cb5ce874a4a86b36ed05 (6회 발생)
+ • order_status:
+ • 총 개수: 997
+ • 고유값: 4
+ • 최빈값: delivered (982회 발생)
+ • order_purchase_timestamp:
+ • 총 개수: 997
+ • 고유값: 893
+ • 최빈값: 2017.11.24 23:37 (6회 발생)
+ • product_category:
+ • 총 개수: 997
+ • 고유값: 19
+ • 최빈값: health_beauty (278회 발생)
+ • payment_method:
+ • 총 개수: 997
+ • 고유값: 4
+ • 최빈값: credit_card (748회 발생)
+이 정보들은 데이터의 전반적인 분포와 특성을 이해하는 데 도움이 됩니다. 
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Generating summary statistics for numerical columns</span>
+numerical_summary = data.describe()
+
+<span class="hljs-comment"># Generating summary statistics for categorical columns</span>
+categorical_summary = data.describe(include=[<span class="hljs-string">'object'</span>])
+
+<span class="hljs-comment"># 수치형 데이터의 요약 통계량</span>
+numerical_summary, categorical_summary
+</div></code></pre>
+<pre class="hljs"><code><div>(       installments  item_price_usd  shipping_cost_usd
+ count    997.000000      898.000000         898.000000
+ mean       3.623872       29.099161         115.493469
+ std       31.681427      333.614822        3336.873052
+ min        0.000000        1.805000          -9.595000
+ 25%        1.000000       13.110000           2.464300
+ 50%        1.000000       17.098100           3.064700
+ 75%        4.000000       20.898100           5.169425
+ max      999.000000     9999.000000       99999.000000,
+                                 order_id                       customer_id  \
+ count                                997                               997
+ unique                               894                               894
+ top     52eb8ce94864a3bb1be410a545f9ed4c  4aa0005ef4b8cb5ce874a4a86b36ed05
+ freq                                   6                                 6
+
+        order_status order_purchase_timestamp product_category payment_method
+ count           997                      997              997            997
+ unique            4                      893               19              4
+ top       delivered         2017.11.24 23:37    health_beauty    credit_card
+ freq            982                        6              278            748  )
+</div></code></pre>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>각 범주형 데이터의 고유값에 대해 설명해줘, 단, ID값과 날짜는 제외하고 알려줘
+</div></code></pre>
+<pre class="hljs"><code><div>범주형 데이터의 고유값에 대한 설명은 다음과 같습니다(ID값과 날짜는 제외):
+
+order_status (주문 상태):
+
+	•	delivered: 982회 발생 (배송 완료)
+	•	shipped: 12회 발생 (배송 중)
+	•	invoiced: 2회 발생 (청구서 발행됨)
+	•	canceled: 1회 발생 (주문 취소됨)
+
+product_category (상품 카테고리):
+
+	•	health_beauty: 278회 발생 (건강 및 미용)
+	•	garden_tools: 219회 발생 (정원 도구)
+	•	perfumery: 125회 발생 (향수)
+	•	auto: 91회 발생 (자동차 관련)
+	•	bed_bath_table: 52회 발생 (침실, 욕실, 테이블 관련)
+	•	stationery: 41회 발생 (문구류)
+	•	baby: 40회 발생 (유아용품)
+	•	toys: 35회 발생 (장난감)
+	•	watches_gifts: 27회 발생 (시계 및 선물)
+	•	computers_accessories: 23회 발생 (컴퓨터 및 액세서리)
+	•	telephony: 19회 발생 (전화기 관련)
+	•	electronics: 13회 발생 (전자기기)
+	•	office_furniture: 9회 발생 (사무용 가구)
+	•	cool_stuff: 6회 발생 (멋진 물건)
+	•	pet_shop: 5회 발생 (애완동물 용품)
+	•	furniture_decor: 5회 발생 (가구 및 장식)
+	•	housewares: 4회 발생 (가정용품)
+	•	construction_tools_construction: 4회 발생 (건설 도구)
+	•	air_conditioning: 1회 발생 (에어컨)
+
+payment_method (결제 수단):
+
+	•	credit_card: 748회 발생 (신용카드)
+	•	boleto: 202회 발생 (브라질의 지불 수단)
+	•	voucher: 35회 발생 (바우처)
+	•	debit_card: 12회 발생 (직불카드)
+
+이 고유값들은 각 범주형 컬럼에서 나타나는 값들의 빈도와 분포를 보여줍니다.
+</div></code></pre>
+<p>📌 <strong>더 알아보기</strong></p>
+<ul>
+<li>데이터 <code>요약</code>, <code>통계정보</code>를 통해 <code>이상치</code> 및 <code>결측치</code>에 대한 처리를 어떻게 해야할지 대략적인 감을 잡을 수 있음</li>
+</ul>
+<hr>
+<h2 id="3-%EC%A1%B0%EA%B1%B4%EC%97%90-%EB%A7%9E%EB%8A%94-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%90%EC%83%89">3. 조건에 맞는 데이터 탐색</h2>
+<h3 id="31-%EB%8B%A8%EC%9D%BC-%EC%A1%B0%EA%B1%B4%EC%9C%BC%EB%A1%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%90%EC%83%89">3.1 단일 조건으로 데이터 탐색</h3>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>제시한 데이터에서 product_category가 장난감인 것들만 탐색해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Filtering the dataset for rows where the product_category is 'toys'</span>
+toys_data = data[data[<span class="hljs-string">'product_category'</span>] == <span class="hljs-string">'toys'</span>]
+
+<span class="hljs-comment"># Displaying the filtered data</span>
+print(toys_data.head())
+</div></code></pre>
+<pre class="hljs"><code><div>                             order_id                       customer_id  \
+424  432aaf21d85167c2c86ec9448c4e42cc  3df704f53d3f1d4818840b34ec672a9f
+425  4e2160ff7a61b2bf4fbd2e527ea924d3  ea36ec29b56eded534644f21b9561efc
+426  588e9a3844482484a31e604c2767b82f  c6d04a9495cc4d8e22a4276131aac50e
+427  0d2d1445891e7aba669fa2069d695601  739ee2d2d5960609ad780937fd9fa282
+428  ce0e053019fe2441df8363b9bf4208a7  eb0e5e03030a71a038d3e71bdbe82d86
+
+    order_status order_purchase_timestamp product_category payment_method  \
+424    delivered           2018.3.1 14:14             toys    credit_card
+425    delivered           2018.2.9 13:48             toys    credit_card
+426    delivered          2018.3.24 21:50             toys         boleto
+427    delivered          2017.10.9 19:54             toys         boleto
+428    delivered          2017.12.4 20:15             toys    credit_card
+
+     installments  item_price_usd  shipping_cost_usd
+424             1          7.2675             3.0609
+425             1          7.2675             3.0609
+426             1          8.0731             9.9712
+427             1          7.2675             2.5650
+428             2          7.2675             5.1091
+</div></code></pre>
+<h3 id="32-%EB%8B%A4%EC%A4%91-%EC%A1%B0%EA%B1%B4%EC%9C%BC%EB%A1%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%90%EC%83%89">3.2 다중 조건으로 데이터 탐색</h3>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>제시한 데이터에서 product_category가 장난감이고 installments이 평균 이상인 것들만 탐색해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Calculating the mean of 'installments'</span>
+installments_mean = data[<span class="hljs-string">'installments'</span>].mean()
+
+<span class="hljs-comment"># Filtering the dataset for rows where the product_category is 'toys' and installments are above the mean</span>
+toys_above_mean_installments = data[(data[<span class="hljs-string">'product_category'</span>] == <span class="hljs-string">'toys'</span>) &amp; (data[<span class="hljs-string">'installments'</span>] &gt; installments_mean)]
+
+print(toys_above_mean_installments)
+</div></code></pre>
+<pre class="hljs"><code><div>                             order_id                       customer_id  \
+445  fa5927f07ada4f44128f6d9fab3b70f6  8af801d95c9bc9bd7cfa7845826e4b72
+452  d9971834a50b8fc323aa7f527978169d  4899884819536b44b5b533849b3683ce
+453  d9971834a50b8fc323aa7f527978169d  4899884819536b44b5b533849b3683ce
+455  7c74b6a47ffad9deb24bd2a1f0b0acc5  95e4216612b16855852e2b9efa6174d2
+
+    order_status order_purchase_timestamp product_category payment_method  \
+445    delivered           2018.2.2 10:18             toys    credit_card
+452    delivered           2017.9.27 0:07             toys    credit_card
+453    delivered           2017.9.27 0:07             toys    credit_card
+455    delivered          2017.12.4 17:22             toys    credit_card
+
+     installments  item_price_usd  shipping_cost_usd
+445             5          7.2675             3.4048
+452            10          7.2675             3.0609
+453            10          7.2675             3.0609
+455             5          7.2675             3.0609
+</div></code></pre>
+<hr>
+<h2 id="4-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%9A%94%EC%95%BD">4. 데이터 요약</h2>
+<p>데이터를 요약하여 원하는 정보를 얻는 것은 데이터가 지닌 값의 특징을 알게 해줍니다. 이와 비슷한 것을 2장에서 수행해보았는데, 이번 장에서는 세부적으로 데이터를 요약하여 집계하는 방법을 알아보겠습니다.</p>
+<h3 id="41-%EA%B7%B8%EB%A3%B9%ED%99%94-%EC%A7%91%EA%B3%84">4.1 그룹화 집계</h3>
+<p>👀 <strong>Definition</strong></p>
+<blockquote>
+<p>그룹화는 하나 이상의 데이터를 조건에 따라 여러개 그룹으로 묶는 것</p>
+</blockquote>
+<ul>
+<li>groupby() 함수를 사용함</li>
+</ul>
+<p>📌 <strong>groupby</strong></p>
+<blockquote>
+<p>DataFrame.groupby(by=None, axis=0, sort=False, dropna=True).FUN()</p>
+</blockquote>
+<ul>
+<li>by: 그룹을 결정하는 데 사용</li>
+<li>axis: 행(0)과 열(1) 지정c</li>
+<li>sort: 집계된 내용을 정렬할지 여부</li>
+<li>dropna: True이면 결측값이 행/열과 함께 삭제, False이면 결측값도 그룹의 키로 처리</li>
+<li>FUN: 집계함수</li>
+</ul>
+<p>🔥 <strong>집계함수</strong></p>
+<ul>
+<li>count(): 값의 개수</li>
+<li>sum(): 값들의 합</li>
+<li>std(): 표준편차</li>
+<li>var(): 분산</li>
+<li>min(): 최솟값</li>
+<li>max(): 최대값</li>
+<li>mean(): 평균값</li>
+<li>median(): 중앙값</li>
+</ul>
+<p>🧑‍💻: product_category 별로 다양한 집계를 수행해 봅니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>product_category 값을 기준으로 집계 함수 count를 수행해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>product_category 값을 기준으로 각 카테고리의 주문 수를 집계한 결과는 다음과 같습니다:
+
+	•	health_beauty: 278
+	•	garden_tools: 219
+	•	perfumery: 125
+	•	auto: 91
+	•	bed_bath_table: 52
+	•	stationery: 41
+	•	baby: 40
+	•	toys: 35
+	•	watches_gifts: 27
+	•	computers_accessories: 23
+	•	telephony: 19
+	•	electronics: 13
+	•	office_furniture: 9
+	•	cool_stuff: 6
+	•	pet_shop: 5
+	•	furniture_decor: 5
+	•	housewares: 4
+	•	construction_tools_construction: 4
+	•	air_conditioning: 1
+
+이 결과는 각 카테고리에 속한 주문의 빈도를 보여줍니다.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># product_category를 기준으로 각 카테고리의 주문 수를 집계</span>
+category_count = data[<span class="hljs-string">'product_category'</span>].value_counts()
+
+category_count
+</div></code></pre>
+<pre class="hljs"><code><div>health_beauty                      278
+garden_tools                       219
+perfumery                          125
+auto                                91
+bed_bath_table                      52
+stationery                          41
+baby                                40
+toys                                35
+watches_gifts                       27
+computers_accessories               23
+telephony                           19
+electronics                         13
+office_furniture                     9
+cool_stuff                           6
+pet_shop                             5
+furniture_decor                      5
+housewares                           4
+construction_tools_construction      4
+air_conditioning                     1
+Name: product_category, dtype: int64
+</div></code></pre>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>product_category 값을 기준으로 installments의 평균을 구해줘 (집계함수 mean 적용)
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>product_category 값을 기준으로 installments의 평균을 계산한 결과는 다음과 같습니다:
+
+	• air_conditioning: 0.00
+	• auto: 2.09
+	• baby: 3.23
+	• bed_bath_table: 1.75
+	• computers_accessories: 2.13
+	• construction_tools_construction: 10.00
+	• cool_stuff: 3.67
+	• electronics: 2.15
+	• furniture_decor: 0.60
+	• garden_tools: 2.71
+	• health_beauty: 6.60
+	• housewares: 1.25
+	• office_furniture: 2.11
+	• perfumery: 2.78
+	• pet_shop: 1.40
+	• stationery: 1.10
+	• telephony: 1.74
+	• toys: 1.89
+	• watches_gifts: 4.11
+
+이 값들은 각 상품 카테고리별 할부 횟수의 평균을 나타냅니다. 
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># product_category를 기준으로 installments의 평균을 계산</span>
+installments_mean_by_category = data.groupby(<span class="hljs-string">'product_category'</span>)[<span class="hljs-string">'installments'</span>].mean()
+
+installments_mean_by_category
+</div></code></pre>
+<pre class="hljs"><code><div>product_category
+air_conditioning                    0.000000
+auto                                2.087912
+baby                                3.225000
+bed_bath_table                      1.750000
+computers_accessories               2.130435
+construction_tools_construction    10.000000
+cool_stuff                          3.666667
+electronics                         2.153846
+furniture_decor                     0.600000
+garden_tools                        2.712329
+health_beauty                       6.597122
+housewares                          1.250000
+office_furniture                    2.111111
+perfumery                           2.776000
+pet_shop                            1.400000
+stationery                          1.097561
+telephony                           1.736842
+toys                                1.885714
+watches_gifts                       4.111111
+</div></code></pre>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>집계 함수로 구한 product_category 값을 기준으로 installments의 평균에 대해 결과를 해석해서 설명해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>각 product_category(상품 카테고리)별로 installments(할부 횟수)의 평균을 분석한 결과는 다음과 같습니다:
+
+	1. 높은 할부 횟수:
+	• construction_tools_construction (10.00): 이 카테고리에서는 평균 10회의 할부가 적용되었습니다. 이는 고가의 상품이 포함될 가능성이 높으며, 구매자들이 비용을 분할하여 지불하는 경향이 강하다는 것을 나타냅니다.
+	• health_beauty (6.60): 건강 및 미용 제품도 비교적 높은 할부 횟수를 보입니다. 이는 고객들이 이 카테고리의 상품을 구매할 때 할부를 자주 선택한다는 것을 의미합니다.
+	2. 중간 할부 횟수:
+	• watches_gifts (4.11), cool_stuff (3.67), baby (3.23): 이 카테고리들은 중간 수준의 할부 횟수를 가지고 있으며, 이는 구매자들이 이러한 제품을 구매할 때 어느 정도의 분할 지불을 선호한다는 것을 보여줍니다.
+	• perfumery (2.78), auto (2.09): 이 카테고리들도 중간 정도의 할부 횟수를 보입니다. 특히 향수(perfumery)와 자동차 관련 상품(auto)도 일정 수준의 할부를 통해 구매된다는 것을 알 수 있습니다.
+	3. 낮은 할부 횟수:
+	• stationery (1.10), housewares (1.25), telephony (1.74): 문구류, 가정용품, 전화기 관련 제품들은 평균적으로 낮은 할부 횟수를 보입니다. 이는 이들 제품이 비교적 저렴하거나, 구매자들이 할부 대신 일시불로 지불하는 경우가 많다는 것을 시사합니다.
+	• air_conditioning (0.00): 에어컨 관련 카테고리의 경우, 할부가 전혀 선택되지 않았습니다. 이는 이 데이터셋에서 해당 제품이 매우 적거나, 일시불로 지불된다는 것을 의미할 수 있습니다.
+
+결론:
+
+이 결과는 카테고리별로 할부 지불 방식이 다르며, 고가의 상품일수록 할부 횟수가 높아지는 경향이 있음을 보여줍니다. 반면, 저렴하거나 상대적으로 일상적인 제품들은 대부분 낮은 할부 횟수로 구매되거나 일시불로 처리됩니다. 이는 고객의 구매 패턴과 선호도를 파악하는 데 유용한 정보입니다.
+</div></code></pre>
+<hr>
+<h2 id="5-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%95%EB%A0%AC%ED%95%98%EA%B8%B0">5. 데이터 정렬하기</h2>
+<h3 id="51-%EC%BB%AC%EB%9F%BC%EC%9D%98-%EA%B0%92%EC%97%90-%EB%8C%80%ED%95%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%95%EB%A0%AC%ED%95%98%EA%B8%B0">5.1 컬럼의 값에 대해 데이터 정렬하기</h3>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>order_purchase_timestamp을 기준으로 오름차순 정렬을 수행해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>order_purchase_timestamp를 기준으로 오름차순 정렬을 수행한 결과, 가장 오래된 주문부터 순차적으로 정렬되었습니다. 상위 5개의 데이터는 다음과 같습니다:
+
+	1.	2017.1.23 18:29 - furniture_decor 카테고리, boleto 결제, 할부 없음.
+	2.	2017.1.30 10:47 - auto 카테고리, credit_card 결제, 할부 없음.
+	3.	2017.1.31 17:40 - auto 카테고리, credit_card 결제, 1회 할부.
+	4.	2017.10.1 20:04 - health_beauty 카테고리, credit_card 결제, 1회 할부.
+	5.	2017.10.1 09:15 - auto 카테고리, boleto 결제, 1회 할부.
+
+이 데이터를 통해 시간 순서대로 주문 내역을 확인할 수 있습니다. 
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># order_purchase_timestamp을 기준으로 오름차순 정렬 수행</span>
+data_sorted_by_timestamp = data.sort_values(by=<span class="hljs-string">'order_purchase_timestamp'</span>, ascending=<span class="hljs-literal">True</span>)
+
+<span class="hljs-comment"># 정렬된 데이터 확인 (상위 5개)</span>
+data_sorted_by_timestamp.head()
+</div></code></pre>
+<pre class="hljs"><code><div>                             order_id                       customer_id  \
+248  76c6e866289321a7c93b82b54852dc33  f54a9f0e6b351c431402b8461ea51999
+189  9559e0b00c67d159a266152428f85615  c3498e41d1549d56c4cbde7cbfdabeb3
+244  35aa6b03b34d8d0a5c1eaae2bb5fcf76  18f5e4ab94b6b5fdcf32dade57defe50
+511  80dabd6ee5b0e0d7d5672d511ca8cc7e  fbea4ed949b70f597425d14164f82851
+247  3389e2333066b728a245423a73f3f82c  45c155ac404d868fd8f1d07e8cd916c3
+
+    order_status order_purchase_timestamp product_category payment_method  \
+248    delivered          2017.1.23 18:29  furniture_decor         boleto
+189    delivered          2017.1.30 10:47             auto    credit_card
+244    delivered          2017.1.31 17:40             auto    credit_card
+511    delivered          2017.10.1 20:04    health_beauty    credit_card
+247    delivered           2017.10.1 9:15             auto         boleto
+
+     installments  item_price_usd  shipping_cost_usd
+248             0          3.7810             3.0495
+189             0         28.1010             3.4200
+244             1          9.4981             2.7588
+511             1         17.0981             3.1141
+247             1             NaN             2.8690
+</div></code></pre>
+<p>📌 <strong>더 알아보기</strong></p>
+<ul>
+<li>정렬을 수행한 후에는 인덱스가 섞인 상태</li>
+<li>인덱스가 섞이면 추후 분석과정에서 오류가 발생할 수 있으므로 인덱스 또한 정렬이 필요</li>
+<li>이때, 값은 건들이지 않고 인덱스만을 정렬함</li>
+</ul>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>인덱스를 정렬해주고, 과거의 인덱스는 버려줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>이제 데이터는 order_purchase_timestamp를 기준으로 오름차순 정렬되었으며, 인덱스도 새로운 순서에 맞게 재설정되었습니다. 과거의 인덱스는 제거되었으며, 현재 데이터는 정렬된 순서에 맞는 새로운 인덱스를 가지고 있습니다.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 인덱스를 정렬된 데이터의 순서에 맞게 재설정하고, 이전 인덱스는 제거</span>
+data_sorted_by_timestamp.reset_index(drop=<span class="hljs-literal">True</span>, inplace=<span class="hljs-literal">True</span>)
+
+<span class="hljs-comment"># 재설정된 인덱스를 가진 데이터 확인 (상위 5개)</span>
+data_sorted_by_timestamp.head()
+</div></code></pre>
+<pre class="hljs"><code><div># 인덱스를 정렬된 데이터의 순서에 맞게 재설정하고, 이전 인덱스는 제거
+data_sorted_by_timestamp.reset_index(drop=True, inplace=True)
+
+# 재설정된 인덱스를 가진 데이터 확인 (상위 5개)
+print(data_sorted_by_timestamp.head())
+</div></code></pre>
+<pre class="hljs"><code><div>                           order_id                       customer_id  \
+0  76c6e866289321a7c93b82b54852dc33  f54a9f0e6b351c431402b8461ea51999
+1  9559e0b00c67d159a266152428f85615  c3498e41d1549d56c4cbde7cbfdabeb3
+2  35aa6b03b34d8d0a5c1eaae2bb5fcf76  18f5e4ab94b6b5fdcf32dade57defe50
+3  80dabd6ee5b0e0d7d5672d511ca8cc7e  fbea4ed949b70f597425d14164f82851
+4  3389e2333066b728a245423a73f3f82c  45c155ac404d868fd8f1d07e8cd916c3
+
+  order_status order_purchase_timestamp product_category payment_method  \
+0    delivered          2017.1.23 18:29  furniture_decor         boleto
+1    delivered          2017.1.30 10:47             auto    credit_card
+2    delivered          2017.1.31 17:40             auto    credit_card
+3    delivered          2017.10.1 20:04    health_beauty    credit_card
+4    delivered           2017.10.1 9:15             auto         boleto
+
+   installments  item_price_usd  shipping_cost_usd
+0             0          3.7810             3.0495
+1             0         28.1010             3.4200
+2             1          9.4981             2.7588
+3             1         17.0981             3.1141
+4             1             NaN             2.8690
+</div></code></pre>
+<hr>
+<h2 id="6-dataframe%EC%97%90-%ED%95%A8%EC%88%98-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0">6. DataFrame에 함수 적용하기</h2>
+<p>Apply와 Map 함수를 사용하여 데이터의 행 또는 열에 자유롭게 함수를 적용하고 값을 변경할 수 있습니다.</p>
+<ul>
+<li>apply/ map 둘 다 동일한 기능 수행</li>
+<li>데이터프레임에 행 또는 열 방향으로 지정한 함수 실행</li>
+</ul>
+<p>🔥 <strong>꿀팁</strong></p>
+<ul>
+<li>lambda는 apply를 시작할 때 &quot;lambda 뒤에 오는 변수를 가지고 수행할거야!&quot;라는 뜻</li>
+<li>이 변수는 하나의 컬럼일 수도 있고 여러 컬럼일 수 도 있으며 다양한 처리를 수행할 수 있음</li>
+<li>대상이 여러 컬럼일 경우 axis=1를 꼭 명시해야함</li>
+</ul>
+<h3 id="61-%ED%95%98%EB%82%98%EC%9D%98-%EC%BB%AC%EB%9F%BC%EC%97%90-%EB%8C%80%ED%95%9C-%EC%88%98%ED%96%89">6.1 하나의 컬럼에 대한 수행</h3>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>데이터프레임에 installment_divide라는 컬럼을 추가해줘
+installment_divide라는 installment 컬럼을 12로 나눈 값이야, apply를 적용해서 수행해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>데이터프레임에 installment_divide라는 컬럼이 추가되었으며, installments 컬럼의 값을 12로 나눈 결과가 해당 컬럼에 저장되었습니다.
+예를 들어, installments 값이 1인 경우 installment_divide 값은 0.0833입니다.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># installment_divide라는 컬럼을 추가하여 installments 컬럼의 값을 12로 나눈 값을 할당</span>
+data_sorted_by_timestamp[<span class="hljs-string">'installment_divide'</span>] = data_sorted_by_timestamp[<span class="hljs-string">'installments'</span>].apply(<span class="hljs-keyword">lambda</span> x: x / <span class="hljs-number">12</span>)
+
+<span class="hljs-comment"># 추가된 컬럼 확인 (상위 5개)</span>
+print(data_sorted_by_timestamp[[<span class="hljs-string">'installments'</span>, <span class="hljs-string">'installment_divide'</span>]].head())
+</div></code></pre>
+<pre class="hljs"><code><div>   installments  installment_divide
+0             0            0.000000
+1             0            0.000000
+2             1            0.083333
+3             1            0.083333
+4             1            0.083333
+</div></code></pre>
+<h3 id="62-%EC%97%AC%EB%9F%AC-%EC%BB%AC%EB%9F%BC%EC%97%90-%EB%8C%80%ED%95%9C-%EC%88%98%ED%96%89">6.2 여러 컬럼에 대한 수행</h3>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>데이터 프레임에 monthly_price 컬럼을 만들어줘
+installment_divide 컬럼과 item_price_usd를 곱한 값이야, apply를 적용해서 수행해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>데이터프레임에 monthly_price라는 컬럼이 추가되었습니다. 이 컬럼은 installment_divide와 item_price_usd를 곱한 값으로 계산되었습니다. 예를 들어, installments 값이 1이고 item_price_usd가 9.4981인 경우 monthly_price 값은 0.791508입니다.
+
+이제 각 상품의 할부 금액에 해당하는 월별 가격을 확인할 수 있습니다.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># monthly_price 컬럼을 추가하여 installment_divide와 item_price_usd를 곱한 값을 할당</span>
+data_sorted_by_timestamp[<span class="hljs-string">'monthly_price'</span>] = data_sorted_by_timestamp.apply(
+    <span class="hljs-keyword">lambda</span> row: row[<span class="hljs-string">'installment_divide'</span>] * row[<span class="hljs-string">'item_price_usd'</span>], axis=<span class="hljs-number">1</span>
+)
+
+<span class="hljs-comment"># 추가된 컬럼 확인 (상위 5개)</span>
+print(data_sorted_by_timestamp[[<span class="hljs-string">'installment_divide'</span>, <span class="hljs-string">'item_price_usd'</span>, <span class="hljs-string">'monthly_price'</span>]].head())
+</div></code></pre>
+<pre class="hljs"><code><div># monthly_price 컬럼을 추가하여 installment_divide와 item_price_usd를 곱한 값을 할당
+data_sorted_by_timestamp['monthly_price'] = data_sorted_by_timestamp.apply(
+    lambda row: row['installment_divide'] * row['item_price_usd'], axis=1
+)
+
+# 추가된 컬럼 확인 (상위 5개)
+print(data_sorted_by_timestamp[['installment_divide', 'item_price_usd', 'monthly_price']].head())
+</div></code></pre>
+<hr>
+<h2 id="7-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%80%EC%9E%A5">7. 데이터 저장</h2>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>현재까지 만들어진 데이터를 다운로드 받을 수 있는 링크를 만들어줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>데이터를 다운로드할 수 있는 링크를 생성했습니다. 아래 링크를 클릭하여 데이터를 다운로드할 수 있습니다:
+
+다운로드 링크 ￼
+</div></code></pre>
+
+</body>
+</html>

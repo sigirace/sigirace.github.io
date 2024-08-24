@@ -1,57 +1,403 @@
----
-layout: single
-title: "데이터 전처리"
-toc: true
-categories: [GPT Advanced Data Analysis]
-tags: [Lecture, Data Preprocessing]
----
+<!DOCTYPE html>
+<html>
+<head>
+<title>7-2. Data Analysis.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
-# 🌈 데이터 분석 실습
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
-🔗 **한국어 패치 다운로드**
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
 
-- 💾 [Korea matplotlib](https://github.com/sigirace/gpt_ada/blob/main/data/koreanize_matplotlib-0.1.1-py3-none-any.whl)
-- 💾 [나눔고딕 폰트](https://github.com/sigirace/gpt_ada/blob/main/data/NanumBarunGothic.ttf)
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
 
-💬 **Chat Prompt**
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
 
-```
-가상환경에 한국어를 사용할 수 있도록 whl 파일과 ttf 파일을 제공하였으니, 아래 과정을 수행하며 한국어 환경 설정 수행
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%F0%9F%8C%88-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D-%EC%8B%A4%EC%8A%B5">🌈 데이터 분석 실습</h1>
+<p>🔗 <strong>한국어 패치 다운로드</strong></p>
+<ul>
+<li>💾 <a href="https://github.com/sigirace/gpt_ada/blob/main/data/koreanize_matplotlib-0.1.1-py3-none-any.whl">Korea matplotlib</a></li>
+<li>💾 <a href="https://github.com/sigirace/gpt_ada/blob/main/data/NanumBarunGothic.ttf">나눔고딕 폰트</a></li>
+</ul>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>가상환경에 한국어를 사용할 수 있도록 whl 파일과 ttf 파일을 제공하였으니, 아래 과정을 수행하며 한국어 환경 설정 수행
 
 - Code interpreter로 제공한 파일들을 다운로드 및 수행
 - 가상환경에 설치 및 한국어를 사용할 수 있도록 설정
 - 설치 완료후 테스트 그래프 제시
 - 모든 설명은 한국어로 진행
-```
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> matplotlib.font_manager <span class="hljs-keyword">as</span> fm
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
-🤖 **GPT 출력: Code**
+<span class="hljs-comment"># 폰트 파일 경로</span>
+font_path = <span class="hljs-string">'/Users/sigi/sigirace.github.io/_posts/kang_lecture/gpt_ada/data/NanumBarunGothic.ttf'</span>
 
-```python
-import matplotlib.font_manager as fm
-import matplotlib.pyplot as plt
-
-# 폰트 파일 경로
-font_path = '/Users/sigi/sigirace.github.io/_posts/kang_lecture/gpt_ada/data/NanumBarunGothic.ttf'
-
-# 폰트 등록
+<span class="hljs-comment"># 폰트 등록</span>
 fm.fontManager.addfont(font_path)
 
-# 한글 폰트 설정
-plt.rc('font', family='NanumBarunGothic')
-```
-
-🧑‍💻: 앞서 저장하였던 데이터를 GPT에 업로드 해주세요!
-
-💬 **Chat Prompt**
-
-```
-제시한 데이터는 이커머스회사 olist의 구매기록 데이터를 전처리한 것이다. 이 데이터의 컬럼을 살펴보고 설명해라. 단, 모든 과정에서 설명시 한국어를 사용하고, ace_tools는 사용하지 말아라.
-```
-
-🤖 **GPT 출력: Message**
-
-```
-주어진 데이터는 이커머스 회사 Olist의 구매 기록 데이터입니다. 데이터의 컬럼(열)과 그 설명은 다음과 같습니다:
+<span class="hljs-comment"># 한글 폰트 설정</span>
+plt.rc(<span class="hljs-string">'font'</span>, family=<span class="hljs-string">'NanumBarunGothic'</span>)
+</div></code></pre>
+<p>🧑‍💻: 앞서 저장하였던 데이터를 GPT에 업로드 해주세요!</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>제시한 데이터는 이커머스회사 olist의 구매기록 데이터를 전처리한 것이다. 이 데이터의 컬럼을 살펴보고 설명해라. 단, 모든 과정에서 설명시 한국어를 사용하고, ace_tools는 사용하지 말아라.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>주어진 데이터는 이커머스 회사 Olist의 구매 기록 데이터입니다. 데이터의 컬럼(열)과 그 설명은 다음과 같습니다:
 
 	1.	order_id: 각 주문의 고유 식별자입니다. 이 값은 주문을 식별하는 데 사용됩니다.
 	2.	customer_id: 각 고객의 고유 식별자입니다. 이를 통해 고객을 식별할 수 있습니다.
@@ -66,26 +412,21 @@ plt.rc('font', family='NanumBarunGothic')
 	11.	installment_duration_type: 할부 기간의 유형을 나타냅니다. ‘일시불’이나 ‘단기’ 등의 값이 들어갑니다.
 
 이 데이터는 고객의 주문 기록, 결제 방식, 배송 관련 정보 등을 포함하고 있어, 이커머스 비즈니스 분석에 유용하게 사용될 수 있습니다. 추가적인 분석이나 문의가 필요하시면 말씀해 주세요. 
-```
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
-🤖 **GPT 출력: Code**
-
-```python
-import pandas as pd
-
-# 데이터 로드
-file_path = '/mnt/data/cleaned_olist_order_data.csv'
+<span class="hljs-comment"># 데이터 로드</span>
+file_path = <span class="hljs-string">'/mnt/data/cleaned_olist_order_data.csv'</span>
 data = pd.read_csv(file_path)
 
-# 데이터의 첫 몇 행과 컬럼 정보 확인
+<span class="hljs-comment"># 데이터의 첫 몇 행과 컬럼 정보 확인</span>
 data_head = data.head()
 data_columns = data.columns
 
 data_head, data_columns
-```
-
-```
-(                           order_id                       customer_id  \
+</div></code></pre>
+<pre class="hljs"><code><div>(                           order_id                       customer_id  \
  0  76c6e866289321a7c93b82b54852dc33  f54a9f0e6b351c431402b8461ea51999
  1  9559e0b00c67d159a266152428f85615  c3498e41d1549d56c4cbde7cbfdabeb3
  2  35aa6b03b34d8d0a5c1eaae2bb5fcf76  18f5e4ab94b6b5fdcf32dade57defe50
@@ -116,32 +457,22 @@ data_head, data_columns
         'product_category', 'payment_method', 'installments', 'item_price_usd',
         'shipping_cost_usd', 'is_weekend', 'installment_duration_type'],
        dtype='object'))
-```
-
-***
-
-## 1. EDA
-
-🧑‍💻: 앞서 배워본 치트키를 사용하여 일변량, 다변량 EDA를 수행하겠습니다.
-
-### 1.1 일변량 EDA
-
-- 하나의 컬럼에 대해서만 분석함
-
-💬 **Chat Prompt**
-
-```
-제시한 데이터로 일변량 EDA 수행해줘
-```
-
-🤖 **GPT 출력: Message**
-
-```
-일변량 탐색적 데이터 분석(EDA)의 결과는 다음과 같습니다:
+</div></code></pre>
+<h2 id="1-eda">1. EDA</h2>
+<p>🧑‍💻: 앞서 배워본 치트키를 사용하여 일변량, 다변량 EDA를 수행하겠습니다.</p>
+<h3 id="11-%EC%9D%BC%EB%B3%80%EB%9F%89-eda">1.1 일변량 EDA</h3>
+<ul>
+<li>하나의 컬럼에 대해서만 분석함</li>
+</ul>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>제시한 데이터로 일변량 EDA 수행해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>일변량 탐색적 데이터 분석(EDA)의 결과는 다음과 같습니다:
 
 1. 기초 통계량
-- 주문 상태(order_status): 대부분의 주문이 "delivered" 상태로 완료되었습니다.
-- 결제 방법(payment_method): 대부분의 고객이 "credit_card"를 결제 방법으로 사용했습니다.
+- 주문 상태(order_status): 대부분의 주문이 &quot;delivered&quot; 상태로 완료되었습니다.
+- 결제 방법(payment_method): 대부분의 고객이 &quot;credit_card&quot;를 결제 방법으로 사용했습니다.
 - 할부 횟수(installments): 할부 횟수는 0(일시불)에서 10회까지 다양하며, 평균적으로 2.7회입니다.
 - 상품 가격(item_price_usd): 상품 가격의 평균은 약 $18.04이며, 가장 낮은 가격은 $3.78, 가장 높은 가격은 $34.01입니다.
 - 배송비(shipping_cost_usd): 배송비의 평균은 약 $3.91이며, 가장 낮은 배송비는 $1.49, 가장 높은 배송비는 $8.88입니다.
@@ -157,22 +488,16 @@ data_head, data_columns
 - 할부 기간 유형 분포: '단기' 할부가 가장 일반적입니다.
 
 이 분석 결과는 데이터의 전반적인 분포와 패턴을 이해하는 데 도움이 되며, 추가적인 분석이 필요할 경우 이를 기반으로 심층적인 분석을 진행할 수 있습니다. 추가적으로 궁금한 점이나 더 분석하고 싶은 부분이 있으면 말씀해 주세요.
-```
-
-### 1.2 다변량 EDA
-
-- 두 개 이상의 컬럼을 종합하여 인사이트를 도출
-
-💬 **Chat Prompt**
-
-```
-제시한 데이터로 다변량 EDA 수행해줘
-```
-
-🤖 **GPT 출력: Message**
-
-```
-다변량 탐색적 데이터 분석(EDA)의 결과는 다음과 같습니다:
+</div></code></pre>
+<h3 id="12-%EB%8B%A4%EB%B3%80%EB%9F%89-eda">1.2 다변량 EDA</h3>
+<ul>
+<li>두 개 이상의 컬럼을 종합하여 인사이트를 도출</li>
+</ul>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>제시한 데이터로 다변량 EDA 수행해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>다변량 탐색적 데이터 분석(EDA)의 결과는 다음과 같습니다:
 
 1. 주문 상태별 결제 방법 분포
 - 결제 방법과 주문 상태: 대부분의 주문이 'credit_card'로 결제되었으며, 'delivered' 상태인 경우가 대부분입니다. 다른 결제 방법들도 대부분 'delivered' 상태에 해당하지만, 'boleto' 등의 결제 방법은 상대적으로 적은 비율을 차지하고 있습니다.
@@ -187,24 +512,15 @@ data_head, data_columns
 - 상관 관계: 할부 횟수, 상품 가격, 배송비 간의 상관관계를 분석한 결과, 이들 변수 간에는 강한 상관관계가 존재하지 않습니다. 이는 각 변수가 독립적으로 움직일 가능성이 크다는 것을 의미합니다.
 
 이러한 다변량 분석을 통해 변수들 간의 관계를 이해할 수 있으며, 추가적인 분석이나 모델링의 방향을 설정하는 데 도움이 됩니다. 추가로 분석하고 싶은 부분이 있으면 알려주세요!
-```
-
-## 2. 분석 주제 선정
-
-### 2.1 아이디어 도출
-
-🧑‍💻: 수행한 EDA를 기반으로 과제를 도출해봅니다.
-
-💬 **Chat Prompt**
-
-```
-이 데이터를 기반으로 비즈니스 인사이트를 도출하고 싶어 분석할만한 과제를 제안해줘
-```
-
-🤖 **GPT 출력: Message**
-
-```
-이 데이터를 기반으로 비즈니스 인사이트를 도출할 수 있는 다양한 분석 과제를 제안드리겠습니다. 이러한 과제를 통해 이커머스 비즈니스의 효율성을 높이고, 고객 경험을 개선할 수 있는 전략적 결정을 내릴 수 있습니다.
+</div></code></pre>
+<h2 id="2-%EB%B6%84%EC%84%9D-%EC%A3%BC%EC%A0%9C-%EC%84%A0%EC%A0%95">2. 분석 주제 선정</h2>
+<h3 id="21-%EC%95%84%EC%9D%B4%EB%94%94%EC%96%B4-%EB%8F%84%EC%B6%9C">2.1 아이디어 도출</h3>
+<p>🧑‍💻: 수행한 EDA를 기반으로 과제를 도출해봅니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>이 데이터를 기반으로 비즈니스 인사이트를 도출하고 싶어 분석할만한 과제를 제안해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>이 데이터를 기반으로 비즈니스 인사이트를 도출할 수 있는 다양한 분석 과제를 제안드리겠습니다. 이러한 과제를 통해 이커머스 비즈니스의 효율성을 높이고, 고객 경험을 개선할 수 있는 전략적 결정을 내릴 수 있습니다.
 
 1. 고객 세분화 및 맞춤형 마케팅 전략 수립
    - 목표: 고객의 구매 패턴, 결제 방법, 상품 카테고리 선호도 등을 분석하여 고객을 세분화합니다. 각 고객군에 맞춤형 마케팅 캠페인을 기획하여 매출을 극대화할 수 있는 전략을 수립할 수 있습니다.
@@ -242,14 +558,10 @@ data_head, data_columns
      - 충성도 높은 고객에게 특별 혜택을 제공하는 프로그램을 기획합니다.
 
 이와 같은 분석 과제를 통해 얻은 인사이트를 바탕으로, 이커머스 비즈니스의 다양한 측면을 개선하고 더 나은 성과를 달성할 수 있습니다. 각 과제에 대한 추가적인 방향이나 세부적인 분석 방법이 필요하다면 언제든지 도와드리겠습니다.
-```
-
-### 2.2 아디이어 구체화
-
-🧑‍💻: 프롬프트를 고도화하여 분석 과제 도출을 구체화 해보겠습니다.
-
-```
-아래에는 작업을 수행하기 위해 부여된 Role, 이전에 수행한 Pre-work 그리고 수행해야될 Todo가 있습니다. 요청을 적절하게 완료하는 응답을 작성하세요.
+</div></code></pre>
+<h3 id="22-%EC%95%84%EB%94%94%EC%9D%B4%EC%96%B4-%EA%B5%AC%EC%B2%B4%ED%99%94">2.2 아디이어 구체화</h3>
+<p>🧑‍💻: 프롬프트를 고도화하여 분석 과제 도출을 구체화 해보겠습니다.</p>
+<pre class="hljs"><code><div>아래에는 작업을 수행하기 위해 부여된 Role, 이전에 수행한 Pre-work 그리고 수행해야될 Todo가 있습니다. 요청을 적절하게 완료하는 응답을 작성하세요.
 
 [Role]
 이커머스 회사 olist에서 근무하는 데이터 분석가
@@ -287,12 +599,9 @@ EDA 수행결과로부터 인사이트를 도출하기 위한 과제를 선정�
 	- 취소 여부인 범주형 변수와 수치형 변수 간의 t-검정 수행 후 가설에 대한 채택/기각 선택
 
 Let's go!
-```
-
-🤖 **GPT 출력: Message**
-
-```
-리포트: Olist 이커머스 데이터 분석 및 인사이트 도출
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>리포트: Olist 이커머스 데이터 분석 및 인사이트 도출
 
 1. 결제 방법에 따른 고객 이탈 분석
 목표 결제 방법에 따른 고객의 구매 완료율을 분석하여 이탈이 빈번한 결제 방법을 파악하고, 이를 개선하여 고객 이탈을 줄이기 위한 전략을 마련합니다.
@@ -337,42 +646,34 @@ Let's go!
 - 회귀 분석: 배송비와 재구매율 간의 관계를 정량적으로 평가하기 위해 회귀 분석을 수행합니다. 이를 통해 배송비 정책이 재구매에 미치는 영향을 평가하고 최적의 배송비 정책을 제안합니다.
 
 이러한 분석을 통해 도출된 인사이트는 Olist의 전략적 의사결정에 기여할 수 있으며, 고객 만족도 및 매출 증대에 중요한 역할을 할 것입니다. 필요한 추가 분석이나 데이터를 요청해 주시면 더욱 구체적인 전략을 제시할 수 있습니다.
-```
-
-💡 **Learn!**
-
-> 상황과 역할 그리고 예시를 통해 프롬프트를 작성하면 일반적인 질문보다 구체화된 답변을 받을 수 있습니다.
-
-❣️ **꿀팁**
-
-> GPT는 확률적으로 답변하기 때문에 여러번 질문을 수행하여 원하는 주제를 선택할 수 있습니다.
-
-## 3. 분석 실습
-
-🧑‍💻: 위에서 열심히 프롬프트 작성을 통해 과제를 도출하였으나... 실습을 위해 아래의 과제로 분석을 수행하겠습니다....
-
-### 3.1 범주형 변수간의 관계 분석
-
-- 범주형 변수간의 관계를 분석하기 위해서는 카이제곱 검정을 수행하여 유의확률을 통해 가설을 채택/기각 합니다.
-
-✏️ **분석과제**
-
-> 상품 유형(product_category)과 결제 방식(payment_method)간의 차이가 있는지 파악
-
-💬 **Chat Prompt**
-
-```
-상품 유형(product_category)과 결제 방식(payment_method)간의 차이가 있는지 파악
+</div></code></pre>
+<p>💡 <strong>Learn!</strong></p>
+<blockquote>
+<p>상황과 역할 그리고 예시를 통해 프롬프트를 작성하면 일반적인 질문보다 구체화된 답변을 받을 수 있습니다.</p>
+</blockquote>
+<p>❣️ <strong>꿀팁</strong></p>
+<blockquote>
+<p>GPT는 확률적으로 답변하기 때문에 여러번 질문을 수행하여 원하는 주제를 선택할 수 있습니다.</p>
+</blockquote>
+<h2 id="3-%EB%B6%84%EC%84%9D-%EC%8B%A4%EC%8A%B5">3. 분석 실습</h2>
+<p>🧑‍💻: 위에서 열심히 프롬프트 작성을 통해 과제를 도출하였으나... 실습을 위해 아래의 과제로 분석을 수행하겠습니다....</p>
+<h3 id="31-%EB%B2%94%EC%A3%BC%ED%98%95-%EB%B3%80%EC%88%98%EA%B0%84%EC%9D%98-%EA%B4%80%EA%B3%84-%EB%B6%84%EC%84%9D">3.1 범주형 변수간의 관계 분석</h3>
+<ul>
+<li>범주형 변수간의 관계를 분석하기 위해서는 카이제곱 검정을 수행하여 유의확률을 통해 가설을 채택/기각 합니다.</li>
+</ul>
+<p>✏️ <strong>분석과제</strong></p>
+<blockquote>
+<p>상품 유형(product_category)과 결제 방식(payment_method)간의 차이가 있는지 파악</p>
+</blockquote>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>상품 유형(product_category)과 결제 방식(payment_method)간의 차이가 있는지 파악
 
 - 가설 도출
 - 카이제곱 분석 수행
 - 유의확률에 따라 관계 도출
-```
-
-🤖 **GPT 출력: Message**
-
-```
-상품 유형(product_category)과 결제 방식(payment_method) 간의 관계를 파악하기 위해 아래와 같은 과정을 진행하겠습니다.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>상품 유형(product_category)과 결제 방식(payment_method) 간의 관계를 파악하기 위해 아래와 같은 과정을 진행하겠습니다.
 
 1. 가설 도출
 
@@ -401,24 +702,19 @@ Let's go!
 	•	결론: 이 결과는 상품 유형(product_category)과 결제 방식(payment_method) 간에 통계적으로 유의미한 관계가 없다는 것을 의미합니다. 즉, 이 데이터에서는 상품 유형에 따라 결제 방식이 달라지지 않는다고 볼 수 있습니다.
 
 따라서, 상품 유형과 결제 방식 간의 차이는 통계적으로 유의미하지 않으며, 두 변수 간에 독립적인 관계를 가질 가능성이 높습니다.
-```
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> scipy.stats <span class="hljs-keyword">import</span> chi2_contingency
 
-🤖 **GPT 출력: Code**
+<span class="hljs-comment"># 교차표 생성: product_category와 payment_method</span>
+crosstab = pd.crosstab(data[<span class="hljs-string">'product_category'</span>], data[<span class="hljs-string">'payment_method'</span>])
 
-```python
-from scipy.stats import chi2_contingency
-
-# 교차표 생성: product_category와 payment_method
-crosstab = pd.crosstab(data['product_category'], data['payment_method'])
-
-# 카이제곱 검정 수행
+<span class="hljs-comment"># 카이제곱 검정 수행</span>
 chi2, p, dof, expected = chi2_contingency(crosstab)
 
 chi2, p, dof, expected
-```
-
-```
-(63.97918687574001,
+</div></code></pre>
+<pre class="hljs"><code><div>(63.97918687574001,
  0.06118147058250798,
  48,
  array([[1.55615764e+01, 6.17475369e+01, 9.97536946e-01, 2.69334975e+00],
@@ -438,82 +734,71 @@ chi2, p, dof, expected
         [3.26600985e+00, 1.29593596e+01, 2.09359606e-01, 5.65270936e-01],
         [5.95566502e+00, 2.36317734e+01, 3.81773399e-01, 1.03078818e+00],
         [3.45812808e+00, 1.37216749e+01, 2.21674877e-01, 5.98522167e-01]]))
-```
-
-💬 **Chat Prompt**
-
-```
-상품 유형(product_category)과 결제 방식(payment_method)간의 차이를 시각화로 보여줘
-```
-
-🤖 **GPT 출력: Message**
-
-```
-위의 시각화는 상품 유형(product_category)과 결제 방식(payment_method) 간의 관계를 보여주는 누적 막대 그래프입니다. 이 그래프를 통해 각 상품 유형별로 어떤 결제 방식이 주로 사용되는지 한눈에 파악할 수 있습니다.
+</div></code></pre>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>상품 유형(product_category)과 결제 방식(payment_method)간의 차이를 시각화로 보여줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>위의 시각화는 상품 유형(product_category)과 결제 방식(payment_method) 간의 관계를 보여주는 누적 막대 그래프입니다. 이 그래프를 통해 각 상품 유형별로 어떤 결제 방식이 주로 사용되는지 한눈에 파악할 수 있습니다.
 
 각 막대는 특정 상품 유형에 대해 다양한 결제 방법의 비율을 나타내며, 결제 방식 간의 차이를 시각적으로 비교할 수 있습니다. 추가적인 분석이나 질문이 있으시면 말씀해 주세요. 
-```
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
-🤖 **GPT 출력: Code**
+<span class="hljs-comment"># 교차표 생성: product_category와 payment_method</span>
+crosstab = pd.crosstab(data[<span class="hljs-string">'product_category'</span>], data[<span class="hljs-string">'payment_method'</span>])
 
-```python
-import matplotlib.pyplot as plt
-
-# 교차표 생성: product_category와 payment_method
-crosstab = pd.crosstab(data['product_category'], data['payment_method'])
-
-# 시각화: Stacked Bar Chart
-crosstab.plot(kind='bar', stacked=True, figsize=(14, 8))
-plt.title('상품 유형과 결제 방식 간의 관계')
-plt.xlabel('상품 유형')
-plt.ylabel('주문 수')
-plt.legend(title='결제 방식')
+<span class="hljs-comment"># 시각화: Stacked Bar Chart</span>
+crosstab.plot(kind=<span class="hljs-string">'bar'</span>, stacked=<span class="hljs-literal">True</span>, figsize=(<span class="hljs-number">14</span>, <span class="hljs-number">8</span>))
+plt.title(<span class="hljs-string">'상품 유형과 결제 방식 간의 관계'</span>)
+plt.xlabel(<span class="hljs-string">'상품 유형'</span>)
+plt.ylabel(<span class="hljs-string">'주문 수'</span>)
+plt.legend(title=<span class="hljs-string">'결제 방식'</span>)
 plt.show()
-```
-
+</div></code></pre>
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/gpt_ada/ki.png?raw=true" width="1000" height="600"></p>
-
-💡 **해석**
-
-> 분석 결과 유의미한 차이가 있지 않다고 하였으나, 유의수준을 덜 엄격하게 설정하면 차이가 있다고 볼 수 있습니다.
->
-> 즉, 유의수준을 0.1로 설정할 경우, 상품 유형에 따라 결제 방식이 다를 수 있다는 결론을 내릴 수 있고, 이 관계를 바탕으로 추가적인 분석이나 비즈니스 전략을 검토해볼 수 있습니다.
-
-📌 **더 알아보기: 0.05 유의수준 vs 0.1 유의수준**
-
-1. **0.05 유의수준**:
-
-   - **장점**: 더 엄격한 기준을 적용하여, 잘못된 결론을 내릴 가능성을 줄입니다. 연구 결과가 더 신뢰할 수 있게 됩니다.
-   - **단점**: 귀무가설을 기각하기 어려워질 수 있습니다. 즉, 실제로 관계가 있는 두 변수 사이에서도 관계를 발견하지 못할 가능성이 있습니다(2종 오류 가능성 증가).
-   - 과학 연구, 의학 연구 등에서 사용됩니다. 여기서는 오류의 비용이 높기 때문에 엄격한 기준이 요구됩니다.
-
-2. **0.1 유의수준**:
-   - **장점**: 더 관대한 기준을 적용하여, 실제로 관계가 있는 변수들 간의 관계를 더 잘 발견할 수 있습니다. 연구 결과가 더 포괄적일 수 있습니다.
-   - **단점**: 귀무가설을 기각할 확률이 높아지기 때문에, 실제로 관계가 없는 두 변수 사이에 관계가 있다고 잘못 결론 내릴 가능성(1종 오류)이 증가합니다.
-   - 경제학, 사회학 연구 등에서 사용될 수 있습니다. 이 경우 연구의 초기 단계에서 더 많은 관계를 발견하기 위해 덜 엄격한 기준을 설정할 수 있습니다.
-
-### 3.2 수치형 변수간의 관계 분석
-
-- 수치형 변수간의 관계를 분석하기 위해서, 상관계수 분석 혹은 회귀 분석을 수행할 수 있습니다.
-
-✏️ **분석과제**
-
-> 상품 가격(item_price_usd)과 배송 비용(shipping_cost_usd)간의 관계 분석
-
-💬 **Chat Prompt**
-
-```
-상품 가격(item_price_usd)과 배송 비용(shipping_cost_usd)간의 관계를 분석함
+<p>💡 <strong>해석</strong></p>
+<blockquote>
+<p>분석 결과 유의미한 차이가 있지 않다고 하였으나, 유의수준을 덜 엄격하게 설정하면 차이가 있다고 볼 수 있습니다.</p>
+<p>즉, 유의수준을 0.1로 설정할 경우, 상품 유형에 따라 결제 방식이 다를 수 있다는 결론을 내릴 수 있고, 이 관계를 바탕으로 추가적인 분석이나 비즈니스 전략을 검토해볼 수 있습니다.</p>
+</blockquote>
+<p>📌 <strong>더 알아보기: 0.05 유의수준 vs 0.1 유의수준</strong></p>
+<ol>
+<li>
+<p><strong>0.05 유의수준</strong>:</p>
+<ul>
+<li><strong>장점</strong>: 더 엄격한 기준을 적용하여, 잘못된 결론을 내릴 가능성을 줄입니다. 연구 결과가 더 신뢰할 수 있게 됩니다.</li>
+<li><strong>단점</strong>: 귀무가설을 기각하기 어려워질 수 있습니다. 즉, 실제로 관계가 있는 두 변수 사이에서도 관계를 발견하지 못할 가능성이 있습니다(2종 오류 가능성 증가).</li>
+<li>과학 연구, 의학 연구 등에서 사용됩니다. 여기서는 오류의 비용이 높기 때문에 엄격한 기준이 요구됩니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>0.1 유의수준</strong>:</p>
+<ul>
+<li><strong>장점</strong>: 더 관대한 기준을 적용하여, 실제로 관계가 있는 변수들 간의 관계를 더 잘 발견할 수 있습니다. 연구 결과가 더 포괄적일 수 있습니다.</li>
+<li><strong>단점</strong>: 귀무가설을 기각할 확률이 높아지기 때문에, 실제로 관계가 없는 두 변수 사이에 관계가 있다고 잘못 결론 내릴 가능성(1종 오류)이 증가합니다.</li>
+<li>경제학, 사회학 연구 등에서 사용될 수 있습니다. 이 경우 연구의 초기 단계에서 더 많은 관계를 발견하기 위해 덜 엄격한 기준을 설정할 수 있습니다.</li>
+</ul>
+</li>
+</ol>
+<h3 id="32-%EC%88%98%EC%B9%98%ED%98%95-%EB%B3%80%EC%88%98%EA%B0%84%EC%9D%98-%EA%B4%80%EA%B3%84-%EB%B6%84%EC%84%9D">3.2 수치형 변수간의 관계 분석</h3>
+<ul>
+<li>수치형 변수간의 관계를 분석하기 위해서, 상관계수 분석 혹은 회귀 분석을 수행할 수 있습니다.</li>
+</ul>
+<p>✏️ <strong>분석과제</strong></p>
+<blockquote>
+<p>상품 가격(item_price_usd)과 배송 비용(shipping_cost_usd)간의 관계 분석</p>
+</blockquote>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>상품 가격(item_price_usd)과 배송 비용(shipping_cost_usd)간의 관계를 분석함
 
 - 가설 도출
 - 회귀분석 수행
 - 유의확률에 따라 관계 도출
-```
-
-🤖 **GPT 출력: Message**
-
-```
-상품 가격(item_price_usd)과 배송 비용(shipping_cost_usd) 간의 관계 분석
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>상품 가격(item_price_usd)과 배송 비용(shipping_cost_usd) 간의 관계 분석
 
 1. 가설 도출
 
@@ -549,31 +834,26 @@ plt.show()
 	•	그러나, R-squared 값이 매우 낮기 때문에, 상품 가격이 배송 비용의 변동을 설명하는 주요 요인이 아니라는 점도 중요하게 고려해야 합니다. 이는 다른 요인들이 배송 비용에 더 큰 영향을 미칠 수 있음을 시사합니다.
 
 추가적인 분석이나 더 심도 있는 연구가 필요하다면 이를 바탕으로 진행할 수 있습니다. 
-```
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> statsmodels.api <span class="hljs-keyword">as</span> sm
 
-🤖 **GPT 출력: Code**
+<span class="hljs-comment"># 독립 변수 (상품 가격)</span>
+X = data[<span class="hljs-string">'item_price_usd'</span>]
+<span class="hljs-comment"># 종속 변수 (배송 비용)</span>
+y = data[<span class="hljs-string">'shipping_cost_usd'</span>]
 
-```python
-import statsmodels.api as sm
-
-# 독립 변수 (상품 가격)
-X = data['item_price_usd']
-# 종속 변수 (배송 비용)
-y = data['shipping_cost_usd']
-
-# 상수항 추가
+<span class="hljs-comment"># 상수항 추가</span>
 X = sm.add_constant(X)
 
-# 회귀 분석 수행
+<span class="hljs-comment"># 회귀 분석 수행</span>
 model = sm.OLS(y, X).fit()
 
-# 회귀 분석 결과 요약
+<span class="hljs-comment"># 회귀 분석 결과 요약</span>
 model_summary = model.summary()
 model_summary
-```
-
-```
-                            OLS Regression Results
+</div></code></pre>
+<pre class="hljs"><code><div>                            OLS Regression Results
 ==============================================================================
 Dep. Variable:      shipping_cost_usd   R-squared:                       0.034
 Model:                            OLS   Adj. R-squared:                  0.033
@@ -585,7 +865,7 @@ Df Residuals:                     810   BIC:                             3443.
 Df Model:                           1
 Covariance Type:            nonrobust
 ==================================================================================
-                     coef    std err          t      P>|t|      [0.025      0.975]
+                     coef    std err          t      P&gt;|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
 const              3.0170      0.181     16.678      0.000       2.662       3.372
 item_price_usd     0.0496      0.009      5.365      0.000       0.031       0.068
@@ -598,65 +878,47 @@ Kurtosis:                       3.069   Cond. No.                         50.5
 
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-```
-
-🧑‍💻: 상관계수도 고려해보겠습니다.
-
-💬 **Chat Prompt**
-
-```
-상품 가격(item_price_usd)과 배송 비용(shipping_cost_usd)간의 상관관계를 상관계수로 분석해줘
-```
-
-🤖 **GPT 출력: Message**
-
-```
-상품 가격(item_price_usd)과 배송 비용(shipping_cost_usd) 간의 상관계수는 0.185입니다.
+</div></code></pre>
+<p>🧑‍💻: 상관계수도 고려해보겠습니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>상품 가격(item_price_usd)과 배송 비용(shipping_cost_usd)간의 상관관계를 상관계수로 분석해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>상품 가격(item_price_usd)과 배송 비용(shipping_cost_usd) 간의 상관계수는 0.185입니다.
 
 해석:
 
 	•	상관계수 0.185는 두 변수 간에 약한 양의 선형 관계가 있음을 의미합니다. 즉, 상품 가격이 증가할 때 배송 비용도 약간 증가하는 경향이 있지만, 그 관계는 매우 약합니다.
 	•	이 값은 변수 간의 선형적 연관성이 크지 않음을 나타내므로, 다른 요인들이 배송 비용에 더 큰 영향을 미칠 수 있습니다.
-```
-
-🤖 **GPT 출력: Code**
-
-```python
-# 상품 가격과 배송 비용 간의 상관계수를 계산
-correlation = data['item_price_usd'].corr(data['shipping_cost_usd'])
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 상품 가격과 배송 비용 간의 상관계수를 계산</span>
+correlation = data[<span class="hljs-string">'item_price_usd'</span>].corr(data[<span class="hljs-string">'shipping_cost_usd'</span>])
 correlation
-```
-
-```
-0.18523538792917865
-```
-
-💡 **해석**
-
-> 회귀분석을 통해 두 변수간 통계적으로 유의미한 선형 관계가 있음을 알 수 있었습니다. 그러나 설명력(R-squared)이 낮았고 상관계수또한 낮았기에 아주 약한 관계임을 예상할 수 있습니다. 즉, 다른 요인이나 비선형적인 관계가 있음을 유추할 수 있습니다.
-
-### 3.3 범주형과 수치형 변수간의 관계 분석
-
-- 범주형과 수치형 변수간의 관계는 ANOVA 분석을 통해 알 수 있습니다.
-
-✏️ **분석과제**
-
-> 주말 여부(is_weekend)에 따른 매출의 영향이 있는지 파악
-
-💬 **Chat Prompt**
-
-```
-주말 여부(is_weekend)에 따른 매출의 영향이 있는지 파악
+</div></code></pre>
+<pre class="hljs"><code><div>0.18523538792917865
+</div></code></pre>
+<p>💡 <strong>해석</strong></p>
+<blockquote>
+<p>회귀분석을 통해 두 변수간 통계적으로 유의미한 선형 관계가 있음을 알 수 있었습니다. 그러나 설명력(R-squared)이 낮았고 상관계수또한 낮았기에 아주 약한 관계임을 예상할 수 있습니다. 즉, 다른 요인이나 비선형적인 관계가 있음을 유추할 수 있습니다.</p>
+</blockquote>
+<h3 id="33-%EB%B2%94%EC%A3%BC%ED%98%95%EA%B3%BC-%EC%88%98%EC%B9%98%ED%98%95-%EB%B3%80%EC%88%98%EA%B0%84%EC%9D%98-%EA%B4%80%EA%B3%84-%EB%B6%84%EC%84%9D">3.3 범주형과 수치형 변수간의 관계 분석</h3>
+<ul>
+<li>범주형과 수치형 변수간의 관계는 ANOVA 분석을 통해 알 수 있습니다.</li>
+</ul>
+<p>✏️ <strong>분석과제</strong></p>
+<blockquote>
+<p>주말 여부(is_weekend)에 따른 매출의 영향이 있는지 파악</p>
+</blockquote>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>주말 여부(is_weekend)에 따른 매출의 영향이 있는지 파악
 
 - 가설 도출
 - Anova 분석 수행
 - 유의확률에 따라 관계 도출
-```
-
-🤖 **GPT 출력: Message**
-
-```
-주말 여부(is_weekend)에 따른 매출(item_price_usd)의 영향 분석
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>주말 여부(is_weekend)에 따른 매출(item_price_usd)의 영향 분석
 
 1. 가설 도출
 
@@ -682,89 +944,66 @@ correlation
 	•	결론: 주말 여부(is_weekend)에 따른 매출(item_price_usd)에는 통계적으로 유의미한 차이가 없다는 결론을 내릴 수 있습니다. 즉, 주말과 평일 간의 매출 차이는 통계적으로 의미가 없다고 판단됩니다.
 
 이 결과에 따르면, 주말 여부가 매출에 미치는 영향은 미미하며, 두 그룹 간의 차이는 통계적으로 유의미하지 않습니다. 추가적으로 다른 요인을 고려하여 매출에 영향을 미칠 수 있는 요소를 분석하는 것이 필요할 수 있습니다. 
-```
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> scipy.stats <span class="hljs-keyword">import</span> f_oneway
 
-🤖 **GPT 출력: Code**
+<span class="hljs-comment"># 주말 여부에 따른 매출을 그룹화</span>
+weekend_sales = data[data[<span class="hljs-string">'is_weekend'</span>] == <span class="hljs-literal">True</span>][<span class="hljs-string">'item_price_usd'</span>]
+weekday_sales = data[data[<span class="hljs-string">'is_weekend'</span>] == <span class="hljs-literal">False</span>][<span class="hljs-string">'item_price_usd'</span>]
 
-```python
-from scipy.stats import f_oneway
-
-# 주말 여부에 따른 매출을 그룹화
-weekend_sales = data[data['is_weekend'] == True]['item_price_usd']
-weekday_sales = data[data['is_weekend'] == False]['item_price_usd']
-
-# ANOVA 분석 수행
+<span class="hljs-comment"># ANOVA 분석 수행</span>
 anova_result = f_oneway(weekend_sales, weekday_sales)
 anova_result
-```
-
-```
-F_onewayResult(statistic=0.20731798058076364, pvalue=0.6489997358230262)
-```
-
-💬 **Chat Prompt**
-
-```
-주말 여부(is_weekend)에 따른 매출을 시각화해줘
-```
-
-🤖 **GPT 출력: Message**
-
-```
-위의 그래프는 주말 여부에 따른 평균 매출을 시각화한 것입니다.
+</div></code></pre>
+<pre class="hljs"><code><div>F_onewayResult(statistic=0.20731798058076364, pvalue=0.6489997358230262)
+</div></code></pre>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>주말 여부(is_weekend)에 따른 매출을 시각화해줘
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>위의 그래프는 주말 여부에 따른 평균 매출을 시각화한 것입니다.
 
 	•	평일(0)과 주말(1)의 평균 매출을 비교할 수 있으며, 각 기간에 고객당 평균적으로 얼마의 매출이 발생했는지를 확인할 수 있습니다.
 
 이 그래프를 통해 주말과 평일 중 어느 시기에 더 높은 평균 매출이 발생하는지 파악할 수 있으며, 이는 고객의 구매 패턴을 이해하는 데 도움이 됩니다.
 
 추가적으로 분석이 필요한 부분이 있으면 말씀해 주세요
-```
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 주말 여부에 따른 매출의 평균을 계산합니다.</span>
 
-🤖 **GPT 출력: Code**
+<span class="hljs-comment"># 주말 여부에 따른 매출 평균 계산</span>
+average_revenue_by_weekend = data.groupby(<span class="hljs-string">'is_weekend'</span>)[<span class="hljs-string">'item_price_usd'</span>].mean()
 
-```python
-# 주말 여부에 따른 매출의 평균을 계산합니다.
-
-# 주말 여부에 따른 매출 평균 계산
-average_revenue_by_weekend = data.groupby('is_weekend')['item_price_usd'].mean()
-
-# 시각화
-plt.figure(figsize=(8, 6))
-average_revenue_by_weekend.plot(kind='bar', color=['blue', 'orange'])
-plt.title('주말 여부에 따른 평균 매출')
-plt.xlabel('주말 여부 (0: 평일, 1: 주말)')
-plt.ylabel('평균 매출 (USD)')
-plt.xticks([0, 1], labels=['평일', '주말'], rotation=0)
+<span class="hljs-comment"># 시각화</span>
+plt.figure(figsize=(<span class="hljs-number">8</span>, <span class="hljs-number">6</span>))
+average_revenue_by_weekend.plot(kind=<span class="hljs-string">'bar'</span>, color=[<span class="hljs-string">'blue'</span>, <span class="hljs-string">'orange'</span>])
+plt.title(<span class="hljs-string">'주말 여부에 따른 평균 매출'</span>)
+plt.xlabel(<span class="hljs-string">'주말 여부 (0: 평일, 1: 주말)'</span>)
+plt.ylabel(<span class="hljs-string">'평균 매출 (USD)'</span>)
+plt.xticks([<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], labels=[<span class="hljs-string">'평일'</span>, <span class="hljs-string">'주말'</span>], rotation=<span class="hljs-number">0</span>)
 plt.show()
-```
-
+</div></code></pre>
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/gpt_ada/anova.png?raw=true" width="600" height="300"></p>
-
-💡**해석**
-
-> 주중, 주말 여부에 따라 총매출은 차이가 있으나, 평균 매출은 차이가 없음을 알 수 있다. 이는 Olist가 이커머스 회사이기 때문에 주말의 영향이 적은 것이라고 해석 할 수 있다.
-
-### 3.4 고객 세그먼트 분석
-
-구매 데이터 기반 고객 세분화는 RFM분석을 수행합니다. 이는 고객별로 R(Recently, 얼마나 최근), F(Frequency, 얼마나 자주), M(Monetary, 얼마나 많이)에 대해 스코어링을 하고 이를 분류함으로 수행됩니다.
-
-✏️ **분석과제**
-
-> 고객 세그먼트 분석을 통해 세분화 전략 수행
-
-💬 **Chat Prompt**
-
-```
-제시한 데이터를 통해 RFM 분석을 수행해라
+<p>💡<strong>해석</strong></p>
+<blockquote>
+<p>주중, 주말 여부에 따라 총매출은 차이가 있으나, 평균 매출은 차이가 없음을 알 수 있다. 이는 Olist가 이커머스 회사이기 때문에 주말의 영향이 적은 것이라고 해석 할 수 있다.</p>
+</blockquote>
+<h3 id="34-%EA%B3%A0%EA%B0%9D-%EC%84%B8%EA%B7%B8%EB%A8%BC%ED%8A%B8-%EB%B6%84%EC%84%9D">3.4 고객 세그먼트 분석</h3>
+<p>구매 데이터 기반 고객 세분화는 RFM분석을 수행합니다. 이는 고객별로 R(Recently, 얼마나 최근), F(Frequency, 얼마나 자주), M(Monetary, 얼마나 많이)에 대해 스코어링을 하고 이를 분류함으로 수행됩니다.</p>
+<p>✏️ <strong>분석과제</strong></p>
+<blockquote>
+<p>고객 세그먼트 분석을 통해 세분화 전략 수행</p>
+</blockquote>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>제시한 데이터를 통해 RFM 분석을 수행해라
 
 - 각 customer_id 별로 R,F,M을 5점 척도로 스코어링
 - 스코어링 시에 설명 포함
-```
-
-🤖 **GPT 출력: Message**
-
-```
-RFM 분석을 통해 각 고객별로 R(Recency), F(Frequency), M(Monetary) 스코어를 5점 척도로 계산하였습니다.
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>RFM 분석을 통해 각 고객별로 R(Recency), F(Frequency), M(Monetary) 스코어를 5점 척도로 계산하였습니다.
 
 	•	R_Score: 최근성 점수로, 최근에 구매한 고객일수록 높은 점수(5점)를 받습니다. 오래 전에 구매한 고객일수록 점수가 낮아집니다.
 	•	F_Score: 빈도 점수로, 구매 빈도가 높은 고객일수록 높은 점수(5점)를 받습니다. 구매 빈도가 낮은 고객일수록 점수가 낮아집니다.
@@ -773,73 +1012,61 @@ RFM 분석을 통해 각 고객별로 R(Recency), F(Frequency), M(Monetary) 스�
 각 고객의 customer_id에 대해 R, F, M 스코어를 계산하여 고객의 가치를 평가할 수 있으며, 이를 통해 마케팅 전략을 세울 수 있습니다.
 
 추가적인 분석이나 다른 작업이 필요하시면 말씀해 주세요! ￼
-```
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Recency (R): 마지막 구매 이후의 경과일</span>
+<span class="hljs-comment"># Frequency (F): 특정 기간 동안의 구매 빈도</span>
+<span class="hljs-comment"># Monetary Value (M): 총 구매 금액</span>
 
-🤖 **GPT 출력: Code**
+<span class="hljs-comment"># Recency 계산</span>
+data[<span class="hljs-string">'order_purchase_timestamp'</span>] = pd.to_datetime(data[<span class="hljs-string">'order_purchase_timestamp'</span>])
+last_purchase = data.groupby(<span class="hljs-string">'customer_id'</span>)[<span class="hljs-string">'order_purchase_timestamp'</span>].max().reset_index()
+last_purchase.columns = [<span class="hljs-string">'customer_id'</span>, <span class="hljs-string">'LastPurchaseDate'</span>]
 
-```python
-# Recency (R): 마지막 구매 이후의 경과일
-# Frequency (F): 특정 기간 동안의 구매 빈도
-# Monetary Value (M): 총 구매 금액
+<span class="hljs-comment"># 분석 기준 날짜 (가장 최근 날짜로 설정)</span>
+now = data[<span class="hljs-string">'order_purchase_timestamp'</span>].max()
 
-# Recency 계산
-data['order_purchase_timestamp'] = pd.to_datetime(data['order_purchase_timestamp'])
-last_purchase = data.groupby('customer_id')['order_purchase_timestamp'].max().reset_index()
-last_purchase.columns = ['customer_id', 'LastPurchaseDate']
+<span class="hljs-comment"># Recency 계산</span>
+last_purchase[<span class="hljs-string">'Recency'</span>] = (now - last_purchase[<span class="hljs-string">'LastPurchaseDate'</span>]).dt.days
 
-# 분석 기준 날짜 (가장 최근 날짜로 설정)
-now = data['order_purchase_timestamp'].max()
+<span class="hljs-comment"># Frequency 계산</span>
+frequency = data.groupby(<span class="hljs-string">'customer_id'</span>)[<span class="hljs-string">'order_id'</span>].count().reset_index()
+frequency.columns = [<span class="hljs-string">'customer_id'</span>, <span class="hljs-string">'Frequency'</span>]
 
-# Recency 계산
-last_purchase['Recency'] = (now - last_purchase['LastPurchaseDate']).dt.days
+<span class="hljs-comment"># Monetary 계산</span>
+monetary = data.groupby(<span class="hljs-string">'customer_id'</span>)[<span class="hljs-string">'item_price_usd'</span>].sum().reset_index()
+monetary.columns = [<span class="hljs-string">'customer_id'</span>, <span class="hljs-string">'Monetary'</span>]
 
-# Frequency 계산
-frequency = data.groupby('customer_id')['order_id'].count().reset_index()
-frequency.columns = ['customer_id', 'Frequency']
+<span class="hljs-comment"># RFM 데이터를 합침</span>
+rfm = last_purchase.merge(frequency, on=<span class="hljs-string">'customer_id'</span>)
+rfm = rfm.merge(monetary, on=<span class="hljs-string">'customer_id'</span>)
 
-# Monetary 계산
-monetary = data.groupby('customer_id')['item_price_usd'].sum().reset_index()
-monetary.columns = ['customer_id', 'Monetary']
+<span class="hljs-comment"># R, F, M 각각을 5점 척도로 스코어링</span>
+rfm[<span class="hljs-string">'R_Score'</span>] = pd.qcut(rfm[<span class="hljs-string">'Recency'</span>], <span class="hljs-number">5</span>, labels=[<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>])
+rfm[<span class="hljs-string">'F_Score'</span>] = pd.qcut(rfm[<span class="hljs-string">'Frequency'</span>].rank(method=<span class="hljs-string">"first"</span>), <span class="hljs-number">5</span>, labels=[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>])
+rfm[<span class="hljs-string">'M_Score'</span>] = pd.qcut(rfm[<span class="hljs-string">'Monetary'</span>], <span class="hljs-number">5</span>, labels=[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>])
 
-# RFM 데이터를 합침
-rfm = last_purchase.merge(frequency, on='customer_id')
-rfm = rfm.merge(monetary, on='customer_id')
-
-# R, F, M 각각을 5점 척도로 스코어링
-rfm['R_Score'] = pd.qcut(rfm['Recency'], 5, labels=[5, 4, 3, 2, 1])
-rfm['F_Score'] = pd.qcut(rfm['Frequency'].rank(method="first"), 5, labels=[1, 2, 3, 4, 5])
-rfm['M_Score'] = pd.qcut(rfm['Monetary'], 5, labels=[1, 2, 3, 4, 5])
-
-# 결과를 확인하기 위해 RFM 데이터를 보여줍니다.
-print(rfm[['customer_id', 'R_Score', 'F_Score', 'M_Score']].head())
-```
-
-```
-                        customer_id R_Score F_Score M_Score
+<span class="hljs-comment"># 결과를 확인하기 위해 RFM 데이터를 보여줍니다.</span>
+print(rfm[[<span class="hljs-string">'customer_id'</span>, <span class="hljs-string">'R_Score'</span>, <span class="hljs-string">'F_Score'</span>, <span class="hljs-string">'M_Score'</span>]].head())
+</div></code></pre>
+<pre class="hljs"><code><div>                        customer_id R_Score F_Score M_Score
 0  011a899e735ec86f00f26089cdae09cf       3       1       2
 1  0147fbc5c91112d914a4f4a480a0f09e       1       1       5
 2  015faf9ec36eccd957c0f2782aab09a4       2       5       5
 3  0191e09197e54ad2690c3abd44723c7c       3       1       5
 4  0270aff4097536e634627aba39320083       1       1       3
-```
-
-🧑‍💻: 스코어링한 RFM 스코어를 기준으로 고객 세분화 세그먼트를 설정합니다.
-
-💬 **Chat Prompt**
-
-```
-RFM 스코어를 기준으로 고객 세분화를 해줘
+</div></code></pre>
+<p>🧑‍💻: 스코어링한 RFM 스코어를 기준으로 고객 세분화 세그먼트를 설정합니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>RFM 스코어를 기준으로 고객 세분화를 해줘
 
 - 세그먼트를 최대한 MECE하게 설계
 - 각 세그먼트를 정의하고, 분류 기준을 설명한 후, 고객들을 세그먼트별로 분류
 - 각 세그먼트에 특성에 어울리는 네이밍 부여
 - 각 세그먼트에 몇명의 고객이 포함되었는지 표기
-```
-
-🤖 **GPT 출력: Message**
-
-```
-RFM 분석을 기반으로 고객을 다음과 같은 세그먼트로 세분화하였습니다:
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>RFM 분석을 기반으로 고객을 다음과 같은 세그먼트로 세분화하였습니다:
 
 	1.	우수 고객: R, F, M 점수가 모두 높은 고객. 매우 가치 있는 고객들입니다. (57명)
 	2.	충성 고객: R(최근성)과 F(빈도) 점수가 높은 고객. 꾸준히 구매하는 충성 고객들입니다. (62명)
@@ -852,14 +1079,10 @@ RFM 분석을 기반으로 고객을 다음과 같은 세그먼트로 세분화�
 	9.	일반 고객: R, F, M 점수가 모두 중간 정도이거나 낮은 고객들. 특출나지 않은 일반 고객들입니다. (191명)
 
 이 분류를 통해 각 세그먼트에 어떤 고객들이 포함되어 있는지 파악할 수 있으며, 각 세그먼트별로 맞춤형 마케팅 전략을 수립할 수 있습니다. 추가적으로 분석이 필요하거나 다른 도움이 필요하시면 말씀해 주세요!
-```
-
-🧑‍💻: 프롬프트를 통해 세그먼트별 전략을 추천받아 봅니다.
-
-💬 **Chat Prompt**
-
-```
-아래에는 작업을 수행하기 위해 부여된 Role, 이전에 수행한 Pre-work 그리고 수행해야될 Todo가 있습니다. 요청을 적절하게 완료하는 응답을 작성하세요.
+</div></code></pre>
+<p>🧑‍💻: 프롬프트를 통해 세그먼트별 전략을 추천받아 봅니다.</p>
+<p>💬 <strong>Chat Prompt</strong></p>
+<pre class="hljs"><code><div>아래에는 작업을 수행하기 위해 부여된 Role, 이전에 수행한 Pre-work 그리고 수행해야될 Todo가 있습니다. 요청을 적절하게 완료하는 응답을 작성하세요.
 
 [Role]
 이커머스 회사 olist에서 근무하는 마케팅 팀 직원
@@ -871,12 +1094,9 @@ RFM 분석을 기반으로 고객을 다음과 같은 세그먼트로 세분화�
 각 고객 세그먼트별로 마케팅 전략을 수립하여 보고서 작성
 
 Let's go!
-```
-
-🤖 **GPT 출력: Message**
-
-```
-Olist 마케팅 전략 보고서
+</div></code></pre>
+<p>🤖 <strong>GPT 출력: Message</strong></p>
+<pre class="hljs"><code><div>Olist 마케팅 전략 보고서
 
 작성자: 마케팅 팀
 
@@ -942,10 +1162,10 @@ Olist 마케팅 전략 보고서
 	•	마케팅 전략:
 	•	맞춤형 제안: 프리미엄 상품 추천 및 맞춤형 서비스 제공.
 	•	한정판 제품 소개: 특별한 제품
-```
-
----
-
-## ❤️‍🔥 고생하셨습니다.
-
+</div></code></pre>
+<hr>
+<h2 id="%E2%9D%A4%EF%B8%8F%E2%80%8D%F0%9F%94%A5-%EA%B3%A0%EC%83%9D%ED%95%98%EC%85%A8%EC%8A%B5%EB%8B%88%EB%8B%A4">❤️‍🔥 고생하셨습니다.</h2>
 <p align="center"><img src="https://github.com/sigirace/page-images/blob/main/kang_lectures/gpt_ada/da_end.png?raw=true" width="600" height="300"></p>
+
+</body>
+</html>
