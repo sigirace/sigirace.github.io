@@ -1,6 +1,4 @@
-**Django 정리**
-
-
+# Django 정리
 
 **migrations**
 
@@ -21,8 +19,6 @@ python manage.py migrate
 ```
 python manage.py createsuperuser
 ```
-
-
 
 ## ❤️‍🔥 Tip
 
@@ -85,7 +81,7 @@ foriegn_key = models.ForeignKey("app.Model", blank=True, on_delete=models.SET_NU
 - **Many-to-Many**: ManyToManyField
 - **One-to-One**: OneToOneField
 
-
+***
 
 ## 1. App settings
 
@@ -128,9 +124,7 @@ CUSTOM_APPS = [
 INSTALLED_APPS = SYSTEM_APPS + CUSTOM_APPS
 ```
 
-
-
-
+***
 
 ## 2. User
 
@@ -169,8 +163,6 @@ from .models import Users
 class CustomUserAdmin(UserAdmin):
     pass
 ```
-
-
 
 ### 2.2 Custom
 
@@ -276,7 +268,7 @@ class UserAdmin(BaseUserAdmin):
 admin.site.register(Users, UserAdmin)
 ```
 
-
+***
 
 ## 3. Common Model
 
@@ -304,7 +296,7 @@ class OtherModel(CommonModel):
 
 - common model을 상속받아서 해당 속성이 자동으로 임포트
 
-
+***
 
 ## 3. Admin Pannel
 
@@ -355,14 +347,273 @@ class ModelAdmin(admin.ModelAdmin):
 - search_fileds: admin 검색을 위한 컬럼(모델)
 - exclude: 수정할 수 없도록 함
 
-
-
 ## ⛔️ Trouble Shooting
 
 💥 **Messages**
 
 - django는 SYSTEM_APPS에 이미 message를 가지고 있음
 - 신규 application을 message로 가져가면 안됨
+
+***
+
+## 4. ORM
+
+### 4.1 QuerySet
+
+- lazy: 작동하는 즉시 가져오지 않음
+- Admin Method(all, get, filter 등)를 사용해야 실제 데이터를 가져옴
+
+### 4.2 related_name
+
+> 모델 이름을 related_name으로 설정함
+
+**1. Relation**
+
+- Model A(User) <- ForeignKey -> Model B(Room)
+
+**2. model**
+
+```python
+## Room
+class Room():
+  ...
+  owner = models.ForeignKey(
+    "users.User",
+    on_delete=models.CASCADE,
+    related_name="rooms", # 모델 이름을 등록
+  )
+```
+
+**3. python**
+
+```python
+# Using in python
+from users.models import User
+me = User.objects.get(pk=1)
+me.rooms.all() # 다른 모델에서 사용
+```
+
+***
+
+## 5. URL Settings
+
+### 5.1 View
+
+**1. config**
+
+- config > urls.py
+- url로 접근하면 적혀있는 함수를 실행함
+- 모든 url을 적을 순 없으니 분할하여 각 feature에 적용
+- urlpatterns
+  - 첫번째 argument 유저가 이동할 url
+  - 두번째 argument는 실행할 함수 (in view)
+
+**2. view**
+
+- 유저가 특정 url에 접근했을때 작동하게되는 함수
+- framework가 제공해주지 않아서 이름이 꼭 view일 필요는 없음
+- view 함수에 전달되는 request
+  - 누가 접근했는지
+  - 어떤 데이터가 전송되고 있는지
+- httpResponse를 return 해야함
+
+### 5.2 Include
+
+[config > urls.py]
+
+```python
+urlpatterns = [
+  path("admin/", admin.site.urls),
+  path("feature/", include("feature.urls")),
+]
+```
+
+- feature 경로로 들어올 시 라우팅을 통해 하위로 보냄
+- feature home 경로 뒤에 `/`를 붙여줘야 함 
+
+[feature > urls.py]
+
+```python
+urlpatterns = [
+  path("", views.function),
+]
+```
+
+- feature url의 첫 부분이 비워져있다면 root
+  - ~~/feature
+
+
+### 5.3 URL Arguments
+
+```python
+urlpatterns = [
+  path("", views.function),
+  path("<int:id>", views.function)
+]
+```
+
+***
+
+## 6. DRF
+
+### 6.1 api_view(legacy)
+
+- *6.3 APIView를 상속받는 것으로 변경됨*
+- decorator로 적용
+- web ui 화면을 만들어 줌
+- decorator의 인자로 Http Protocol 전달 (GET, POST, PUT, DELETE, ..)
+
+### 6.2 Serializer(legacy)
+
+- *6.4 ModelSerializer로 변경됨*
+- queryset을 json으로 바꿔주는 번역기 역할
+- post시에 serializer에 정의한 항목들을 검증함 -> `is_valid()`
+  - 검증하지 않을 항목은 `read_only=True`
+  - save 함수를 사용시 serializer에 정의된 함수를 참조함
+
+### 6.3 APIView(legacy)
+
+- *6.5 ModelViewSet으로 변경됨*
+
+**url settings**
+
+[urls.py]
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+  path("", views.Function.as_view()),
+]
+```
+
+- as_view 사용
+
+**case1. GET, POST**
+
+```python
+class Function(APIView):
+  
+  def get(self, request):
+    objects = Model.objects.all()
+    serializer = ModelSerializer(objects, many=True)
+    return Response(serializer.data)
+  
+  def post(self, request):
+    serializer = ModelSerializer(data=request.data)
+    if serializer.is_valid():
+      new_data = serializer.save()
+    	return Response(ModelSerializer(new_data).data,)
+  	# is_valid error
+    	return Response(serializer.error)
+```
+
+**case2. GET, POST, DELETE**
+
+```python
+class Function(APIView):
+  def get_object(self, pk):
+    try:
+      return Model.objects.get(pk=pk)
+    except Model.DoesNotExist:
+      raise NotFound
+
+	def get(self, request, pk):
+    serializer = ModelSerializer(self.get_object(pk))
+    return Response(serializer.data)
+  
+  def put(self, request, pk):
+    serializer = ModelSerializer(
+    	self.get_object(pk),
+      data = request.data,
+      partial=True
+    )
+
+	def delete(self, request, pk):
+    self.get_object(pk).delete()
+    return Response(status=HTTP_204_NO_CONTENT)
+```
+
+### 6.4 ModelSerializer
+
+- serializer와 동일하나 default로 create와 update가 있음
+- meta class로 설정
+
+```python
+from rest_framework import serializers
+from .models import Model
+
+class ModelSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Model
+    exclude
+    fields = ("name", "kind")
+```
+
+- fields = "\_\_all\_\_"
+  - 모든 field 노출
+- exclude
+  - 몇 컬럼을 제외
+
+### 6.5 ModelViewSet
+
+**1. url settings**
+
+```python
+urlpatterns = [
+  path("", views.ModelViewSet.as_view({
+    'get': 'list', # 전체 검색
+    'post': 'create',
+  })),
+  path("<int:pk>", # 개별 작업에 대해서는 pk가 필요함
+       views.ModelViewSet.as_view({
+    'get':'retrieve', # 한개 검색
+    'put': 'partial_update',
+    'delete': 'destroy',
+  }))
+]
+```
+
+**2. views**
+
+```python
+class ModelViewSet(ModelViewSet):
+  
+  serializer_class = ModelSerializer
+  queryset = Model.objects.all()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+**Response**
+
+- 삭제 후 없음 표시: HTTP_204_NO_CONTENT
+
+**Except-raise**
+
+- DoesNotExist
+  - NotFound
+
+
+
+
+
+
+
+
+
+
 
 
 
