@@ -13,3 +13,11 @@ llm -> /Users/sigi/hanwha_project/aida/llm
 echo 'alias llm="cd /Users/sigi/hanwha_project/aida/llm"' >> ~/.zshrc
 
 source ~/.zshrc
+
+
+
+/Users/sigi/kang_dev/flutter
+
+
+
+echo 'alias sigi="cd //Users/sigi/sigirace.github.io"' >> ~/.zshrc
