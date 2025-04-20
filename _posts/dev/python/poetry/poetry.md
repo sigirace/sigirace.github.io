@@ -64,3 +64,15 @@ poetry env use python3.11
 poetry shell
 ```
 
+
+
+
+
+### poetry v2.0
+
+```
+poetry init
+poetry env activate
+source .venv/bin/activate
+```
+
